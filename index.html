@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="dark light" />
+  <meta name="color-scheme" content="dark" />
   <title>Nikki Sanders — AI Content Strategy & Workshops</title>
   <meta name="description" content="AI-first content strategy, workshops, and systems to grow without burnout. Join the Two-Day Social Accelerator and get a 90-day plan in 48 hours." />
   <link rel="canonical" href="index.html" />
@@ -1012,12 +1012,7 @@
       .form-row { grid-template-columns: 1fr; }
     }
 
-    /* Accessibility: prefer black text on light backgrounds in light scheme */
-    @media (prefers-color-scheme: light) {
-      body { color: #ffffff; }
-      .cta-primary { color: #111; }
-      .feature-card p, .section-sub, .form-help { color: #ffffff; }
-    }
+    /* Force dark theme always: remove light-scheme overrides */
 
     /* Theme switcher */
     .theme-switch { display: inline-flex; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; overflow: hidden; }
@@ -2738,7 +2733,7 @@
     // Theme + Accent tokens, nav aria-current, scroll spy, command palette, carousels, rotator, nav behaviors
     (function(){
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-      const savedMode = localStorage.getItem('mode');
+      const savedMode = 'dark';
       const savedAccent = localStorage.getItem('accent');
       function setMode(mode){ document.body.setAttribute('data-theme', mode); localStorage.setItem('mode', mode);
         document.querySelectorAll('[data-theme-mode]')
@@ -2748,9 +2743,9 @@
         document.querySelectorAll('[data-accent]')
           .forEach(b=> b.setAttribute('aria-checked', String(b.getAttribute('data-accent')===ac)));
       }
-      setMode(savedMode || (prefersDark.matches ? 'dark' : 'light'));
+      setMode('dark');
       setAccent(savedAccent || (document.body.getAttribute('data-accent')||'gold'));
-      prefersDark.addEventListener?.('change', (e)=>{ if(!localStorage.getItem('mode')) setMode(e.matches?'dark':'light'); });
+      // Ignore OS preference changes to keep dark mode always
       document.addEventListener('click', (e)=>{
         const tm = e.target.closest('[data-theme-mode]'); if (tm) setMode(tm.getAttribute('data-theme-mode'));
         const ac = e.target.closest('.theme-switch [data-accent], .floating-switcher [data-accent]'); if (ac) setAccent(ac.getAttribute('data-accent'));

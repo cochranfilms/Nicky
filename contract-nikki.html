@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Service Agreement — Nikki Sanders Content Strategy</title>
+  <title>Service Agreement — Nicky Sanders Content Strategy</title>
   
   <!-- PDF Generation Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -74,12 +74,25 @@
     .logo-container {
       text-align: center;
       margin-bottom: 30px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+
+    .logo-container::after {
+      content: "";
+      position: absolute; inset: -10px; border-radius: 50%;
+      background: radial-gradient(60% 60% at 50% 50%, rgba(255,255,255,.18), transparent 60%);
+      filter: blur(18px); opacity: .6; z-index: -1;
     }
 
     .logo-container img {
-      max-width: 200px;
-      height: auto;
-      border-radius: 8px;
+      width: 160px; height: 160px; object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid rgba(255,255,255,.85);
+      box-shadow: 0 16px 60px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.12);
+      background: #000;
     }
 
     /* Typography */
@@ -267,23 +280,24 @@
   <div class="container">
     <!-- Logo -->
     <div class="logo-container">
-      <img src="logo.webp" alt="Nikki Sanders Logo" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'128\' height=\'128\'><defs><linearGradient id=\'g\' x1=\'0\' x2=\'1\'><stop stop-color=\'%23e0ab10\' offset=\'0\'/><stop stop-color=\'%23ffd86a\' offset=\'1\'/></linearGradient></defs><rect rx=\'24\' ry=\'24\' width=\'100%\' height=\'100%\' fill=\'%23010043\'/><text x=\'50%\' y=\'54%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=\'44\' font-family=\'sans-serif\' fill=\'url(%23g)\'>NS</text></svg>'">
+      <img src="DTTB-Logo-Final-Black.png" alt="Nicky Sanders — Deeper Than The Brand">
     </div>
 
     <!-- Contract Form -->
     <div id="contractForm">
       <div class="contract-card">
         <h1>Service Agreement</h1>
-        <p>This Service Agreement is made between <strong>Cochran Films LLC</strong> and <strong>Nikki Sanders</strong> on <span id="effectiveDateDisplay">August 21, 2025</span>.</p>
+        <p>This Service Agreement is made between <strong>Marketing Mousetrap Agency</strong> and <strong>Nicky Sanders</strong>.</p>
 
         <h2>Project Overview</h2>
-        <p>This proposal covers web systems, content integration, automation, and ongoing support. The goal is to unify Nikki's current scattered ecosystem into one seamless platform.</p>
+        <p>This proposal covers web systems, content integration, automation, and ongoing support. The goal is to unify Nicky's current scattered ecosystem into one seamless platform.</p>
 
         <h2>Current Challenges</h2>
         <ul>
           <li>Multiple separate Google Forms (podcasts + speaking)</li>
           <li>Links spread across various platforms (IG, LinkedIn Learning, etc.)</li>
           <li>Community newsletter and course demos in different places</li>
+          <li>Lack of a single branded intake and scheduling experience</li>
         </ul>
 
         <h2>Package Options</h2>
@@ -344,7 +358,7 @@
         <div class="signature-section">
           <h2>Digital Signature</h2>
           <div class="signature-note">
-            <strong>Note:</strong> Please type your full name exactly as it appears on official documents. This will serve as your digital signature and is legally binding.
+            <strong>Note:</strong> Please type your full name exactly as it appears on official documents. This will serve as your digital signature and is legally binding. The effective date shown on final PDF will be the day of signing.
           </div>
           <form id="signatureForm">
             <div class="form-group">
@@ -427,13 +441,13 @@
         selectedPackage,
         signature,
         signatureDate: formatDate(new Date()),
-        contractDate: 'August 21, 2025',
+        contractDate: '',
         effectiveDate: formatDate(new Date()),
         contractId: 'NS-' + Date.now()
       };
       
-      // Update display date
-      document.getElementById('effectiveDateDisplay').textContent = contractData.effectiveDate;
+      // Remove display date in the form header (not set until signing)
+      const ed = document.getElementById('effectiveDateDisplay'); if (ed) ed.textContent = contractData.effectiveDate;
       
       // Hide form and show thank you screen
       document.getElementById('contractForm').style.display = 'none';
@@ -493,7 +507,7 @@
         doc.text(contractData.signature, 20, 210);
         
         // Save PDF
-        const fileName = `NikkiSanders_Contract_${contractData.contractId}.pdf`;
+        const fileName = `NickySanders_Contract_${contractData.contractId}.pdf`;
         doc.save(fileName);
         
       } catch (error) {

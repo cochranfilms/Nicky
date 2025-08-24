@@ -49,6 +49,27 @@
       line-height: 1.6;
     }
 
+    /* Top brand bar */
+    .contract-top { position: sticky; top: 0; z-index: 20; backdrop-filter: saturate(160%) blur(10px); background: linear-gradient(180deg, rgba(7,7,26,.78), rgba(7,7,26,.45)); border-bottom: 1px solid rgba(255,255,255,.08); }
+    .top-inner { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; height: 56px; width: min(100%, 1200px); margin: 0 auto; padding: 0 16px; }
+    .top-brand { display: flex; align-items: center; gap: 10px; }
+    .top-brand img { width: 28px; height: 28px; border-radius: 6px; box-shadow: 0 4px 14px rgba(224,171,16,.3); }
+    .top-brand strong { letter-spacing: .2px; }
+
+    /* Hero banner */
+    .hero-banner { position: relative; overflow: hidden; padding: 72px 0 46px; }
+    .hero-banner::before { content: ""; position: absolute; inset: -20% -10%; background:
+        radial-gradient(1200px 700px at 18% -10%, rgba(255,120,200,.22), transparent 60%),
+        radial-gradient(1200px 700px at 90% 120%, rgba(224,171,16,.20), transparent 60%),
+        conic-gradient(from 220deg at 60% 40%, rgba(255,255,255,.08), rgba(255,255,255,0) 25%, rgba(255,255,255,.08) 50%, rgba(255,255,255,0) 75%, rgba(255,255,255,.08));
+      filter: saturate(140%) blur(8px); opacity: .9; pointer-events: none; }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size: 40px 40px; mask-image: radial-gradient(70% 70% at 50% 30%, #000 60%, transparent 100%); opacity: .18; pointer-events: none; }
+    .hero-inner { width: min(100%, 1200px); margin: 0 auto; padding: 0 24px; text-align: center; }
+    .hero-title { margin: 0 0 10px; font-size: clamp(28px, 5vw, 52px); font-weight: 800; background: linear-gradient(90deg, #fff, #ffd86a, #9ecbff); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 10px 40px rgba(224,171,16,.16); }
+    .hero-sub { margin: 0; color: var(--muted); font-size: 16px; }
+    .chips { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+    .chip { display: inline-flex; gap: 8px; align-items: center; padding: 8px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.08)); font-size: 12px; }
+
     .container {
       max-width: 800px;
       margin: 40px auto;
@@ -221,6 +242,7 @@
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; text-decoration: none; line-height: 1;
     }
 
     .cta-ghost {
@@ -233,6 +255,7 @@
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; text-decoration: none; line-height: 1;
     }
 
     /* Email status */
@@ -277,6 +300,29 @@
   </style>
 </head>
 <body>
+  <header class="contract-top" aria-label="Brand">
+    <div class="top-inner">
+      <div class="top-brand"><img src="DTTB-Logo-Final-Black.png" alt="DTTB"/><strong>Nicky Sanders — Service Agreement</strong></div>
+      <div></div>
+      <nav style="display:flex; gap:8px; align-items:center">
+        <a class="cta-ghost" href="index.html">Back to Site</a>
+        <a class="cta-ghost" href="proposal-nikki.html">Back to Proposal</a>
+      </nav>
+    </div>
+  </header>
+  <section class="hero-banner" aria-label="Contract Overview">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <h1 class="hero-title">Let’s build a unified, AI‑powered content system</h1>
+      <p class="hero-sub">This agreement outlines scope, options, and next steps for launching your consolidated hub and booking flows.</p>
+      <div class="chips">
+        <span class="chip">AI‑First Design</span>
+        <span class="chip">Unified Booking</span>
+        <span class="chip">Calendar Automations</span>
+        <span class="chip">Creator‑Ready Ops</span>
+      </div>
+    </div>
+  </section>
   <div class="container">
     <!-- Logo -->
     <div class="logo-container">

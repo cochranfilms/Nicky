@@ -314,6 +314,15 @@
       .btn-row { gap: 10px; }
       .cta-primary, .cta-ghost { height: 46px; padding: 0 18px; }
     }
+
+    /* Payment modal */
+    .payment-modal { position: fixed; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(2px); display:none; align-items:center; justify-content:center; z-index: 50; }
+    .payment-modal.show { display:flex; }
+    .payment-dialog { width: min(1000px, 96%); height: min(780px, 92vh); background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04)); border: 1px solid rgba(255,255,255,.12); border-radius: 16px; box-shadow: var(--shadow); display:flex; flex-direction: column; overflow: hidden; }
+    .payment-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding: 12px 16px; background: rgba(1,0,67,.85); color: #fff; }
+    .payment-frame { flex:1; width: 100%; border: 0; background: #fff; }
+    .close-x { background: #fff; color: #111; border: none; border-radius: 8px; padding: 6px 10px; cursor:pointer; font-weight:600; }
+    .payment-fallback { padding: 10px 16px; background: rgba(255,255,255,.06); font-size: 14px; }
   </style>
 </head>
 <body>
@@ -478,6 +487,18 @@
         </div>
         <div id="invoiceStatus" class="email-status" style="margin-top:14px"></div>
       </div>
+
+      <!-- Payment Modal -->
+      <div id="paymentModal" class="payment-modal" aria-hidden="true">
+        <div class="payment-dialog" role="dialog" aria-modal="true" aria-label="Secure Payment">
+          <div class="payment-head">
+            <strong>Secure Checkout</strong>
+            <button id="closePaymentModal" class="close-x" aria-label="Close">✕</button>
+          </div>
+          <iframe id="paymentFrame" title="Secure Payment" class="payment-frame"></iframe>
+          <div id="paymentEmbedFallback" class="payment-fallback">If the checkout doesn't appear, <a id="paymentExternalLink" href="#" target="_blank" rel="noreferrer">open payment in a new tab</a>.</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -502,7 +523,7 @@
 
     // Store contract and invoice meta data
     let contractData = {};
-    let invoiceMeta = { invoiceId: null, paymentUrl: null };
+    let invoiceMeta = { invoiceId: null, paymentUrl: null, contractDownloadUrl: '' };
 
     // Format date
     function formatDate(date) {
@@ -556,18 +577,28 @@
         if (result) {
           invoiceMeta.invoiceId = result.invoiceId || null;
           invoiceMeta.paymentUrl = result.paymentUrl || null;
+          invoiceMeta.mode = result.mode || null;
         }
-        if (invoiceMeta.paymentUrl) {
-          const payBtn = document.getElementById('payNowBtn');
+        const payBtn = document.getElementById('payNowBtn');
+        const isLive = invoiceMeta && invoiceMeta.mode === 'live' && invoiceMeta.paymentUrl && !/payment-demo/.test(invoiceMeta.paymentUrl);
+        if (isLive) {
           payBtn.disabled = false;
-          payBtn.onclick = () => { window.open(invoiceMeta.paymentUrl, '_blank'); };
-          setInvoiceStatus('✅ Invoice is ready. Click Pay Securely to complete payment.', 'success');
+          payBtn.onclick = () => openPaymentModal(invoiceMeta.paymentUrl);
+          setInvoiceStatus('✅ Invoice is ready. Pay securely below.', 'success');
         } else {
-          setInvoiceStatus('⚠️ Could not prepare online payment link. You can still pay via the invoice we send by email.', 'error');
+          payBtn.disabled = true;
+          setInvoiceStatus('ℹ️ Payment link pending. We will email your secure checkout shortly.', 'success');
         }
       } catch (err) {
         console.error('Invoice creation error', err);
         setInvoiceStatus('⚠️ Invoice setup error. We will follow up with a payment link via email.', 'error');
+      }
+
+      // Upload signed contract PDF to GitHub (store URL for emails)
+      try {
+        invoiceMeta.contractDownloadUrl = await uploadSignedContractToGitHub(contractData);
+      } catch (e) {
+        console.warn('Contract upload skipped:', e);
       }
 
       // Send confirmation emails (now with invoice details if available)
@@ -582,14 +613,6 @@
         }
         const pkg = getPackageDetails(contractData.selectedPackage);
         const deposit = pkg ? Math.round(pkg.price * 0.5) : null;
-        // Generate signed contract PDF (base64) for client attachment
-        let contractPdfBase64 = '';
-        let contractFileName = `NickySanders_Contract_${contractData.contractId}.pdf`;
-        try {
-          contractPdfBase64 = await generateContractPDFBase64(contractData);
-        } catch (e) {
-          console.warn('Could not generate contract PDF for email attachment', e);
-        }
         // Client email
         const clientParams = {
           to_email: contractData.clientEmail,
@@ -601,19 +624,10 @@
           selected_package: pkg ? pkg.name : contractData.selectedPackage,
           invoice_total_due: deposit ? `$${deposit.toLocaleString()}` : '',
           payment_link: invoiceMeta.paymentUrl || '',
-          invoice_id: invoiceMeta.invoiceId || ''
+          invoice_id: invoiceMeta.invoiceId || '',
+          download_link: invoiceMeta.contractDownloadUrl || ''
         };
-        try {
-          await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, clientParams, {
-            publicKey: EMAILJS_CONFIG.publicKey,
-            attachments: contractPdfBase64 ? [
-              { name: contractFileName, data: contractPdfBase64 }
-            ] : undefined
-          });
-        } catch (attachErr) {
-          console.warn('EmailJS send with attachment failed, retrying without attachment', attachErr);
-          await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, clientParams);
-        }
+        await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, clientParams, EMAILJS_CONFIG.publicKey);
 
         // Admin email
         const adminParams = {
@@ -626,9 +640,10 @@
           selected_package: pkg ? pkg.name : contractData.selectedPackage,
           invoice_total_due: deposit ? `$${deposit.toLocaleString()}` : '',
           payment_link: invoiceMeta.paymentUrl || '',
-          invoice_id: invoiceMeta.invoiceId || ''
+          invoice_id: invoiceMeta.invoiceId || '',
+          download_link: invoiceMeta.contractDownloadUrl || ''
         };
-        await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.adminTemplateId, adminParams);
+        await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.adminTemplateId, adminParams, EMAILJS_CONFIG.publicKey);
 
         showEmailStatus('✅ Confirmation emails sent successfully!', 'success');
       } catch (error) {
@@ -716,7 +731,7 @@
       return res.json();
     }
 
-    // Build the same contract PDF and return base64 (no data URL prefix)
+    // Build a signed contract PDF with MMA + Client signatures; return base64
     async function generateContractPDFBase64(cd) {
       const { jsPDF } = window.jspdf;
       if (!jsPDF) throw new Error('jsPDF not loaded');
@@ -726,21 +741,91 @@
       doc.setFillColor(224, 171, 16);
       doc.rect(0, 0, 210, 25, 'F');
       doc.setTextColor(0, 0, 0);
-      doc.setFontSize(20);
-      doc.text('Service Agreement', 105, 15, { align: 'center' });
-
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(18);
+      doc.text('MARKETING MOUSETRAP AGENCY', 105, 12, { align: 'center' });
+      doc.setFont('helvetica', 'normal');
       doc.setFontSize(12);
-      doc.text(`Contract ID: ${cd.contractId}`, 20, 40);
-      doc.text(`Date: ${cd.effectiveDate}`, 20, 50);
-      doc.text(`Client: ${cd.clientName}`, 20, 60);
-      doc.text(`Email: ${cd.clientEmail}`, 20, 70);
-      doc.text(`Package: ${cd.selectedPackage}`, 20, 80);
+      doc.text('SERVICE AGREEMENT', 105, 20, { align: 'center' });
 
-      // Signature
+      // Metadata
+      doc.setFontSize(9);
+      doc.setTextColor(100, 100, 100);
+      doc.text(`Contract ID: ${cd.contractId}`, 20, 35);
+      doc.text(`Effective Date: ${cd.effectiveDate}`, 20, 40);
+
+      // Client information
+      doc.setFillColor(224, 171, 16);
+      doc.rect(20, 50, 170, 8, 'F');
+      doc.setFontSize(10);
+      doc.setTextColor(0, 0, 0);
+      doc.setFont('helvetica', 'bold');
+      doc.text('CLIENT INFORMATION', 105, 56, { align: 'center' });
+
+      doc.setFillColor(248, 249, 250);
+      doc.rect(20, 65, 170, 25, 'F');
+      doc.setDrawColor(224, 171, 16);
+      doc.setLineWidth(0.5);
+      doc.rect(20, 65, 170, 25, 'S');
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(0, 0, 0);
+      doc.text(`Client: ${cd.clientName}`, 25, 75);
+      doc.text(`Email: ${cd.clientEmail}`, 25, 81);
+      doc.text(`Package: ${getPackageDetails(cd.selectedPackage)?.name || cd.selectedPackage}`, 25, 87);
+
+      // Signatures section
+      const signatureY = 120;
+      doc.setFillColor(224, 171, 16);
+      doc.rect(20, signatureY - 5, 170, 8, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+      doc.setTextColor(0, 0, 0);
+      doc.text('CONTRACT SIGNATURES', 105, signatureY + 2, { align: 'center' });
+
+      // MMA signature (left)
+      doc.setFontSize(8);
+      doc.text('MARKETING MOUSETRAP AGENCY (COMPANY)', 20, signatureY + 15);
+      doc.setFillColor(248, 249, 250);
+      doc.rect(20, signatureY + 20, 75, 25, 'F');
+      doc.setDrawColor(224, 171, 16);
+      doc.setLineWidth(0.5);
+      doc.rect(20, signatureY + 20, 75, 25, 'S');
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(6);
+      doc.text('Authorized Signature:', 25, signatureY + 26);
       doc.setFontSize(12);
-      doc.text('Digital Signature:', 20, 200);
       doc.setFont('helvetica', 'italic');
-      doc.text(cd.signature, 20, 210);
+      doc.text('MMA', 25, signatureY + 32);
+      doc.setDrawColor(0, 0, 0);
+      doc.setLineWidth(0.3);
+      doc.line(25, signatureY + 34, 85, signatureY + 34);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(6);
+      doc.text('Title: Authorized Signatory', 25, signatureY + 38);
+      doc.text('Date: ' + cd.contractDate, 25, signatureY + 42);
+
+      // Client signature (right)
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(8);
+      doc.text('CLIENT SIGNATURE', 105, signatureY + 15);
+      doc.setFillColor(248, 249, 250);
+      doc.rect(105, signatureY + 20, 75, 25, 'F');
+      doc.setDrawColor(224, 171, 16);
+      doc.setLineWidth(0.5);
+      doc.rect(105, signatureY + 20, 75, 25, 'S');
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(6);
+      doc.text('Representative:', 115, signatureY + 26);
+      doc.setFontSize(12);
+      doc.setFont('helvetica', 'italic');
+      doc.text(cd.clientName, 115, signatureY + 32);
+      doc.setDrawColor(0, 0, 0);
+      doc.setLineWidth(0.3);
+      doc.line(115, signatureY + 34, 175, signatureY + 34);
+      doc.setFontSize(6);
+      doc.text('Signature: ' + cd.signature, 115, signatureY + 38);
+      doc.text('Date: ' + cd.signatureDate, 115, signatureY + 42);
 
       // Return pure base64
       const dataUri = doc.output('datauristring');
@@ -749,32 +834,100 @@
       return base64;
     }
 
-    // Generate and download PDF
+    // Generate and download PDF (with signatures)
     document.getElementById('downloadContractBtn').addEventListener('click', function() {
       try {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
         
-        // Add content to PDF
+        // Header
         doc.setFillColor(224, 171, 16);
         doc.rect(0, 0, 210, 25, 'F');
-        
         doc.setTextColor(0, 0, 0);
-        doc.setFontSize(20);
-        doc.text('Service Agreement', 105, 15, { align: 'center' });
-        
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(18);
+        doc.text('MARKETING MOUSETRAP AGENCY', 105, 12, { align: 'center' });
+        doc.setFont('helvetica', 'normal');
         doc.setFontSize(12);
-        doc.text(`Contract ID: ${contractData.contractId}`, 20, 40);
-        doc.text(`Date: ${contractData.effectiveDate}`, 20, 50);
-        doc.text(`Client: ${contractData.clientName}`, 20, 60);
-        doc.text(`Email: ${contractData.clientEmail}`, 20, 70);
-        doc.text(`Package: ${contractData.selectedPackage}`, 20, 80);
+        doc.text('SERVICE AGREEMENT', 105, 20, { align: 'center' });
         
-        // Add signature
+        // Meta
+        doc.setFontSize(9);
+        doc.setTextColor(100, 100, 100);
+        doc.text(`Contract ID: ${contractData.contractId}`, 20, 35);
+        doc.text(`Effective Date: ${contractData.effectiveDate}`, 20, 40);
+        
+        // Client info
+        doc.setFillColor(224, 171, 16);
+        doc.rect(20, 50, 170, 8, 'F');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(10);
+        doc.setTextColor(0, 0, 0);
+        doc.text('CLIENT INFORMATION', 105, 56, { align: 'center' });
+        doc.setFillColor(248, 249, 250);
+        doc.rect(20, 65, 170, 25, 'F');
+        doc.setDrawColor(224, 171, 16);
+        doc.setLineWidth(0.5);
+        doc.rect(20, 65, 170, 25, 'S');
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9);
+        doc.setTextColor(0, 0, 0);
+        doc.text(`Client: ${contractData.clientName}`, 25, 75);
+        doc.text(`Email: ${contractData.clientEmail}`, 25, 81);
+        doc.text(`Package: ${getPackageDetails(contractData.selectedPackage)?.name || contractData.selectedPackage}`, 25, 87);
+        
+        // Signatures
+        const signatureY = 120;
+        doc.setFillColor(224, 171, 16);
+        doc.rect(20, signatureY - 5, 170, 8, 'F');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(10);
+        doc.setTextColor(0, 0, 0);
+        doc.text('CONTRACT SIGNATURES', 105, signatureY + 2, { align: 'center' });
+        
+        // MMA signature
+        doc.setFontSize(8);
+        doc.text('MARKETING MOUSETRAP AGENCY (COMPANY)', 20, signatureY + 15);
+        doc.setFillColor(248, 249, 250);
+        doc.rect(20, signatureY + 20, 75, 25, 'F');
+        doc.setDrawColor(224, 171, 16);
+        doc.setLineWidth(0.5);
+        doc.rect(20, signatureY + 20, 75, 25, 'S');
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(6);
+        doc.text('Authorized Signature:', 25, signatureY + 26);
         doc.setFontSize(12);
-        doc.text('Digital Signature:', 20, 200);
-        doc.setFontStyle('italic');
-        doc.text(contractData.signature, 20, 210);
+        doc.setFont('helvetica', 'italic');
+        doc.text('MMA', 25, signatureY + 32);
+        doc.setDrawColor(0, 0, 0);
+        doc.setLineWidth(0.3);
+        doc.line(25, signatureY + 34, 85, signatureY + 34);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(6);
+        doc.text('Title: Authorized Signatory', 25, signatureY + 38);
+        doc.text('Date: ' + contractData.contractDate, 25, signatureY + 42);
+        
+        // Client signature
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(8);
+        doc.text('CLIENT SIGNATURE', 105, signatureY + 15);
+        doc.setFillColor(248, 249, 250);
+        doc.rect(105, signatureY + 20, 75, 25, 'F');
+        doc.setDrawColor(224, 171, 16);
+        doc.setLineWidth(0.5);
+        doc.rect(105, signatureY + 20, 75, 25, 'S');
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(6);
+        doc.text('Representative:', 115, signatureY + 26);
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'italic');
+        doc.text(contractData.clientName, 115, signatureY + 32);
+        doc.setDrawColor(0, 0, 0);
+        doc.setLineWidth(0.3);
+        doc.line(115, signatureY + 34, 175, signatureY + 34);
+        doc.setFontSize(6);
+        doc.text('Signature: ' + contractData.signature, 115, signatureY + 38);
+        doc.text('Date: ' + contractData.signatureDate, 115, signatureY + 42);
         
         // Save PDF
         const fileName = `NickySanders_Contract_${contractData.contractId}.pdf`;
@@ -886,6 +1039,40 @@
         console.error('❌ Invoice PDF error:', error);
         alert('Error generating invoice PDF. Please try again.');
       }
+    });
+
+    // Upload signed contract PDF to GitHub via API
+    async function uploadSignedContractToGitHub(cd) {
+      const base64 = await generateContractPDFBase64(cd);
+      const safeName = cd.clientName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+      const filename = `MMA_Contract_${safeName}_${cd.contractId}.pdf`;
+      const res = await fetch('/api/upload-contract', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filename, content: base64, contractData: cd })
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Upload failed');
+      }
+      const data = await res.json();
+      return data.downloadUrl || '';
+    }
+
+    // Payment modal helpers
+    function openPaymentModal(url) {
+      const modal = document.getElementById('paymentModal');
+      const frame = document.getElementById('paymentFrame');
+      const link = document.getElementById('paymentExternalLink');
+      frame.src = url;
+      link.href = url;
+      modal.classList.add('show');
+    }
+    document.getElementById('closePaymentModal').addEventListener('click', function() {
+      const modal = document.getElementById('paymentModal');
+      const frame = document.getElementById('paymentFrame');
+      frame.removeAttribute('src');
+      modal.classList.remove('show');
     });
   </script>
 </body>

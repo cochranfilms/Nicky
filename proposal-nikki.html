@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Content Strategy & Systems Proposal — Nikki Sanders</title>
+  <title>AI Content Strategy & Systems Proposal — Nicky Sanders</title>
   
   <!-- Shared Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -46,6 +46,27 @@
       background-attachment: fixed, fixed, fixed;
       overflow-x: hidden;
     }
+
+    /* Top brand bar */
+    .proposal-top { position: sticky; top: 0; z-index: 40; backdrop-filter: saturate(160%) blur(10px); background: linear-gradient(180deg, rgba(7,7,26,.78), rgba(7,7,26,.45)); border-bottom: 1px solid rgba(255,255,255,.08); }
+    .top-inner { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; height: 56px; width: min(100%, 1200px); margin: 0 auto; padding: 0 16px; }
+    .top-brand { display: flex; align-items: center; gap: 10px; }
+    .top-brand img { width: 28px; height: 28px; border-radius: 6px; box-shadow: 0 4px 14px rgba(224,171,16,.3); }
+    .top-brand strong { letter-spacing: .2px; }
+
+    /* Hero banner */
+    .hero-banner { position: relative; overflow: hidden; padding: 68px 0 44px; }
+    .hero-banner::before { content: ""; position: absolute; inset: -20% -10%; background:
+        radial-gradient(1200px 700px at 18% -10%, rgba(255,120,200,.22), transparent 60%),
+        radial-gradient(1200px 700px at 90% 120%, rgba(224,171,16,.20), transparent 60%),
+        conic-gradient(from 220deg at 60% 40%, rgba(255,255,255,.08), rgba(255,255,255,0) 25%, rgba(255,255,255,.08) 50%, rgba(255,255,255,0) 75%, rgba(255,255,255,.08));
+      filter: saturate(140%) blur(8px); opacity: .9; pointer-events: none; }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size: 40px 40px; mask-image: radial-gradient(70% 70% at 50% 30%, #000 60%, transparent 100%); opacity: .18; pointer-events: none; }
+    .hero-inner { width: min(100%, 1200px); margin: 0 auto; padding: 0 24px; text-align: center; }
+    .hero-title { margin: 0 0 10px; font-size: clamp(28px, 5vw, 52px); font-weight: 800; background: linear-gradient(90deg, #fff, #ffd86a, #9ecbff); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 10px 40px rgba(224,171,16,.16); }
+    .hero-sub { margin: 0; color: var(--muted); font-size: 16px; }
+    .chips { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+    .chip { display: inline-flex; gap: 8px; align-items: center; padding: 8px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.08)); font-size: 12px; }
 
     .neural-canvas {
       position: fixed;
@@ -235,22 +256,31 @@
   <canvas id="neural" class="neural-canvas" aria-hidden="true"></canvas>
   <div class="neural-overlay" aria-hidden="true"></div>
 
-  <header>
-    <nav class="nav">
-      <div class="brand">
-        <img src="logo.webp" alt="Nikki Sanders Logo" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'128\' height=\'128\'><defs><linearGradient id=\'g\' x1=\'0\' x2=\'1\'><stop stop-color=\'%23e0ab10\' offset=\'0\'/><stop stop-color=\'%23ffd86a\' offset=\'1\'/></linearGradient></defs><rect rx=\'24\' ry=\'24\' width=\'100%\' height=\'100%\' fill=\'%23010043\'/><text x=\'50%\' y=\'54%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=\'44\' font-family=\'sans-serif\' fill=\'url(%23g)\'>NS</text></svg>'">
-        <div class="name">
-          Nikki Sanders
-          <small>The Voice of Content Branding</small>
-        </div>
-      </div>
-      <div class="actions">
-        <a href="index.html" class="cta-ghost">View Demo</a>
-        <a href="roadmap-nikki.html" class="cta-ghost">View Roadmap</a>
-        <a href="contract-nikki.html" class="cta-primary">Review Agreement</a>
-      </div>
-    </nav>
+  <header class="proposal-top" aria-label="Brand">
+    <div class="top-inner">
+      <div class="top-brand"><img src="DTTB-Logo-Final-Black.png" alt="DTTB"/><strong>Nicky Sanders — AI Content Proposal</strong></div>
+      <div></div>
+      <nav style="display:flex; gap:8px; align-items:center">
+        <a class="cta-ghost" href="index.html">View Demo</a>
+        <a class="cta-ghost" href="roadmap-nikki.html">View Roadmap</a>
+        <a class="cta-primary" href="contract-nikki.html">Review Agreement</a>
+      </nav>
+    </div>
   </header>
+
+  <section class="hero-banner" aria-label="Proposal Overview">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <h1 class="hero-title">Build an AI‑Powered Platform that Sells While You Sleep</h1>
+      <p class="hero-sub">A unified hub for booking, education, and media—designed for speed, scale, and measurable ROI.</p>
+      <div class="chips">
+        <span class="chip">Unified Booking</span>
+        <span class="chip">Education Hub</span>
+        <span class="chip">Automation</span>
+        <span class="chip">Creator Workflows</span>
+      </div>
+    </div>
+  </section>
 
   <main>
     <section class="hero container">
@@ -258,27 +288,28 @@
       <p class="sub">Content, Strategy, and AI that actually works.</p>
       <div class="cta-group">
         <a href="index.html" class="cta-primary">Explore the Demo</a>
+        <a href="roadmap-nikki.html" class="cta-ghost">See the Roadmap</a>
       </div>
     </section>
 
     <section class="container">
       <div class="grid">
         <div class="card">
-          <h2>ChatGPT for Content Creation</h2>
-          <p>LinkedIn Learning course with hands-on workflows and strategy.</p>
-          <a href="demo-nikki.html#course" class="cta-ghost">Learn More</a>
+          <h2>Unified Booking Hub</h2>
+          <p>One smart form for speaking, podcast, and workshop requests with auto calendar invites.</p>
+          <a href="index.html#contact" class="cta-ghost">Preview Booking</a>
         </div>
         
         <div class="card">
-          <h2>Two-Day Social Accelerator</h2>
-          <p>Design a 90-day content system in two days—zero burnout, maximum clarity.</p>
-          <a href="demo-nikki.html#workshop" class="cta-ghost">View Workshop</a>
+          <h2>Education Platform</h2>
+          <p>Courses, workshops, and resources under one brand—optimized for conversion and learning.</p>
+          <a href="index.html#workshops" class="cta-ghost">See Workshops</a>
         </div>
         
         <div class="card">
-          <h2>AI Content Strategy</h2>
-          <p>Weekly classes to architect your AI-assisted editorial calendar and brand voice.</p>
-          <a href="demo-nikki.html#strategy" class="cta-ghost">Explore Programs</a>
+          <h2>AI Content Engine</h2>
+          <p>Reusable prompts, templates, and analytics to scale content without burnout.</p>
+          <a href="index.html#toolkit" class="cta-ghost">Explore Toolkit</a>
         </div>
       </div>
     </section>

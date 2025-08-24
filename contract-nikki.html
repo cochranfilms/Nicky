@@ -669,9 +669,45 @@
     function getPackageDetails(selectedPackage) {
       // Base prices per package
       const map = {
-        core: { name: 'Core System Package', price: 5000 },
-        growth: { name: 'Growth Accelerator Package', price: 7500 },
-        full: { name: 'Full Ecosystem Package', price: 10000 }
+        core: {
+          name: 'Core System Package',
+          price: 5000,
+          features: [
+            'Website redesign (AI-first brand style)',
+            'Centralized booking form',
+            'Automated calendar integration',
+            'Workshop booking demo',
+            'Newsletter sign-up automation',
+            'Portfolio/media hub',
+            'Basic SEO + analytics'
+          ]
+        },
+        growth: {
+          name: 'Growth Accelerator Package',
+          price: 7500,
+          features: [
+            'Everything in Core Package',
+            'Learning Hub integration',
+            'Resource downloads system',
+            'Community area (gated)',
+            'Content pipeline automation',
+            'Quarterly strategy calls',
+            'Custom branded videos'
+          ]
+        },
+        full: {
+          name: 'Full Ecosystem Package',
+          price: 10000,
+          features: [
+            'Everything in Growth Package',
+            'Custom dashboard',
+            'Automated invoicing',
+            'Booking workflows',
+            'Private client portal',
+            'Advanced analytics',
+            '6 months support included'
+          ]
+        }
       };
       return map[selectedPackage] || null;
     }
@@ -692,19 +728,23 @@
 
       // 50% upfront per payment terms
       const deposit = Math.round(pkg.price * 0.5);
-      const lineItems = [
-        { label: `${pkg.name} — Initial Deposit (50%)`, amount: deposit },
-      ];
+      const featureList = (pkg.features || []).map(f => `<li style=\"margin:6px 0; display:flex; align-items:center; gap:8px\"><span style=\"color:var(--brand-gold);\">✔</span><span>${f}</span></li>`).join('');
 
       meta.textContent = `${cd.clientName} • ${cd.clientEmail} • ${cd.effectiveDate}`;
       items.innerHTML = `
-        <div style="display:grid; gap:10px">
-          ${lineItems.map(li => `
-            <div style="display:flex; justify-content:space-between; gap:16px">
-              <div>${li.label}</div>
-              <div><strong>$${li.amount.toLocaleString()}</strong></div>
-            </div>
-          `).join('')}
+        <div style=\"display:grid; gap:14px\">
+          <div>
+            <div style=\"font-weight:700; margin-bottom:6px\">${pkg.name}</div>
+            <ul style=\"margin:0; padding-left:0; list-style:none; color:var(--muted);\">${featureList}</ul>
+          </div>
+          <div style=\"display:flex; justify-content:space-between; align-items:center; padding-top:8px; border-top:1px solid rgba(255,255,255,.14)\">
+            <div>Initial Deposit (50%)</div>
+            <div><strong>$${deposit.toLocaleString()}</strong></div>
+          </div>
+          <div style=\"display:flex; justify-content:space-between; color:var(--muted)\">
+            <div>Remaining Balance (due at launch)</div>
+            <div>$${(pkg.price - deposit).toLocaleString()}</div>
+          </div>
         </div>
       `;
       total.textContent = `Total Due Now: $${deposit.toLocaleString()}`;
@@ -731,7 +771,7 @@
       return res.json();
     }
 
-    // Build a signed contract PDF with MMA + Client signatures; return base64
+    // Build signed contract PDF (MMA + Client signatures) and return base64
     async function generateContractPDFBase64(cd) {
       const { jsPDF } = window.jspdf;
       if (!jsPDF) throw new Error('jsPDF not loaded');
@@ -754,12 +794,12 @@
       doc.text(`Contract ID: ${cd.contractId}`, 20, 35);
       doc.text(`Effective Date: ${cd.effectiveDate}`, 20, 40);
 
-      // Client information
+      // Client info
       doc.setFillColor(224, 171, 16);
       doc.rect(20, 50, 170, 8, 'F');
+      doc.setFont('helvetica', 'bold');
       doc.setFontSize(10);
       doc.setTextColor(0, 0, 0);
-      doc.setFont('helvetica', 'bold');
       doc.text('CLIENT INFORMATION', 105, 56, { align: 'center' });
 
       doc.setFillColor(248, 249, 250);
@@ -774,7 +814,7 @@
       doc.text(`Email: ${cd.clientEmail}`, 25, 81);
       doc.text(`Package: ${getPackageDetails(cd.selectedPackage)?.name || cd.selectedPackage}`, 25, 87);
 
-      // Signatures section
+      // Signatures
       const signatureY = 120;
       doc.setFillColor(224, 171, 16);
       doc.rect(20, signatureY - 5, 170, 8, 'F');
@@ -783,7 +823,7 @@
       doc.setTextColor(0, 0, 0);
       doc.text('CONTRACT SIGNATURES', 105, signatureY + 2, { align: 'center' });
 
-      // MMA signature (left)
+      // MMA signature
       doc.setFontSize(8);
       doc.text('MARKETING MOUSETRAP AGENCY (COMPANY)', 20, signatureY + 15);
       doc.setFillColor(248, 249, 250);
@@ -805,7 +845,7 @@
       doc.text('Title: Authorized Signatory', 25, signatureY + 38);
       doc.text('Date: ' + cd.contractDate, 25, signatureY + 42);
 
-      // Client signature (right)
+      // Client signature
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(8);
       doc.text('CLIENT SIGNATURE', 105, signatureY + 15);
@@ -827,7 +867,6 @@
       doc.text('Signature: ' + cd.signature, 115, signatureY + 38);
       doc.text('Date: ' + cd.signatureDate, 115, signatureY + 42);
 
-      // Return pure base64
       const dataUri = doc.output('datauristring');
       const base64 = dataUri.split('base64,')[1] || '';
       if (!base64) throw new Error('Failed to produce base64');
@@ -947,6 +986,7 @@
 
         const pkg = getPackageDetails(contractData.selectedPackage);
         const deposit = pkg ? Math.round(pkg.price * 0.5) : 0;
+        const features = (pkg && pkg.features) ? pkg.features : [];
 
         // Brand colors
         // brand-dark: #010043 (1,0,67) | brand-gold: #e0ab10 (224,171,16)
@@ -988,46 +1028,56 @@
         doc.text(`Client: ${contractData.clientName}`, 25, 78);
         doc.text(`Email: ${contractData.clientEmail}`, 25, 84);
 
-        // Items header
+        // Package items
         doc.setFillColor(224, 171, 16);
         doc.rect(20, 98, 170, 8, 'F');
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(10);
-        doc.text('ITEMS', 25, 104);
+        doc.text('PACKAGE ITEMS', 25, 104);
 
-        // Line item
+        let yPos = 112;
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8.5);
+        const maxItems = 12;
+        features.slice(0, maxItems).forEach((f) => {
+          if (yPos > 152) return; // keep within page before totals
+          doc.text(`• ${f}`, 25, yPos);
+          yPos += 6;
+        });
+
+        // Deposit line
         doc.setFillColor(248, 249, 250);
-        doc.rect(20, 108, 170, 14, 'F');
+        doc.rect(20, 156, 170, 12, 'F');
         doc.setDrawColor(224, 171, 16);
         doc.setLineWidth(0.5);
-        doc.rect(20, 108, 170, 14, 'S');
+        doc.rect(20, 156, 170, 12, 'S');
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(9);
         const label = `${pkg ? pkg.name : contractData.selectedPackage} — Initial Deposit (50%)`;
-        doc.text(label, 25, 116);
-        doc.text(`$${deposit.toLocaleString()}`, 180, 116, { align: 'right' });
+        doc.text(label, 25, 164);
+        doc.text(`$${deposit.toLocaleString()}`, 180, 164, { align: 'right' });
 
         // Total
         doc.setFillColor(224, 171, 16);
-        doc.rect(20, 130, 170, 8, 'F');
+        doc.rect(20, 174, 170, 8, 'F');
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(10);
-        doc.text('TOTAL DUE NOW', 25, 136);
+        doc.text('TOTAL DUE NOW', 25, 180);
 
         doc.setFillColor(248, 249, 250);
-        doc.rect(20, 138, 170, 14, 'F');
+        doc.rect(20, 182, 170, 14, 'F');
         doc.setDrawColor(224, 171, 16);
         doc.setLineWidth(0.5);
-        doc.rect(20, 138, 170, 14, 'S');
+        doc.rect(20, 182, 170, 14, 'S');
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(12);
-        doc.text(`$${deposit.toLocaleString()}`, 180, 147, { align: 'right' });
+        doc.text(`$${deposit.toLocaleString()}`, 180, 191, { align: 'right' });
 
         // Payment note
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(8);
         doc.setTextColor(100, 100, 100);
-        const y = 168;
+        const y = 204;
         doc.text('Secure online payment is available via the Pay button on your contract page.', 105, y, { align: 'center' });
         if (invoiceMeta.paymentUrl) {
           doc.text(`Payment Link: ${invoiceMeta.paymentUrl}`, 105, y + 6, { align: 'center' });

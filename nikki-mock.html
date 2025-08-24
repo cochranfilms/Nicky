@@ -1,0 +1,3189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <title>Nikki Sanders — AI Content Strategy & Workshops</title>
+  <meta name="description" content="AI-first content strategy, workshops, and systems to grow without burnout. Join the Two-Day Social Accelerator and get a 90-day plan in 48 hours." />
+  <link rel="canonical" href="nikki-mock.html" />
+  <meta name="theme-color" content="#010043" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Nikki Sanders — AI Content Strategy & Workshops" />
+  <meta property="og:description" content="AI-first content strategy, workshops, and systems to grow without burnout." />
+  <meta property="og:url" content="nikki-mock.html" />
+  <meta property="og:image" content="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'><defs><linearGradient id='g' x1='0' x2='1'><stop stop-color='%23010043' offset='0'/><stop stop-color='%239ecbff' offset='1'/></linearGradient></defs><rect width='100%' height='100%' fill='url(%23g)'/><text x='50%' y='50%' font-family='sans-serif' font-size='64' fill='%23ffd86a' text-anchor='middle' dominant-baseline='middle'>NIKKI SANDERS</text><text x='50%' y='62%' font-family='sans-serif' font-size='28' fill='%23ffffff' opacity='0.9' text-anchor='middle' dominant-baseline='middle'>AI Content Strategy & Workshops</text></svg>" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Nikki Sanders — AI Content Strategy & Workshops" />
+  <meta name="twitter:description" content="AI-first content strategy, workshops, and systems to grow without burnout." />
+  <meta name="twitter:image" content="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'><rect width='100%' height='100%' fill='%23010043'/><text x='50%' y='50%' font-family='sans-serif' font-size='64' fill='%23ffd86a' text-anchor='middle' dominant-baseline='middle'>NIKKI SANDERS</text></svg>" />
+  <style>
+    /* Skip link */
+    .skip-link { position: absolute; left: -9999px; top: 0; background: #ffd86a; color: #111; padding: 8px 12px; border-radius: 8px; z-index: 1000; }
+    .skip-link:focus { left: 12px; top: 12px; box-shadow: 0 0 0 3px rgba(224,171,16,.45); }
+
+    :root {
+      --brand-dark: #010043; /* dark blue */
+      --brand-gold: #e0ab10; /* gold */
+      --bg-0: #07071a;
+      --bg-1: #0b0b23;
+      --glass: 16px;
+      --text: #ffffff;
+      --muted: #ffffff;
+      --ok: #3ddc84;
+      --danger: #ff5470;
+      --shadow: 0 10px 40px rgba(0,0,0,.35);
+      --ring: 0 0 0 2px rgba(224,171,16,.35);
+      --maxw: 1200px;
+      --radius: 16px;
+      /* Card theme (defaults to green) */
+      --cardA: rgba(145, 255, 0, 0.075);
+      --cardB: rgba(255, 0, 255, 0.065);
+      --glowA: rgba(0,255,190,.30);
+      --glowB: rgba(0,255,120,.22);
+
+      /* AI card system */
+      --card-bg: rgba(255,255,255,0.08);
+      --card-border: rgba(255,255,255,0.25);
+      --card-radius: 20px;
+      --card-blur: 20px;
+
+      /* Design tokens */
+      --bg: #07071a;
+      --surface-1: #0b0b23;
+      --surface-2: #111233;
+      --text-strong: #ffffff;
+      --text: #e8ebff;
+      --muted-2: #cbd0ff;
+      --ring-color: rgba(224,171,16,.45);
+      --radius-lg: 16px;
+      --radius-sm: 10px;
+      --shadow-lg: 0 24px 80px rgba(0,0,0,.45);
+      --shadow-sm: 0 8px 24px rgba(0,0,0,.35);
+      /* Accent defaults (gold) */
+      --accent-1: #e0ab10;
+      --accent-2: #ffd86a;
+      --accent-3: #fff2b8;
+      --accent-text: #111111;
+      --accent-grad: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      --mesh-a: rgba(255,120,200,.09);
+      --mesh-b: rgba(224,171,16,.09);
+      /* Nav + surfaces */
+      --nav-h: 56px;
+      --nav-h-compact: 44px;
+      --progress-h: 2px;
+      --surface-elevated: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+      --outline-strong: rgba(255,255,255,.22);
+    }
+
+    /* Shared AI card base */
+    .ai-card {
+      border-radius: var(--card-radius);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 8px 30px rgba(0,0,0,.45);
+      backdrop-filter: blur(var(--card-blur)) saturate(140%);
+      transition: transform .2s ease, box-shadow .3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .ai-card:hover { transform: translateY(-3px); box-shadow: 0 16px 50px rgba(0,0,0,.65); }
+    .ai-card::before {
+      content:""; position:absolute; inset:0; border-radius:inherit; padding:1px;
+      background:linear-gradient(135deg,rgba(255,120,200,.6),rgba(224,171,16,.6),rgba(90,160,255,.6));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude; opacity:.6; pointer-events:none;
+    }
+
+    /* Theme modes */
+    body[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #07071a; --surface-1:#0b0b23; --surface-2:#101233; --text-strong:#ffffff; --text:#e8ebff; --muted-2:#cbd0ff; --ring-color: rgba(224,171,16,.45);
+      --shadow-lg: 0 24px 80px rgba(0,0,0,.5); --shadow-sm:0 8px 24px rgba(0,0,0,.4);
+      --mesh-a: rgba(255,120,200,.09); --mesh-b: rgba(224,171,16,.09);
+    }
+    body[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f7f7fb; --surface-1:#ffffff; --surface-2:#f1f3ff; --text-strong:#0b0b23; --text:#111433; --muted-2:#4a4e7a; --ring-color: rgba(1,0,67,.35);
+      --shadow-lg: 0 24px 80px rgba(0,0,0,.08); --shadow-sm:0 8px 24px rgba(0,0,0,.08);
+      --mesh-a: rgba(120,160,255,.18); --mesh-b: rgba(224,171,16,.18);
+    }
+
+    /* Accent themes */
+    body[data-accent="violet"] { --accent-1:#c964ff; --accent-2:#6aa1ff; --accent-3:#e6d1ff; --accent-text:#101016; }
+    body[data-accent="cyan"] { --accent-1:#08d6ff; --accent-2:#73a8ff; --accent-3:#d1f6ff; --accent-text:#0a0f14; }
+    body[data-accent="gold"] { --accent-1:#e0ab10; --accent-2:#ffd86a; --accent-3:#fff2b8; --accent-text:#111; }
+    body[data-accent="emerald"] { --accent-1:#22c55e; --accent-2:#8df7c1; --accent-3:#d1ffe9; --accent-text:#08110b; }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text-strong);
+      background:
+        radial-gradient(1200px 800px at 70% -10%, var(--mesh-b), transparent 50%),
+        radial-gradient(900px 600px at 0% 100%, rgba(1,0,67,.6), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--surface-1));
+      background-attachment: fixed, fixed, fixed;
+      overflow-x: hidden;
+    }
+    .hero .gradient-text { font-size: clamp(28px, 5.4vw, 56px); line-height: 1.12; }
+    .hero .sub { font-size: clamp(14px, 2vw, 18px); }
+
+    a { color: #ffffff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: none; box-shadow: 0 0 0 2px rgba(255,255,255,.35), 0 0 0 6px rgba(224,171,16,.35); }
+
+    .container { width: min(100%, var(--maxw)); margin: 0 auto; padding: 0 24px; }
+
+    /* Floating theme/accent switcher */
+    /* removed floating theme/accent switcher */
+    .floating-switcher .row { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+    .floating-switcher .seg { display: inline-flex; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; overflow: hidden; }
+    .floating-switcher .seg button { background: rgba(255,255,255,.85); color: #111; border: 0; padding: 6px 10px; font-size: 12px; cursor: pointer; }
+    .floating-switcher .seg button[aria-checked="true"] { background: var(--accent-grad); color: var(--accent-text); }
+
+    /* Command palette */
+    .cmdk { position: fixed; inset: 0; display: none; place-items: center; z-index: 90; }
+    .cmdk.open { display: grid; }
+    .cmdk .backdrop { position: absolute; inset: 0; background: rgba(3,3,10,.55); backdrop-filter: blur(6px); }
+    .cmdk .panel { position: relative; width: min(92vw, 680px); border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04)); box-shadow: var(--shadow-lg); }
+    .cmdk .search { display: flex; gap: 8px; align-items: center; padding: 12px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .cmdk input { flex: 1; background: rgba(255,255,255,.08); color: var(--text-strong); border: 1px solid rgba(255,255,255,.16); border-radius: 10px; padding: 10px 12px; }
+    .cmdk ul { list-style: none; margin: 0; padding: 8px; max-height: 320px; overflow: auto; display: grid; gap: 6px; }
+    .cmdk li { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border: 1px solid rgba(255,255,255,.12); border-radius: 10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); }
+    .cmdk li[aria-selected="true"] { outline: 2px solid var(--accent-2); }
+    .kbd { font-size: 11px; border: 1px solid rgba(255,255,255,.2); border-radius: 6px; padding: 2px 6px; background: #fff; color: #111; }
+
+    /* ===== Elite Navigation System (AI-native) ===== */
+    .nav-shell { position: sticky; top: 0; z-index: 60; backdrop-filter: saturate(160%) blur(10px); background: linear-gradient(180deg, rgba(7,7,26,.75), rgba(7,7,26,.45)); border-bottom: 1px solid rgba(255,255,255,.06); }
+    .nav-shell .progress { position: absolute; top: 0; left: 0; height: var(--progress-h); width: 0%; background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); box-shadow: 0 0 12px var(--accent-2); }
+    .nav-inner { display: grid; grid-template-columns: auto 1fr auto; align-items: center; height: var(--nav-h); transition: height .28s ease; }
+    .nav-shell.compact .nav-inner { height: var(--nav-h-compact); }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand img { width: 26px; height: 26px; object-fit: contain; filter: drop-shadow(0 2px 8px rgba(224,171,16,.35)); border-radius: 8px; }
+    .brand .name { font-weight: 700; letter-spacing: .2px; }
+    .brand .name small { display: block; font-weight: 500; color: var(--muted); margin-top: -2px; font-size: 11px; }
+    nav.primary { display: flex; align-items: center; gap: 10px; justify-self: center; }
+    nav.primary a { position: relative; appearance: none; border: 0; background: transparent; color: var(--text); font-weight: 600; padding: 8px 10px; border-radius: 10px; cursor: pointer; }
+    nav.primary a:hover { background: rgba(255,255,255,.06); }
+    nav.primary a[aria-current="section"]::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 4px; height: 2px; background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); border-radius: 2px; transform-origin: left; transform: scaleX(1); transition: transform .24s ease; }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .icon-btn { width: 34px; height: 34px; display: inline-grid; place-items: center; border-radius: 10px; border: 1px solid rgba(255,255,255,.12); background: var(--surface-elevated); cursor: pointer; }
+    /* Prevent nav items (e.g., Newsletter) from drifting off-screen on medium widths */
+    @media (max-width: 1180px){
+      nav.primary { flex-wrap: wrap; row-gap: 6px; justify-content: center; }
+      nav.primary a { padding: 6px 8px; font-size: 14px; }
+      .nav-actions { gap: 8px; }
+      .cta-primary { min-width: 140px; height: 38px; font-size: 13px; padding: 0 14px; }
+      .brand .name small { display: none; }
+      .brand .name { font-size: 14px; }
+      .nav-inner { grid-template-columns: auto 1fr auto; column-gap: 10px; }
+    }
+    .hamburger { display: none; }
+    @media (max-width: 980px) { nav.primary { display: none; } .hamburger { display: inline-grid; } }
+
+    /* Mega menu panels */
+    .mega { position: fixed; left: 0; right: 0; top: var(--nav-h); display: none; pointer-events: none; }
+    .mega.open { display: block; }
+    .mega .panel { pointer-events: auto; width: min(100%, var(--maxw)); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; padding: 14px; border-radius: 14px; border: 1px solid rgba(255,255,255,.16); background: var(--surface-elevated); box-shadow: var(--shadow-lg); }
+    .mega h4 { grid-column: 1 / -1; margin: 4px 6px 6px; font-size: 12px; letter-spacing: .4px; text-transform: uppercase; opacity: .85; }
+    .mega .card { display: grid; gap: 8px; padding: 12px; border: 1px solid rgba(255,255,255,.12); border-radius: 12px; background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); }
+    .mega .card strong { font-size: 14px; }
+    .mega .card p { margin: 0; font-size: 12px; opacity: .9; }
+    .mega .card .cta { justify-self: start; }
+
+    /* Off-canvas drawer */
+    #nav-drawer { position: fixed; inset: 0; display: none; z-index: 70; }
+    #nav-drawer.open { display: block; }
+    #nav-drawer .backdrop { position: absolute; inset: 0; background: rgba(3,3,10,.55); backdrop-filter: blur(6px); }
+    #nav-drawer .sheet { position: absolute; right: 0; top: 0; height: 100%; width: min(86vw, 380px); background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04)); border-left: 1px solid rgba(255,255,255,.14); box-shadow: var(--shadow-lg); display: grid; grid-template-rows: auto 1fr; }
+    #nav-drawer header { display:flex; align-items:center; justify-content: space-between; padding: 12px; border-bottom: 1px solid rgba(255,255,255,.12); }
+    #nav-drawer nav { padding: 10px; overflow: auto; }
+    .accordion { display: grid; gap: 6px; }
+    .accordion-button { width: 100%; text-align: left; padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.06); color: var(--text); font-weight: 700; }
+    .accordion-panel { padding: 10px; border-left: 2px solid rgba(255,255,255,.12); margin-left: 6px; }
+
+    /* System status strip */
+    /* removed system status strip styles */
+
+    /* Carousels */
+    .carousel-wrap { position: relative; padding: 16px 60px 18px; border: 2px solid rgba(255,255,255,.22); border-radius: 16px; background: var(--surface-elevated); box-shadow: var(--shadow-sm), inset 0 0 0 1px rgba(255,255,255,.06); }
+    .carousel-track { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 32px) / 3); gap: 16px; overflow: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+    @media (max-width: 980px){ .carousel-track { grid-auto-columns: minmax(300px, 92%); } }
+    .carousel-track > * { scroll-snap-align: start; }
+    @media (max-width: 980px){ .carousel-wrap { padding: 14px 48px 16px; } }
+    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 38px; height: 38px; border-radius: 10px; border: 1px solid rgba(255,255,255,.16); background: linear-gradient(180deg, rgba(255,255,255,.20), rgba(255,255,255,.08)); backdrop-filter: blur(8px) saturate(140%); display: grid; place-items: center; cursor: pointer; z-index: 2; }
+    .carousel-btn.prev { left: 16px; }
+    .carousel-btn.next { right: 16px; }
+
+    .cta-primary {
+      --c1: var(--brand-gold);
+      --c2: #ffd86a;
+      background: linear-gradient(135deg, var(--c1), var(--c2));
+      color: #101010;
+      border: none; border-radius: 999px;
+      height: 42px; min-width: 160px; padding: 0 16px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 14px; line-height: 1; font-weight: 700; letter-spacing: .2px; white-space: nowrap;
+      box-shadow: 0 10px 30px rgba(224,171,16,.35);
+      cursor: pointer; transition: transform .15s ease, filter .2s ease;
+    }
+    .cta-primary:hover { transform: translateY(-1px); filter: brightness(1.05); }
+
+    .cta-ghost { background: rgba(255,255,255,.9); color: #111; border: 1px solid rgba(255,255,255,.12); border-radius: 999px; height: 40px; min-width: 140px; padding: 0 14px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; line-height: 1; font-weight: 600; cursor: pointer; white-space: nowrap; }
+
+    /* Magic CTA - draw focus and attention */
+    .magic-cta {
+      position: relative; isolation: isolate; overflow: hidden; border-radius: 999px; padding: 10px 18px; height: auto; min-width: 280px;
+      background: radial-gradient(100% 100% at 0% 0%, rgba(255,216,106,.8), rgba(255,255,255,.92)) !important;
+      border: 1px solid rgba(255,255,255,.35) !important; box-shadow: 0 14px 40px rgba(224,171,16,.45), 0 0 0 2px rgba(255,255,255,.4) inset;
+      color: #111; font-weight: 800; letter-spacing: .2px;
+    }
+    .magic-cta .label { position: relative; z-index: 2; }
+    .magic-cta .arrow { position: relative; z-index: 2; display:inline-block; margin: 0 8px; transform: translateX(0); }
+    .magic-cta::before { content:""; position:absolute; inset:-120%; background: conic-gradient(from 0deg, rgba(255,120,200,.6), rgba(224,171,16,.6), rgba(158,203,255,.6), rgba(255,120,200,.6)); filter: blur(26px); opacity:.55; animation: magicSpin 6s linear infinite; }
+    .magic-cta::after { content:""; position:absolute; inset:0; border-radius:inherit; background: radial-gradient(160% 120% at var(--mx,20%) 50%, rgba(255,255,255,.35), transparent 60%); mix-blend-mode: screen; opacity:.35; transition: opacity .2s ease; }
+    .magic-cta:hover::after { opacity:.6; }
+    .magic-cta:hover { transform: translateY(-2px); box-shadow: 0 22px 70px rgba(224,171,16,.55), 0 0 0 2px rgba(255,255,255,.5) inset; }
+    .magic-cta .arrow { animation: arrowPulse 1.1s ease-in-out infinite alternate; }
+    .magic-cta .arrow:first-child { margin-right: 10px; animation-delay: 0s; }
+    .magic-cta .arrow.left { margin-left: 10px; transform: rotate(180deg); animation: arrowPulseLeft 1.1s ease-in-out infinite alternate .2s; }
+    @keyframes arrowPulse { from { transform: translateX(-2px); opacity:.85; } to { transform: translateX(2px); opacity:1; } }
+    @keyframes arrowPulseLeft { from { transform: rotate(180deg) translateX(-2px); opacity:.85; } to { transform: rotate(180deg) translateX(2px); opacity:1; } }
+    @keyframes magicSpin { to { transform: rotate(360deg); } }
+
+    /* Topbar NAV buttons – square, AI glow, proportionate width */
+    .topbar .actions { display: flex; gap: 12px; flex-wrap: nowrap; align-items: center; }
+    .topbar .actions .cta-ghost,
+    .topbar .actions .cta-primary {
+      position: relative;
+      border-radius: 0; height: 40px; padding: 0 16px; min-width: auto;
+      letter-spacing: .2px; text-transform: none;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 6px 20px rgba(0,0,0,.35);
+      transition: transform .14s ease, box-shadow .2s ease, filter .2s ease;
+      overflow: hidden;
+    }
+    /* Theme switch compact in topbar */
+    .topbar .theme-switch { display: inline-flex; gap: 4px; margin-left: 8px; }
+    .topbar .theme-switch button { height: 32px; padding: 0 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,.25); background:#fff; color:#111; cursor:pointer; }
+
+    @media (max-width: 980px){
+      .nav { height: 52px; }
+      .topbar .actions { flex-wrap: wrap; row-gap: 8px; }
+    }
+    /* Nav underline animation */
+    .topbar .actions a {
+      position: relative;
+      background-image: linear-gradient(currentColor, currentColor);
+      background-position: 0 100%; background-size: 0% 2px; background-repeat: no-repeat;
+      transition: background-size .2s ease;
+    }
+    .topbar .actions a:hover { background-size: 100% 2px; }
+    .topbar .actions a[aria-current="page"] { background-size: 100% 2px; }
+    .topbar .actions .cta-ghost {
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.78));
+      border-color: rgba(255,255,255,.28);
+    }
+    .topbar .actions .cta-primary {
+      background: linear-gradient(135deg, #ffcf4d, #e0ab10);
+      color: #111;
+    }
+    /* Animated neon edge */
+    .topbar .actions .cta-ghost::after,
+    .topbar .actions .cta-primary::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(135deg, rgba(255,120,200,.65), rgba(224,171,16,.65));
+      mix-blend-mode: screen; opacity: .0; filter: blur(10px); transition: opacity .25s ease;
+    }
+    .topbar .actions .cta-ghost:hover,
+    .topbar .actions .cta-primary:hover { transform: translateY(-1px); filter: brightness(1.03); }
+    .topbar .actions .cta-ghost:hover::after,
+    .topbar .actions .cta-primary:hover::after { opacity: .6; }
+    .topbar .actions .cta-ghost:focus-visible,
+    .topbar .actions .cta-primary:focus-visible {
+      outline: none; box-shadow: 0 0 0 2px rgba(255,255,255,.4), 0 0 0 6px rgba(255,120,200,.35);
+    }
+
+    /* Allow long CTA text (like email) to wrap inside cards */
+    .link-card .cta-primary,
+    .form-card .cta-primary,
+    .service-card .cta-primary {
+      max-width: 100%;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      height: auto; min-height: 48px; padding: 12px 18px;
+    }
+
+    /* Gradient text utility */
+    .gradient-text {
+      background: linear-gradient(90deg, #fff, #ffd86a, #9ecbff);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      text-shadow: 0 6px 24px rgba(224,171,16,.15);
+    }
+
+    /* Hero */
+    #hero { position: relative; }
+    .neural-canvas {
+      position: fixed; top: 0; bottom: 0;
+      left: calc(50% - 50vw); right: calc(50% - 50vw);
+      z-index: -2;
+    }
+    .neural-overlay {
+      position: fixed; top: 0; bottom: 0;
+      left: calc(50% - 50vw); right: calc(50% - 50vw);
+      z-index: -1; pointer-events: none;
+      background: radial-gradient(1000px 600px at 10% -10%, rgba(255,120,200,.09), transparent 50%),
+                  radial-gradient(900px 600px at 100% 100%, rgba(224,171,16,.09), transparent 55%);
+    }
+    .hero-wrap { padding: 72px 0; }
+    .hero {
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center;
+    }
+    /* Remove the right-side hero panel from the banner per request */
+    .hero-right { display: none !important; }
+    .ai-rotator { width: 100%; }
+    .hero { grid-template-columns: 1fr; }
+    .kicker { margin: 0 0 6px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: #ffd86a; }
+    .hero h1 { font-size: clamp(28px, 4vw, 48px); line-height: 1.08; margin: 0 0 14px; font-weight: 800; }
+    .hero p.sub { margin: 0 0 24px; color: var(--muted); font-size: 18px; }
+    .hero-ctas { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .social-proof { margin: 8px 0 0; color: #ffffff; opacity: .9; font-size: 13px; }
+
+    .hero-card {
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 22px; box-shadow: var(--shadow);
+      backdrop-filter: blur(14px) saturate(130%);
+    }
+
+    /* Sections */
+    section { padding: 72px 0; position: relative; }
+    .section-title { font-size: clamp(22px, 2.6vw, 32px); margin: 0 0 18px; font-weight: 800; }
+    .section-sub { color: var(--muted); margin-bottom: 28px; }
+
+    /* Sectioned background panels */
+    section.panel { isolation: isolate; }
+    /* Full-bleed background that spans the entire viewport width */
+    section.panel::before {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0;
+      /* Full-bleed technique: center at 50% and expand by 50vw on both sides */
+      left: 50%; right: 50%;
+      margin-left: -50vw; margin-right: -50vw;
+      z-index: -1; pointer-events: none;
+      background: linear-gradient(180deg, rgba(255,255,255,.28), rgba(255,255,255,.16));
+      border-top: 1px solid rgba(255,255,255,.06);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      box-shadow: inset 0 22px 90px rgba(0,0,0,.22), inset 0 -22px 90px rgba(0,0,0,.22);
+    }
+    /* Light/Dark glass variants */
+    section.panel-light::before {
+      background:
+        radial-gradient(1200px 700px at 15% -10%, rgba(255,120,200,.65), transparent 60%),
+        radial-gradient(1200px 700px at 90% 115%, rgba(224,171,16,.55), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.14));
+      border-top-color: rgba(255,255,255,.28);
+      border-bottom-color: rgba(255,255,255,.28);
+      box-shadow: inset 0 26px 90px rgba(0,0,0,.18), inset 0 -26px 90px rgba(0,0,0,.18);
+    }
+    section.panel-dark::before {
+      background:
+        radial-gradient(1100px 600px at 85% -10%, rgba(255,120,200,.55), transparent 60%),
+        radial-gradient(1100px 600px at 10% 115%, rgba(224,171,16,.45), transparent 60%),
+        linear-gradient(180deg, rgba(6,6,18,.56), rgba(6,6,18,.40));
+      border-top-color: rgba(255,255,255,.22);
+      border-bottom-color: rgba(255,255,255,.22);
+      box-shadow: inset 0 26px 90px rgba(0,0,0,.28), inset 0 -26px 90px rgba(0,0,0,.28);
+    }
+
+    /* Card glass tweaks per panel */
+    .panel-light .about-card,
+    .panel-light .media-card,
+    .panel-light .service-card,
+    .panel-light .feature-card,
+    .panel-light .form-card,
+    .panel-light .link-card,
+    .panel-light .yt-card {
+      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+      border-color: rgba(255,255,255,.2);
+    }
+    .panel-dark .about-card,
+    .panel-dark .media-card,
+    .panel-dark .service-card,
+    .panel-dark .feature-card,
+    .panel-dark .form-card,
+    .panel-dark .link-card,
+    .panel-dark .yt-card {
+      background: linear-gradient(180deg, rgba(22,22,40,.45), rgba(22,22,40,.28));
+      border-color: rgba(255,255,255,.12);
+    }
+
+    /* Textured overlay on cards without overriding base glass */
+    .panel-light :is(.about-card,.media-card,.service-card,.feature-card,.form-card,.link-card,.yt-card,.hero-card),
+    .panel-dark :is(.about-card,.media-card,.service-card,.feature-card,.form-card,.link-card,.yt-card,.hero-card) {
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.08'/></svg>");
+      background-repeat: repeat;
+      background-size: 160px 160px;
+      background-blend-mode: overlay;
+    }
+    /* Variant color glows per section */
+    .panel-a::before { background:
+      radial-gradient(900px 600px at 12% -10%, rgba(255,120,200,.75), transparent 60%),
+      radial-gradient(900px 600px at 100% 110%, rgba(224,171,16,.65), transparent 60%),
+      linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,.16)); }
+    .panel-b::before { background:
+      radial-gradient(900px 600px at 88% -10%, rgba(255,120,200,.75), transparent 60%),
+      radial-gradient(900px 600px at 0% 110%, rgba(224,171,16,.65), transparent 60%),
+      linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,.16)); }
+    .panel-c::before { background:
+      radial-gradient(800px 520px at 50% -15%, rgba(255,120,200,.68), transparent 60%),
+      radial-gradient(900px 600px at 50% 120%, rgba(224,171,16,.62), transparent 60%),
+      linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,.16)); }
+
+    /* AI Card Redesign: higher contrast glass, gradient stroke, glow */
+    :is(.about-card,.media-card,.service-card,.feature-card,.form-card,.link-card,.yt-card) {
+      position: relative;
+      background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.08'/></svg>") repeat,
+        var(--card-bg);
+      background-size: 160px 160px, auto;
+      background-blend-mode: overlay, normal;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 12px 40px rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.06);
+      backdrop-filter: blur(var(--card-blur)) saturate(150%) brightness(1.02);
+      overflow: hidden;
+      border-radius: var(--card-radius);
+      transition: transform .2s ease, box-shadow .3s ease, background .3s ease;
+    }
+    /* Gradient edge using masking */
+    :is(.about-card,.media-card,.service-card,.feature-card,.form-card,.link-card,.yt-card)::before {
+      content:""; position:absolute; inset:0; pointer-events:none; border-radius: inherit; padding:1px;
+      background: linear-gradient(135deg, rgba(255,120,200,.9), rgba(224,171,16,.9), rgba(158,203,255,.9));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity:.65;
+    }
+    /* Ambient glow */
+    :is(.about-card,.media-card,.service-card,.feature-card,.form-card,.link-card,.yt-card)::after {
+      content:""; position:absolute; inset:-20% -20% auto -20%; height:60%; pointer-events:none;
+      background: radial-gradient(60% 80% at 50% 10%, var(--glowA), var(--glowB), transparent 70%);
+      filter: blur(24px); opacity:.4; transform: translateY(-10px);
+    }
+    /* Theme variants */
+    body.theme-violet { --cardA: rgba(255,120,200,.35); --cardB: rgba(158,203,255,.35); --glowA: rgba(255,120,200,.30); --glowB: rgba(158,203,255,.22); }
+    body.theme-gold { --cardA: rgba(255,216,106,.35); --cardB: rgba(224,171,16,.35); --glowA: rgba(255,216,106,.30); --glowB: rgba(224,171,16,.22); }
+    body.theme-cyan { --cardA: rgba(0,220,255,.35); --cardB: rgba(90,160,255,.35); --glowA: rgba(0,220,255,.30); --glowB: rgba(90,160,255,.22); }
+    /* Hover lift + stronger glow */
+    :is(.about-card,.media-card,.service-card,.feature-card,.form-card,.link-card,.yt-card):hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 50px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.08) inset;
+    }
+    :is(.about-card,.media-card,.service-card,.feature-card,.form-card,.link-card,.yt-card):hover::after { opacity:.6; }
+
+    /* AI V2: 3D tilt + dynamic spotlight */
+    .ai-v2 { perspective: 900px; }
+    .ai-v2 .card3d { transform-style: preserve-3d; transition: transform .12s ease, box-shadow .25s ease; position: relative; overflow: hidden; }
+    .ai-v2 .card3d .spot { position:absolute; inset:-40% -40% auto -40%; height:80%; background: radial-gradient(40% 60% at var(--mx,50%) var(--my,50%), rgba(255,255,255,.35), transparent 60%); mix-blend-mode: overlay; pointer-events:none; filter: blur(32px); opacity:.0; transition: opacity .15s ease; }
+    .ai-v2 .card3d:hover .spot { opacity:.5; }
+    .ai-v2 .card3d:hover { box-shadow: 0 30px 100px rgba(0,0,0,.65); }
+
+    /* Magnetic buttons */
+    .magnet { position: relative; overflow: hidden; }
+    .magnet::after { content:""; position:absolute; inset:0; background: radial-gradient(200px 120px at var(--mx,50%) var(--my,50%), rgba(255,255,255,.25), transparent 60%); opacity:.0; transition: opacity .15s ease; }
+    .magnet:hover::after { opacity:.35; }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(12px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.show { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce){
+      .reveal { transition: opacity .001ms ease !important; transform: none !important; }
+      .reveal.show { opacity: 1; transform: none !important; }
+      .ai-v2 .card3d, .magnet { transform: none !important; }
+    }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; }
+    .about-card, .media-card, .service-card, .feature-card, .form-card {
+      border-radius: var(--card-radius);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 8px 30px rgba(0,0,0,.45);
+      backdrop-filter: blur(var(--card-blur)) saturate(140%);
+    }
+    .about-card { padding: 22px; }
+
+    .thumb {
+      position: relative; overflow: hidden; border-radius: calc(var(--radius) - 6px);
+      aspect-ratio: 16 / 9; background: radial-gradient(circle at 30% 20%, rgba(224,171,16,.25), transparent 40%), #0e0e24;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .85; }
+    .thumb .play {
+      position: absolute; inset: 0; display: grid; place-items: center; cursor: pointer;
+      background: radial-gradient(240px 160px at 50% 50%, rgba(0,0,0,.25), transparent 55%);
+    }
+    .thumb .play button {
+      border: none; border-radius: 999px; width: 64px; height: 64px; cursor: pointer;
+      background: linear-gradient(135deg, var(--brand-gold), #ffd86a);
+      box-shadow: 0 10px 24px rgba(224,171,16,.35);
+      display: grid; place-items: center;
+    }
+
+    /* Services grid */
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .service-card { padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+    .service-card .icon {
+      width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center;
+      background: linear-gradient(135deg, rgba(224,171,16,.25), rgba(158,203,255,.2));
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: inset 0 0 24px rgba(224,171,16,.15);
+    }
+    .service-card h3 { margin: 6px 0 0; font-size: 18px; }
+    .service-card p { margin: 0; color: var(--muted); }
+    .service-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    /* Newsletter */
+    .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 18px; }
+    @media (max-width: 980px){ .features-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px){ .features-grid { grid-template-columns: 1fr; } }
+    .feature-card { padding: 16px; }
+    .feature-card h4 { margin: 0 0 6px; font-size: 14px; }
+    .feature-card p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    /* Media */
+    .media-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    @media (max-width: 1100px){ .media-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px){ .media-grid { grid-template-columns: 1fr; } }
+    .media-card { padding: 0; display: grid; grid-template-rows: auto 1fr; overflow: hidden; }
+    .media-card .thumb { position: relative; aspect-ratio: 16/9; overflow: hidden; }
+    .media-card .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+    .media-card .meta { display: grid; gap: 6px; padding: 12px 14px; }
+    .media-card .title { font-weight: 700; margin: 0; }
+    .media-card .badges { display: flex; gap: 8px; flex-wrap: wrap; }
+    .media-card .badge { font-size: 11px; padding: 4px 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.08); }
+    .media-card:hover .thumb img { transform: scale(1.04); }
+
+    /* Testimonials */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin: 40px 0;
+    }
+    
+    .testimonials-grid .media-card {
+      aspect-ratio: 16/9;
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      padding: 0;
+    }
+    
+    .testimonials-grid .thumb {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .testimonials-grid .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .testimonials-grid .play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.3);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .testimonials-grid .media-card:hover .play {
+      opacity: 1;
+    }
+    
+    .testimonials-grid .play button {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: none;
+      background: var(--brand-gold);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+    
+    .testimonials-grid .play button:hover {
+      transform: scale(1.1);
+    }
+
+    .testimonial-feature {
+      padding: 0;
+      overflow: hidden;
+      border-radius: var(--radius);
+    }
+
+    .testimonial-feature .thumb {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 aspect ratio */
+      overflow: hidden;
+    }
+
+    .testimonial-feature .thumb img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .testimonial-feature .play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(135deg, var(--brand-gold), #ffd86a);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 4px 20px rgba(224,171,16,.4);
+    }
+
+    .testimonial-feature .content {
+      padding: 24px;
+    }
+
+    .testimonial-feature blockquote {
+      margin: 0 0 16px;
+      font-size: 18px;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    .testimonial-feature footer {
+      display: grid;
+      gap: 4px;
+    }
+
+    .testimonial-feature .author {
+      font-weight: 600;
+      color: var(--brand-gold);
+    }
+
+    .testimonial-feature .role {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .testimonials-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .testimonial-card {
+      padding: 24px;
+      display: grid;
+      gap: 16px;
+      grid-template-columns: auto 1fr;
+      align-items: start;
+    }
+
+    .testimonial-card .profile {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--brand-gold);
+    }
+
+    .testimonial-card .profile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .testimonial-card blockquote {
+      margin: 0 0 12px;
+      grid-column: 1 / -1;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .testimonial-card footer {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .testimonial-card .author {
+      font-weight: 600;
+    }
+
+    .testimonial-card .role {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .testimonial-card .watch-story {
+      font-size: 14px;
+      color: var(--brand-gold);
+      background: none;
+      border: 1px solid var(--brand-gold);
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+    }
+
+    .stat-card .number {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--brand-gold);
+      margin-bottom: 8px;
+    }
+
+    .stat-card .label {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      
+      .stats-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* YouTube grid */
+    
+    /* YouTube grid */
+    .yt-grid { 
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin: 24px 0;
+    }
+    @media (max-width: 980px) { .yt-grid { grid-template-columns: 1fr; } }
+    .yt-card { padding: 0; aspect-ratio: 16/9; display: block; position: relative; overflow: hidden; }
+    
+    .yt-card .thumb {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    
+    .yt-card .content { position: absolute; inset: auto 0 0 0; z-index: 1; padding: 14px 16px; background: linear-gradient(0deg, rgba(1,0,67,.95), rgba(1,0,67,.5) 75%, transparent); }
+    
+    .yt-card .title {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0 0 8px;
+      color: var(--brand-gold);
+    }
+    
+    .yt-card .description {
+      font-size: 14px;
+      margin: 0;
+      opacity: 0.9;
+    }
+    .yt-thumb { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.1); }
+    .yt-thumb img { width: 100%; height: auto; display: block; }
+    .yt-overlay { position: absolute; inset: 0; display: grid; place-items: center; background: radial-gradient(260px 180px at 50% 50%, rgba(0,0,0,.35), transparent 55%); opacity: 0; transition: opacity .2s ease; }
+    .yt-overlay button { width: 64px; height: 64px; border-radius: 999px; border: 1px solid rgba(255,255,255,.35); background: linear-gradient(135deg, rgba(255,255,255,.9), rgba(255,255,255,.7)); display:grid; place-items:center; cursor:pointer; color:#111; }
+    .yt-card:hover .yt-overlay { opacity: 1; }
+    .yt-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; }
+    .yt-title { font-weight: 700; font-size: 15px; margin: 0; }
+    .yt-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+    .yt-badge { font-size: 11px; border: 1px solid rgba(255,255,255,.18); padding: 4px 8px; border-radius: 999px; background: linear-gradient(135deg, rgba(255,255,255,.2), rgba(255,255,255,.08)); color: #111; }
+
+    /* Links Hub */
+    .links-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    @media (max-width: 1200px) { .links-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 980px) { .links-grid { grid-template-columns: 1fr; } }
+    .link-card { padding: 20px; display: grid; gap: 12px; position: relative; }
+    /* Bold gradient base for Links Hub cards with creative overlay */
+    .panel-light .link-card,
+    .panel-dark .link-card {
+      background:
+        radial-gradient(120% 90% at 18% -10%, rgba(255,216,106,.28), transparent 60%),
+        radial-gradient(120% 90% at 100% 120%, rgba(158,203,255,.22), transparent 62%),
+        linear-gradient(135deg, rgba(255,255,255,.14), rgba(255,255,255,.08)) !important;
+      border-color: rgba(255,255,255,.22);
+    }
+    .link-card::before { content:""; position:absolute; left:-1px; top:-1px; bottom:-1px; width:6px; border-radius:6px; background: linear-gradient(180deg, var(--accent-1), var(--accent-2)); filter: saturate(120%); opacity:.9; }
+    /* Textured sheen overlay */
+    .link-card::after {
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background:
+        radial-gradient(60% 45% at var(--mx,50%) var(--my,30%), rgba(255,255,255,.14), transparent 60%),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><defs><pattern id='d' width='16' height='16' patternUnits='userSpaceOnUse' patternTransform='rotate(35)'><rect width='16' height='16' fill='transparent'/><path d='M0 0h16' stroke='rgba(255,255,255,0.06)' stroke-width='1'/></pattern></defs><rect width='100%' height='100%' fill='url(%23d)'/></svg>") repeat,
+        conic-gradient(from 200deg at 50% 50%, rgba(255,255,255,.06), rgba(255,255,255,0) 25%, rgba(255,255,255,.06) 50%, rgba(255,255,255,0) 75%, rgba(255,255,255,.06) 100%);
+      mix-blend-mode: overlay; opacity:.35; transition: opacity .2s ease;
+    }
+    .link-card:hover { transform: translateY(-2px); box-shadow: 0 16px 50px rgba(0,0,0,.6); }
+    .link-card:hover::after { opacity:.55; box-shadow: inset 0 0 0 1px rgba(255,255,255,.1); }
+    .link-card .icon { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(224,171,16,.25), rgba(158,203,255,.2)); border: 1px solid rgba(255,255,255,.2); box-shadow: inset 0 0 24px rgba(224,171,16,.15), 0 8px 24px rgba(0,0,0,.25); }
+    /* Animated subtle parallax for link cards */
+    .links-grid { perspective: 800px; }
+    .links-grid .service-card { transform-style: preserve-3d; transition: transform .15s ease; }
+    .links-grid .service-card:hover { transform: rotateX(2deg) rotateY(-2deg) translateY(-2px); }
+    .stat-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .stat { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); background: linear-gradient(135deg, rgba(255,255,255,.2), rgba(255,255,255,.08)); font-size: 12px; color: #111; }
+
+    /* Forms */
+    form { display: grid; gap: 12px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    input, textarea, select {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 14px; padding: 12px 14px; color: var(--text);
+      outline: none; box-shadow: inset 0 2px 10px rgba(0,0,0,.25); transition: box-shadow .18s ease, border-color .18s ease, transform .12s ease;
+    }
+    input::placeholder, textarea::placeholder { color: rgba(255,255,255,.65); }
+    input:focus, textarea:focus, select:focus { box-shadow: 0 0 0 1px rgba(255,255,255,.12) inset, 0 0 0 4px rgba(224,171,16,.18); border-color: rgba(224,171,16,.55); }
+    button { color: #111; }
+    /* CTA enhancements */
+    .cta-primary { position: relative; overflow: hidden; }
+    .cta-primary::after { content:""; position:absolute; inset:0; background: radial-gradient(200px 120px at var(--mx,50%) var(--my,50%), rgba(255,255,255,.35), transparent 60%); opacity: .0; transition: opacity .18s ease; }
+    .cta-primary:hover::after { opacity: .35; }
+    .cta-primary:focus-visible { box-shadow: 0 0 0 2px rgba(255,255,255,.35), 0 0 0 6px rgba(224,171,16,.35); }
+    input:focus, textarea:focus, select:focus { box-shadow: var(--ring); border-color: rgba(224,171,16,.5); }
+    textarea { min-height: 120px; resize: vertical; }
+
+    .form-help { color: var(--muted); font-size: 12px; }
+
+    .badge-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(135deg, rgba(224,171,16,.15), rgba(158,203,255,.15));
+      font-size: 12px; color: #ffffff;
+    }
+    .badge .dot { width: 10px; height: 10px; border-radius: 999px; background: var(--brand-gold); box-shadow: 0 0 0 3px rgba(224,171,16,.25); }
+
+    /* Virtual Assistant (Demo) */
+    #siteChat .chat-select { background:#fff;color:#111;border-radius:8px;padding:6px 8px; border: 1px solid rgba(0,0,0,.12); }
+    #siteChat .va-chips { display:flex; gap:8px; flex-wrap:wrap; margin:8px 0; }
+    #siteChat .va-chip { background: rgba(255,255,255,.92); color:#111; border:1px solid rgba(255,255,255,.2); border-radius:999px; padding:6px 10px; font-weight:600; cursor:pointer; }
+    #siteChat .va-log { max-height: 340px; overflow:auto; display:grid; gap:10px; padding:10px; border-radius:14px; border:1px solid rgba(255,255,255,.16); background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); }
+    #siteChat .va-bubble { display:grid; grid-template-columns: 28px 1fr; gap:10px; align-items:flex-start; border:1px solid rgba(255,255,255,.16); border-radius:14px; padding:10px 12px; background: rgba(255,255,255,.06); }
+    #siteChat .va-bubble .ava { width:28px; height:28px; border-radius:999px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.25); background: linear-gradient(135deg, rgba(255,255,255,.3), rgba(255,255,255,.08)); color:#111; font-weight:700; }
+    #siteChat .va-bubble .content { color:#fff; }
+    #siteChat .va-bubble.me { background: rgba(255,255,255,.92); color:#111; }
+    #siteChat .va-bubble.me .content { color:#111; }
+    #siteChat .va-actions { grid-column: 2 / -1; display:flex; gap:6px; }
+    #siteChat .va-actions .btn { font-size:11px; border-radius:8px; border:1px solid rgba(255,255,255,.2); background:#fff; color:#111; padding:2px 8px; cursor:pointer; }
+
+    /* Back to Top */
+    .back-top {
+      position: fixed; right: 20px; bottom: 24px; z-index: 70;
+      width: 48px; height: 48px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18);
+      background: linear-gradient(135deg, var(--brand-gold), #ffd86a);
+      color: #111; display: grid; place-items: center; cursor: pointer;
+      box-shadow: 0 10px 30px rgba(224,171,16,.35), inset 0 1px 0 rgba(255,255,255,.35);
+      opacity: 0; transform: translateY(8px); pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease, filter .2s ease;
+    }
+    .back-top:hover { filter: brightness(1.05); }
+    .back-top:focus-visible { outline: none; box-shadow: var(--ring); }
+    .back-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+    /* Footer */
+    footer { padding: 32px 0 50px; border-top: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+    }
+    .footer-grid { display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: center; }
+    .socials { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* Modal */
+    .modal { position: fixed; inset: 0; display: none; place-items: center; z-index: 60; padding: 32px 16px; box-sizing: border-box; }
+    .modal.open { display: grid; }
+    .modal .backdrop { position: absolute; inset: 0; background: rgba(3,3,10,.6); backdrop-filter: blur(6px); }
+    .modal .dialog { position: relative; width: min(92vw, 720px); border-radius: 18px; overflow: hidden; max-height: calc(100vh - 96px); display:grid; grid-template-rows: auto 1fr;
+      border: 1px solid rgba(255,255,255,.18); box-shadow: var(--shadow);
+      background:
+        radial-gradient(1200px 700px at 85% -10%, rgba(255,216,106,.12), transparent 55%),
+        radial-gradient(1200px 700px at 10% 115%, rgba(158,203,255,.12), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.08));
+      backdrop-filter: blur(10px) saturate(140%);
+    }
+    .dialog-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .dialog-body { padding: 16px; overflow: auto; }
+    .close-x { background: transparent; border: 1px solid rgba(255,255,255,.2); color: var(--text); border-radius: 10px; padding: 6px 10px; cursor: pointer; }
+    /* Popup button overrides: white text + white outline */
+    .modal .dialog :is(.cta-primary, .cta-ghost) {
+      background: transparent !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(255,255,255,.9) !important;
+      box-shadow: none !important;
+    }
+    .modal .dialog :is(.cta-primary, .cta-ghost):hover {
+      background: rgba(255,255,255,.12) !important;
+      filter: none !important;
+      transform: none !important;
+    }
+    .modal .dialog :is(.cta-primary, .cta-ghost):focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(255,255,255,.6), 0 0 0 6px rgba(255,255,255,.25) !important;
+    }
+    .close-x { color: #111; }
+
+    /* Explainer modal visuals */
+    #unifiedExplainer .dialog { width: min(96vw, 1040px); }
+    #unifiedExplainer .grid-two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    #unifiedExplainer .ghost {
+      position: relative; padding: 14px; border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.22);
+      background:
+        radial-gradient(800px 500px at 20% -10%, rgba(255,216,106,.18), transparent 60%),
+        radial-gradient(800px 500px at 80% 120%, rgba(158,203,255,.18), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.10));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08), 0 18px 60px rgba(0,0,0,.35);
+      backdrop-filter: blur(10px) saturate(150%);
+    }
+    #unifiedExplainer .ghost.accent { border-color: rgba(224,171,16,.55); box-shadow: 0 24px 80px rgba(224,171,16,.22), inset 0 0 0 1px rgba(255,255,255,.10); }
+    #unifiedExplainer fieldset[disabled] input,
+    #unifiedExplainer fieldset[disabled] textarea,
+    #unifiedExplainer fieldset[disabled] select {
+      background: rgba(255,255,255,.16) !important; border-color: rgba(255,255,255,.24) !important; color: var(--text) !important;
+    }
+    #unifiedExplainer .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+    #unifiedExplainer .kpi { padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.14); background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.05)); }
+    #unifiedExplainer .kpi .num { font-weight: 800; font-size: 22px; background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    #unifiedExplainer .kpi small { color: var(--muted); }
+    #unifiedExplainer .progress-mini { height: 6px; border-radius: 999px; background: rgba(255,255,255,.12); overflow: hidden; }
+    #unifiedExplainer .progress-mini > i { display: block; height: 100%; width: var(--w,60%); background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); box-shadow: 0 0 12px rgba(255,216,106,.45); }
+    #unifiedExplainer .flow { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+    #unifiedExplainer .pill { padding: 8px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.06)); font-size: 13px; color: #111; }
+    #unifiedExplainer .pill.accent { background: var(--accent-grad); color: var(--accent-text); border-color: rgba(255,255,255,.35); }
+    #unifiedExplainer .arrow { width: 18px; height: 18px; opacity: .8; }
+    @media (max-width: 980px) { #unifiedExplainer .grid-two { grid-template-columns: 1fr; } #unifiedExplainer .kpi-grid { grid-template-columns: 1fr; } }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .media-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    /* Accessibility: prefer black text on light backgrounds in light scheme */
+    @media (prefers-color-scheme: light) {
+      body { color: #ffffff; }
+      .cta-primary { color: #111; }
+      .feature-card p, .section-sub, .form-help { color: #ffffff; }
+    }
+
+    /* Theme switcher */
+    .theme-switch { display: inline-flex; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; overflow: hidden; }
+    .theme-switch button { background: rgba(255,255,255,.85); border: none; padding: 8px 10px; font-size: 12px; cursor: pointer; color: #111; }
+    .theme-switch button[aria-checked="true"] { background: linear-gradient(135deg, var(--brand-gold), #ffd86a); color: #111; }
+    .theme-switch button:focus-visible { box-shadow: var(--ring); }
+
+    /* Pricing */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    @media (max-width: 980px) { .pricing-grid { grid-template-columns: 1fr; } }
+    .pricing-card { padding: 22px; }
+    .pricing-card h3 { margin: 0 0 6px; }
+    .pricing-feats { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+    .pricing-feats li { display: flex; gap: 8px; align-items: flex-start; font-size: 14px; }
+
+    /* Accordion */
+    .accordion { display: grid; gap: 8px; border: 0; }
+    .accordion-item { border: 0; }
+    .accordion-header { margin: 0; }
+    .accordion-button {
+      width: 100%; text-align: left; background: rgba(255,255,255,.06);
+      color: #fff; border: 1px solid rgba(255,255,255,.18); padding: 14px 16px; font-weight: 700; cursor: pointer;
+      border-radius: 999px; transition: transform .15s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .accordion-button:hover { transform: translateY(-1px); box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+    .accordion-button[aria-expanded="true"] { background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.28); box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset; }
+    .accordion-panel { padding: 10px 16px 14px; border-left: 2px solid rgba(255,255,255,.18); margin-left: 6px; border-radius: 8px; background: rgba(255,255,255,.04); }
+
+    /* Calendar block */
+    .calendar-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .calendar-badge { font-size: 12px; color: #fff; opacity: .9; }
+
+    /* Results chips */
+    .chips-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .chip { border: 1px solid rgba(255,255,255,.18); background: linear-gradient(135deg, rgba(255,255,255,.2), rgba(255,255,255,.08)); color: #111; padding: 8px 12px; border-radius: 999px; font-size: 13px; }
+
+    /* Results (Expected Outcomes) enhancements */
+    #results { position: relative; overflow: hidden; }
+    #results .results-viz { position: absolute; inset: -10% -10% -10% -10%; pointer-events: none; filter: saturate(120%); }
+    #results .results-viz svg { width: 120%; height: 120%; position: absolute; left: -10%; top: -10%; opacity: .55; }
+    #results .results-viz .blur { filter: blur(28px); opacity: .45; }
+    #results .chips-row { margin-top: 14px; }
+    #results .chip { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.10)); border-color: rgba(255,255,255,.26); color: #ffffff; }
+    #results .chip svg { width: 14px; height: 14px; fill: #ffffff; }
+    #results .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
+    @media (max-width: 980px){ #results .kpi-grid { grid-template-columns: 1fr; } }
+    #results .kpi { padding: 14px; border-radius: 14px; border: 1px solid rgba(255,255,255,.18); background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.08)); box-shadow: inset 0 0 0 1px rgba(255,255,255,.06); }
+    #results .kpi .num { font-weight: 800; font-size: 22px; background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    #results .kpi small { color: var(--muted); }
+
+    /* Form labels and errors */
+    label { font-size: 13px; opacity: .95; }
+    .field { display: grid; gap: 6px; }
+    .error { color: #ffb4c0; font-size: 12px; min-height: 16px; }
+    .badge-demo { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); background: linear-gradient(135deg, rgba(255,255,255,.25), rgba(255,255,255,.1)); font-size: 12px; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+      .ai-v2 .card3d, .magnet { transform: none !important; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "name": "Nikki Sanders",
+        "description": "The Voice of Content Branding. AI-first content strategy and workshops.",
+        "sameAs": [
+          "https://www.instagram.com/thisisnickys/",
+          "https://www.youtube.com/@thisisnickys",
+          "https://www.linkedin.com/learning/how-to-use-chatgpt-for-content-creation"
+        ]
+      },
+      {
+        "@type": "Course",
+        "name": "How to use ChatGPT for Content Creation",
+        "provider": {
+          "@type": "Organization",
+          "name": "LinkedIn Learning",
+          "sameAs": "https://www.linkedin.com/learning/"
+        }
+      },
+      {
+        "@type": "Event",
+        "name": "Two-Day Social Accelerator",
+        "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "startDate": "2025-11-12T09:00:00+00:00",
+        "endDate": "2025-11-13T17:00:00+00:00",
+        "location": {
+          "@type": "VirtualLocation",
+          "url": "nikki-mock.html"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="theme-gold" data-theme="dark" data-accent="gold">
+  <a href="#hero" class="skip-link">Skip to content</a>
+  <canvas id="neural" class="neural-canvas" aria-hidden="true"></canvas>
+  <div class="neural-overlay" aria-hidden="true"></div>
+
+  <!-- ===== NAV DATA ===== -->
+  <script id="nav-data" type="application/json">{
+    "brand": { "name": "Nikki Sanders", "tag": "The Voice of Content Branding", "logo": "DTTB-Logo-Final-Black.png" },
+    "items": [
+      { "type": "menu", "id": "programs", "label": "Programs", "panel": "mega-programs" },
+      { "type": "link", "href": "#links", "label": "Links Hub" },
+      { "type": "menu", "id": "workshops", "label": "Workshops", "panel": "mega-workshops" },
+      { "type": "link", "href": "nikki-class.html", "label": "Class Demo" },
+      { "type": "link", "href": "#media", "label": "Media" },
+      { "type": "link", "href": "#community", "label": "Newsletter" },
+      { "type": "link", "href": "#contact", "label": "Contact" }
+    ],
+    "panels": {
+      "mega-programs": [
+        { "title": "The AI Toolkit", "desc": "14 modules for modern content ops", "cta": {"href": "#programs", "label": "Explore"} },
+        { "title": "I2M", "desc": "Impact to Monetization systems", "cta": {"href": "#programs", "label": "Explore"} },
+        { "title": "The Experience", "desc": "Exclusive community for creators", "cta": {"href": "#programs", "label": "Explore"} }
+      ],
+      "mega-workshops": [
+        { "title": "Two-Day Social Accelerator", "desc": "Design a 90-day content system", "price": "$499+", "cta": {"href": "#workshops", "label": "Details"} },
+        { "title": "AI Content Strategy Classes", "desc": "Hands-on strategy and workflows", "price": "$149+", "cta": {"href": "#workshops", "label": "Details"} }
+      ],
+      "mega-resources": [
+        { "title": "Newsletter", "desc": "Content Newsstand & AI Alley", "cta": {"href": "#community", "label": "Subscribe"} },
+        { "title": "YouTube", "desc": "Recent highlights and deep dives", "cta": {"href": "#youtube", "label": "Watch"} },
+        { "title": "Instagram", "desc": "Daily tips @thisisnickys", "cta": {"href": "https://www.instagram.com/thisisnickys/", "label": "Open", "external": true} },
+        { "title": "VideoAsk", "desc": "Ask Nikki anything (demo)", "cta": {"href": "#links", "label": "Try"} },
+        { "title": "Free LinkedIn Course", "desc": "ChatGPT for Content Creation", "cta": {"href": "https://www.linkedin.com/learning/how-to-use-chatgpt-for-content-creation", "label": "Start", "external": true} }
+      ]
+    }
+  }</script>
+
+  <!-- ===== NAV MARKUP ===== -->
+  <header class="nav-shell" role="banner">
+    <div class="progress" aria-hidden="true"></div>
+    <div class="container nav-inner">
+      <div class="brand">
+        <img src="DTTB-Logo-Final-Black.png" alt="Deeper Than The Brand logo" />
+        <div class="name">Nikki Sanders <small>The Voice of Content Branding</small></div>
+      </div>
+      <nav class="primary" aria-label="Primary">
+        <a class="nav-link" href="#programs" data-scrollto="#programs">Programs</a>
+        <a class="nav-link" href="#links" data-scrollto="#links">Links Hub</a>
+        <a class="nav-link" href="#workshops" data-scrollto="#workshops">Workshops</a>
+        <a class="nav-link" href="nikki-class.html">Class Demo</a>
+        <a class="nav-link" href="#media" data-scrollto="#media">Media</a>
+        <a class="nav-link" href="#contact" data-scrollto="#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="cta-primary magnet" data-open="bookingModal" aria-label="Open booking form">Book My Workshop</button>
+        
+        <button class="icon-btn hamburger" id="navHamburger" aria-label="Open menu" aria-haspopup="menu" aria-controls="nav-drawer">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/></svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mega panels removed per request -->
+  </header>
+
+  <!-- ===== NAV: OFF-CANVAS ===== -->
+  <aside id="nav-drawer" aria-hidden="true">
+    <div class="backdrop" data-close></div>
+    <div class="sheet" role="dialog" aria-modal="true" aria-label="Menu">
+      <header>
+        <strong>Menu</strong>
+        <button class="icon-btn" id="navDrawerClose" aria-label="Close menu"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M18.3 5.71L12 12.01 5.7 5.7 4.29 7.11l6.3 6.3-6.3 6.3 1.41 1.41 6.3-6.3 6.29 6.3 1.42-1.41-6.3-6.3 6.3-6.3z"/></svg></button>
+      </header>
+      <nav id="drawerNav">
+        <div class="accordion" aria-label="Primary">
+          <button class="accordion-button" aria-expanded="false" aria-controls="acc-programs">Programs</button>
+          <div id="acc-programs" class="accordion-panel" hidden>
+            <a href="#programs" data-scrollto="#programs">The AI Toolkit</a><br/>
+            <a href="#programs" data-scrollto="#programs">I2M</a><br/>
+            <a href="#programs" data-scrollto="#programs">The Experience</a>
+          </div>
+          <a class="accordion-button" href="#links" data-scrollto="#links">Links Hub</a>
+          <button class="accordion-button" aria-expanded="false" aria-controls="acc-workshops">Workshops</button>
+          <div id="acc-workshops" class="accordion-panel" hidden>
+            <a href="#workshops" data-scrollto="#workshops">Two-Day Social Accelerator</a><br/>
+            <a href="#workshops" data-scrollto="#workshops">AI Content Strategy Classes</a>
+          </div>
+          <a class="accordion-button" href="nikki-class.html">Class Demo</a>
+          <a class="accordion-button" href="#media" data-scrollto="#media">Media</a>
+          
+          <a class="accordion-button" href="#contact" data-scrollto="#contact">Contact</a>
+        </div>
+        <div style="display:grid; gap:8px; margin-top:12px;">
+          <button class="cta-primary" data-open="bookingModal">Book My Workshop</button>
+        </div>
+      </nav>
+    </div>
+  </aside>
+
+  
+
+  <!-- ===== CMDK ===== -->
+  <div id="cmdPalette" class="cmdk" role="dialog" aria-modal="true" aria-label="Command Palette">
+    <div class="backdrop" data-close></div>
+    <div class="panel">
+      <div class="search">
+        <input id="cmdSearch" placeholder="Type a command or search…" aria-label="Search commands" />
+        <span class="kbd">Esc</span>
+      </div>
+      <div class="cats" role="tablist" aria-label="Categories" style="display:flex; gap:6px; padding:8px 12px; border-bottom:1px solid rgba(255,255,255,.1)">
+        <button role="tab" aria-selected="true" data-cat="navigate" class="cta-ghost">Navigate</button>
+        <button role="tab" aria-selected="false" data-cat="book" class="cta-ghost">Book</button>
+        <button role="tab" aria-selected="false" data-cat="media" class="cta-ghost">Filter Media</button>
+        <button role="tab" aria-selected="false" data-cat="theme" class="cta-ghost">Theme</button>
+      </div>
+      <ul id="cmdList" role="listbox" aria-label="Results"></ul>
+      <div id="cmdAnnounce" style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <main id="hero" role="main" tabindex="-1">
+    <div class="hero-wrap container ai-v2">
+      <div class="hero" style="align-items:center;">
+        <div class="hero-left reveal">
+          <p class="kicker" aria-hidden="true">The Voice of Content Branding</p>
+          <h1 class="gradient-text">Helping you show up consistently + grow without burnout</h1>
+          <p class="sub">Content, Strategy, and AI that actually works.</p>
+          <div class="hero-ctas">
+            <button class="cta-primary magnet" data-open="bookingModal">Book My Workshop</button>
+            <button class="cta-ghost magnet" data-scrollto="#programs">See Programs</button>
+          </div>
+          <div class="marquee" aria-hidden="true" style="margin-top:10px;overflow:hidden;white-space:nowrap;opacity:.9;">
+            <div class="track" style="display:inline-block; animation: marquee 20s linear infinite;">
+              <span style="margin-right:28px;">Content Newsstand</span>
+              <span style="margin-right:28px;">AI Alley</span>
+              <span style="margin-right:28px;">Content Stoop</span>
+              <span style="margin-right:28px;">First To Know</span>
+              <span style="margin-right:28px;">Content Newsstand</span>
+              <span style="margin-right:28px;">AI Alley</span>
+              <span style="margin-right:28px;">Content Stoop</span>
+              <span style="margin-right:28px;">First To Know</span>
+            </div>
+          </div>
+          <p class="social-proof" aria-live="polite">Trusted by 10,000+ creators weekly</p>
+        </div>
+        <div class="hero-right hero-card card3d reveal" style="padding:0; overflow:visible;">
+          <div class="spot"></div>
+          <div class="ai-rotator" aria-label="AI Feature Rotator" style="position:relative;height:380px;">
+            <div class="ai-card" data-i="0" style="position:absolute;inset:0;display:grid;place-items:center;opacity:1;transform:translateY(0);transition:opacity .6s ease, transform .6s ease;">
+              <div style="display:grid;gap:10px; text-align:center;">
+                <strong class="gradient-text" style="font-size:20px;">AI Content System</strong>
+                <small class="section-sub">Plan, draft, and repurpose with a 90‑day cadence.</small>
+              </div>
+            </div>
+            <div class="ai-card" data-i="1" style="position:absolute;inset:0;display:grid;place-items:center;opacity:0;transform:translateY(8px);transition:opacity .6s ease, transform .6s ease;">
+              <div style="display:grid;gap:10px; text-align:center;">
+                <strong class="gradient-text" style="font-size:20px;">Newsletter Engine</strong>
+                <small class="section-sub">Content Newsstand, AI Alley, Stoop, First‑To‑Know.</small>
+              </div>
+            </div>
+            <div class="ai-card" data-i="2" style="position:absolute;inset:0;display:grid;place-items:center;opacity:0;transform:translateY(8px);transition:opacity .6s ease, transform .6s ease;">
+              <div style="display:grid;gap:10px; text-align:center;">
+                <strong class="gradient-text" style="font-size:20px;">Creator Flywheel</strong>
+                <small class="section-sub">Turn audience into outcomes without burnout.</small>
+              </div>
+            </div>
+          </div>
+          <!-- Preserve original device images (hidden) -->
+          <div style="position:absolute;inset:0;opacity:0;pointer-events:none;" aria-hidden="true">
+            <img src="Mobile-Mockup-Filming-.png" alt="Device" onerror="this.style.display='none'"/>
+            <img src="App-Mobile-Mockup-V1.png" alt="Device" onerror="this.style.display='none'"/>
+            <img src="Reel-Mockup-V2.png" alt="Device" onerror="this.style.display='none'"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Hero footer band: agency credits + explainer modal trigger -->
+    <div class="container" style="padding: 12px 24px 0; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+      <small class="section-sub">Curated by Marketing Mousetrap Agency · Powered by Cochran Films</small>
+      <button class="cta-ghost magic-cta" data-open="unifiedExplainer" aria-label="Open explainer about unified hub">
+        <span class="arrow">➜</span>
+        <span class="label">Learn how this hub replaces scattered links</span>
+        <span class="arrow left">➜</span>
+      </button>
+    </div>
+  </main>
+
+  <section id="about" class="panel panel-light panel-a">
+    <div class="container">
+      <h2 class="section-title gradient-text">About Nikki</h2>
+      <div class="about-grid">
+        <div class="about-card">
+          <p style="margin-top:0; font-size:18px; line-height:1.6;">
+            <strong>Nikki Sanders</strong>, known as <em>The Voice of Content Branding</em>, helps entrepreneurs and creators harness AI content strategy to grow without burnout.
+          </p>
+          <p class="section-sub">Connect with Nikki on <a href="https://www.instagram.com/thisisnickys/" target="_blank" rel="noopener">Instagram @thisisnickys</a>.</p>
+          <div class="badge-row">
+            <span class="badge"><span class="dot"></span> Strategic Systems</span>
+            <span class="badge"><span class="dot"></span> AI Content Ops</span>
+            <span class="badge"><span class="dot"></span> Consistent Presence</span>
+          </div>
+        </div>
+        <div class="about-card">
+          <div class="thumb">
+            <img alt="How to use ChatGPT for Content Creation — YouTube thumbnail" src="https://img.youtube.com/vi/W0Ck2E9B9A8/hqdefault.jpg" loading="lazy"/>
+            <div class="play">
+              <button data-video="https://www.youtube.com/embed/W0Ck2E9B9A8?autoplay=1" aria-label="Play preview">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#111" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+            </div>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center; margin-top:10px;">
+            <a class="cta-ghost" href="https://www.youtube.com/watch?v=W0Ck2E9B9A8" target="_blank" rel="noopener">Watch on YouTube</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="youtube" class="panel panel-dark panel-b">
+    <div class="container">
+      <h2 class="section-title gradient-text">Recent on YouTube</h2>
+      <p class="section-sub">Highlights from @thisisnickys — strategy, systems, and AI workflows.</p>
+      <div class="carousel-wrap" role="region" aria-roledescription="carousel" aria-label="YouTube Highlights">
+        <button class="carousel-btn prev" data-carousel-prev aria-label="Previous" aria-controls="ytCarousel"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+        <div id="ytCarousel" class="carousel-track" tabindex="0">
+        <article class="yt-card card3d" data-video="https://www.youtube.com/embed/HYaf6W3GYE8?autoplay=1">
+          <div class="spot"></div>
+          <img class="thumb" alt="The AI Toolkit" src="https://img.youtube.com/vi/HYaf6W3GYE8/maxresdefault.jpg"/>
+          <div class="content">
+            <h3 class="title">The AI Toolkit</h3>
+            <p class="description">14 in-depth modules covering the most popular AI tools for content creation</p>
+          </div>
+          <div class="yt-overlay"><button aria-label="Play video"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M8 5v14l11-7z"/></svg></button></div>
+        </article>
+
+        <article class="yt-card card3d" data-video="https://www.youtube.com/embed/iwSYdl1FUHU?autoplay=1">
+          <div class="spot"></div>
+          <img class="thumb" alt="I2M: Impact to Monetization" src="https://img.youtube.com/vi/iwSYdl1FUHU/maxresdefault.jpg"/>
+          <div class="content">
+            <h3 class="title">I2M: Impact to Monetization</h3>
+            <p class="description">Turn your content into revenue with proven systems and strategies</p>
+          </div>
+          <div class="yt-overlay"><button aria-label="Play video"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M8 5v14l11-7z"/></svg></button></div>
+        </article>
+
+        <article class="yt-card card3d" data-video="https://www.youtube.com/embed/lxw2lCUkIxU?autoplay=1">
+          <div class="spot"></div>
+          <img class="thumb" alt="Content Strategy Masterclass" src="https://img.youtube.com/vi/lxw2lCUkIxU/maxresdefault.jpg"/>
+          <div class="content">
+            <h3 class="title">Content Strategy Masterclass</h3>
+            <p class="description">Build your content engine with AI-powered workflows</p>
+          </div>
+          <div class="yt-overlay"><button aria-label="Play video"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M8 5v14l11-7z"/></svg></button></div>
+        </article>
+
+        <article class="yt-card card3d" data-video="https://www.youtube.com/embed/2CTQZWAQ9Js?autoplay=1">
+          <div class="spot"></div>
+          <img class="thumb" alt="The Experience" src="https://img.youtube.com/vi/2CTQZWAQ9Js/maxresdefault.jpg"/>
+          <div class="content">
+            <h3 class="title">The Experience</h3>
+            <p class="description">Join our exclusive community for creators and entrepreneurs</p>
+          </div>
+          <div class="yt-overlay"><button aria-label="Play video"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M8 5v14l11-7z"/></svg></button></div>
+        </article>
+        </div>
+        <button class="carousel-btn next" data-carousel-next aria-label="Next" aria-controls="ytCarousel"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M10 6l-1.41 1.41L13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+      </div>
+    </div>
+  </section>
+  <section id="links" class="panel panel-light panel-c">
+    <div class="container">
+      <h2 class="section-title gradient-text">Nikki’s Links Hub</h2>
+      <p class="section-sub">Explore resources, bookings, and social in one place.</p>
+      <div class="links-grid">
+        <article class="link-card ai-card service-card">
+          <div class="icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#ffd86a" d="M3 6h18v12H3z"/><path fill="#9ecbff" d="M10 9l5 3-5 3z"/></svg>
+          </div>
+          <h3 style="margin:4px 0 0;">Start Here: Personal Video Intro</h3>
+          <p class="section-sub" style="margin:0;">Watch Nikki explain how to get the most from her content.</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="cta-primary" data-iframe="https://www.videoask.com/fh6koo2b4">Open VideoAsk</button>
+            <a class="cta-ghost" href="https://www.videoask.com/fh6koo2b4" target="_blank" rel="noopener">Open in new tab</a>
+          </div>
+        </article>
+
+        <article class="link-card ai-card service-card">
+          <div class="icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#ffd86a" d="M4 4h16v16H4z"/><path fill="#010043" d="M6 7h12v2H6zm0 4h12v2H6zm0 4h8v2H6z"/></svg>
+          </div>
+          <h3 style="margin:4px 0 0;">Newsletter: Content Therapy</h3>
+          <p class="section-sub" style="margin:0;">Join 10,000+ every Friday for Content Newsstand, AI Alley, and more.</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="cta-primary" href="https://deeperthanthebrand.kit.com/contenttherapy" target="_blank" rel="noopener">Subscribe</a>
+          </div>
+        </article>
+
+        <article class="link-card ai-card service-card">
+          <div class="icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#9ecbff"/><path fill="#010043" d="M10 8h6v2h-6zm0 3h6v2h-6zm0 3h4v2h-4z"/></svg>
+          </div>
+          <h3 style="margin:4px 0 0;">Free Course: ChatGPT for Content Creation</h3>
+          <p class="section-sub" style="margin:0;">LinkedIn Learning course with hands-on workflows and strategy.</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="cta-primary" href="https://www.linkedin.com/learning/how-to-use-chatgpt-for-content-creation" target="_blank" rel="noopener">Watch on LinkedIn</a>
+          </div>
+        </article>
+
+        <article class="link-card ai-card service-card">
+          <div class="icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#ffd86a" d="M12 2l9 4v6c0 5-4 9-9 10C7 21 3 17 3 12V6l9-4z"/></svg>
+          </div>
+          <h3 style="margin:4px 0 0;">Book Nikki for a Speaking Gig</h3>
+          <p class="section-sub" style="margin:0;">Bring Nikki to your event for AI, content systems, and branding.</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="cta-primary" href="https://clientportal.deeperthanthebrand.com/public/form/view/63801e342aea4f2f97fd671d" target="_blank" rel="noopener">Speaking Request</a>
+          </div>
+        </article>
+
+        <article class="link-card ai-card service-card">
+          <div class="icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#9ecbff" d="M3 5h18v14H3z"/><path fill="#010043" d="M9 9h2v6H9zm4 0h2v6h-2z"/></svg>
+          </div>
+          <h3 style="margin:4px 0 0;">Book Nikki for Your Podcast</h3>
+          <p class="section-sub" style="margin:0;">Invite Nikki to share strategic insights with your audience.</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="cta-primary" href="https://clientportal.deeperthanthebrand.com/public/form/view/638024c167a7b42fcde07a33" target="_blank" rel="noopener">Podcast Request</a>
+          </div>
+        </article>
+
+        <article class="link-card ai-card service-card">
+          <div class="icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#ffd86a" d="M20 8v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8l8 5 8-5z"/><path fill="#9ecbff" d="M20 6H4l8 5 8-5z"/></svg>
+          </div>
+          <h3 style="margin:4px 0 0;">Email</h3>
+          <p class="section-sub" style="margin:0;">Reach Nikki’s team directly.</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="cta-primary" href="mailto:nicky@deeperthanthebrand.com">Send Message</a>
+          </div>
+        </article>
+
+        <article class="link-card ai-card service-card">
+          <div class="icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#ffd86a"/><path d="M6 10h12v4H6z" fill="#010043"/></svg>
+          </div>
+          <h3 style="margin:4px 0 0;">Book a Clarity Call</h3>
+          <p class="section-sub" style="margin:0;">Quick chat to see if the Accelerator is right for you.</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="cta-primary" type="button" data-open="calendlyModal">Open Scheduler (Demo)</button>
+          </div>
+        </article>
+
+        <article class="link-card ai-card service-card">
+          <div class="icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#ff0000" d="M10 8l6 4-6 4z"/><rect x="3" y="6" width="18" height="12" rx="3" ry="3" fill="#fff" opacity=".15"/></svg>
+          </div>
+          <h3 style="margin:4px 0 0;">YouTube: @thisisnickys</h3>
+          <p class="section-sub" style="margin:0;">Strategy, content systems, and creator growth.</p>
+          <div class="stat-row">
+            <span class="stat"><svg width="14" height="14" viewBox="0 0 24 24"><path fill="#010043" d="M10 8l6 4-6 4z"/></svg> 39K subscribers</span>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="cta-primary" href="https://www.youtube.com/@thisisnickys" target="_blank" rel="noopener">Visit Channel</a>
+          </div>
+        </article>
+
+        <article class="link-card ai-card service-card">
+          <div class="icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#E1306C"/><circle cx="12" cy="12" r="4.5" fill="#fff" opacity=".3"/></svg>
+          </div>
+          <h3 style="margin:4px 0 0;">Instagram: @thisisnickys</h3>
+          <p class="section-sub" style="margin:0;">Daily insights and behind-the-scenes.</p>
+          <div class="stat-row">
+            <span class="stat"><svg width="14" height="14" viewBox="0 0 24 24"><path fill="#010043" d="M7 22c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2v13c0 1.1-.9 2-2 2H7z"/></svg> 201K followers</span>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="cta-primary" href="https://www.instagram.com/thisisnickys/" target="_blank" rel="noopener">Open Instagram</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="programs" class="panel panel-dark panel-b">
+    <div class="container">
+      <h2 class="section-title gradient-text">Programs & Courses</h2>
+      <p class="section-sub">Everything in one ecosystem — learn, plan, and grow without leaving this page.</p>
+      <div class="services-grid ai-v2">
+        <article class="service-card ai-card card3d reveal">
+          <div class="spot"></div>
+          <div class="icon" aria-hidden="true"><img src="The-Ai-Toolkit.png" alt="AI Toolkit" style="width:100%;height:100%;object-fit:cover;border-radius:12px;opacity:.9" onerror="this.style.display='none'"/></div>
+          <h3>The AI Toolkit</h3>
+          <p>14 in-depth modules for mastering the most popular AI tools end-to-end.</p>
+          <div class="service-actions">
+            <button class="cta-primary magnet" data-scrollto="#toolkit">Explore Modules</button>
+          </div>
+        </article>
+        <article class="service-card ai-card card3d reveal">
+          <div class="spot"></div>
+          <div class="icon" aria-hidden="true"><img src="i2m-M-2025.png" alt="I2M" style="width:100%;height:100%;object-fit:cover;border-radius:12px;opacity:.9" onerror="this.style.display='none'"/></div>
+          <h3>I2M: Impact to Monetization</h3>
+          <p>Leverage content to convert community into revenue with a proven system.</p>
+          <div class="service-actions">
+            <a class="cta-ghost magnet" href="https://www.deeperthanthebrand.com/viral" target="_blank" rel="noopener">Find out more</a>
+          </div>
+        </article>
+        <article class="service-card ai-card card3d reveal">
+          <div class="spot"></div>
+          <div class="icon" aria-hidden="true"><img src="The-Experience-SEO.png" alt="The Experience" style="width:100%;height:100%;object-fit:cover;border-radius:12px;opacity:.9" onerror="this.style.display='none'"/></div>
+          <h3>The Experience</h3>
+          <p>An exclusive community for creators: accountability, strategy, and live sessions.</p>
+          <div class="service-actions">
+            <a class="cta-ghost magnet" href="https://www.deeperthanthebrand.com/viral" target="_blank" rel="noopener">Join Community</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="toolkit" class="panel panel-light panel-a">
+    <div class="container">
+      <h2 class="section-title gradient-text">The AI Toolkit Curriculum</h2>
+      <div class="features-grid">
+        <div class="feature-card ai-card flip" tabindex="0">
+          <div class="face front"><img src="Objectives.png" alt="Discover Goals" style="width:100%;border-radius:10px;margin-bottom:8px" onerror="this.style.display='none'"/><h4>Discover Your Social Media Goals</h4><p>Define and achieve specific goals — turn aspirations into action.</p></div>
+          <div class="face back"><small>Outcome: Clarity on goals fuels consistent content.</small></div>
+        </div>
+        <div class="feature-card ai-card flip" tabindex="0">
+          <div class="face front"><img src="ChatGPT-Integration.png" alt="ChatGPT Integration" style="width:100%;border-radius:10px;margin-bottom:8px" onerror="this.style.display='none'"/><h4>ChatGPT Integration</h4><p>Leverage prompts to generate engaging content that resonates.</p></div>
+          <div class="face back"><small>Outcome: Repeatable prompt systems for brand voice.</small></div>
+        </div>
+        <div class="feature-card ai-card flip" tabindex="0">
+          <div class="face front"><img src="Calendar-Setup-V1.png" alt="Content Planning" style="width:100%;border-radius:10px;margin-bottom:8px" onerror="this.style.display='none'"/><h4>Master Content Planning</h4><p>Use planners and calendars to organize consistent posting.</p></div>
+          <div class="face back"><small>Outcome: A 90‑day plan with weekly cadence.</small></div>
+        </div>
+        <div class="feature-card ai-card flip" tabindex="0">
+          <div class="face front"><img src="Content-Ideas.png" alt="Weekly Inspiration" style="width:100%;border-radius:10px;margin-bottom:8px" onerror="this.style.display='none'"/><h4>Weekly Inspiration Boosters</h4><p>Fresh ideas every week to keep your feed compelling.</p></div>
+          <div class="face back"><small>Outcome: Always‑on ideation pipeline.</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ecosystem" class="panel panel-dark panel-c">
+    <div class="container">
+      <h2 class="section-title gradient-text">Nikki’s Ecosystem</h2>
+      <p class="section-sub">A single home for content, courses, bookings, and community.</p>
+      <div class="carousel" style="display:grid; grid-auto-flow:column; grid-auto-columns:minmax(260px, 32%); gap:14px; overflow:auto; scroll-snap-type:x mandatory; padding-bottom:8px;">
+        <div class="media-card ai-card card3d reveal" style="scroll-snap-align:start;">
+          <div class="spot"></div>
+          <div class="thumb"><img src="App-Mobile-Mockup-V1.png" alt="Mobile App" onerror="this.style.display='none'"/></div>
+        </div>
+        <div class="media-card ai-card card3d reveal" style="scroll-snap-align:start;">
+          <div class="spot"></div>
+          <div class="thumb"><img src="Creative-Ideas-Mockup-V1.png" alt="Ideas" onerror="this.style.display='none'"/></div>
+        </div>
+        <div class="media-card ai-card card3d reveal" style="scroll-snap-align:start;">
+          <div class="spot"></div>
+          <div class="thumb"><img src="Chat-GPT-Mockup-v1.png" alt="ChatGPT" onerror="this.style.display='none'"/></div>
+        </div>
+        <div class="media-card ai-card card3d reveal" style="scroll-snap-align:start;">
+          <div class="spot"></div>
+          <div class="thumb"><img src="Reel-Mockup-V2.png" alt="Reels" onerror="this.style.display='none'"/></div>
+        </div>
+        <div class="media-card ai-card card3d reveal" style="scroll-snap-align:start;">
+          <div class="spot"></div>
+          <div class="thumb"><img src="Instagram-Highlights.png" alt="Highlights" onerror="this.style.display='none'"/></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" class="panel panel-light panel-b">
+    <div class="container">
+      <h2 class="section-title gradient-text">What Our Community Says</h2>
+      <p class="section-sub">Join thousands of creators who've transformed their content strategy</p>
+      <div class="carousel-wrap" role="region" aria-roledescription="carousel" aria-label="Testimonials">
+        <button class="carousel-btn prev" data-carousel-prev aria-label="Previous" aria-controls="testCarousel"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+        <div id="testCarousel" class="carousel-track" tabindex="0">
+        <article class="yt-card ai-card card3d" data-video="https://player.vimeo.com/video/491509730?autoplay=1">
+          <div class="spot"></div>
+          <img class="thumb" alt="Testimonial" src="Screenshot 2025-08-23 at 10.01.14 PM.png" onerror="this.style.display='none'"/>
+          <div class="content">
+            <h3 class="title">Transformational Results</h3>
+            <p class="description">See how our AI content strategy transformed engagement and growth</p>
+          </div>
+          <div class="yt-overlay"><button aria-label="Play video"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M8 5v14l11-7z"/></svg></button></div>
+        </article>
+
+        <article class="yt-card ai-card card3d" data-video="https://www.youtube.com/embed/iwSYdl1FUHU?autoplay=1">
+          <div class="spot"></div>
+          <img class="thumb" alt="I2M: Impact to Monetization" src="https://img.youtube.com/vi/iwSYdl1FUHU/maxresdefault.jpg" onerror="this.style.display='none'"/>
+          <div class="content">
+            <h3 class="title">Content That Converts</h3>
+            <p class="description">Learn how we helped scale from 300k to 2M followers in 18 months</p>
+          </div>
+          <div class="yt-overlay"><button aria-label="Play video"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M8 5v14l11-7z"/></svg></button></div>
+        </article>
+
+        <article class="yt-card ai-card card3d" data-video="https://player.vimeo.com/video/491507248?autoplay=1">
+          <div class="spot"></div>
+          <img class="thumb" alt="Testimonial" src="Screenshot 2025-08-23 at 10.01.41 PM.png" onerror="this.style.display='none'"/>
+          <div class="content">
+            <h3 class="title">Workshop Success Story</h3>
+            <p class="description">From overwhelmed to organized with our 2-day accelerator</p>
+          </div>
+          <div class="yt-overlay"><button aria-label="Play video"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M8 5v14l11-7z"/></svg></button></div>
+        </article>
+
+        <article class="yt-card ai-card card3d" data-video="https://player.vimeo.com/video/491504702?autoplay=1">
+          <div class="spot"></div>
+          <img class="thumb" alt="Testimonial" src="Screenshot 2025-08-23 at 10.01.51 PM.png" onerror="this.style.display='none'"/>
+          <div class="content">
+            <h3 class="title">Community Impact</h3>
+            <p class="description">How our systems help creators show up consistently</p>
+          </div>
+          <div class="yt-overlay"><button aria-label="Play video"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M8 5v14l11-7z"/></svg></button></div>
+        </article>
+        </div>
+        <button class="carousel-btn next" data-carousel-next aria-label="Next" aria-controls="testCarousel"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M10 6l-1.41 1.41L13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+      </div>
+    </div>
+  </section>
+  <section id="workshops" class="panel panel-dark panel-a">
+    <div class="container">
+      <h2 class="section-title gradient-text">Workshops & Courses</h2>
+      <p class="section-sub">Hands-on trainings, strategic systems, and AI content playbooks.</p>
+      <div class="services-grid">
+        <article class="service-card ai-card">
+          <div class="icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <defs>
+                <linearGradient id="ic1" x1="0" x2="1">
+                  <stop stop-color="#e0ab10" offset="0"/>
+                  <stop stop-color="#ffd86a" offset="1"/>
+                </linearGradient>
+              </defs>
+              <path fill="url(#ic1)" d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+            </svg>
+          </div>
+          <h3>ChatGPT for Content Creation</h3>
+          <p>Learn prompt systems, repurposing workflows, and consistent publishing with AI.</p>
+          <div class="service-actions">
+            <a class="cta-ghost" href="https://www.linkedin.com/learning/" target="_blank" rel="noopener">Learn More</a>
+          </div>
+        </article>
+
+        <article class="service-card ai-card">
+          <div class="icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <defs>
+                <linearGradient id="ic2" x1="0" x2="1">
+                  <stop stop-color="#9ecbff" offset="0"/>
+                  <stop stop-color="#ffd86a" offset="1"/>
+                </linearGradient>
+              </defs>
+              <path fill="url(#ic2)" d="M12 7l5 10H7l5-10zm0-5L1 22h22L12 2z"/>
+            </svg>
+          </div>
+          <h3>Two-Day Social Accelerator Workshop</h3>
+          <p>Design a 90-day content system in two days—zero burnout, maximum clarity.</p>
+          <div class="service-actions">
+            <button class="cta-primary" data-open="reserveModal">Reserve My Seat</button>
+            <button class="cta-ghost" data-open="reserveModal">Learn More</button>
+          </div>
+        </article>
+
+        <article class="service-card ai-card">
+          <div class="icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <defs>
+                <linearGradient id="ic3" x1="0" x2="1">
+                  <stop stop-color="#ffd86a" offset="0"/>
+                  <stop stop-color="#9ecbff" offset="1"/>
+                </linearGradient>
+              </defs>
+              <path fill="url(#ic3)" d="M4 6h16v2H4V6zm0 4h10v2H4v-2zm0 4h16v2H4v-2z"/>
+            </svg>
+          </div>
+          <h3>AI Content Strategy Classes</h3>
+          <p>Weekly classes to architect your AI-assisted editorial calendar and brand voice.</p>
+          <div class="service-actions">
+            <button class="cta-ghost" data-open="bookingModal">Learn More</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing / Packages -->
+  <section id="pricing" class="panel panel-light panel-b">
+    <div class="container">
+      <h2 class="section-title gradient-text">Workshop Packages</h2>
+      <p class="section-sub">Choose your cohort experience. All tiers include the complete accelerator framework.</p>
+      <div class="pricing-grid ai-v2">
+        <article class="service-card ai-card pricing-card card3d reveal">
+          <div class="spot"></div>
+          <h3>Starter</h3>
+          <p class="section-sub">Great for solo creators validating their system.</p>
+          <ul class="pricing-feats">
+            <li><strong>Duration</strong>: 2 days</li>
+            <li><strong>Cohort size</strong>: Up to 30</li>
+            <li><strong>Deliverables</strong>: 90-day plan, content calendar</li>
+            <li><strong>Support</strong>: Group Q&A</li>
+          </ul>
+          <div class="service-actions">
+            <button class="cta-primary magnet" data-open="reserveModal">Reserve My Seat</button>
+            <a class="cta-ghost magnet" href="#faq" data-scrollto="#faq">See Syllabus</a>
+          </div>
+        </article>
+        <article class="service-card ai-card pricing-card card3d reveal">
+          <div class="spot"></div>
+          <h3>Pro</h3>
+          <p class="section-sub">For teams who want repeatable workflows.</p>
+          <ul class="pricing-feats">
+            <li><strong>Duration</strong>: 2 days + office hours</li>
+            <li><strong>Cohort size</strong>: Up to 20</li>
+            <li><strong>Deliverables</strong>: 90-day plan, repurposing framework</li>
+            <li><strong>Support</strong>: Priority Q&A</li>
+          </ul>
+          <div class="service-actions">
+            <button class="cta-primary magnet" data-open="reserveModal">Reserve My Seat</button>
+            <a class="cta-ghost magnet" href="#faq" data-scrollto="#faq">See Syllabus</a>
+          </div>
+        </article>
+        <article class="service-card ai-card pricing-card card3d reveal">
+          <div class="spot"></div>
+          <h3>VIP</h3>
+          <p class="section-sub">Executive support with tailored strategy.</p>
+          <ul class="pricing-feats">
+            <li><strong>Duration</strong>: 2 days + 30-day support</li>
+            <li><strong>Cohort size</strong>: Private or up to 10</li>
+            <li><strong>Deliverables</strong>: 90-day plan, content flywheel, templates</li>
+            <li><strong>Support</strong>: 1:1 guidance</li>
+          </ul>
+          <div class="service-actions">
+            <button class="cta-primary magnet" data-open="reserveModal">Reserve My Seat</button>
+            <a class="cta-ghost magnet" href="#faq" data-scrollto="#faq">See Syllabus</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ / Syllabus -->
+  <section id="faq" class="panel panel-dark panel-c">
+    <div class="container">
+      <h2 class="section-title gradient-text">FAQ & Syllabus</h2>
+      <div class="form-card ai-card accordion" role="tablist" aria-label="Workshop FAQ">
+        <div class="accordion-item">
+          <h3 class="accordion-header" id="q1"><button class="accordion-button" role="tab" aria-controls="p1" aria-expanded="false">What’s included in the Two‑Day Social Accelerator?</button></h3>
+          <div id="p1" class="accordion-panel" role="tabpanel" aria-labelledby="q1" hidden>
+            <p>Day 1: Strategy and voice. Day 2: Systems and scheduling. You’ll ship a 90‑day plan and templates you can reuse.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header" id="q2"><button class="accordion-button" role="tab" aria-controls="p2" aria-expanded="false">How do AI workflows reduce burnout?</button></h3>
+          <div id="p2" class="accordion-panel" role="tabpanel" aria-labelledby="q2" hidden>
+            <p>We offload repetitive ideation, batching, and distribution to AI tools with review checkpoints, so you focus on creative quality.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header" id="q3"><button class="accordion-button" role="tab" aria-controls="p3" aria-expanded="false">Do you customize strategy by niche?</button></h3>
+          <div id="p3" class="accordion-panel" role="tabpanel" aria-labelledby="q3" hidden>
+            <p>Yes. Frameworks stay consistent, but examples, voice, and channels are tailored to your niche and goals.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header" id="q4"><button class="accordion-button" role="tab" aria-controls="p4" aria-expanded="false">What tools are used (ChatGPT, planners, templates)?</button></h3>
+          <div id="p4" class="accordion-panel" role="tabpanel" aria-labelledby="q4" hidden>
+            <p>We use ChatGPT, modern planners, and reusable templates. You’ll leave with a toolkit you can maintain.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calendar Block -->
+  <section id="calendar" class="panel panel-light panel-a">
+    <div class="container">
+      <h2 class="section-title gradient-text">Next Cohort</h2>
+      <p class="section-sub">Next Cohort Kickoff: Nov 12–13 (Sample Date)</p>
+      <div class="calendar-row">
+        <button class="cta-primary" id="btnGoogleCal" type="button">Add to Google</button>
+        <button class="cta-ghost" id="btnAppleCal" type="button">Add to Apple</button>
+        <button class="cta-ghost" id="btnOutlookCal" type="button">Add to Outlook</button>
+        <span class="calendar-badge">Calendar links are generated on the fly (demo)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results / Outcomes -->
+  <section id="results" class="panel panel-dark panel-b">
+    <div class="container">
+      <h2 class="section-title gradient-text">Expected Outcomes</h2>
+      <div class="results-viz" aria-hidden="true">
+        <svg viewBox="0 0 1200 400" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="gStroke" x1="0" x2="1">
+              <stop offset="0" stop-color="#ff78c8" stop-opacity="0.8"/>
+              <stop offset="1" stop-color="#e0ab10" stop-opacity="0.8"/>
+            </linearGradient>
+            <radialGradient id="gGlow" cx="50%" cy="50%" r="60%">
+              <stop offset="0" stop-color="#ff78c8" stop-opacity="0.35"/>
+              <stop offset="1" stop-color="#e0ab10" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle class="blur" cx="900" cy="120" r="180" fill="url(#gGlow)"/>
+          <path d="M0,300 C200,220 280,260 420,200 C560,140 740,220 880,180 C1040,130 1120,160 1200,120" fill="none" stroke="url(#gStroke)" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="chips-row reveal" id="resultChips">
+        <span class="chip"><svg viewBox="0 0 24 24"><path fill="#010043" d="M3 12l6 6L21 6l-2-2-10 10-4-4z"/></svg>90‑day plan in 48 hrs</span>
+        <span class="chip"><svg viewBox="0 0 24 24"><path fill="#010043" d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 14l-4-4 1.4-1.4L13 12.2l4.6-4.6L19 9l-6 7z"/></svg>Content flywheel</span>
+        <span class="chip"><svg viewBox="0 0 24 24"><path fill="#010043" d="M4 6h16v2H4v-2zm0 5h10v2H4v-2zm0 5h16v2H4v-2z"/></svg>Repurposing framework</span>
+        <span class="chip"><svg viewBox="0 0 24 24"><path fill="#010043" d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>Creator operating system</span>
+        <span class="chip"><svg viewBox="0 0 24 24"><path fill="#010043" d="M4 17l6-6 4 4 6-6v8H4z"/></svg>Consistent publishing</span>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi ai-card"><div class="num">-80%</div><small>Time to confirm</small></div>
+        <div class="kpi ai-card"><div class="num">+35%</div><small>Conversion from unified hub</small></div>
+        <div class="kpi ai-card"><div class="num">1 tool</div><small>Smart form + calendar</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="community" class="panel panel-light panel-b">
+    <div class="container">
+      <h2 class="section-title gradient-text">Join 10,000+ community members every Friday morning</h2>
+      <p class="section-sub">Four quick segments. One consistent system.</p>
+      <div class="features-grid">
+        <div class="feature-card ai-card">
+          <h4>Content Newsstand</h4>
+          <p>Signal over noise: weekly content trends you can act on.</p>
+        </div>
+        <div class="feature-card ai-card">
+          <h4>AI Alley</h4>
+          <p>Actionable AI workflows, prompts, and content ops.</p>
+        </div>
+        <div class="feature-card ai-card">
+          <h4>Content Stoop</h4>
+          <p>Community stories, wins, and creator spotlights.</p>
+        </div>
+        <div class="feature-card ai-card">
+          <h4>First To Know</h4>
+          <p>Be first in line for cohorts, workshops, and drops.</p>
+        </div>
+      </div>
+      <div class="form-card ai-card" style="padding:16px;">
+        <form id="newsletterForm">
+          <div class="form-row">
+            <input required name="name" placeholder="Your Name" />
+            <input required type="email" name="email" placeholder="Email Address" />
+          </div>
+          <small class="form-help">This uses an EmailJS placeholder. No emails are actually sent in this demo.</small>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+            <button class="cta-primary" type="submit">Join the Newsletter</button>
+            <button class="cta-ghost" type="button" data-open="bookingModal">Book a Clarity Call</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="media" class="panel panel-dark panel-c">
+    <div class="container">
+      <h2 class="section-title gradient-text">Media & Portfolio</h2>
+      <div class="media-filters" role="toolbar" aria-label="Filter media">
+        <button class="chip" data-filter="all" aria-pressed="true">All</button>
+        <button class="chip" data-filter="youtube" aria-pressed="false">YouTube</button>
+        <button class="chip" data-filter="reels" aria-pressed="false">Reels</button>
+        <button class="chip" data-filter="talks" aria-pressed="false">Talks</button>
+      </div>
+      <div class="carousel-wrap" role="region" aria-roledescription="carousel" aria-label="Media & Portfolio">
+        <button class="carousel-btn prev" data-carousel-prev aria-label="Previous" aria-controls="mediaCarousel"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+        <div id="mediaCarousel" class="carousel-track" tabindex="0">
+          <article class="yt-card ai-card card3d" data-video="https://www.youtube.com/embed/W0Ck2E9B9A8?autoplay=1" data-cat="youtube">
+            <div class="spot"></div>
+            <img class="thumb" alt="How to use ChatGPT for Content Creation" src="https://img.youtube.com/vi/W0Ck2E9B9A8/maxresdefault.jpg"/>
+            <div class="content">
+              <h3 class="title">ChatGPT for Content Creation</h3>
+              <p class="description">Highlights and takeaways from the LinkedIn Learning course</p>
+            </div>
+            <div class="yt-overlay"><button aria-label="Play video"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M8 5v14l11-7z"/></svg></button></div>
+          </article>
+
+          <article class="yt-card ai-card card3d" data-video="https://player.vimeo.com/video/76979871?autoplay=1" data-cat="talks">
+            <div class="spot"></div>
+            <img class="thumb" alt="Workshop Recap" src="data:image/svg+xml;utf8, <svg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'><rect width='100%' height='100%' fill='%23010043'/><text x='50%' y='50%' fill='%23ffd86a' font-size='44' font-family='sans-serif' dominant-baseline='middle' text-anchor='middle'>Two-Day Social Accelerator: Recap</text></svg>"/>
+            <div class="content">
+              <h3 class="title">Workshop Recap</h3>
+              <p class="description">Snippets from our accelerator talks and sessions</p>
+            </div>
+            <div class="yt-overlay"><button aria-label="Play recap"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M8 5v14l11-7z"/></svg></button></div>
+          </article>
+        </div>
+        <button class="carousel-btn next" data-carousel-next aria-label="Next" aria-controls="mediaCarousel"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M10 6l-1.41 1.41L13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="panel panel-light panel-a">
+    <div class="container">
+      <h2 class="section-title gradient-text">Booking & Contact</h2>
+      <div class="two-col-contact" style="display:grid; grid-template-columns:1.1fr .9fr; gap:18px;">
+        <div class="form-card ai-card" style="padding:16px;">
+          <form id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="field"><label for="cname">Your Name</label><input id="cname" required name="name" /></div>
+              <div class="field"><label for="cemail">Email Address</label><input id="cemail" required type="email" name="email" /></div>
+            </div>
+            <div class="field"><label for="cmsg">Message</label><textarea id="cmsg" required name="message" placeholder="How can we help?"></textarea></div>
+            <div class="badge-row" style="margin:6px 0 6px;">
+              <span class="badge"><span class="dot"></span> AI-powered</span>
+              <span class="badge"><span class="dot"></span> Creator-first</span>
+              <span class="badge"><span class="dot"></span> Burnout-free growth</span>
+            </div>
+            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+              <button class="cta-primary" type="submit">Send with EmailJS</button>
+              <small class="form-help"><span class="badge-demo"><span class="dot" style="width:8px;height:8px;background:#3ddc84;border-radius:50%;box-shadow:0 0 0 3px rgba(61,220,132,.25)"></span>EmailJS: Demo Mode</span></small>
+            </div>
+          </form>
+        </div>
+        <div class="form-card ai-card" style="padding:16px;">
+          <h3 class="gradient-text" style="margin:0 0 8px; font-size:20px;">FAQ</h3>
+          <div class="accordion" role="tablist" aria-label="Contact FAQ">
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="cq1"><button class="accordion-button" role="tab" aria-controls="cp1" aria-expanded="false">How quickly do you respond?</button></h3>
+              <div id="cp1" class="accordion-panel" role="tabpanel" aria-labelledby="cq1" hidden>
+                <p>We typically reply within 1–2 business days (demo).</p>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="cq2"><button class="accordion-button" role="tab" aria-controls="cp2" aria-expanded="false">Do you offer custom workshops?</button></h3>
+              <div id="cp2" class="accordion-panel" role="tabpanel" aria-labelledby="cq2" hidden>
+                <p>Yes — content systems tailored to your team (demo).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-card ai-card" id="siteChat" style="padding:16px; margin-top:18px;">
+        <h3 class="gradient-text" style="margin:0 0 8px; font-size:20px;">Virtual Assistant (Demo)</h3>
+        <div class="chat-top" style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <label for="vaPrompt" style="font-size:14px;opacity:.9">System prompt:</label>
+          <select id="vaPrompt" class="chat-select" style="background:#fff;color:#111;border-radius:8px;padding:6px 8px">
+            <option value="">— choose —</option>
+            <option>Rewrite this hook with more urgency</option>
+            <option>Repurpose this summary for Instagram carousel</option>
+            <option>Add an audience-specific angle for freelancers</option>
+          </select>
+        </div>
+        <div id="siteChatLog" class="ai-card va-log"></div>
+        <div class="ai-card" style="display:flex; gap:8px; margin-top:8px; padding:8px; align-items:center;">
+          <div aria-hidden="true" style="width:28px;height:28px;border-radius:999px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.2);background:linear-gradient(135deg, rgba(255,255,255,.2), rgba(255,255,255,.06)); box-shadow: inset 0 0 18px rgba(224,171,16,.12);">
+            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="#ffd86a" d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
+          </div>
+          <input id="siteChatInput" placeholder="Ask anything about services, workshops, or content…" style="flex:1; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.18); border-radius:14px; padding:12px 14px; color:#fff; caret-color:#ffd86a;" />
+          <button class="cta-primary magnet" id="siteChatSend" type="button">Send</button>
+        </div>
+        <div class="va-chips">
+          <button class="va-chip" data-suggest="What’s in the Two‑Day Social Accelerator?">Accelerator syllabus</button>
+          <button class="va-chip" data-suggest="How does booking work (demo)?">Booking flow (demo)</button>
+          <button class="va-chip" data-suggest="Share your LinkedIn course link">LinkedIn course</button>
+        </div>
+        <small class="form-help">Demo only — no messages are sent to any LLM. Local mock only.</small>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-grid">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <img src="logo.webp" alt="Logo" width="28" height="28" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,\
+          <svg xmlns=\'http://www.w3.org/2000/svg\' width=\'64\' height=\'64\'>\
+            <rect width=\'100%\' height=\'100%\' rx=\'12\' ry=\'12\' fill=\'%23010043\'/>\
+            <text x=\'50%\' y=\'55%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=\'24\' font-family=\'sans-serif\' fill=\'%23ffd86a\'>NS</text>\
+          </svg>'" />
+        <div>
+          <strong>The Voice of Content Branding 🦁</strong><br/>
+          <small class="section-sub" style="margin:0;">© <span id="year"></span> Nikki Sanders. All rights reserved.</small>
+        </div>
+      </div>
+      <nav class="socials">
+        <a href="https://www.instagram.com/thisisnickys/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/learning/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="#community" data-scrollto="#community">Newsletter</a>
+      </nav>
+    </div>
+  </footer>
+
+  
+
+  <!-- Back to Top Button -->
+  <button id="backTop" class="back-top" aria-label="Back to top" title="Back to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M12 5l7 7-1.4 1.4L13 8.8V20h-2V8.8L6.4 13.4 5 12z"/></svg>
+  </button>
+
+  <!-- Booking Modal -->
+  <div id="bookingModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="bookingTitle" aria-describedby="bookingDesc">
+    <div class="backdrop" data-close></div>
+    <div class="dialog">
+      <div class="dialog-header">
+        <strong id="bookingTitle">Book My Workshop</strong>
+        <button class="close-x" data-close>Close</button>
+      </div>
+      <div class="dialog-body">
+        <p id="bookingDesc" class="section-sub">Complete the form. EmailJS demo mode is active.</p>
+        <div class="badge-demo" aria-hidden="true"><span class="dot" style="width:8px;height:8px;background:#3ddc84;border-radius:50%;box-shadow:0 0 0 3px rgba(61,220,132,.25)"></span>This replaces multiple forms and syncs your calendar automatically (demo).</div>
+        <div class="seg" role="tablist" aria-label="Booking type" style="margin:10px 0; display:inline-flex; border:1px solid rgba(255,255,255,.18); border-radius:999px; overflow:hidden;">
+          <button role="tab" aria-selected="true" data-booking-type="speaking" class="cta-ghost">Speaking Engagement</button>
+          <button role="tab" aria-selected="false" data-booking-type="podcast" class="cta-ghost">Podcast Guest</button>
+          <button role="tab" aria-selected="false" data-booking-type="workshop" class="cta-ghost">Workshop Inquiry</button>
+        </div>
+        <div class="badge-demo" aria-hidden="true"><span class="dot" style="width:8px;height:8px;background:#3ddc84;border-radius:50%;box-shadow:0 0 0 3px rgba(61,220,132,.25)"></span>EmailJS: Demo Mode</div>
+        <form id="bookingForm" novalidate>
+          <div class="form-row">
+            <div class="field"><label for="bname">Your Name</label><input id="bname" name="name" required aria-invalid="false" /></div>
+            <div class="field"><label for="bemail">Email</label><input id="bemail" type="email" name="email" required aria-invalid="false" /></div>
+          </div>
+          <div id="reqSpeaking" class="form-card ai-card" style="padding:12px; margin:10px 0;">
+            <strong>Speaking Details</strong>
+            <div class="form-row">
+              <div class="field"><label for="sorg">Organization</label><input id="sorg" name="sorg" disabled placeholder="Your company or org (demo)"/></div>
+              <div class="field"><label for="sdate">Preferred Date</label><input id="sdate" type="date" name="sdate" disabled/></div>
+            </div>
+            <small class="form-help">Calendar will be auto‑invited after confirmation (demo).</small>
+          </div>
+          <div id="reqPodcast" class="form-card ai-card" style="padding:12px; margin:10px 0; display:none;">
+            <strong>Podcast Details</strong>
+            <div class="form-row">
+              <div class="field"><label for="pname">Podcast Name</label><input id="pname" name="pname" disabled placeholder="Show name (demo)"/></div>
+              <div class="field"><label for="plink">Episode Link</label><input id="plink" name="plink" disabled placeholder="Optional"/></div>
+            </div>
+            <small class="form-help">Calendar will be auto‑invited after confirmation (demo).</small>
+          </div>
+          <div id="reqWorkshop" class="form-card ai-card" style="padding:12px; margin:10px 0; display:none;">
+            <strong>Workshop Details</strong>
+            <div class="form-row">
+              <div class="field"><label for="wtype">Workshop</label>
+                <select id="wtype" name="workshop" disabled>
+                  <option value="Two-Day Social Accelerator">Two-Day Social Accelerator</option>
+                  <option value="AI Content Strategy">AI Content Strategy</option>
+                </select>
+              </div>
+              <div class="field"><label for="wteam">Team Size</label><input id="wteam" name="wteam" type="number" min="1" value="5" disabled/></div>
+            </div>
+            <small class="form-help">Calendar will be auto‑invited after confirmation (demo).</small>
+          </div>
+          <div class="field"><label for="bnotes">Notes</label><textarea id="bnotes" name="notes" placeholder="What outcome are you seeking?"></textarea></div>
+          <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+            <button type="submit" class="cta-primary">Submit via EmailJS</button>
+            <small class="form-help">Placeholder — no emails are sent in this demo.</small>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:8px;">
+            <button class="cta-ghost" id="bookAddGoogle" type="button">Add to Google</button>
+            <button class="cta-ghost" id="bookAddICS" type="button">Download .ics</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reserve/Stripe Modal -->
+  <div id="reserveModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="reserveTitle" aria-describedby="reserveDesc">
+    <div class="backdrop" data-close></div>
+    <div class="dialog">
+      <div class="dialog-header">
+        <strong id="reserveTitle">Reserve My Seat</strong>
+        <button class="close-x" data-close>Close</button>
+      </div>
+      <div class="dialog-body">
+        <p id="reserveDesc" class="section-sub">Demo checkout. Taxes calculated at checkout.</p>
+        <form id="reserveForm" novalidate>
+          <div class="form-row">
+            <div class="field"><label for="rname">Full Name</label><input id="rname" name="name" required aria-invalid="false" /></div>
+            <div class="field"><label for="remail">Email</label><input id="remail" type="email" name="email" required aria-invalid="false" /></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="rqty">Seats</label><input id="rqty" name="qty" type="number" min="1" value="1" required aria-invalid="false" /></div>
+            <div class="field"><label for="rtier">Tier</label><select id="rtier" name="tier"><option value="starter">Starter</option><option value="pro">Pro</option><option value="vip">VIP</option></select></div>
+          </div>
+          <div class="form-card ai-card" style="padding:12px; margin:10px 0;">
+            <strong>Order Summary</strong>
+            <div id="orderSummary" class="section-sub">Two‑Day Social Accelerator — <span data-os-tier>Starter</span> • Qty <span data-os-qty>1</span> • Total <span data-os-total>$499</span> <small>(Taxes calculated at checkout)</small></div>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+            <button type="button" class="cta-primary" id="stripeCheckout">Proceed to Stripe (Demo)</button>
+            <button type="submit" class="cta-ghost">Save Reservation (EmailJS)</button>
+          </div>
+          <small class="form-help">This is a demo Stripe/EmailJS flow for mock-up only.</small>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video Lightbox Modal -->
+  <div id="videoModal" class="modal" role="dialog" aria-modal="true" aria-label="Video Player">
+    <div class="backdrop" data-close></div>
+    <div class="dialog" style="width:min(96vw, 960px);">
+      <div class="dialog-header">
+        <strong>Now Playing</strong>
+        <button class="close-x" data-close>Close</button>
+      </div>
+      <div class="dialog-body" style="padding:0;">
+        <div style="position:relative; padding-top:56.25%; background:#000;">
+          <iframe id="videoPlayer" src="" allow="autoplay; fullscreen" allowfullscreen title="Video player"
+            style="position:absolute; inset:0; width:100%; height:100%; border:0;"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Iframe Modal (for VideoAsk and others) -->
+  <div id="iframeModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="embedTitle">
+    <div class="backdrop" data-close></div>
+    <div class="dialog" style="width:min(96vw, 960px); height:min(90vh, 720px);">
+      <div class="dialog-header">
+        <strong id="embedTitle">Embedded Content</strong>
+        <button class="close-x" data-close>Close</button>
+      </div>
+      <div class="dialog-body" style="padding:0; height: calc(100% - 52px);">
+        <iframe id="iframePlayer" src="" title="Embedded content" style="position:absolute; inset:0; width:100%; height:100%; border:0; background:#000;"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Explainer Modal: Today vs Unified -->
+  <div id="unifiedExplainer" class="modal" role="dialog" aria-modal="true" aria-labelledby="uxTitle">
+    <div class="backdrop" data-close></div>
+    <div class="dialog" style="width:min(96vw, 1040px);">
+      <div class="dialog-header">
+        <strong id="uxTitle">Why this is better than your current stack</strong>
+        <div class="header-actions" style="display:flex; align-items:center; gap:8px; margin-left:auto;">
+          <button id="uxTourToggle" role="switch" aria-checked="false" class="cta-ghost" aria-label="Toggle guided tour">Try it: Off</button>
+          <button id="uxCopyLink" class="cta-ghost" aria-label="Copy deep link">Copy Link</button>
+        </div>
+        <button class="close-x" data-close>Close</button>
+      </div>
+      <div class="dialog-body">
+        <style>
+          /* Scoped styles for the upgraded comparison */
+          #unifiedExplainer .ux-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start;}
+          @media (max-width: 900px){ #unifiedExplainer .ux-grid{grid-template-columns:1fr;} }
+          #unifiedExplainer .ux-panel{position:relative; border:1px solid rgba(255,255,255,.14); border-radius:16px; padding:14px; background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); backdrop-filter: saturate(140%) blur(8px);} 
+          #unifiedExplainer [data-heatmap] .hotspot{position:absolute; pointer-events:none; border-radius:10px; outline:2px solid rgba(224,171,16,0); outline-offset:-2px; box-shadow:0 0 0 rgba(224,171,16,0); transition:outline-color .2s ease, box-shadow .2s ease;}
+          @media (prefers-reduced-motion: reduce){ #unifiedExplainer [data-heatmap] .hotspot{transition:none; outline:2px solid rgba(224,171,16,.6); box-shadow:none;} }
+          #unifiedExplainer [data-heatmap]:hover .hotspot{outline-color: rgba(224,171,16,.65); box-shadow:0 0 10px rgba(224,171,16,.35);} 
+          #unifiedExplainer .ux-title{font-size:18px; font-weight:700;}
+          #unifiedExplainer .ux-sub{color:var(--muted, #9fb0ff); margin:6px 0 10px;}
+          #unifiedExplainer .ux-fieldset{display:grid; gap:8px;}
+          #unifiedExplainer .ux-fieldset label{font-size:12px; color:var(--muted, #9fb0ff);} 
+          #unifiedExplainer .ux-fieldset input, #unifiedExplainer .ux-fieldset select, #unifiedExplainer .ux-fieldset textarea{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.18); color:inherit; border-radius:10px; padding:10px 12px;}
+          #unifiedExplainer .ux-kpi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:12px; min-height:82px;}
+          @media (max-width: 600px){ #unifiedExplainer .ux-kpi-grid{grid-template-columns:1fr;}}
+          #unifiedExplainer .ux-kpi{border:1px solid rgba(255,255,255,.16); border-radius:14px; padding:10px 12px; background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));}
+          #unifiedExplainer .ux-kpi .num{font-weight:800; font-size:18px; background:linear-gradient(90deg,#e0ab10,#ffd86a); -webkit-background-clip:text; background-clip:text; color:transparent;}
+          #unifiedExplainer .ux-kpi small{color:var(--muted, #9fb0ff);} 
+          #unifiedExplainer .ux-tabs{display:inline-flex; border:1px solid rgba(255,255,255,.18); border-radius:999px; overflow:hidden;}
+          #unifiedExplainer .ux-tabs [role="tab"]{padding:8px 12px;}
+          #unifiedExplainer .ux-tabs [aria-selected="true"]{background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.06));}
+          #unifiedExplainer .ux-actions{display:flex; gap:6px; align-items:center; margin:10px 0 0;}
+          #unifiedExplainer .calendar-row{display:flex; flex-wrap:wrap; gap:8px; margin:8px 0 0; align-items:center;}
+          #unifiedExplainer .workflow{display:flex; align-items:center; gap:8px; padding-top:10px;}
+          #unifiedExplainer .workflow .node{position:relative; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.18); background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03)); cursor:help;}
+          #unifiedExplainer .workflow .node:hover{box-shadow:0 0 12px rgba(224,171,16,.3);} 
+          #unifiedExplainer .workflow .tip{position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%); white-space:nowrap; background:rgba(0,0,0,.8); color:#fff; padding:6px 8px; border-radius:8px; font-size:12px; display:none;}
+          #unifiedExplainer .workflow .node:focus .tip, #unifiedExplainer .workflow .node:hover .tip{display:block;}
+          #unifiedExplainer .kpi-controls{margin-top:12px; border-top:1px dashed rgba(255,255,255,.15); padding-top:10px; display:grid; gap:10px;}
+          #unifiedExplainer .range-row{display:grid; grid-template-columns:140px 1fr auto; align-items:center; gap:8px;}
+          #unifiedExplainer .range-row .balloon{min-width:56px; text-align:right; font-variant-numeric:tabular-nums;}
+          #unifiedExplainer .success{display:none; border:1px solid rgba(255,255,255,.18); border-radius:12px; padding:12px; background:linear-gradient(180deg, rgba(20,255,160,.08), rgba(20,255,160,.04)); margin-top:10px;}
+          #unifiedExplainer .success[aria-hidden="false"]{display:block;}
+          #unifiedExplainer .tour{position:absolute; inset:0; display:none;}
+          #unifiedExplainer .tour[aria-hidden="false"]{display:block;}
+          #unifiedExplainer .tour .veil{position:absolute; inset:0; background:radial-gradient(transparent 40%, rgba(0,0,0,.65) 41%);} 
+          #unifiedExplainer .tour .callout{position:absolute; max-width:260px; background:rgba(0,0,0,.85); color:#fff; padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.2);} 
+          @media (prefers-reduced-motion: reduce){ #unifiedExplainer .tour .veil{background:rgba(0,0,0,.55);} }
+        </style>
+
+        <div class="ux-grid" id="uxGrid">
+          <!-- Left: Today -->
+          <div class="ux-panel" aria-label="Today" id="uxToday">
+            <div class="ux-title">Today</div>
+            <ul class="ux-sub">
+              <li>Separate Google Forms: Speaking + Podcast</li>
+              <li>Scattered links: YouTube, Instagram, Newsletter, Course pages</li>
+            </ul>
+            <div data-heatmap class="hm-speaking" style="position:relative;">
+              <fieldset class="ux-fieldset" disabled>
+                <label>Speaking Form (Google)</label>
+                <input placeholder="Name"/>
+                <input placeholder="Email"/>
+                <textarea placeholder="Event details"></textarea>
+              </fieldset>
+              <div class="hotspot" style="top:44px; left:6px; right:6px; height:38px;"></div>
+              <div class="hotspot" style="top:90px; left:6px; right:6px; height:38px;"></div>
+              <div class="hotspot" style="top:136px; left:6px; right:6px; height:84px;"></div>
+            </div>
+            <div data-heatmap class="hm-podcast" style="position:relative; margin-top:8px;">
+              <fieldset class="ux-fieldset" disabled>
+                <label>Podcast Guest Form (Google)</label>
+                <input placeholder="Show name"/>
+                <input placeholder="Your handle"/>
+                <textarea placeholder="Topic"></textarea>
+              </fieldset>
+              <div class="hotspot" style="top:44px; left:6px; right:6px; height:38px;"></div>
+              <div class="hotspot" style="top:90px; left:6px; right:6px; height:38px;"></div>
+              <div class="hotspot" style="top:136px; left:6px; right:6px; height:84px;"></div>
+            </div>
+            <div class="ux-kpi-grid" aria-hidden="false">
+              <div class="ux-kpi"><div class="num">8–12 hrs</div><small>Manual back‑and‑forth</small></div>
+              <div class="ux-kpi"><div class="num">-28%</div><small>Drop‑off from scattered links</small></div>
+              <div class="ux-kpi"><div class="num" id="uxToolsBeforeChip">3 tools</div><small>Separate forms + calendar</small></div>
+            </div>
+          </div>
+
+          <!-- Right: Unified -->
+          <div class="ux-panel accent" aria-label="Unified" id="uxUnified">
+            <div class="ux-title">Unified</div>
+            <p class="ux-sub">One smart booking with radio toggles + auto calendar sync</p>
+
+            <div class="ux-tabs seg" id="uxTabs" role="tablist" aria-label="Booking type">
+              <button role="tab" aria-selected="true" data-type="speaking" class="cta-ghost">Speaking</button>
+              <button role="tab" aria-selected="false" data-type="podcast" class="cta-ghost">Podcast</button>
+              <button role="tab" aria-selected="false" data-type="workshop" class="cta-ghost">Workshop</button>
+            </div>
+
+            <form id="uxForm" class="ux-fieldset" aria-live="polite">
+              <div id="sharedFields">
+                <label>Name*<input name="name" required placeholder="Your name"/></label>
+                <label>Email*<input name="email" type="email" required placeholder="you@example.com"/></label>
+                <label>Organization / Company<input name="org" placeholder="Company"/></label>
+                <label id="uxDate">Preferred Date*<input name="date" type="date" required/></label>
+                <small class="form-help">Calendar will be auto‑invited (demo).</small>
+                <label>Notes<textarea name="notes" rows="3" placeholder="Anything else we should know?"></textarea></label>
+              </div>
+              <div id="conditionalFields" aria-live="polite"></div>
+              <div class="calendar-row" aria-label="Add to calendar">
+                <button type="button" class="cta-ghost" id="uxGoogleCal" aria-label="Add to Google Calendar">Google Calendar</button>
+                <button type="button" class="cta-ghost" id="uxAppleCal" aria-label="Download ICS for Apple Calendar">Apple Calendar</button>
+                <button type="button" class="cta-ghost" id="uxOutlookCal" aria-label="Download ICS for Outlook">Outlook</button>
+              </div>
+              <div class="ux-actions">
+                <button type="submit" class="cta-primary" aria-label="Submit request">Submit</button>
+              </div>
+            </form>
+
+            <div id="uxSuccess" class="success" aria-hidden="true">
+              <strong>Request received → Calendar auto‑invited (demo)</strong>
+              <div class="calendar-row" style="margin-top:8px;">
+                <button type="button" class="cta-ghost" id="uxGoogleCal2">Add to Google</button>
+                <button type="button" class="cta-ghost" id="uxAppleCal2">Add Apple/ICS</button>
+                <button type="button" class="cta-ghost" id="uxOutlookCal2">Add Outlook/ICS</button>
+                <button type="button" class="cta-ghost" id="uxReturn">Return to Site</button>
+              </div>
+            </div>
+
+            <div class="ux-kpi-grid" id="uxKPIChips" aria-live="polite">
+              <div class="ux-kpi"><div class="num" id="kpiTime">-80%</div><small>Time to confirm</small></div>
+              <div class="ux-kpi"><div class="num" id="kpiConv">+35%</div><small>Conversion from unified hub</small></div>
+              <div class="ux-kpi"><div class="num" id="kpiTools">1 tool</div><small>Smart form + auto calendar</small></div>
+            </div>
+
+            <div class="workflow" aria-label="Automation workflow" id="uxWorkflow">
+              <button class="node" type="button">Visitor<span class="tip">A visitor lands on your hub.</span></button>
+              <svg class="arrow" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="#e0ab10" d="M10 6l-1.41 1.41L13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+              <button class="node" type="button">Smart Booking<span class="tip">One form handles every intake case.</span></button>
+              <svg class="arrow" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="#e0ab10" d="M10 6l-1.41 1.41L13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+              <button class="node" type="button">Auto Invite<span class="tip">Calendar invite sent automatically.</span></button>
+              <svg class="arrow" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="#e0ab10" d="M10 6l-1.41 1.41L13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+              <button class="node" type="button">Thank You<span class="tip">Clear next steps for the requester.</span></button>
+              <svg class="arrow" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="#e0ab10" d="M10 6l-1.41 1.41L13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+              <button class="node" type="button">Analytics Tag<span class="tip">Track conversions end‑to‑end.</span></button>
+            </div>
+
+            <div class="kpi-controls" id="uxKPIControls">
+              <div class="range-row"><label for="uxTimeSlider">Time Saved</label><input id="uxTimeSlider" type="range" min="40" max="90" value="80"/><div class="balloon" id="uxTimeVal">80%</div></div>
+              <div class="range-row"><label for="uxConvSlider">Conversion Lift</label><input id="uxConvSlider" type="range" min="10" max="50" value="35"/><div class="balloon" id="uxConvVal">35%</div></div>
+              <div class="range-row"><label for="uxToolsSlider">Tool Reduction</label><input id="uxToolsSlider" type="range" min="2" max="6" value="3"/><div class="balloon" id="uxToolsVal">3 → 1</div></div>
+              <span class="visually-hidden" aria-live="polite" id="uxAnnounce"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guided tour surface -->
+        <div class="tour" id="uxTour" aria-hidden="true" aria-label="Guided tour overlay">
+          <div class="veil" aria-hidden="true"></div>
+          <div class="callout" id="uxTourCallout" style="left:20px; top:20px;">Welcome to the unified booking demo.</div>
+        </div>
+
+        <!-- Config JSON for the booking form -->
+        <script type="application/json" id="booking-config">{
+          "kpi": {"timeSaved":80, "convLift":35, "toolsBefore":3, "toolsAfter":1},
+          "calendar": {"title":"[Type] with Nicky Sanders","durationMin":45, "location":"Online"},
+          "fields": {
+            "speaking": [
+              {"label":"Event Name","name":"event","required":true},
+              {"label":"Audience Size","name":"audience","type":"number"},
+              {"label":"Budget","name":"budget","type":"select","options":["<$5k","$5k–$15k",">$15k"]}
+            ],
+            "podcast": [
+              {"label":"Topic","name":"topic","required":true},
+              {"label":"Host Handle","name":"host","required":false},
+              {"label":"Recording Preference","name":"rec","type":"select","options":["Remote","In‑studio"]}
+            ],
+            "workshop": [
+              {"label":"Team Size","name":"team","type":"number","required":true},
+              {"label":"Format","name":"format","type":"select","options":["Virtual","On‑site"]},
+              {"label":"Duration","name":"duration","type":"select","options":["Half‑day","Full‑day","2 days"]}
+            ]
+          }
+        }</script>
+        <script>
+          (function(){
+            const cfgEl = document.getElementById('booking-config');
+            if (!cfgEl) return;
+            const cfg = JSON.parse(cfgEl.textContent || '{}');
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const qs = (sel, root=document) => root.querySelector(sel);
+            const qsa = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+            const form = qs('#uxForm');
+            const tabsWrap = qs('#uxTabs');
+            const cond = qs('#conditionalFields');
+            const dateInput = qs('#uxDate input');
+            const kpiTime = qs('#kpiTime'); const kpiConv = qs('#kpiConv'); const kpiTools = qs('#kpiTools');
+            const toolsBeforeChip = qs('#uxToolsBeforeChip');
+            const timeSlider = qs('#uxTimeSlider'); const convSlider = qs('#uxConvSlider'); const toolsSlider = qs('#uxToolsSlider');
+            const timeVal = qs('#uxTimeVal'); const convVal = qs('#uxConvVal'); const toolsVal = qs('#uxToolsVal');
+            const announcer = qs('#uxAnnounce');
+            const success = qs('#uxSuccess');
+            const copyBtn = qs('#uxCopyLink');
+            const tourToggle = qs('#uxTourToggle'); const tour = qs('#uxTour'); const callout = qs('#uxTourCallout');
+            const unifiedModal = document.getElementById('unifiedExplainer');
+
+            let currentType = 'speaking';
+
+            function titleCase(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+
+            function renderConditional(type){
+              currentType = type;
+              cond.innerHTML = '';
+              const fields = (cfg.fields && cfg.fields[type]) || [];
+              fields.forEach(f => {
+                const label = document.createElement('label');
+                label.textContent = f.label + (f.required?'*':'');
+                let input;
+                if (f.type === 'select'){
+                  input = document.createElement('select');
+                  (f.options||[]).forEach(opt => { const o=document.createElement('option'); o.textContent=opt; o.value=opt; input.appendChild(o); });
+                } else {
+                  input = document.createElement('input');
+                  if (f.type) input.type = f.type;
+                }
+                input.name = f.name; if (f.required) input.required = true;
+                label.appendChild(input); cond.appendChild(label);
+              });
+              announcer.textContent = `Booking type set to ${titleCase(type)}`;
+              updateHash(false);
+            }
+
+            function setSelectedTab(type){
+              qsa('[role="tab"]', tabsWrap).forEach(b => b.setAttribute('aria-selected', String(b.getAttribute('data-type')===type)));
+              renderConditional(type);
+            }
+
+            // Tabs click + arrow navigation
+            tabsWrap.addEventListener('click', (e)=>{
+              const b = e.target.closest('[role="tab"]'); if (!b) return; setSelectedTab(b.getAttribute('data-type'));
+            });
+            tabsWrap.addEventListener('keydown', (e)=>{
+              const tabs = qsa('[role="tab"]', tabsWrap); const i = tabs.indexOf(document.activeElement);
+              if (i<0) return; if (!['ArrowLeft','ArrowRight','Home','End'].includes(e.key)) return;
+              e.preventDefault(); let ni = i + (e.key==='ArrowRight'?1: e.key==='ArrowLeft'?-1: 0);
+              if (e.key==='Home') ni = 0; if (e.key==='End') ni = tabs.length-1; if (ni<0) ni=tabs.length-1; if (ni>=tabs.length) ni=0;
+              tabs[ni].focus(); setSelectedTab(tabs[ni].getAttribute('data-type'));
+            });
+
+            // KPI sliders
+            function animateNumber(el, from, to, format){
+              if (reduceMotion) { el.textContent = format(to); return; }
+              const start = performance.now(); const dur = 600; const diff = to - from;
+              function step(t){ const p = Math.min(1, (t-start)/dur); const val = from + diff*p; el.textContent = format(val); if (p<1) requestAnimationFrame(step); }
+              requestAnimationFrame(step);
+            }
+            function setKPIs(){
+              const t = parseInt(timeSlider.value,10); const c = parseInt(convSlider.value,10); const tb = parseInt(toolsSlider.value,10);
+              animateNumber(kpiTime, Number(kpiTime.textContent.replace(/[^0-9.-]/g,''))||0, t, v=>`-${Math.round(v)}%`);
+              animateNumber(kpiConv, Number(kpiConv.textContent.replace(/[^0-9.-]/g,''))||0, c, v=>`+${Math.round(v)}%`);
+              kpiTools.textContent = '1 tool';
+              toolsBeforeChip.textContent = `${tb} tools`;
+              timeVal.textContent = `${t}%`; convVal.textContent = `${c}%`; toolsVal.textContent = `${tb} → 1`;
+              announcer.textContent = `KPIs updated: time saved ${t} percent, conversion lift ${c} percent, tools ${tb} to 1`;
+              updateHash(false);
+            }
+            timeSlider.addEventListener('input', setKPIs);
+            convSlider.addEventListener('input', setKPIs);
+            toolsSlider.addEventListener('input', setKPIs);
+
+            // Calendar helpers
+            function fmtICSDate(d){ return d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}Z$/,'Z'); }
+            function computeStartEnd(){
+              const dateStr = dateInput.value || new Date().toISOString().slice(0,10);
+              // 9:00 local
+              const startLocal = new Date(`${dateStr}T09:00:00`);
+              const endLocal = new Date(startLocal.getTime() + (cfg.calendar?.durationMin||45)*60000);
+              return { start: new Date(startLocal.toISOString()), end: new Date(endLocal.toISOString()) };
+            }
+            function icsText(){
+              const {start, end} = computeStartEnd();
+              const uid = `${Date.now()}-${Math.random().toString(16).slice(2)}@nikki`;
+              const title = (cfg.calendar?.title||'[Type] with Nicky Sanders').replace('[Type]', titleCase(currentType));
+              return `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//NikkiSanders//UnifiedBooking//EN\nBEGIN:VEVENT\nUID:${uid}\nDTSTAMP:${fmtICSDate(new Date())}\nDTSTART:${fmtICSDate(start)}\nDTEND:${fmtICSDate(end)}\nSUMMARY:${title}\nDESCRIPTION:Auto calendar invite after confirmation (demo).\nLOCATION:${cfg.calendar?.location||'Online'}\nEND:VEVENT\nEND:VCALENDAR`;
+            }
+            function downloadICS(which){ const blob = new Blob([icsText()], {type:'text/calendar'}); const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=`booking-${currentType}.ics`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url), 1000); announcer.textContent=`${which} ICS downloaded.`; }
+            function openGoogle(){ const {start,end} = computeStartEnd(); const title = (cfg.calendar?.title||'[Type] with Nicky Sanders').replace('[Type]', titleCase(currentType)); const params = new URLSearchParams({action:'TEMPLATE', text:title, dates:`${fmtICSDate(start)}/${fmtICSDate(end)}`, details:'Auto calendar invite after confirmation (demo).', location: cfg.calendar?.location||'Online'}); window.open('https://calendar.google.com/calendar/render?'+params.toString(), '_blank', 'noopener'); announcer.textContent='Google Calendar opened.'; }
+
+            function wireCalendarButtons(){
+              const g1 = qs('#uxGoogleCal'); const a1 = qs('#uxAppleCal'); const o1 = qs('#uxOutlookCal');
+              const g2 = qs('#uxGoogleCal2'); const a2 = qs('#uxAppleCal2'); const o2 = qs('#uxOutlookCal2');
+              g1?.addEventListener('click', openGoogle); a1?.addEventListener('click', ()=>downloadICS('Apple')); o1?.addEventListener('click', ()=>downloadICS('Outlook'));
+              g2?.addEventListener('click', openGoogle); a2?.addEventListener('click', ()=>downloadICS('Apple')); o2?.addEventListener('click', ()=>downloadICS('Outlook'));
+            }
+
+            // Submit handling
+            form.addEventListener('submit', (e)=>{
+              e.preventDefault(); if (!form.reportValidity()) return;
+              window.toast && toast('EmailJS sent (demo).');
+              form.style.display = 'none'; success.setAttribute('aria-hidden','false');
+              announcer.textContent = 'Request received. Calendar auto-invited (demo).';
+            });
+            qs('#uxReturn')?.addEventListener('click', ()=>{ success.setAttribute('aria-hidden','true'); form.reset(); form.style.display='grid'; closeModal(unifiedModal); });
+
+            // Deep links
+            function parseHash(){
+              const h = location.hash.startsWith('#') ? location.hash.slice(1) : location.hash; const p = new URLSearchParams(h);
+              const type = p.get('type'); const date = p.get('date');
+              if (type && ['speaking','podcast','workshop'].includes(type)) setSelectedTab(type);
+              if (date) { dateInput.value = date; }
+              const t = Number(p.get('time')) || cfg.kpi?.timeSaved || 80; const c=Number(p.get('conv')) || cfg.kpi?.convLift||35; const tb=Number(p.get('toolsBefore')) || cfg.kpi?.toolsBefore||3;
+              timeSlider.value=String(t); convSlider.value=String(c); toolsSlider.value=String(tb);
+              setKPIs();
+            }
+            function updateHash(push=true){
+              const state = new URLSearchParams(); state.set('demo','unified'); state.set('tab','booking'); state.set('type', currentType); if (dateInput.value) state.set('date', dateInput.value); state.set('time', timeSlider.value); state.set('conv', convSlider.value); state.set('toolsBefore', toolsSlider.value);
+              const hash = '#'+state.toString(); if (push) location.hash = hash; return hash;
+            }
+            dateInput.addEventListener('change', ()=>{ announcer.textContent = 'Date selected.'; updateHash(false); });
+            copyBtn?.addEventListener('click', async ()=>{ const link = updateHash(false); try { await navigator.clipboard.writeText(link); window.toast && toast('Deep link copied'); } catch(e){ console.log(e); } });
+
+            // Guided tour (3 steps)
+            let tourOn = false; let step = 0; const steps = [
+              {el: tabsWrap, text: 'One form handles every intake case.'},
+              {el: qs('#uxDate'), text: 'Calendar will be auto‑invited (demo).'},
+              {el: qs('#uxKPIControls'), text: 'See the time and conversion lift in real time.'}
+            ];
+            function positionCallout(){ const s = steps[step]; if (!s) return; const r = s.el.getBoundingClientRect(); callout.textContent = s.text; callout.style.left = (window.scrollX + r.left + r.width/2 - 130) + 'px'; callout.style.top = (window.scrollY + r.top - 70) + 'px'; }
+            function setTour(on){ tourOn = on; tour.setAttribute('aria-hidden', String(!on)); tourToggle.setAttribute('aria-checked', String(on)); tourToggle.textContent = 'Try it: ' + (on?'On':'Off'); if (on){ step = 0; positionCallout(); } }
+            tourToggle?.addEventListener('click', ()=> setTour(!tourOn));
+            tour.addEventListener('click', ()=>{ step = (step+1)%steps.length; positionCallout(); });
+            document.addEventListener('keydown', (e)=>{ if(!tourOn) return; if (e.key==='Escape'){ setTour(false); } });
+
+            // Heatmap: position hotspots snugly around inputs by reading their rects
+            function positionHeatmap(rootSel){
+              const wrap = document.querySelector(rootSel); if (!wrap) return;
+              const inputs = wrap.querySelectorAll('input, textarea, select');
+              const rectWrap = wrap.getBoundingClientRect();
+              const spots = wrap.querySelectorAll('.hotspot'); spots.forEach(s=> s.remove());
+              inputs.forEach(el=>{
+                const r = el.getBoundingClientRect();
+                const spot = document.createElement('div');
+                spot.className = 'hotspot';
+                spot.style.top = (r.top - rectWrap.top - 2) + 'px';
+                spot.style.left = (r.left - rectWrap.left - 2) + 'px';
+                spot.style.width = (r.width + 4) + 'px';
+                spot.style.height = (r.height + 4) + 'px';
+                wrap.appendChild(spot);
+              });
+            }
+
+            function afterLayout(){
+              positionHeatmap('#uxToday .hm-speaking');
+              positionHeatmap('#uxToday .hm-podcast');
+            }
+            const ro = new ResizeObserver(()=> afterLayout());
+            ro.observe(document.getElementById('uxToday'));
+            window.addEventListener('load', afterLayout, { once:true });
+            setTimeout(afterLayout, 50);
+
+            // Init
+            setSelectedTab('speaking');
+            // defaults
+            timeSlider.value = String(cfg.kpi?.timeSaved || 80);
+            convSlider.value = String(cfg.kpi?.convLift || 35);
+            toolsSlider.value = String(cfg.kpi?.toolsBefore || 3);
+            setKPIs();
+            wireCalendarButtons();
+            parseHash();
+          })();
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <!-- Calendly Modal (Demo) -->
+  <div id="calendlyModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="calTitle">
+    <div class="backdrop" data-close></div>
+    <div class="dialog" style="width:min(96vw, 960px); height:min(90vh, 720px);">
+      <div class="dialog-header">
+        <strong id="calTitle">Book a Clarity Call (Demo)</strong>
+        <button class="close-x" data-close>Close</button>
+      </div>
+      <div class="dialog-body" style="padding:0; height: calc(100% - 52px);">
+        <iframe title="Calendly demo" src="about:blank" id="calIframe" style="position:absolute; inset:0; width:100%; height:100%; border:0; background:#0b0b23"></iframe>
+        <div style="position:absolute; bottom:12px; left:12px;">
+          <a class="cta-ghost" href="https://calendly.com/" target="_blank" rel="noopener">Open in Calendly (demo)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Util: smooth scroll
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-scrollto]');
+      if (btn) {
+        const sel = btn.getAttribute('data-scrollto');
+        const el = document.querySelector(sel);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Modal system with focus trap + return focus
+    let lastFocus = null; let removeTrap = null;
+    function trapFocus(modal) {
+      const focusables = modal.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])');
+      const first = focusables[0]; const last = focusables[focusables.length - 1];
+      function loop(e){
+        if (e.key !== 'Tab') return;
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+      modal.addEventListener('keydown', loop);
+      return () => modal.removeEventListener('keydown', loop);
+    }
+    function openModal(id) {
+      const m = document.getElementById(id);
+      if (!m) return;
+      lastFocus = document.activeElement;
+      m.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      removeTrap = trapFocus(m);
+      const firstBtn = m.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      firstBtn?.focus();
+    }
+    function closeModal(el) {
+      const m = el?.closest?.('.modal') || el;
+      if (!m) return;
+      if (m.id === 'videoModal') {
+        const frame = document.getElementById('videoPlayer');
+        if (frame) frame.src = '';
+      }
+      m.classList.remove('open');
+      document.body.style.overflow = '';
+      removeTrap?.();
+      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+    }
+    document.addEventListener('click', (e) => {
+      const openBtn = e.target.closest('[data-open]');
+      if (openBtn) { openModal(openBtn.getAttribute('data-open')); }
+      if (e.target.matches('[data-close]')) closeModal(e.target.closest('.modal'));
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.modal.open').forEach(closeModal); });
+
+    // Back to Top visibility + scroll
+    (function(){
+      const btn = document.getElementById('backTop');
+      if (!btn) return;
+      function onScroll(){
+        if (window.scrollY > 350) btn.classList.add('show');
+        else btn.classList.remove('show');
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+      btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    })();
+
+    // Video lightbox
+    document.querySelectorAll('.thumb .play button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const url = btn.getAttribute('data-video');
+        const frame = document.getElementById('videoPlayer');
+        if (frame) frame.src = url;
+        openModal('videoModal');
+      });
+    });
+    // Delegated play from YouTube cards
+    document.addEventListener('click', (e) => {
+      const cardBtn = e.target.closest('.yt-card .yt-overlay button');
+      const card = cardBtn ? cardBtn.closest('.yt-card') : e.target.closest('.yt-card[data-video]');
+      if (!card) return;
+      const url = card.getAttribute('data-video');
+      // Inline replace: swap thumbnail for iframe
+      const existing = card.querySelector('iframe');
+      if (existing) return;
+      const iframe = document.createElement('iframe');
+      iframe.setAttribute('allow', 'autoplay; fullscreen');
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.setAttribute('title', 'Inline video');
+      iframe.style.position = 'absolute'; iframe.style.inset = '0'; iframe.style.width = '100%'; iframe.style.height = '100%'; iframe.style.border = '0';
+      iframe.src = url;
+      card.appendChild(iframe);
+    });
+
+    // Iframe modal (VideoAsk etc.)
+    document.addEventListener('click', (e) => {
+      const iframeBtn = e.target.closest('[data-iframe]');
+      if (!iframeBtn) return;
+      const url = iframeBtn.getAttribute('data-iframe');
+      const frame = document.getElementById('iframePlayer');
+      if (frame) frame.src = url;
+      openModal('iframeModal');
+    });
+
+    // Scheduler demo loader (inline, no external URL)
+    document.addEventListener('click', (e)=>{
+      const trg = e.target.closest('[data-open="calendlyModal"]');
+      if (!trg) return;
+      const cal = document.getElementById('calIframe');
+      if (!cal) return;
+      if (cal.getAttribute('data-loaded') === '1') return;
+      const html = '<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>'+
+      '<style>'+ 
+      ':root{ --bg:#0b0b23; --panel:#121433; --text:#e8ebff; --muted:#9fb0ff; --accent:#ffd86a; --accent2:#e0ab10; }'+
+      'html,body{height:100%;margin:0;}'+
+      'body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter; background:linear-gradient(180deg,var(--bg),#0d0f2b); color:var(--text);}'+
+      '.wrap{height:100%; display:grid; grid-template-rows:auto 1fr;}'+
+      'header{padding:14px 16px; border-bottom:1px solid rgba(255,255,255,.08); background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));}'+
+      'h1{font-size:16px; margin:0 0 6px;} .sub{color:var(--muted); font-size:12px; margin:0;}'+
+      '.grid{display:grid; grid-template-columns: 120px repeat(4, 1fr); gap:8px; padding:16px;}'+
+      '.col-h{color:var(--muted); font-size:12px;} .day{color:var(--text); font-weight:600; font-size:12px;}'+
+      '.slot{border:1px solid rgba(255,255,255,.14); border-radius:10px; padding:10px 12px; text-align:center; background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.04));}'+
+      '.legend{padding:0 16px 16px; color:var(--muted); font-size:12px;}'+
+      '</style></head><body><div class="wrap">'+
+      '<header><h1>Book a 30‑minute call (Demo)</h1><p class="sub">Select a time slot. This is a visual demo only.</p></header>'+
+      '<div class="grid">'+
+      '<div></div><div class="col-h">Mon</div><div class="col-h">Tue</div><div class="col-h">Wed</div><div class="col-h">Thu</div><div class="col-h">Fri</div>'+
+      '<div class="day">9:00 AM</div><div class="slot">9:00 AM</div><div class="slot">9:00 AM</div><div class="slot">9:00 AM</div><div class="slot">9:00 AM</div><div class="slot">9:00 AM</div>'+
+      '<div class="day">10:30 AM</div><div class="slot">10:30 AM</div><div class="slot">10:30 AM</div><div class="slot">10:30 AM</div><div class="slot">10:30 AM</div><div class="slot">10:30 AM</div>'+
+      '<div class="day">1:00 PM</div><div class="slot">1:00 PM</div><div class="slot">1:00 PM</div><div class="slot">1:00 PM</div><div class="slot">1:00 PM</div><div class="slot">1:00 PM</div>'+
+      '<div class="day">2:30 PM</div><div class="slot">2:30 PM</div><div class="slot">2:30 PM</div><div class="slot">2:30 PM</div><div class="slot">2:30 PM</div><div class="slot">2:30 PM</div>'+
+      '<div class="day">4:00 PM</div><div class="slot">4:00 PM</div><div class="slot">4:00 PM</div><div class="slot">4:00 PM</div><div class="slot">4:00 PM</div><div class="slot">4:00 PM</div>'+
+      '</div><p class="legend">This is a static scheduler preview for the demo.</p></div></body></html>';
+      cal.removeAttribute('src');
+      cal.srcdoc = html;
+      cal.setAttribute('data-loaded','1');
+    });
+
+    // Media filters (demo only)
+    (function(){
+      const wrap = document.querySelector('#media'); if(!wrap) return;
+      const chips = wrap.querySelectorAll('[data-filter]'); const cards = wrap.querySelectorAll('#media .yt-card');
+      function setFilter(cat){ chips.forEach(c=> c.setAttribute('aria-pressed', String(c.dataset.filter===cat)) );
+        cards.forEach(card=>{ const ok = cat==='all' || (card.getAttribute('data-cat')===cat); card.style.display = ok? '' : 'none'; }); }
+      chips.forEach(c=> c.addEventListener('click', ()=> setFilter(c.dataset.filter)) );
+      setFilter('all');
+    })();
+
+    // EmailJS placeholders + toast
+    function mockEmailJS(formEl, meta) {
+      const formData = new FormData(formEl);
+      const payload = Object.fromEntries(formData.entries());
+      console.log('[EmailJS MOCK]', meta, payload);
+    }
+    function toast(msg){ const t=document.createElement('div'); t.textContent=msg; t.setAttribute('role','status'); t.style.position='fixed'; t.style.left='50%'; t.style.bottom='24px'; t.style.transform='translateX(-50%)'; t.style.background='rgba(255,255,255,.95)'; t.style.color='#111'; t.style.padding='10px 14px'; t.style.borderRadius='12px'; t.style.boxShadow='0 10px 30px rgba(0,0,0,.35)'; t.style.zIndex='1000'; document.body.appendChild(t); setTimeout(()=>t.remove(),2000); }
+    document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+      e.preventDefault(); mockEmailJS(e.target, 'newsletter'); toast('Submitted via EmailJS (demo).'); e.target.reset();
+    });
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault(); mockEmailJS(e.target, 'contact'); toast('Submitted via EmailJS (demo).'); e.target.reset();
+    });
+    document.getElementById('bookingForm').addEventListener('submit', (e) => {
+      e.preventDefault(); mockEmailJS(e.target, 'booking'); toast('Submitted via EmailJS (demo).'); closeModal(document.getElementById('bookingModal')); e.target.reset();
+    });
+    document.getElementById('reserveForm').addEventListener('submit', (e) => {
+      e.preventDefault(); mockEmailJS(e.target, 'reserve'); toast('Saved reservation (demo).'); closeModal(document.getElementById('reserveModal')); e.target.reset();
+    });
+    function priceForTier(t){ return t==='vip'?1299: t==='pro'?899:499; }
+    function updateOrder(){ const tier=document.getElementById('rtier').value; const qty=Math.max(1, parseInt(document.getElementById('rqty').value||'1',10)); const total=priceForTier(tier)*qty; document.querySelector('[data-os-tier]').textContent=tier.charAt(0).toUpperCase()+tier.slice(1); document.querySelector('[data-os-qty]').textContent=String(qty); document.querySelector('[data-os-total]').textContent=`$${total}`; }
+    const rtier=document.getElementById('rtier'); const rqty=document.getElementById('rqty'); if (rtier&&rqty){ rtier.addEventListener('change', updateOrder); rqty.addEventListener('input', updateOrder); updateOrder(); }
+    const sc=document.getElementById('stripeCheckout'); if (sc){ sc.addEventListener('click', ()=>{ alert('Proceeding to Stripe (demo).'); closeModal(document.getElementById('reserveModal')); }); }
+    // Booking type toggles (visual only)
+    (function(){
+      const tabs = Array.from(document.querySelectorAll('[data-booking-type]'));
+      function sel(type){
+        tabs.forEach(t=> t.setAttribute('aria-selected', String(t.getAttribute('data-booking-type')===type)));
+        document.getElementById('reqSpeaking').style.display = type==='speaking'? '' : 'none';
+        document.getElementById('reqPodcast').style.display = type==='podcast'? '' : 'none';
+        document.getElementById('reqWorkshop').style.display = type==='workshop'? '' : 'none';
+      }
+      document.querySelector('[data-booking-type]')?.parentElement?.addEventListener('click', (e)=>{
+        const b = e.target.closest('[data-booking-type]'); if(!b) return; sel(b.getAttribute('data-booking-type'));
+      }); sel('speaking');
+      // Calendar helpers in booking modal
+      const start = new Date('2025-11-12T09:00:00Z'); const end = new Date('2025-11-13T17:00:00Z');
+      function fmt(d){ return d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}Z$/,'Z'); }
+      const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//NikkiSanders//UnifiedBooking//EN\nBEGIN:VEVENT\nUID:${Date.now()}@nikki\nDTSTAMP:${fmt(new Date())}\nDTSTART:${fmt(start)}\nDTEND:${fmt(end)}\nSUMMARY:Unified Booking Hold (Demo)\nDESCRIPTION:Auto calendar invite after confirmation (demo).\nLOCATION:Online\nEND:VEVENT\nEND:VCALENDAR`;
+      function dl(filename, content){ const blob = new Blob([content], {type:'text/calendar'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; a.click(); setTimeout(()=>URL.revokeObjectURL(url), 1000); }
+      document.getElementById('bookAddICS')?.addEventListener('click', ()=> dl('unified-booking.ics', ics));
+      document.getElementById('bookAddGoogle')?.addEventListener('click', ()=>{ const params = new URLSearchParams({ action:'TEMPLATE', text:'Unified Booking Hold (Demo)', dates:`${fmt(start)}/${fmt(end)}`, details:'Auto calendar invite after confirmation (demo).', location:'Online' }); window.open('https://calendar.google.com/calendar/render?'+params.toString(), '_blank', 'noopener'); });
+    })();
+
+    // Theme + Accent tokens, nav aria-current, scroll spy, command palette, carousels, rotator, nav behaviors
+    (function(){
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+      const savedMode = localStorage.getItem('mode');
+      const savedAccent = localStorage.getItem('accent');
+      function setMode(mode){ document.body.setAttribute('data-theme', mode); localStorage.setItem('mode', mode);
+        document.querySelectorAll('[data-theme-mode]')
+          .forEach(b=> b.setAttribute('aria-checked', String(b.getAttribute('data-theme-mode')===mode)));
+      }
+      function setAccent(ac){ document.body.setAttribute('data-accent', ac); localStorage.setItem('accent', ac);
+        document.querySelectorAll('[data-accent]')
+          .forEach(b=> b.setAttribute('aria-checked', String(b.getAttribute('data-accent')===ac)));
+      }
+      setMode(savedMode || (prefersDark.matches ? 'dark' : 'light'));
+      setAccent(savedAccent || (document.body.getAttribute('data-accent')||'gold'));
+      prefersDark.addEventListener?.('change', (e)=>{ if(!localStorage.getItem('mode')) setMode(e.matches?'dark':'light'); });
+      document.addEventListener('click', (e)=>{
+        const tm = e.target.closest('[data-theme-mode]'); if (tm) setMode(tm.getAttribute('data-theme-mode'));
+        const ac = e.target.closest('.theme-switch [data-accent], .floating-switcher [data-accent]'); if (ac) setAccent(ac.getAttribute('data-accent'));
+      });
+
+      // Active nav by section in view
+      const navLinks = Array.from(document.querySelectorAll('header nav.primary a[href^="#"]'));
+      const sections = navLinks.map(a=> document.querySelector(a.getAttribute('href'))).filter(Boolean);
+      const spy = new IntersectionObserver((entries)=>{
+        const vis = entries.filter(e=>e.isIntersecting).sort((a,b)=> b.intersectionRatio - a.intersectionRatio)[0];
+        if (!vis) return; navLinks.forEach(a=>a.removeAttribute('aria-current'));
+        const m = navLinks.find(a=> a.getAttribute('href') === ('#'+vis.target.id)); if (m) m.setAttribute('aria-current','section');
+      }, { rootMargin: '-40% 0px -50% 0px', threshold: [0, .2, .4, .6, .8, 1]});
+      sections.forEach(s=> spy.observe(s));
+
+      // Scroll progress + compress header
+      const navShell = document.querySelector('.nav-shell');
+      const prog = document.querySelector('.nav-shell .progress');
+      function onScroll(){
+        const max = document.body.scrollHeight - window.innerHeight;
+        const p = Math.max(0, Math.min(1, window.scrollY / (max||1)));
+        if (prog) prog.style.width = (p*100)+'%';
+        const hero = document.getElementById('hero');
+        const heroH = hero ? hero.getBoundingClientRect().bottom : 0;
+        if (heroH < 0) navShell?.classList.add('compact'); else navShell?.classList.remove('compact');
+      }
+      window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+      // Mega menus hover/click + focus trap
+      // Mega menu removed per request
+
+      // Off-canvas drawer
+      const drawer = document.getElementById('nav-drawer'); const openBtn = document.getElementById('navHamburger'); const closeBtn = document.getElementById('navDrawerClose');
+      function openDrawer(){ drawer?.classList.add('open'); drawer?.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; const first = drawer.querySelector('button, a'); first?.focus(); }
+      function closeDrawer(){ drawer?.classList.remove('open'); drawer?.setAttribute('aria-hidden','true'); document.body.style.overflow=''; openBtn?.focus(); }
+      openBtn?.addEventListener('click', openDrawer); closeBtn?.addEventListener('click', closeDrawer);
+      drawer?.addEventListener('click', (e)=>{ if(e.target.classList.contains('backdrop')) closeDrawer(); });
+      document.addEventListener('keydown', (e)=>{ if(drawer?.classList.contains('open') && e.key==='Escape') closeDrawer(); });
+      // removed drawer command button
+      // Drawer accordions reuse existing accordion wiring
+
+      // removed system status badge tooltips
+
+      // Command palette (upgraded)
+      const cmd = document.getElementById('cmdPalette'); const cmdInput = document.getElementById('cmdSearch'); const cmdList = document.getElementById('cmdList'); const cmdAnn = document.getElementById('cmdAnnounce');
+      const data = [
+        { cat:'navigate', label:'Programs', action:()=> document.querySelector('#programs')?.scrollIntoView({behavior:'smooth'}) },
+        { cat:'navigate', label:'Workshops', action:()=> document.querySelector('#workshops')?.scrollIntoView({behavior:'smooth'}) },
+        { cat:'navigate', label:'Links Hub', action:()=> document.querySelector('#links')?.scrollIntoView({behavior:'smooth'}) },
+        { cat:'navigate', label:'Media', action:()=> document.querySelector('#media')?.scrollIntoView({behavior:'smooth'}) },
+        { cat:'navigate', label:'Newsletter', action:()=> document.querySelector('#community')?.scrollIntoView({behavior:'smooth'}) },
+        { cat:'navigate', label:'Contact', action:()=> document.querySelector('#contact')?.scrollIntoView({behavior:'smooth'}) },
+        { cat:'book', label:'Book Workshop', action:()=> openModal('bookingModal') },
+        { cat:'book', label:'Open Calendar Demo', action:()=> openModal('calendlyModal') },
+        { cat:'media', label:'Filter: YouTube', action:()=> document.querySelector('#media .chip[data-filter="youtube"]')?.click() },
+        { cat:'media', label:'Filter: Reels', action:()=> document.querySelector('#media .chip[data-filter="reels"]')?.click() },
+        { cat:'theme', label:'Switch to Violet', action:()=> document.querySelector('[data-accent="violet"]')?.click() },
+        { cat:'theme', label:'Switch to Cyan', action:()=> document.querySelector('[data-accent="cyan"]')?.click() },
+        { cat:'theme', label:'Switch to Gold', action:()=> document.querySelector('[data-accent="gold"]')?.click() },
+        { cat:'theme', label:'Switch to Emerald', action:()=> document.querySelector('[data-accent="emerald"]')?.click() },
+        { cat:'theme', label:'Toggle Light/Dark', action:()=>{ const cur=document.body.getAttribute('data-theme'); document.querySelector(`[data-theme-mode="${cur==='dark'?'light':'dark'}"]`)?.click(); } }
+      ];
+      let activeCat = 'navigate';
+      function renderCmd(items){ cmdList.innerHTML = items.map((it,i)=> `<li role="option" data-idx="${i}" aria-selected="${i===0}"><span>${it.label}</span><span class="kbd">Enter</span></li>`).join(''); cmdAnn.textContent = `${items.length} results`; }
+      function filtered(){ const q=(cmdInput.value||'').toLowerCase(); return data.filter(d=> d.cat===activeCat && d.label.toLowerCase().includes(q)); }
+      function openCmd(){ cmd.classList.add('open'); cmdInput.value=''; activeCat='navigate'; renderCmd(filtered()); cmdInput.focus(); }
+      function closeCmd(){ cmd.classList.remove('open'); }
+      document.getElementById('cmdOpen')?.addEventListener('click', openCmd);
+      document.addEventListener('keydown',(e)=>{ if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==='k'){ e.preventDefault(); openCmd(); } if(e.key==='Escape') closeCmd(); if(cmd.classList.contains('open') && e.key==='Tab'){ e.preventDefault(); const cats=Array.from(cmd.querySelectorAll('[role="tab"]')); let i=cats.findIndex(c=>c.getAttribute('aria-selected')==='true'); cats[i]?.setAttribute('aria-selected','false'); i=(i+1)%cats.length; cats[i]?.setAttribute('aria-selected','true'); activeCat=cats[i].dataset.cat; renderCmd(filtered()); }});
+      cmd?.addEventListener('click',(e)=>{ if(e.target.matches('[data-close]')) closeCmd(); const tab=e.target.closest('[role="tab"]'); if(tab){ cmd.querySelectorAll('[role="tab"]').forEach(t=>t.setAttribute('aria-selected','false')); tab.setAttribute('aria-selected','true'); activeCat=tab.dataset.cat; renderCmd(filtered()); }});
+      cmdInput?.addEventListener('input', ()=> renderCmd(filtered()));
+      cmdList?.addEventListener('keydown', (e)=>{ const items = Array.from(cmdList.querySelectorAll('li')); const cur = items.findIndex(li=> li.getAttribute('aria-selected')==='true'); if(e.key==='ArrowDown'){ e.preventDefault(); const n = items[(cur+1)%items.length]; items.forEach(li=>li.setAttribute('aria-selected','false')); n?.setAttribute('aria-selected','true'); n?.scrollIntoView({block:'nearest'}); } if(e.key==='ArrowUp'){ e.preventDefault(); const n = items[(cur-1+items.length)%items.length]; items.forEach(li=>li.setAttribute('aria-selected','false')); n?.setAttribute('aria-selected','true'); n?.scrollIntoView({block:'nearest'}); } if(e.key==='Enter'){ const n = items.find(li=> li.getAttribute('aria-selected')==='true')||items[0]; const idx=parseInt(n?.getAttribute('data-idx')||'0',10); const item = filtered()[idx]; if(item){ closeCmd(); item.action(); } }});
+      cmdList?.addEventListener('click', (e)=>{ const li = e.target.closest('li'); if(!li) return; const idx=parseInt(li.getAttribute('data-idx')||'0',10); const item = filtered()[idx]; if(item){ closeCmd(); item.action(); } });
+
+      // Video modal handler
+      function openVideoModal(videoUrl) {
+        const frame = document.getElementById('videoPlayer');
+        if (frame) {
+          frame.src = videoUrl;
+          openModal('videoModal');
+        }
+      }
+
+      // Hero 3-card rotator
+      (function(){ const cards = Array.from(document.querySelectorAll('.ai-rotator .ai-card')); if(cards.length<2) return; let i=0; let paused=false; const root = document.querySelector('.ai-rotator'); root.addEventListener('mouseenter',()=>paused=true); root.addEventListener('mouseleave',()=>paused=false);
+        function show(n){ cards.forEach((c,idx)=>{ const on = idx===n; c.style.opacity = on? '1' : '0'; c.style.transform = on? 'translateY(0)' : 'translateY(8px)'; }); }
+        show(0); setInterval(()=>{ if(paused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; i=(i+1)%cards.length; show(i); }, 6000);
+      })();
+
+      // Carousels controls (YouTube + Testimonials)
+      function bindCarousel(regionId){
+        const track = document.getElementById(regionId);
+        if (!track) return;
+        const wrap = track.closest('.carousel-wrap');
+        const prev = wrap.querySelector('[data-carousel-prev]');
+        const next = wrap.querySelector('[data-carousel-next]');
+        function step(dir){
+          const card = track.querySelector('.yt-card, .media-card');
+          // Snap exactly to 3-card pages (width of one card + gap)
+          const w = card ? (card.getBoundingClientRect().width + 16) * 3 : track.clientWidth;
+          track.scrollBy({ left: (dir>0?1:-1) * w, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches? 'auto':'smooth' });
+        }
+        prev?.addEventListener('click', ()=> step(-1));
+        next?.addEventListener('click', ()=> step(1));
+        track.addEventListener('keydown', (e)=>{
+          if (e.key==='ArrowRight' || e.key==='PageDown') { e.preventDefault(); step(1); }
+          if (e.key==='ArrowLeft' || e.key==='PageUp') { e.preventDefault(); step(-1); }
+          if (e.key==='Home') { e.preventDefault(); track.scrollTo({ left: 0, behavior: 'smooth' }); }
+          if (e.key==='End') { e.preventDefault(); track.scrollTo({ left: track.scrollWidth, behavior: 'smooth' }); }
+        });
+      }
+      bindCarousel('ytCarousel');
+      bindCarousel('testCarousel');
+      bindCarousel('mediaCarousel');
+    })();
+
+    // Aurora + flow-field canvas background (futuristic)
+    (function() {
+      const canvas = document.getElementById('neural');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w, h, dpr, t = 0, raf; let particles = [];
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      // Palette: switch between 'green' and 'pink' to try alternatives
+      const PALETTE = 'pink';
+      const palettes = {
+        green: {
+          aurora: [
+            { a: 'rgba(120,255,214,0.00)', b: 'rgba(224,171,16,0.22)' },
+            { a: 'rgba(120,255,214,0.18)', b: 'rgba(255,216,106,0.14)' },
+            { a: 'rgba(224,171,16,0.18)', b: 'rgba(120,255,214,0.10)' }
+          ],
+          field: 'rgba(120,255,214,0.16)',
+          hueMin: 130, hueMax: 170, // particle hues (greens/teals)
+          g1Start: 'rgba(0,40,20,0.6)', g1End: 'rgba(0,20,10,0.0)',
+          g2Start: 'rgba(120,255,214,0.10)'
+        },
+        pink: {
+          aurora: [
+            { a: 'rgba(255,120,200,0.00)', b: 'rgba(224,171,16,0.22)' },
+            { a: 'rgba(255,120,200,0.20)', b: 'rgba(255,216,106,0.14)' },
+            { a: 'rgba(224,171,16,0.18)', b: 'rgba(255,120,200,0.12)' }
+          ],
+          field: 'rgba(255,120,200,0.16)',
+          hueMin: 300, hueMax: 340, // magentas
+          g1Start: 'rgba(40,0,25,0.6)', g1End: 'rgba(25,0,18,0.0)',
+          g2Start: 'rgba(255,120,200,0.10)'
+        }
+      };
+      const pal = palettes[PALETTE];
+
+      function resize() {
+        dpr = window.devicePixelRatio || 1;
+        w = canvas.clientWidth = window.innerWidth;
+        h = canvas.clientHeight = window.innerHeight;
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        initParticles();
+        draw(0, true);
+      }
+
+      function initParticles() {
+        const count = Math.max(40, Math.floor((w * h) / 24000));
+        particles = new Array(count).fill(0).map(() => ({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          life: 200 + Math.random() * 400,
+          size: 0.8 + Math.random() * 1.6,
+          hue: pal.hueMin + Math.random() * (pal.hueMax - pal.hueMin)
+        }));
+      }
+
+      function fieldAngle(x, y, time) {
+        const s = Math.sin, c = Math.cos;
+        return s(x * 0.002 + time * 0.6) + c(y * 0.0025 - time * 0.5);
+      }
+
+      function drawAurora(time) {
+        ctx.save();
+        ctx.globalCompositeOperation = 'screen';
+        const bands = 3;
+        for (let b = 0; b < bands; b++) {
+          const yBase = h * (0.25 + 0.25 * b);
+          const amp = 40 + b * 26;
+          ctx.beginPath();
+          for (let x = -100; x <= w + 100; x += 12) {
+            const y = yBase
+              + Math.sin(x * 0.012 + time * (0.8 + b * 0.15)) * amp
+              + Math.cos(x * 0.006 - time * (0.4 + b * 0.1)) * (amp * 0.6);
+            if (x === -100) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          const grad = ctx.createLinearGradient(0, yBase - 80, 0, yBase + 80);
+          const cols = pal.aurora[b];
+          grad.addColorStop(0, cols.a);
+          grad.addColorStop(1, cols.b);
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = 3 + b * 0.6;
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      function drawField(time) {
+        ctx.save();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = pal.field;
+        const gx = 42, gy = 24; // grid density
+        for (let i = 0; i <= gx; i++) {
+          for (let j = 0; j <= gy; j++) {
+            const x = (i / gx) * w;
+            const y = (j / gy) * h;
+            const a = fieldAngle(x, y, time) * Math.PI;
+            const dx = Math.cos(a) * 12;
+            const dy = Math.sin(a) * 12;
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x + dx, y + dy);
+            ctx.stroke();
+          }
+        }
+        ctx.restore();
+      }
+
+      function drawParticles(time) {
+        ctx.save();
+        for (const p of particles) {
+          const a = fieldAngle(p.x, p.y, time) * Math.PI;
+          p.x += Math.cos(a) * 0.9;
+          p.y += Math.sin(a) * 0.9;
+          p.life -= 1;
+          if (p.x < -20) p.x = w + 20; if (p.x > w + 20) p.x = -20;
+          if (p.y < -20) p.y = h + 20; if (p.y > h + 20) p.y = -20;
+          if (p.life <= 0) { p.x = Math.random() * w; p.y = Math.random() * h; p.life = 200 + Math.random() * 400; }
+          ctx.beginPath();
+          ctx.fillStyle = `hsla(${p.hue}, 85%, 62%, 0.85)`;
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      function draw(time, staticOnly) {
+        // cosmic backdrop
+        ctx.clearRect(0, 0, w, h);
+        const g1 = ctx.createRadialGradient(w * 0.15, h * 0.1, 0, w * 0.15, h * 0.1, Math.max(w, h));
+        g1.addColorStop(0, pal.g1Start);
+        g1.addColorStop(1, pal.g1End);
+        ctx.fillStyle = g1; ctx.fillRect(0, 0, w, h);
+
+        const g2 = ctx.createRadialGradient(w * 0.85, h * 0.9, 0, w * 0.85, h * 0.9, Math.max(w, h));
+        g2.addColorStop(0, pal.g2Start);
+        g2.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = g2; ctx.fillRect(0, 0, w, h);
+
+        drawAurora(time);
+        if (!staticOnly) {
+          drawField(time);
+          drawParticles(time);
+        }
+      }
+
+      function step() {
+        t += 0.012;
+        draw(t, false);
+        raf = requestAnimationFrame(step);
+      }
+
+      function start() { cancelAnimationFrame(raf); if (reduceMotion.matches) { draw(0, true); return; } raf = requestAnimationFrame(step); }
+
+      resize();
+      window.addEventListener('resize', () => { resize(); start(); });
+      reduceMotion.addEventListener?.('change', start);
+      start();
+    })();
+
+    // Site chat (mock)
+    (function(){
+      const log = document.getElementById('siteChatLog');
+      const input = document.getElementById('siteChatInput');
+      const send = document.getElementById('siteChatSend');
+      const menu = document.getElementById('vaPrompt');
+      if (!log || !input || !send) return;
+      function bubble(text, me){
+        const b = document.createElement('div');
+        b.className = 'va-bubble'+(me?' me':'');
+        const ava = `<div class="ava">${me?'ME':'AI'}</div>`;
+        const content = `<div class="content">${text}</div>`;
+        const actions = `<div class="va-actions"><button data-act="copy" class="btn">Copy</button><button data-act="save" class="btn">Save</button></div>`;
+        b.innerHTML = ava + content + actions;
+        log.appendChild(b); log.scrollTop = log.scrollHeight;
+      }
+      function reply(q){
+        const tips = [
+          'Tip: Book the Two-Day Social Accelerator to build a 90-day system.',
+          'Explore AI Alley in the newsletter for weekly workflows.',
+          'Watch the LinkedIn course to level-up your ChatGPT content ops.',
+          'Need help choosing a workshop? Tap Book My Workshop to open the form.'
+        ];
+        return tips[Math.floor(Math.random()*tips.length)];
+      }
+      function sendMsg(){
+        const v = input.value.trim(); if(!v) return; bubble(v, true); input.value='';
+        setTimeout(()=>bubble('Thinking…', false), 200);
+        setTimeout(()=>{
+          const last = log.querySelector('div:last-child');
+          if (last && last.textContent === 'Thinking…') last.remove();
+          bubble(reply(v), false);
+        }, 900);
+      }
+      send.addEventListener('click', sendMsg);
+      input.addEventListener('keydown', (e)=>{ if(e.key==='Enter') sendMsg(); });
+      menu?.addEventListener('change', (e)=>{ if(e.target.value){ input.value = e.target.value+': '; input.focus(); }});
+      log.addEventListener('click',(e)=>{
+        const btn = e.target.closest('button'); if(!btn) return; const b = btn.closest('.va-bubble'); const text = b?.innerText||'';
+        if(btn.dataset.act==='copy'){ navigator.clipboard?.writeText(text); window.toast && toast('Copied'); }
+        if(btn.dataset.act==='save'){ try { const map = JSON.parse(localStorage.getItem('vaNotes')||'{}'); const items = map['default']||[]; items.push(text); map['default']=items; localStorage.setItem('vaNotes', JSON.stringify(map)); window.toast && toast('Saved'); } catch(_){} }
+      });
+      document.querySelector('#siteChat .va-chips')?.addEventListener('click',(e)=>{ const b=e.target.closest('.va-chip'); if(!b) return; input.value=b.getAttribute('data-suggest')||''; input.focus(); });
+    })();
+
+    // AI V2: 3D tilt, spotlight, magnetic buttons, and scroll reveal
+    (function(){
+      const root = document.documentElement;
+      function handleMouse(e){
+        const card = e.currentTarget;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+        const rx = ((y / rect.height) - 0.5) * -10; // tilt range
+        const ry = ((x / rect.width) - 0.5) * 10;
+        card.style.setProperty('--mx', (x/rect.width*100)+'%');
+        card.style.setProperty('--my', (y/rect.height*100)+'%');
+        card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+      }
+      function resetTilt(e){ e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg)'; }
+      function bindTilt(scope){
+        scope.querySelectorAll('.card3d').forEach(el=>{
+          el.addEventListener('mousemove', handleMouse);
+          el.addEventListener('mouseleave', resetTilt);
+        });
+      }
+      bindTilt(document);
+      document.querySelectorAll('.ai-v2 .card3d').forEach(el=>{
+        el.addEventListener('mousemove', handleMouse);
+        el.addEventListener('mouseleave', resetTilt);
+      });
+
+      // Magnetic buttons
+      function magMove(e){
+        const b = e.currentTarget; const r = b.getBoundingClientRect();
+        const x = e.clientX - r.left; const y = e.clientY - r.top;
+        b.style.setProperty('--mx', (x/r.width*100)+'%');
+        b.style.setProperty('--my', (y/r.height*100)+'%');
+      }
+      document.querySelectorAll('.magnet, .magic-cta').forEach(b=>{
+        b.addEventListener('mousemove', magMove);
+      });
+
+      // Scroll reveal
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(en=>{ if(en.isIntersecting) en.target.classList.add('show'); });
+      }, { threshold: .15 });
+      document.querySelectorAll('.reveal').forEach(n=>io.observe(n));
+      // optional auto-scroll for carousel
+      const car = document.querySelector('#ecosystem .carousel');
+      if (car) {
+        let pos = 0; let dir = 1; setInterval(()=>{
+          pos += 1.2 * dir; if (pos > car.scrollWidth - car.clientWidth - 2) dir = -1; if (pos < 0) dir = 1;
+          car.scrollTo({ left: pos, behavior: 'smooth' });
+          // Coverflow effect
+          const cards = Array.from(car.querySelectorAll('.media-card'));
+          const mid = car.scrollLeft + car.clientWidth/2;
+          cards.forEach(card=>{
+            const r = card.getBoundingClientRect(); const cx = r.left + r.width/2; const d = Math.abs((r.left + r.width/2) - (car.getBoundingClientRect().left + car.clientWidth/2));
+            card.classList.remove('is-center','is-near');
+            if (d < r.width*0.6) card.classList.add('is-center'); else if (d < r.width*1.2) card.classList.add('is-near');
+          });
+        }, 2500);
+      }
+    })();
+
+    // FAQ accordion: single-open, keyboard nav
+    (function(){
+      function wireAccordion(scope){
+        const root = scope; if(!root) return;
+        function closeAll(){ root.querySelectorAll('.accordion-button[aria-expanded="true"]').forEach(btn=>{ btn.setAttribute('aria-expanded','false'); document.getElementById(btn.getAttribute('aria-controls')).hidden = true; }); }
+        root.addEventListener('click', (e)=>{
+          const btn = e.target.closest('.accordion-button'); if(!btn) return;
+          const panel = document.getElementById(btn.getAttribute('aria-controls'));
+          const expanded = btn.getAttribute('aria-expanded') === 'true';
+          closeAll();
+          if (!expanded) { btn.setAttribute('aria-expanded','true'); panel.hidden = false; panel.focus?.(); }
+        });
+        root.addEventListener('keydown', (e)=>{
+          const btns = Array.from(root.querySelectorAll('.accordion-button'));
+          const i = btns.indexOf(document.activeElement);
+          if (e.key === 'ArrowDown') { e.preventDefault(); (btns[i+1]||btns[0]).focus(); }
+          if (e.key === 'ArrowUp') { e.preventDefault(); (btns[i-1]||btns[btns.length-1]).focus(); }
+          if (e.key === 'Home') { e.preventDefault(); btns[0].focus(); }
+          if (e.key === 'End') { e.preventDefault(); btns[btns.length-1].focus(); }
+        });
+      }
+      wireAccordion(document.querySelector('#faq .accordion'));
+      wireAccordion(document.querySelector('#contact .accordion'));
+      wireAccordion(document.querySelector('#drawerNav .accordion'));
+      // Explainer modal tabs
+      (function(){
+        const tabs = Array.from(document.querySelectorAll('[data-demo-type]'));
+        function sel(type){
+          tabs.forEach(t=> t.setAttribute('aria-selected', String(t.getAttribute('data-demo-type')===type)));
+          const s = document.getElementById('demoSpeaking'); if(s) s.hidden = type!=='speaking';
+          const p = document.getElementById('demoPodcast'); if(p) p.hidden = type!=='podcast';
+          const w = document.getElementById('demoWorkshop'); if(w) w.hidden = type!=='workshop';
+        }
+        const wrap = document.querySelector('[data-demo-type]')?.parentElement; if(wrap){ wrap.addEventListener('click', (e)=>{ const b=e.target.closest('[data-demo-type]'); if(!b) return; sel(b.getAttribute('data-demo-type')); }); sel('speaking'); }
+      })();
+    })();
+
+    // Calendar buttons: generate ICS and Google links
+    (function(){
+      const start = new Date('2025-11-12T09:00:00Z');
+      const end = new Date('2025-11-13T17:00:00Z');
+      function fmt(d){ return d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}Z$/,'Z'); }
+      const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//NikkiSanders//SocialAccelerator//EN\nBEGIN:VEVENT\nUID:${Date.now()}@nikki\nDTSTAMP:${fmt(new Date())}\nDTSTART:${fmt(start)}\nDTEND:${fmt(end)}\nSUMMARY:Two-Day Social Accelerator (Demo)\nDESCRIPTION:Online cohort kickoff (demo).\nLOCATION:Online\nEND:VEVENT\nEND:VCALENDAR`;
+      function dl(filename, content){ const blob = new Blob([content], {type:'text/calendar'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; a.click(); setTimeout(()=>URL.revokeObjectURL(url), 1000); }
+      const a1=document.getElementById('btnAppleCal'); const a2=document.getElementById('btnOutlookCal'); const g=document.getElementById('btnGoogleCal');
+      if(a1) a1.addEventListener('click', ()=> dl('two-day-accelerator.ics', ics));
+      if(a2) a2.addEventListener('click', ()=> dl('two-day-accelerator.ics', ics));
+      if(g) g.addEventListener('click', ()=>{ const params = new URLSearchParams({ action:'TEMPLATE', text:'Two-Day Social Accelerator (Demo)', dates:`${fmt(start)}/${fmt(end)}`, details:'Online cohort kickoff (demo).', location:'Online' }); window.open('https://calendar.google.com/calendar/render?'+params.toString(), '_blank', 'noopener'); });
+    })();
+  </script>
+</body>
+</html>

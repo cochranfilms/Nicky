@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Agreement — Nikki Sanders Content Strategy</title>
+  
+  <!-- PDF Generation Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <!-- EmailJS for sending confirmation emails -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <style>
+    /* Import base styles from proposal-nikki.html */
+    :root {
+      --brand-dark: #010043;
+      --brand-gold: #e0ab10;
+      --bg-0: #07071a;
+      --bg-1: #0b0b23;
+      --glass: 16px;
+      --text: #ffffff;
+      --muted: #cbd0ff;
+      --ok: #3ddc84;
+      --danger: #ff5470;
+      --shadow: 0 10px 40px rgba(0,0,0,.35);
+      --ring: 0 0 0 2px rgba(224,171,16,.35);
+      --maxw: 1200px;
+      --radius: 16px;
+      --cardA: rgba(255,216,106,.35);
+      --cardB: rgba(224,171,16,.35);
+      --glowA: rgba(255,216,106,.30);
+      --glowB: rgba(224,171,16,.22);
+    }
+
+    * { box-sizing: border-box; }
+    
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 800px at 70% -10%, rgba(255,120,200,.09), transparent 50%),
+        radial-gradient(900px 600px at 0% 100%, rgba(1,0,67,.6), transparent 60%),
+        linear-gradient(180deg, var(--bg-0), var(--bg-1));
+      background-attachment: fixed, fixed, fixed;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+
+    /* Contract card */
+    .contract-card {
+      border-radius: var(--radius);
+      background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.08'/></svg>") repeat,
+        linear-gradient(135deg, var(--cardA), var(--cardB));
+      background-size: 160px 160px, auto;
+      background-blend-mode: overlay, normal;
+      border: 1px solid rgba(255,255,255,.22);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px) saturate(130%);
+      padding: 30px;
+      margin-bottom: 24px;
+    }
+
+    /* Logo container */
+    .logo-container {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .logo-container img {
+      max-width: 200px;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    /* Typography */
+    h1, h2 {
+      color: #fff;
+      margin: 0 0 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      text-align: center;
+      background: linear-gradient(90deg, #fff, #ffd86a, #9ecbff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-top: 40px;
+    }
+
+    /* Package cards */
+    .package-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 24px 0;
+    }
+
+    .package-card {
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 24px;
+    }
+
+    .package-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+    }
+
+    .package-card .price {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--brand-gold);
+      margin-bottom: 16px;
+    }
+
+    .package-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .package-card li {
+      margin-bottom: 8px;
+    }
+
+    /* Form */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 8px;
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+    }
+
+    /* Signature section */
+    .signature-section {
+      border-top: 2px solid rgba(255,255,255,.08);
+      margin-top: 40px;
+      padding-top: 24px;
+    }
+
+    .signature-note {
+      background: rgba(255,255,255,.06);
+      border-left: 4px solid var(--brand-gold);
+      padding: 16px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+
+    /* Thank you screen */
+    .thank-you-screen {
+      display: none;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .thank-you-screen.show {
+      display: block;
+    }
+
+    .thank-you-screen .icon {
+      font-size: 48px;
+      margin-bottom: 24px;
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .cta-primary {
+      background: linear-gradient(135deg, var(--brand-gold), #ffd86a);
+      color: #111;
+      border: none;
+      border-radius: 999px;
+      height: 48px;
+      padding: 0 24px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .cta-ghost {
+      background: rgba(255,255,255,.9);
+      color: #111;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      height: 48px;
+      padding: 0 24px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Email status */
+    .email-status {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .email-status.success {
+      background: var(--ok);
+      color: #111;
+      display: block;
+    }
+
+    .email-status.error {
+      background: var(--danger);
+      color: #fff;
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+      }
+      
+      .package-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .btn-row {
+        flex-direction: column;
+      }
+      
+      .cta-primary,
+      .cta-ghost {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Logo -->
+    <div class="logo-container">
+      <img src="logo.webp" alt="Nikki Sanders Logo" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'128\' height=\'128\'><defs><linearGradient id=\'g\' x1=\'0\' x2=\'1\'><stop stop-color=\'%23e0ab10\' offset=\'0\'/><stop stop-color=\'%23ffd86a\' offset=\'1\'/></linearGradient></defs><rect rx=\'24\' ry=\'24\' width=\'100%\' height=\'100%\' fill=\'%23010043\'/><text x=\'50%\' y=\'54%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=\'44\' font-family=\'sans-serif\' fill=\'url(%23g)\'>NS</text></svg>'">
+    </div>
+
+    <!-- Contract Form -->
+    <div id="contractForm">
+      <div class="contract-card">
+        <h1>Service Agreement</h1>
+        <p>This Service Agreement is made between <strong>Cochran Films LLC</strong> and <strong>Nikki Sanders</strong> on <span id="effectiveDateDisplay">August 21, 2025</span>.</p>
+
+        <h2>Project Overview</h2>
+        <p>This proposal covers web systems, content integration, automation, and ongoing support. The goal is to unify Nikki's current scattered ecosystem into one seamless platform.</p>
+
+        <h2>Current Challenges</h2>
+        <ul>
+          <li>Multiple separate Google Forms (podcasts + speaking)</li>
+          <li>Links spread across various platforms (IG, LinkedIn Learning, etc.)</li>
+          <li>Community newsletter and course demos in different places</li>
+        </ul>
+
+        <h2>Package Options</h2>
+        <div class="package-grid">
+          <!-- Core System Package -->
+          <div class="package-card">
+            <h3>Core System Package</h3>
+            <div class="price">$5,000</div>
+            <ul>
+              <li>Website redesign (AI-first brand style)</li>
+              <li>Centralized booking form</li>
+              <li>Automated calendar integration</li>
+              <li>Workshop booking demo</li>
+              <li>Newsletter sign-up automation</li>
+              <li>Portfolio/media hub</li>
+              <li>Basic SEO + analytics</li>
+            </ul>
+          </div>
+
+          <!-- Growth Accelerator Package -->
+          <div class="package-card">
+            <h3>Growth Accelerator Package</h3>
+            <div class="price">$7,500</div>
+            <ul>
+              <li>Everything in Core Package</li>
+              <li>Learning Hub integration</li>
+              <li>Resource downloads system</li>
+              <li>Community area (gated)</li>
+              <li>Content pipeline automation</li>
+              <li>Quarterly strategy calls</li>
+              <li>Custom branded videos</li>
+            </ul>
+          </div>
+
+          <!-- Full Ecosystem Package -->
+          <div class="package-card">
+            <h3>Full Ecosystem Package</h3>
+            <div class="price">$10,000</div>
+            <ul>
+              <li>Everything in Growth Package</li>
+              <li>Custom dashboard</li>
+              <li>Automated invoicing</li>
+              <li>Booking workflows</li>
+              <li>Private client portal</li>
+              <li>Advanced analytics</li>
+              <li>6 months support included</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2>Payment Terms</h2>
+        <ul>
+          <li><strong>50% upfront</strong> upon contract signing</li>
+          <li><strong>50% at launch</strong> (project completion)</li>
+          <li>Optional: <strong>$750/month</strong> retainer for continuous support</li>
+        </ul>
+
+        <div class="signature-section">
+          <h2>Digital Signature</h2>
+          <div class="signature-note">
+            <strong>Note:</strong> Please type your full name exactly as it appears on official documents. This will serve as your digital signature and is legally binding.
+          </div>
+          <form id="signatureForm">
+            <div class="form-group">
+              <label for="clientName">Full Name</label>
+              <input type="text" id="clientName" required>
+            </div>
+            <div class="form-group">
+              <label for="clientEmail">Email Address</label>
+              <input type="email" id="clientEmail" required>
+            </div>
+            <div class="form-group">
+              <label for="selectedPackage">Selected Package</label>
+              <select id="selectedPackage" required>
+                <option value="">Choose a package...</option>
+                <option value="core">Core System Package ($5,000)</option>
+                <option value="growth">Growth Accelerator Package ($7,500)</option>
+                <option value="full">Full Ecosystem Package ($10,000)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="signature">Digital Signature</label>
+              <input type="text" id="signature" required placeholder="Type your full name as signature">
+            </div>
+            <div class="btn-row">
+              <button type="submit" class="cta-primary">Sign & Submit</button>
+              <a href="proposal-nikki.html" class="cta-ghost">Back to Proposal</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Thank You Screen -->
+    <div id="thankYouScreen" class="thank-you-screen">
+      <div class="contract-card">
+        <div class="icon">✨</div>
+        <h2>Thank You for Signing!</h2>
+        <p>Your contract has been successfully signed and submitted.</p>
+        <div class="btn-row">
+          <button id="downloadContractBtn" class="cta-primary">Download Contract PDF</button>
+          <a href="https://link.waveapps.com/payment-demo" target="_blank" class="cta-ghost">View Invoice</a>
+        </div>
+        <div id="emailStatus" class="email-status"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize EmailJS
+    (function() {
+      emailjs.init("YOUR_PUBLIC_KEY"); // Demo only
+    })();
+
+    // Store contract data
+    let contractData = {};
+
+    // Format date
+    function formatDate(date) {
+      return new Intl.DateTimeFormat('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      }).format(date);
+    }
+
+    // Handle form submission
+    document.getElementById('signatureForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form data
+      const clientName = document.getElementById('clientName').value.trim();
+      const clientEmail = document.getElementById('clientEmail').value.trim();
+      const selectedPackage = document.getElementById('selectedPackage').value;
+      const signature = document.getElementById('signature').value.trim();
+      
+      // Store contract data
+      contractData = {
+        clientName,
+        clientEmail,
+        selectedPackage,
+        signature,
+        signatureDate: formatDate(new Date()),
+        contractDate: 'August 21, 2025',
+        effectiveDate: formatDate(new Date()),
+        contractId: 'NS-' + Date.now()
+      };
+      
+      // Update display date
+      document.getElementById('effectiveDateDisplay').textContent = contractData.effectiveDate;
+      
+      // Hide form and show thank you screen
+      document.getElementById('contractForm').style.display = 'none';
+      document.getElementById('thankYouScreen').classList.add('show');
+      
+      // Send confirmation email
+      sendConfirmationEmail(contractData);
+    });
+
+    // Send confirmation email
+    async function sendConfirmationEmail(contractData) {
+      try {
+        // Demo: Log email data
+        console.log('📧 Sending confirmation email:', contractData);
+        
+        // Show success message
+        showEmailStatus('✅ Confirmation email sent!', 'success');
+        
+      } catch (error) {
+        console.error('❌ Email error:', error);
+        showEmailStatus('⚠️ Email error: ' + error.message, 'error');
+      }
+    }
+
+    // Show email status
+    function showEmailStatus(message, type) {
+      const status = document.getElementById('emailStatus');
+      status.textContent = message;
+      status.className = `email-status ${type}`;
+    }
+
+    // Generate and download PDF
+    document.getElementById('downloadContractBtn').addEventListener('click', function() {
+      try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        // Add content to PDF
+        doc.setFillColor(224, 171, 16);
+        doc.rect(0, 0, 210, 25, 'F');
+        
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(20);
+        doc.text('Service Agreement', 105, 15, { align: 'center' });
+        
+        doc.setFontSize(12);
+        doc.text(`Contract ID: ${contractData.contractId}`, 20, 40);
+        doc.text(`Date: ${contractData.effectiveDate}`, 20, 50);
+        doc.text(`Client: ${contractData.clientName}`, 20, 60);
+        doc.text(`Email: ${contractData.clientEmail}`, 20, 70);
+        doc.text(`Package: ${contractData.selectedPackage}`, 20, 80);
+        
+        // Add signature
+        doc.setFontSize(12);
+        doc.text('Digital Signature:', 20, 200);
+        doc.setFontStyle('italic');
+        doc.text(contractData.signature, 20, 210);
+        
+        // Save PDF
+        const fileName = `NikkiSanders_Contract_${contractData.contractId}.pdf`;
+        doc.save(fileName);
+        
+      } catch (error) {
+        console.error('❌ PDF error:', error);
+        alert('Error generating PDF. Please try again.');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+  <section id="testimonials" class="panel panel-light panel-b">
+    <div class="container">
+      <h2 class="section-title gradient-text">What Our Community Says</h2>
+      <p class="section-sub">Join thousands of creators who've transformed their content strategy</p>
+      
+      <div class="testimonials-grid">
+        <div class="media-card">
+          <div class="thumb">
+            <img alt="Testimonial" src="Screenshot 2025-08-23 at 10.01.14 PM.png" onerror="this.style.display='none'"/>
+            <div class="play">
+              <button onclick="openVideoModal('https://player.vimeo.com/video/491509730?autoplay=1')" aria-label="Play testimonial">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#111" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="media-card">
+          <div class="thumb">
+            <img alt="Testimonial" src="Screenshot 2025-08-23 at 10.01.29 PM.png" onerror="this.style.display='none'"/>
+            <div class="play">
+              <button onclick="openVideoModal('https://player.vimeo.com/video/491508387?autoplay=1')" aria-label="Play testimonial">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#111" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="media-card">
+          <div class="thumb">
+            <img alt="Testimonial" src="Screenshot 2025-08-23 at 10.01.41 PM.png" onerror="this.style.display='none'"/>
+            <div class="play">
+              <button onclick="openVideoModal('https://player.vimeo.com/video/491507248?autoplay=1')" aria-label="Play testimonial">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#111" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="media-card">
+          <div class="thumb">
+            <img alt="Testimonial" src="Screenshot 2025-08-23 at 10.01.51 PM.png" onerror="this.style.display='none'"/>
+            <div class="play">
+              <button onclick="openVideoModal('https://player.vimeo.com/video/491504702?autoplay=1')" aria-label="Play testimonial">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#111" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<style>
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin: 40px 0;
+    }
+    
+    .testimonials-grid .media-card {
+      aspect-ratio: 16/9;
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      padding: 0;
+    }
+    
+    .testimonials-grid .thumb {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .testimonials-grid .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .testimonials-grid .play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.3);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .testimonials-grid .media-card:hover .play {
+      opacity: 1;
+    }
+    
+    .testimonials-grid .play button {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: none;
+      background: var(--brand-gold);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+    
+    .testimonials-grid .play button:hover {
+      transform: scale(1.1);
+    }
+    
+    @media (max-width: 980px) {
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+</style>

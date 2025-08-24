@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cross Creek Realty — Project Roadmap</title>
+    <meta name="description" content="Cross Creek Realty — 4‑phase project roadmap and implementation timeline." />
+    <link rel="icon" href="./logo.webp" />
+    <style>
+      :root {
+        --ink:#0b0e2a; --gold:#c7a86b; --slate:#2f3446; --soft:#f7f7f9; --muted:#7b8093; --card:#ffffff;
+        --border:#e6e6ef; --panel:#ffffff; --panel-ink:#1b1e2b; --accent:#c7a86b; --shadow:0 8px 28px rgba(11,14,42,.08);
+        --radius:16px;
+      }
+      html[data-theme="dark"] {
+        --soft:#0b0e2a; --panel:#121739; --panel-ink:#e9ecf4; --border:rgba(255,255,255,.12); --shadow:0 24px 60px rgba(0,0,0,.55);
+      }
+      *{box-sizing:border-box}
+      html,body{margin:0}
+      body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial; background:var(--soft); color:var(--panel-ink)}
+
+      /* Top bar */
+      .topbar{position:sticky;top:0;z-index:10;background:rgba(11,14,42,.92);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(6px)}
+      .topbar-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:10px;justify-content:space-between;padding:12px 16px;color:#e9ecf4}
+      .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+      .brand img{height:26px;width:auto}
+      .toggle{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.25);border-radius:999px;color:#fff;background:rgba(255,255,255,.06);padding:6px 10px;cursor:pointer;font-weight:800;font-size:12px}
+      .wrap{max-width:1200px;margin:0 auto;padding:18px}
+
+      .grid{display:grid;gap:16px}
+      @media(min-width:960px){.cols-3{grid-template-columns:1.2fr 1fr 1fr}}
+      .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+      .head{padding:12px 14px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-bottom:1px solid var(--border);font-weight:900}
+      .body{padding:14px}
+      .muted{color:var(--muted)}
+      .pill{display:inline-block;background:#f1efe9;color:#5a4a22;border-radius:999px;padding:.35rem .65rem;font-size:12px;font-weight:800}
+
+      /* Timeline */
+      .timeline{position:relative}
+      .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+      .step{position:relative;padding:10px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.6)}
+      html[data-theme="dark"] .step{background:rgba(255,255,255,.04)}
+      .step .dot{position:absolute;top:-8px;left:12px;width:14px;height:14px;border-radius:50%;background:#444;border:2px solid var(--border)}
+      .step.active{outline:2px solid rgba(199,168,107,.45);background:linear-gradient(180deg, rgba(199,168,107,.15), rgba(199,168,107,.06))}
+      .step.active .dot{background:var(--gold);box-shadow:0 0 0 6px rgba(199,168,107,.18)}
+      .step.complete{outline:2px solid rgba(11,181,122,.3);background:linear-gradient(180deg, rgba(11,181,122,.15), rgba(11,181,122,.06))}
+      .step.complete .dot{background:#0bb57a;box-shadow:0 0 0 6px rgba(11,181,122,.18)}
+      .bar{position:absolute;left:0;right:0;top:18px;height:3px;background:rgba(0,0,0,.08)}
+      html[data-theme="dark"] .bar{background:rgba(255,255,255,.08)}
+      .bar > span{display:block;height:100%;width:var(--bar,0%);background:linear-gradient(90deg,#c7a86b,#0bb57a)}
+
+      /* Phase cards */
+      .phase-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px}
+      .phase-header{background:linear-gradient(135deg,var(--gold),#d4b87a);color:#111;padding:16px 18px;font-weight:900;font-size:18px}
+      .phase-content{padding:18px}
+      .phase-summary{color:var(--muted);margin-bottom:16px;line-height:1.5}
+      .phase-deliverables{list-style:none;padding:0;margin:0}
+      .phase-deliverables li{position:relative;padding-left:20px;margin-bottom:8px;line-height:1.4}
+      .phase-deliverables li:before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:800}
+      .phase-meta{display:flex;align-items:center;gap:12px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+      .phase-duration{background:rgba(199,168,107,.1);color:var(--gold);padding:6px 12px;border-radius:999px;font-weight:700;font-size:12px}
+      .phase-status{background:rgba(11,181,122,.1);color:#0bb57a;padding:6px 12px;border-radius:999px;font-weight:700;font-size:12px}
+
+      /* Controls */
+      .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:20px}
+      .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem .8rem;border-radius:12px;border:1px solid var(--border);text-decoration:none;font-weight:800;cursor:pointer;background:#fff}
+      .btn.primary{background:var(--gold);color:#111;border-color:#b5965f}
+
+      /* Collapsible sections */
+      .collapsible{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden}
+      .collapsible-header{background:rgba(0,0,0,.02);padding:16px 18px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+      .collapsible-header:hover{background:rgba(0,0,0,.04)}
+      .collapsible-header h3{margin:0;font-size:16px;color:var(--ink)}
+      .collapsible-icon{transition:transform .2s ease;font-size:18px;color:var(--muted)}
+      .collapsible.open .collapsible-icon{transform:rotate(180deg)}
+      .collapsible-content{padding:18px;display:none}
+      .collapsible.open .collapsible-content{display:block}
+
+      @media (max-width: 720px) {
+        .steps{grid-template-columns:1fr;gap:8px}
+        .step{text-align:center}
+        .step .dot{left:50%;transform:translateX(-50%)}
+        .controls{flex-direction:column;align-items:stretch}
+        .btn{justify-content:center}
+      }
+
+      /* Goal Timeline Animations */
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 0.3; }
+        50% { transform: scale(1.2); opacity: 0.6; }
+      }
+      
+      @keyframes zoom {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+      }
+      
+      #goalTimeline {
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(11,181,122,.15);
+      }
+      
+      #goalTimeline:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(11,181,122,.25);
+      }
+      
+      #speedIcon, #speedIcon2 {
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,.1));
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <img src="./logo.webp" alt="Cross Creek Realty" />
+          <span>Cross Creek Realty — Project Roadmap</span>
+        </div>
+        <a id="themeToggle" class="toggle" href="#"><span id="themeLabel">Dark</span></a>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <div class="card" style="margin-bottom:16px">
+        <div class="body">
+          <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between">
+            <div>
+              <strong>Project Implementation Roadmap</strong>
+              <div class="muted">4‑phase approach to deliver your modern, conversion-focused real estate website.</div>
+            </div>
+            <div class="controls">
+              <button class="btn primary" id="expandAll">Expand All</button>
+              <button class="btn" id="collapseAll">Collapse All</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="card" style="margin-bottom:16px">
+        <div class="head">Project Overview</div>
+        <div class="body">
+          <p style="margin:0 0 16px 0">This roadmap breaks down your website relaunch into four focused phases, each building on the previous to deliver a site that converts visitors into qualified leads. We'll start with strategy and discovery, then move through development, content creation, and finally launch with full support.</p>
+          
+          <div class="timeline">
+            <div class="bar"><span style="--bar:25%"></span></div>
+            <div class="steps">
+              <div class="step active">
+                <span class="dot"></span>
+                <strong>Phase 1</strong>
+                <small class="muted" style="display:block;margin-top:6px">Discovery & Plan</small>
+              </div>
+              <div class="step">
+                <span class="dot"></span>
+                <strong>Phase 2</strong>
+                <small class="muted" style="display:block;margin-top:6px">Build & Integrate</small>
+              </div>
+              <div class="step">
+                <span class="dot"></span>
+                <strong>Phase 3</strong>
+                <small class="muted" style="display:block;margin-top:6px">Content & QA</small>
+              </div>
+              <div class="step">
+                <span class="dot"></span>
+                <strong>Phase 4</strong>
+                <small class="muted" style="display:block;margin-top:6px">Launch & Handoff</small>
+              </div>
+            </div>
+            <div style="text-align:center;margin-top:16px;padding:12px;background:rgba(199,168,107,.08);border-radius:12px;border:1px solid rgba(199,168,107,.2);">
+              <strong style="color:var(--gold);font-size:16px;">Total Project Timeline: 23-24 days</strong>
+              <div style="color:var(--muted);font-size:14px;margin-top:4px;">From kickoff to launch in under 4 weeks</div>
+            </div>
+            
+            <div id="goalTimeline" style="text-align:center;margin-top:16px;padding:16px;background:linear-gradient(135deg, rgba(11,181,122,.1), rgba(199,168,107,.1));border-radius:16px;border:2px solid rgba(11,181,122,.3);position:relative;overflow:hidden;">
+              <div style="position:absolute;top:-20px;right:-20px;width:60px;height:60px;background:rgba(11,181,122,.1);border-radius:50%;animation:pulse 2s ease-in-out infinite;"></div>
+              <div style="position:absolute;bottom:-15px;left:-15px;width:40px;height:40px;background:rgba(199,168,107,.1);border-radius:50%;animation:pulse 2s ease-in-out infinite 0.5s;"></div>
+              
+              <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:8px;">
+                <div id="speedIcon" style="font-size:24px;animation:zoom 1.5s ease-in-out infinite;">⚡</div>
+                <strong style="color:#0bb57a;font-size:18px;">Goal: 2 Weeks</strong>
+                <div id="speedIcon2" style="font-size:24px;animation:zoom 1.5s ease-in-out infinite 0.75s;">🚀</div>
+              </div>
+              <div style="color:var(--muted);font-size:14px;margin-bottom:8px;">Our accelerated delivery target</div>
+              <div style="display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;">
+                <span style="background:rgba(11,181,122,.15);color:#0bb57a;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:700;">Fast Track</span>
+                <span style="background:rgba(199,168,107,.15);color:var(--gold);padding:4px 8px;border-radius:999px;font-size:11px;font-weight:700;">Expert Team</span>
+                <span style="background:rgba(11,181,122,.15);color:#0bb57a;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:700;">Priority Service</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Phase 1: Discovery & Plan -->
+      <div class="collapsible open" id="phase1">
+        <div class="collapsible-header" onclick="toggleCollapsible('phase1')">
+          <h3>Phase 1 — Discovery & Plan</h3>
+          <span class="collapsible-icon">▼</span>
+        </div>
+        <div class="collapsible-content">
+          <div class="phase-card">
+            <div class="phase-header">Strategy & Foundation</div>
+            <div class="phase-content">
+              <div class="phase-summary">
+                We'll start by understanding your current site's strengths and weaknesses, then develop a clear strategy for the new design. This phase includes technical auditing, homepage vision development, and creating a comprehensive sitemap that guides the entire project.
+              </div>
+              <ul class="phase-deliverables">
+                <li>Technical audit of current site performance and SEO health</li>
+                <li>Homepage wireframes and user journey mapping</li>
+                <li>Complete sitemap with content strategy and navigation structure</li>
+              </ul>
+              <div class="phase-meta">
+                <span class="phase-duration">5 days</span>
+                <span class="phase-status">Foundation</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 2: Build & Integrate -->
+      <div class="collapsible" id="phase2">
+        <div class="collapsible-header" onclick="toggleCollapsible('phase2')">
+          <h3>Phase 2 — Build & Integrate</h3>
+          <span class="collapsible-icon">▼</span>
+        </div>
+        <div class="collapsible-content">
+          <div class="phase-card">
+            <div class="phase-header">Development & IDX Integration</div>
+            <div class="phase-content">
+              <div class="phase-summary">
+                This is where your vision becomes reality. We'll build a custom, mobile-responsive website with full IDX/MLS integration, including saved searches, advanced filters, lead capture forms, and interactive property previews. Every feature is designed to convert visitors into leads.
+              </div>
+              <ul class="phase-deliverables">
+                <li>Custom UI framework with mobile-first responsive design</li>
+                <li>Full IDX integration with saved searches, filters, and lead capture</li>
+                <li>Interactive property tours, 3D walkthroughs, and scheduling tools</li>
+              </ul>
+              <div class="phase-meta">
+                <span class="phase-duration">10 days</span>
+                <span class="phase-status">Core Development</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 3: Content & QA -->
+      <div class="collapsible" id="phase3">
+        <div class="collapsible-header" onclick="toggleCollapsible('phase3')">
+          <h3>Phase 3 — Content & QA</h3>
+          <span class="collapsible-icon">▼</span>
+        </div>
+        <div class="collapsible-content">
+          <div class="phase-card">
+            <div class="phase-header">Content Population & Testing</div>
+            <div class="phase-content">
+              <div class="phase-summary">
+                With the technical foundation in place, we'll populate your site with compelling content, professional photography, and optimized listings. This phase includes comprehensive testing for accessibility, mobile responsiveness, and SEO preparation to ensure your site performs at its best.
+              </div>
+              <ul class="phase-deliverables">
+                <li>Content population including photos, copy, and property listings</li>
+                <li>Comprehensive QA testing for accessibility and mobile responsiveness</li>
+                <li>SEO optimization with metadata, Open Graph tags, and schema markup</li>
+              </ul>
+              <div class="phase-meta">
+                <span class="phase-duration">5 days</span>
+                <span class="phase-status">Polish & Test</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 4: Launch & Handoff -->
+      <div class="collapsible" id="phase4">
+        <div class="collapsible-header" onclick="toggleCollapsible('phase4')">
+          <h3>Phase 4 — Launch & Handoff</h3>
+          <span class="collapsible-icon">▼</span>
+        </div>
+        <div class="collapsible-content">
+          <div class="phase-card">
+            <div class="phase-header">Deployment & Support</div>
+            <div class="phase-content">
+              <div class="phase-summary">
+                The final phase brings your new site live with full analytics tracking, search console setup, and comprehensive admin training. We'll provide post-launch support to ensure smooth operation and help you maximize the site's performance for lead generation.
+              </div>
+              <ul class="phase-deliverables">
+                <li>Site deployment with Google Analytics and Search Console setup</li>
+                <li>Admin training and content management system handoff</li>
+                <li>30-day post-launch support and performance optimization</li>
+              </ul>
+              <div class="phase-meta">
+                <span class="phase-duration">3-4 days</span>
+                <span class="phase-status">Go Live</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="card" style="margin-top:16px">
+        <div class="head">What This Means for You</div>
+        <div class="body">
+          <div class="grid cols-3">
+            <div>
+              <strong>Clear Timeline</strong>
+              <div class="muted">Each phase has defined deliverables and timelines, so you always know what's happening and when to expect results.</div>
+            </div>
+            <div>
+              <strong>Focused Development</strong>
+              <div class="muted">We tackle one phase at a time, ensuring quality and allowing for feedback and adjustments along the way.</div>
+            </div>
+            <div>
+              <strong>Measurable Progress</strong>
+              <div class="muted">Regular check-ins and milestone reviews keep the project on track and aligned with your business goals.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" style="margin-top:16px">
+        <div class="head">Next Steps</div>
+        <div class="body">
+          <p style="margin:0 0 16px 0">Ready to get started? Phase 1 begins with a discovery session where we'll dive deep into your current site, business goals, and vision for the new website. This ensures every decision we make aligns with your objectives.</p>
+          
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a href="./index.html" class="btn primary">View Full Proposal</a>
+            <a href="./status.html" class="btn">Project Status Tracker</a>
+            <a href="./idx-demo.html" class="btn">See IDX Demo</a>
+          </div>
+        </div>
+      </section>
+
+      <p class="muted" style="text-align:center;margin:20px 0">This roadmap is part of Cross Creek Realty's website relaunch package. Questions? Contact us at info@cochranfilms.com</p>
+    </main>
+
+    <script>
+      // Theme toggle
+      (function(){
+        const root = document.documentElement;
+        const btn = document.getElementById('themeToggle');
+        const label = document.getElementById('themeLabel');
+        const saved = localStorage.getItem('ccr-roadmap-theme');
+        if (saved) { root.setAttribute('data-theme', saved); label.textContent = saved === 'dark' ? 'Light' : 'Dark'; }
+        btn?.addEventListener('click', (e)=>{
+          e.preventDefault();
+          const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', next);
+          localStorage.setItem('ccr-roadmap-theme', next);
+          label.textContent = next === 'dark' ? 'Light' : 'Dark';
+        });
+      })();
+
+      // Collapsible functionality
+      function toggleCollapsible(id) {
+        const element = document.getElementById(id);
+        element.classList.toggle('open');
+      }
+
+      // Expand/Collapse all
+      document.getElementById('expandAll').addEventListener('click', () => {
+        document.querySelectorAll('.collapsible').forEach(el => el.classList.add('open'));
+      });
+
+      document.getElementById('collapseAll').addEventListener('click', () => {
+        document.querySelectorAll('.collapsible').forEach(el => el.classList.remove('open'));
+      });
+
+      // Auto-expand based on URL hash
+      window.addEventListener('load', () => {
+        const hash = window.location.hash;
+        if (hash) {
+          const target = document.querySelector(hash);
+          if (target && target.classList.contains('collapsible')) {
+            target.classList.add('open');
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

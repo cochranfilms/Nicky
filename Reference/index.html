@@ -1,0 +1,848 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cross Creek Realty — Digital Upgrade Proposal | Cochran Films</title>
+    <link rel="icon" href="./logo.webp">
+    <meta name="description" content="A focused, corporate-grade proposal for Cross Creek Realty: website reboot, IDX reliability, conversion system, and media production.">
+    <style>
+      :root {
+        --ink: #0b0e2a;       /* deep navy */
+        --gold: #c7a86b;      /* refined gold */
+        --slate: #2f3446;
+        --soft: #f7f7f9;
+        --muted: #7b8093;
+        --card: #ffffff;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        color: #1b1e2b;
+        background: var(--soft);
+        line-height: 1.5;
+      }
+      a { color: var(--gold); text-decoration: none; }
+      .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+      .nav {
+        position: sticky; top: 0; z-index: 10; backdrop-filter: blur(6px);
+        background: rgba(11,14,42,.9); border-bottom: 1px solid rgba(255,255,255,.08);
+      }
+      .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+      .brand { display:flex; align-items:center; gap:10px; color: #fff; font-weight: 700; letter-spacing: .6px; }
+      .brand img { height: 22px; width:auto; }
+      .brand small { color: var(--gold); font-weight: 600; }
+      .nav a { color: #e9ecf4; margin-left: 18px; font-weight: 600; font-size: 14px; opacity: .95; }
+
+      .hero {
+        color: #fff; background: radial-gradient(1200px 400px at 65% 10%, rgba(199,168,107,.25), transparent 60%), var(--ink);
+        border-bottom: 1px solid rgba(255,255,255,.1);
+      }
+      .hero-inner { padding: 80px 0 56px; display: grid; grid-template-columns: 1.3fr .7fr; gap: 40px; align-items: end; }
+      .kicker { color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 12px; }
+      h1 { margin: 10px 0 12px; font-size: 40px; line-height: 1.15; color: #fff; }
+      .sub { color: #cfd5e6; max-width: 720px; }
+      .hero-card {
+        background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+        border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 18px; color: #e9ecf4;
+      }
+      .hero-card b { color: #fff; }
+      .btns { margin-top: 22px; display: flex; gap: 12px; flex-wrap: wrap; }
+      .btn { display: inline-block; padding: 12px 18px; border-radius: 10px; border: 1px solid transparent; font-weight: 700; letter-spacing: .3px; }
+      .btn.primary { background: var(--gold); color: #111; }
+      .btn.ghost { border-color: rgba(255,255,255,.35); color: #fff; }
+      /* Make the floating 3D Tour button black */
+      #openTourDemo { background: #111; color: #fff; border-color: #111; }
+      #openTourDemo:hover { filter: brightness(1.05); }
+
+      section { padding: 64px 0; }
+      h2 { font-size: 28px; margin: 0 0 16px; color: var(--ink); }
+      .lead { color: var(--muted); max-width: 880px; }
+
+      .cards { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+      .card { background: var(--card); border: 1px solid #e9e9ee; border-radius: 14px; padding: 18px; grid-column: span 4; }
+      .card h3 { margin: 8px 0 10px; }
+      .pill { display: inline-block; padding: 6px 10px; border-radius: 999px; background: #f1efe9; color: #5a4a22; font-weight: 700; font-size: 12px; letter-spacing: .3px; }
+      ul.clean { margin: 8px 0 0 0; padding: 0 0 0 16px; }
+      ul.clean li { margin: 6px 0; }
+
+      .pricing { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; align-items: stretch; }
+      .tier { background: var(--card); border: 1px solid #e6e6ef; border-radius: 16px; padding: 22px; grid-column: span 4; display: flex; flex-direction: column; }
+      .tier h3 { margin: 0; }
+      .price { font-weight: 800; font-size: 28px; color: var(--ink); margin: 8px 0 2px; }
+      .note { color: var(--muted); font-size: 13px; }
+      .tier ul { margin: 12px 0; padding-left: 18px; }
+      .tier .cta { margin-top: auto; }
+
+      .gallery { display: grid; grid-template-columns: repeat(12, 1fr); gap: 10px; }
+      .gallery figure { grid-column: span 4; margin: 0; }
+      .gallery img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; border: 1px solid #e6e6ef; }
+      .gallery figcaption { font-size: 13px; color: var(--muted); margin-top: 6px; }
+      /* Center the fourth image and show full image without crop */
+      .gallery .centerpiece { grid-column: 5 / span 4; }
+      .gallery .centerpiece img { height: auto; object-fit: contain; }
+
+      .video-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+      .video { grid-column: span 6; position: relative; border-radius: 12px; overflow: hidden; background: #0b0e2a; border: 1px solid #e6e6ef; }
+      .video::before { content: ""; display: block; padding-top: 56.25%; }
+      .video .embed { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #e9ecf4; font-weight: 700; letter-spacing: .3px; background: linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.28)); }
+      .video .embed span { background: var(--gold); color: #111; padding: 8px 12px; border-radius: 999px; }
+      .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+      .video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
+
+      /* Lightbox for visuals */
+      .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.72); display: none; align-items: center; justify-content: center; z-index: 100; padding: 16px; }
+      .lightbox.open { display: flex; }
+      .lightbox .frame { position: relative; max-width: 96vw; max-height: 92vh; background: #000; border-radius: 14px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+      .lightbox img { display: block; max-width: 96vw; max-height: 86vh; width: auto; height: auto; }
+      .lightbox .cap { color: #e9ecf4; background: rgba(0,0,0,.6); padding: 8px 12px; font-size: 13px; }
+      .lightbox .close { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,.92); color: #111; border: 0; border-radius: 999px; padding: 8px 10px; font-weight: 700; cursor: pointer; }
+      .gallery img { cursor: zoom-in; }
+
+      .dark { background: var(--ink); color: #e9ecf4; }
+      .dark h2 { color: #fff; }
+      .dark .panel { background: #121739; border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 18px; }
+
+      .foot { padding: 28px 0 60px; color: #9aa1b6; font-size: 14px; }
+
+      /* External site preview */
+      .preview { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid #e6e6ef; background: #0b0e2a; display: block; }
+      .preview::before { content: ""; display: block; padding-top: 56.25%; }
+      .preview img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .96; }
+      .preview .bar { position: absolute; left: 0; right: 0; top: 0; height: 34px; background: linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.66)); border-bottom: 1px solid rgba(0,0,0,.08); display: flex; align-items: center; gap: 6px; padding: 0 10px; }
+      .preview .dot { width: 10px; height: 10px; border-radius: 999px; }
+      .preview .dot.r { background: #ff5f57; }
+      .preview .dot.y { background: #febc2e; }
+      .preview .dot.g { background: #28c840; }
+      .preview .cta { position: absolute; right: 10px; bottom: 10px; background: rgba(255,255,255,.92); color: #111; border-radius: 999px; padding: 6px 10px; font-weight: 800; }
+
+      @media (max-width: 960px) {
+        .hero-inner { grid-template-columns: 1fr; padding: 56px 0 42px; }
+        .cards .card, .pricing .tier, .gallery figure { grid-column: span 12; height: auto; }
+        .video-grid .video { grid-column: span 12; }
+      }
+
+      /* Mobile optimizations without altering desktop */
+      @media (max-width: 720px) {
+        .wrap { padding: 0 16px; }
+        section { padding: 48px 0; }
+        h1 { font-size: 32px; }
+        .btn { padding: 10px 14px; }
+        .nav-inner { padding: 10px 0; }
+        .nav a { margin-left: 12px; font-size: 13px; }
+        .cards { grid-template-columns: 1fr !important; }
+        .cards .card { grid-column: span 12; }
+        .gallery img { height: 140px; }
+        .preview::before { padding-top: 65%; }
+      }
+      @media (max-width: 420px) {
+        h1 { font-size: 28px; }
+        .btn { padding: 10px 12px; border-radius: 8px; }
+        .brand small { display: none; }
+      }
+      /* Demo launchers (floating) */
+      .demo-launchers { position: fixed; right: 16px; bottom: 16px; display: flex; flex-direction: column; gap: 8px; z-index: 50; }
+      .btn.small { font-size: 13px; padding: 9px 12px; border-radius: 999px; }
+
+      /* Generic modal */
+      .modal { position: fixed; inset: 0; background: rgba(0,0,0,.72); display: none; align-items: center; justify-content: center; z-index: 100; padding: 16px; }
+      .modal.open { display: flex; }
+      .modal .dialog { position: relative; width: 100%; max-width: 820px; border-radius: 14px; overflow: hidden; border: 1px solid #e6e6ef; background: var(--card); box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+      .modal .head { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-bottom: 1px solid #ececf2; background: #fafafa; }
+      .modal .head h3 { margin: 0; font-size: 16px; color: var(--ink); }
+      .modal .close { appearance: none; border: 0; background: rgba(0,0,0,.06); color: #111; border-radius: 999px; padding: 6px 10px; font-weight: 700; cursor: pointer; }
+      .modal .body { padding: 16px; background: #fff; }
+
+      /* Email demo form */
+      .email-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
+      .field { display: grid; gap: 6px; margin-bottom: 10px; }
+      .field label { font-weight: 700; font-size: 12px; color: var(--slate); letter-spacing: .3px; text-transform: uppercase; }
+      .field input, .field textarea { width: 100%; padding: 10px 12px; border: 1px solid #e1e3ec; border-radius: 10px; font: inherit; outline: none; }
+      .field textarea { min-height: 120px; resize: vertical; }
+      .email-actions { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+      .badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; background: #f5f6fb; color: #556; font-size: 12px; border: 1px solid #e6e6ef; }
+      .spinner { width: 14px; height: 14px; border: 2px solid #cdd2e6; border-top-color: var(--gold); border-radius: 50%; animation: spin 1s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      .success { color: #11643c; background: #e9f7ef; border-color: #cdebd9; }
+
+      .auto-reply { position: absolute; right: 12px; bottom: 12px; background: #11162f; color: #e9ecf4; border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 12px; width: min(420px, 90vw); box-shadow: 0 12px 30px rgba(0,0,0,.4); display: none; }
+      .auto-reply.show { display: block; animation: slideUp .32s ease-out; }
+      @keyframes slideUp { from { transform: translateY(8px); opacity: .6; } to { transform: translateY(0); opacity: 1; } }
+      .auto-reply .meta { font-size: 12px; color: #aab1c8; margin-bottom: 6px; }
+      .auto-reply .cta { margin-top: 8px; display: inline-block; background: var(--gold); color: #111; border-radius: 999px; padding: 6px 10px; font-weight: 800; }
+
+      /* Tour modal */
+      .tour-frame { position: relative; background: #0b0e2a; }
+      .tour-frame::before { content: ""; display: block; padding-top: 56.25%; }
+      .tour-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+      .tour-headline { font-weight: 800; letter-spacing: .3px; color: var(--ink); }
+      .tour-sub { color: var(--muted); font-size: 13px; }
+
+      @media (max-width: 900px) {
+        .email-grid { grid-template-columns: 1fr; }
+      }
+      /* Spotlight guide overlay */
+      .guide-overlay { position: fixed; inset: 0; display: none; z-index: 1000; pointer-events: none; }
+      .guide-overlay.open { display: block; }
+      .guide-spot { position: absolute; border-radius: 12px; box-shadow: 0 0 0 200vmax rgba(0,0,0,.6); outline: 2px solid var(--gold); transition: all .18s ease; }
+      .guide-tip { position: absolute; max-width: min(320px, 92vw); background: #11162f; color: #e9ecf4; border: 1px solid rgba(255,255,255,.08); border-radius: 10px; padding: 8px 10px; font-size: 13px; }
+      /* Mail preview modal (Gmail‑style mock) */
+      .mail-app { display: grid; grid-template-columns: 280px 1fr; height: min(72vh, 680px); background: #fff; }
+      .mail-list { background: #f6f7fb; border-right: 1px solid #e6e6ef; overflow: auto; }
+      .mail-item { padding: 12px 14px; border-bottom: 1px solid #ececf2; cursor: default; display: grid; grid-template-columns: 1fr auto; gap: 4px; }
+      .mail-item .from { font-weight: 700; color: #1f2742; }
+      .mail-item .time { color: #7b8093; font-size: 12px; }
+      .mail-item .sub { grid-column: 1 / -1; color: #4b5370; font-size: 13px; }
+      .mail-item.select { animation: flash .8s ease-in-out; }
+      @keyframes flash { 0% { background: #fff9e8; } 100% { background: transparent; } }
+      .mail-detail { overflow: auto; background: #fff; }
+      .email-template { border: 1px solid #e6e6ef; border-radius: 12px; overflow: hidden; margin: 14px; }
+      .email-template .et-head { background: var(--ink); color: #e9ecf4; padding: 16px; display: flex; align-items: center; justify-content: space-between; }
+      .email-template .et-head .brand { color: #fff; font-weight: 800; letter-spacing: .3px; }
+      .email-template .et-head .subject { color: #cfd5e6; font-size: 13px; }
+      .email-template .et-body { padding: 18px; }
+      .email-template .et-body h4 { margin: 0 0 8px; color: var(--ink); }
+      .email-template .et-body p { margin: 8px 0; color: #2f3446; }
+      .email-template .meta { margin-top: 10px; font-size: 13px; color: #7b8093; }
+      .email-template .et-actions { margin-top: 14px; display: flex; gap: 10px; }
+      .email-template .et-actions a { text-decoration: none; }
+      .mail-app.view-detail .mail-list { filter: grayscale(.15); }
+      @media (max-width: 900px) {
+        .mail-app { grid-template-columns: 1fr; height: 70vh; }
+        .mail-app.view-detail .mail-list { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <div class="wrap nav-inner">
+        <div class="brand"><img src="./logo.webp" alt="Cross Creek Realty"> Cochran Films <small>— Proposal</small></div>
+        <div>
+          <a href="#summary">Summary</a>
+          <a href="#scope">Scope</a>
+          <a href="./pricing.html">Quote</a>
+          <a href="./idx-demo.html">IDX Demo</a>
+          <a href="./status.html">Status</a>
+          <a href="./roadmap.html">Roadmap</a>
+          <a href="./form.html">Project Intake</a>
+          <a href="#work">Visuals</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating demo launchers -->
+    <div class="demo-launchers" aria-label="Interactive demos">
+      <button id="openEmailDemo" class="btn primary small" title="Open Email Flow Demo">Email Demo</button>
+      <button id="openTourDemo" class="btn ghost small" title="Open 3D Tour Demo">3D Tour</button>
+    </div>
+
+    <!-- Email demo modal -->
+    <div class="modal" id="emailDemo" aria-hidden="true" role="dialog" aria-labelledby="emailDemoTitle">
+      <div class="dialog">
+        <div class="head">
+          <h3 id="emailDemoTitle">Email Form — Instant Reply Mockup</h3>
+          <button class="close" data-close="#emailDemo">Close</button>
+        </div>
+        <div class="body">
+          <!-- Spotlight overlay for step explanations -->
+          <div id="guide" class="guide-overlay" aria-hidden="true">
+            <div id="guideSpot" class="guide-spot"></div>
+            <div id="guideTip" class="guide-tip" role="note"></div>
+          </div>
+          <div class="email-grid">
+            <div>
+              <div class="field">
+                <label for="edName">Name</label>
+                <input id="edName" type="text" placeholder="Your name">
+              </div>
+              <div class="field">
+                <label for="edEmail">Email</label>
+                <input id="edEmail" type="email" placeholder="you@example.com">
+              </div>
+              <div class="field">
+                <label for="edMsg">Message</label>
+                <textarea id="edMsg" placeholder="How can we help?"></textarea>
+              </div>
+              <div class="email-actions">
+                <button id="edSend" class="btn primary">Send</button>
+                <span id="edStatus" class="badge" aria-live="polite"></span>
+              </div>
+            </div>
+            <div>
+              <div class="panel">
+                <div class="kicker">Professional Setup</div>
+                <h3 style="margin:6px 0 8px;">Branded email, clean payloads</h3>
+                <ul class="clean">
+                  <li>Modern, trustable form UI</li>
+                  <li>Validations and spam‑resistant patterns</li>
+                  <li>Ready to wire to EmailJS/CRM in production</li>
+                </ul>
+                <div class="note" style="margin-top:8px;">This demo auto‑types and simulates send + reply — no real email sent.</div>
+              </div>
+            </div>
+          </div>
+          <div class="auto-reply" id="edReply" aria-live="polite">
+            <div class="meta">Auto‑reply — Cross Creek Realty</div>
+            <div><b>Thanks, Alex!</b> We received your message and will reach out shortly. In the meantime, explore live listings and schedule a tour.</div>
+            <a class="cta" href="./idx-demo.html">Open the IDX demo →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3D tour modal -->
+    <div class="modal" id="tourDemo" aria-hidden="true" role="dialog" aria-labelledby="tourDemoTitle">
+      <div class="dialog">
+        <div class="head">
+          <h3 id="tourDemoTitle" class="tour-headline">What if Cross Creek Realty toured this way?</h3>
+          <button class="close" data-close="#tourDemo">Close</button>
+        </div>
+        <div class="body">
+          <div class="tour-sub">Immersive, on‑brand presentation that keeps buyers engaged.</div>
+          <div class="tour-frame" style="margin-top:10px; border-radius: 10px; overflow: hidden; border: 1px solid #e6e6ef;">
+            <iframe src="https://my.matterport.com/show/?m=JFdHyZdKqRh&play=1&brand=0" allow="fullscreen; xr-spatial-tracking" allowfullscreen title="3D Tour — Matterport"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Email client preview modal -->
+    <div class="modal" id="mailPreview" aria-hidden="true" role="dialog" aria-labelledby="mailPreviewTitle">
+      <div class="dialog">
+        <div class="head">
+          <h3 id="mailPreviewTitle">Inbox — EmailJS template preview</h3>
+          <button class="close" data-close="#mailPreview">Close</button>
+        </div>
+        <div class="body">
+          <div id="mailApp" class="mail-app">
+            <div class="mail-list">
+              <div id="mpItem" class="mail-item">
+                <div class="from">Cross Creek Realty</div>
+                <div class="time">Now</div>
+                <div class="sub" id="mpSubjectList">Thanks, <span id="mpNameInline">Alex</span> — next steps</div>
+              </div>
+            </div>
+            <div class="mail-detail">
+              <div class="email-template">
+                <div class="et-head">
+                  <div class="brand">Cross Creek Realty</div>
+                  <div class="subject" id="mpSubject">Thanks, Alex — next steps</div>
+                </div>
+                <div class="et-body">
+                  <h4>Hi <span id="mpName">Alex</span>,</h4>
+                  <p>We received your message and pulled a few quick options based on your note.</p>
+                  <p id="mpMsg">"Hi Cross Creek — I'm interested in homes near Buckhead around $750k. Can we schedule a tour this weekend?"</p>
+                  <p class="meta">From: <span id="mpEmail">alex@example.com</span> • To: c21intown(at)gmail(dotted)com</p>
+                  <div class="et-actions">
+                    <a class="btn primary" href="./idx-demo.html">See homes near you</a>
+                    <a class="btn ghost" href="./idx-demo.html#schedule">Schedule a tour</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header class="hero">
+      <div class="wrap hero-inner">
+        <div>
+          <div class="kicker">Cross Creek Realty — Digital Upgrade</div>
+          <h1>Website refresh + listing media that works</h1>
+          <p class="sub">A clean, modern site that works every time. We’ll fix the listing tools, make clear paths for buyers, sellers, and agents, and back it with strong photo + video. Built to launch quickly and grow with you.</p>
+          <div class="btns">
+            <a class="btn primary" href="./pricing.html">Quote</a>
+            <a class="btn ghost" href="#scope">What You Get</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="kicker">Highlights</div>
+          <ul class="clean">
+            <li><b>Reliable listings</b> that keep working, even when the feed acts up</li>
+            <li><b>Clear next steps</b> for buyers and sellers so more people take action</li>
+            <li><b>Stronger local presence</b> with focused market pages and basic SEO</li>
+            <li><b>Original photo + video</b> that looks and feels like Cross Creek</li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <section id="summary">
+      <div class="wrap">
+        <h2>Executive Summary</h2>
+        <p class="lead">The site covers the basics but a few things hold it back: unreliable listing tools, placeholder numbers, and unclear next steps. We’ll make it trustworthy and easy to use — stabilize listings, swap placeholders for real results, and guide buyers and sellers to act. Then we’ll support it with sharp photo and video.</p>
+
+        <div class="cards" style="margin-top:14px;">
+          <div class="card">
+            <span class="pill">Reliability</span>
+            <h3>Fix IDX (Internet Data Exchange) + Account Tools</h3>
+            <ul class="clean">
+              <li>Resolve "Listings not found" states with a graceful fallback form</li>
+              <li>Repair organizer/login; enable saved searches and alerts</li>
+              <li>Replace placeholder KPIs (Key Performance Indicators) with GA4 (Google Analytics 4) / CRM (Customer Relationship Management)‑backed metrics</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Conversion</span>
+            <h3>Buyer & Seller Journeys</h3>
+            <ul class="clean">
+              <li>Above‑the‑fold CTAs (Calls To Action): See Homes Near Me, Schedule a Tour</li>
+              <li>Seller path: Valuation → Marketing Plan → Close, with proof of reach</li>
+              <li>Agent directory filters + book‑a‑meeting actions</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Authority</span>
+            <h3>Local Market Content</h3>
+            <ul class="clean">
+              <li>Community pages with live listings and open houses</li>
+              <li>Micro‑market stats, schools, and neighborhood highlights</li>
+              <li>SEO (Search Engine Optimization) foundations with schema: LocalBusiness, RealEstateAgent, FAQ (Frequently Asked Questions)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <section id="scope" class="dark">
+      <div class="wrap">
+        <h2>Scope — Web Reboot (Now)</h2>
+        <div class="panel">
+          <ul class="clean">
+            <li><b>Design & Build:</b> Fast, mobile‑first site with clear paths for Buyers, Sellers, and Agents — plus speed and accessibility improvements.</li>
+            <li><b>Listings:</b> Check and stabilize the IDX (Internet Data Exchange)/MLS tools; show a simple contact form when data is missing.</li>
+            <li><b>Conversion:</b> Property cards with Ask/Save/Schedule; a quick buyer quiz instead of long forms.</li>
+            <li><b>Content:</b> Better community pages; homepage with real numbers and recent wins.</li>
+            <li><b>SEO & Tracking:</b> Basic SEO setup, analytics tracking, and speed tuning.</li>
+            <li><b>Launch:</b> Domain and security set‑up, uptime watch, and 30‑day support after go‑live.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="wrap">
+        <h2>Findings & Visuals</h2>
+        <p class="lead">A few screenshots from the current site and setup. These show what we’ll fix and how the new site will feel.</p>
+        <div class="gallery" style="margin-top:12px;">
+          <figure>
+            <img alt="Visual 1" src="./1.png">
+            <figcaption>Language menu uses icons with no labels, so it’s hard to tell what’s selected.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 2" src="./2.png">
+            <figcaption>Headline claims “3 MILLION VISITS PER MONTH” without a source — feels questionable and hurts trust.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 3" src="./3.png">
+            <figcaption>Two contact forms stack on top of each other with no clear next step. It creates a “wait and see” experience.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 4" src="./4.png">
+            <figcaption>Generic error messages stop people in their tracks and don’t offer another way to move forward.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 5" src="./5.png">
+            <figcaption>One generic form tries to serve buyers, sellers, and agents. Each audience needs its own short path.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 6" src="./6.png">
+            <figcaption>Hero video shows stock beach condos — not Atlanta. We’ll swap in original Cross Creek footage.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 7" src="./7.png">
+            <figcaption>Community pages are light on local info and actions. We’ll add useful data and simple ways to follow new listings.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 8" src="./8.png">
+            <figcaption>The footer includes the web vendor’s logo and link. If the site was paid in full, this should be removed so it’s 100% Cross Creek.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Visual 9" src="./9.png">
+            <figcaption>There appears to be another site at crosscreekatl.com using the older brand; we’ll consolidate and align both so the experience feels consistent.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <section id="readme">
+      <div class="wrap">
+        <h2>README — IDX Demo & MLS Integration</h2>
+        <p class="lead">The interactive demo showcases the buyer and seller experience we can roll out on your site. When connected to your MLS (IDX), the same interface delivers live listings, strengthens brand credibility, and converts more visitors into real leads — faster.</p>
+
+        <div class="cards" style="margin-top:14px;">
+          <div class="card" style="grid-column: span 6;">
+            <span class="pill">Buyer Experience</span>
+            <h3>Tools that move buyers to action</h3>
+            <ul class="clean">
+              <li><b>Smart filters</b> with grid/list toggle and shareable search links</li>
+              <li><b>Saved searches + alerts</b> (local storage demo, IDX-ready in production)</li>
+              <li><b>Favorites and recent views</b> to keep momentum</li>
+              <li><b>Tour scheduling</b> with downloadable calendar files (ICS)</li>
+              <li><b>Media‑rich listings</b>: photos, video, and a <b>3D/Matterport tour</b></li>
+              <li><b>Payment estimates</b> and a full mortgage calculator</li>
+              <li><b>Comparable listings</b> for quick context and confidence</li>
+            </ul>
+          </div>
+          <div class="card" style="grid-column: span 6;">
+            <span class="pill">Seller & Platform</span>
+            <h3>Proof, process, and lead capture</h3>
+            <ul class="clean">
+              <li><b>Seller highlights</b>: recent results slider, listing process, and net estimator</li>
+              <li><b>Valuation request</b> mini‑form capturing CRM‑ready payloads</li>
+              <li><b>Community follows</b> to build buyer demand ahead of launch</li>
+              <li><b>Lead capture</b> at key moments with clean, short forms</li>
+              <li><b>Schema & analytics ready</b>: LocalBusiness JSON‑LD, GA4/CRM hooks</li>
+              <li><b>Fast, mobile‑first</b> UX with lazy‑loading media and reduced‑motion support</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cards" style="margin-top:14px;">
+          <div class="card" style="grid-column: span 12;">
+            <span class="pill">Why MLS/IDX matters</span>
+            <h3>Trust + speed = more qualified leads</h3>
+            <ul class="clean">
+              <li><b>Live, accurate data</b> direct from the MLS builds credibility and reduces bounce</li>
+              <li><b>Continuous sync</b> means new listings and price changes trigger alerts quickly</li>
+              <li><b>Fewer dead ends</b>: graceful fallbacks capture the lead even if data hiccups</li>
+              <li><b>Brand lift</b>: on‑brand media and UI around verified data positions Cross Creek as the trusted source</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="video-grid" style="margin-top:12px;">
+          <div class="video">
+            <iframe src="https://my.matterport.com/show/?m=JFdHyZdKqRh&play=1&brand=0" allow="fullscreen; xr-spatial-tracking" allowfullscreen loading="lazy" title="3D Tour — Matterport"></iframe>
+          </div>
+        </div>
+
+        <div class="btns" style="margin-top:12px;">
+          <a class="btn primary" href="./idx-demo.html">Open the Live IDX Demo</a>
+          <a class="btn ghost" href="./idx-demo.html#saved">Try saved searches & alerts</a>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <section id="benchmark">
+      <div class="wrap">
+        <h2>Benchmark — Live IDX in the wild</h2>
+        <p class="lead">Here’s what a strong, live MLS (IDX) integration looks like in practice. <a href="https://www.premieratlantarealestate.com/" target="_blank" rel="noopener">Premier Atlanta Real Estate</a> pairs on‑brand content with searchable, constantly updated listings. This is the kind of clarity and trust we can bring to Cross Creek.</p>
+
+        <div class="cards" style="margin-top:14px;">
+          <div class="card" style="grid-column: span 7;">
+            <a class="preview" href="https://www.premieratlantarealestate.com/" target="_blank" rel="noopener" title="Open Premier Atlanta Real Estate">
+              <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+              <img src="./DJI_0276.jpg" alt="Premier Atlanta Real Estate — example of live IDX listings" loading="lazy">
+              <span class="cta">View live site →</span>
+            </a>
+          </div>
+          <div class="card" style="grid-column: span 5;">
+            <span class="pill">What they do well</span>
+            <h3>Credible listings that convert</h3>
+            <ul class="clean">
+              <li><b>Instant search</b> backed by the MLS — trustable and current</li>
+              <li><b>Community landing pages</b> that group listings around neighborhoods</li>
+              <li><b>On‑brand presentation</b> around verified data (photos, maps, stats)</li>
+              <li><b>Clear paths</b> to save, schedule, and ask questions</li>
+            </ul>
+            <div class="btns" style="margin-top:12px;">
+              <a class="btn primary" href="./idx-demo.html">See our interactive demo</a>
+              <a class="btn ghost" href="https://www.premieratlantarealestate.com/" target="_blank" rel="noopener">Open benchmark</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lighthouse">
+      <div class="wrap">
+        <h2>Site Health Check</h2>
+        <p class="lead">Quick check of <a href="https://www.crosscreekrealtyatlanta.com/" target="_blank" rel="noopener">crosscreekrealtyatlanta.com</a> showing where we’ll get easy wins in week one.</p>
+        <div class="cards" style="margin-top:14px;">
+          <div class="card">
+            <span class="pill">Scores</span>
+            <h3>Current snapshot</h3>
+            <ul class="clean">
+              <li><b>Performance</b>: 78/100</li>
+              <li><b>Accessibility</b>: 94/100</li>
+              <li><b>Best Practices</b>: 70/100</li>
+              <li><b>SEO</b>: 100/100</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">Quick Wins</span>
+            <h3>Top improvements</h3>
+            <ul class="clean">
+              <li>Speed up load by trimming and delaying non‑essential files</li>
+              <li>Compress and properly size images</li>
+              <li>Cut unused scripts and delay anything not needed on first load</li>
+              <li>Improve the first big visual load by optimizing the hero and key styles</li>
+              <li>Slim down extra page elements that slow the browser</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill">What we’ll do</span>
+            <h3>Plan</h3>
+            <ul class="clean">
+              <li>Turn on compression and smart caching on the server</li>
+              <li>Use modern image formats and lazy‑load images below the fold</li>
+              <li>Split code and delay non‑essential scripts; inline the most important styles</li>
+              <li>Swap stock hero for original media and pre‑connect to key services</li>
+              <li>Track speed and stability with analytics and Search Console</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+    
+
+    
+
+    <section id="portfolio">
+      <div class="wrap">
+        <h2>Portfolio — Real Estate</h2>
+        <p class="lead">A few videos and photos that show the look we aim for.</p>
+
+        <div class="video-grid" style="margin-top:12px;">
+          <div class="video">
+            <video src="https://video.wixstatic.com/video/aeef42_6d072f431c614174b57772be4f27e2a0/720p/mp4/file.mp4" controls playsinline preload="metadata" title="Screen Recording 1"></video>
+          </div>
+          <div class="video">
+            <video src="https://video.wixstatic.com/video/aeef42_12009d6adef241b691032667d1cfdf0e/720p/mp4/file.mp4" controls playsinline preload="metadata" title="Screen Recording 2"></video>
+          </div>
+          <div class="video">
+            <video src="https://video.wixstatic.com/video/aeef42_7ff200d9091145dc8aa7845e368cea47/720p/mp4/file.mp4" controls playsinline preload="metadata" title="Screen Recording 3"></video>
+          </div>
+          <div class="video">
+            <video src="https://video.wixstatic.com/video/aeef42_d285d32ebeaf47c2bc2a1a337a1ad830/720p/mp4/file.mp4" controls playsinline preload="metadata" title="Screen Recording 4"></video>
+          </div>
+        </div>
+
+        <div class="gallery" style="margin-top:16px;">
+          <figure>
+            <img alt="Exterior — front elevation" src="./CC__1871-HDR.jpg">
+            <figcaption>Front elevation — clean and bright presentation.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Exterior — side view" src="./CC__6615.jpg">
+            <figcaption>Side view — balanced exposure and lines.</figcaption>
+          </figure>
+          <figure>
+            <img alt="Aerial — property overview" src="./DJI_0276.jpg">
+            <figcaption>Aerial overview — shows setting and lot context.</figcaption>
+          </figure>
+          <figure class="centerpiece">
+            <img alt="Liberty Communities preview" src="./Liberty_Communities_Preview_NOWM.jpg">
+            <figcaption>Liberty Communities — exterior preview still.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox root for enlarging visuals -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <div class="frame">
+        <button class="close" id="lbClose">Close</button>
+        <img id="lbImg" alt="Expanded visual">
+        <div class="cap" id="lbCap"></div>
+      </div>
+    </div>
+
+    <div class="wrap foot">
+      <div>© 2025 Cochran Films — Confidential. For Cross Creek Realty review.</div>
+    </div>
+    <script>
+      // Simple lightbox for screenshots and gallery images
+      (function(){
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lbImg');
+        const lbCap = document.getElementById('lbCap');
+        const close = () => { lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); lbImg.src=''; lbCap.textContent=''; };
+        document.getElementById('lbClose').addEventListener('click', close);
+        lb.addEventListener('click', (e)=>{ if (e.target === lb) close(); });
+        document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') close(); });
+        // Delegate clicks from any .gallery img
+        document.addEventListener('click', (e) => {
+          const img = e.target;
+          if (img && img.tagName === 'IMG' && img.closest('.gallery')) {
+            const fig = img.closest('figure');
+            const cap = fig?.querySelector('figcaption')?.textContent || img.alt || '';
+            lbImg.src = img.src;
+            lbImg.alt = img.alt || 'Expanded visual';
+            lbCap.textContent = cap;
+            lb.classList.add('open');
+            lb.setAttribute('aria-hidden','false');
+          }
+        }, true);
+        // Modal helpers
+        const openModal = (el) => { el.classList.add('open'); el.setAttribute('aria-hidden','false'); };
+        const closeModal = (el) => { el.classList.remove('open'); el.setAttribute('aria-hidden','true'); };
+        document.querySelectorAll('.modal').forEach((m) => {
+          m.addEventListener('click', (e) => { if (e.target === m) closeModal(m); });
+        });
+        document.querySelectorAll('.modal .close').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const sel = btn.getAttribute('data-close');
+            const target = sel ? document.querySelector(sel) : btn.closest('.modal');
+            if (target) closeModal(target);
+          });
+        });
+
+        // Launchers
+        const emailModal = document.getElementById('emailDemo');
+        const tourModal = document.getElementById('tourDemo');
+        const openEmailBtn = document.getElementById('openEmailDemo');
+        const openTourBtn = document.getElementById('openTourDemo');
+        if (openEmailBtn) openEmailBtn.addEventListener('click', () => startEmailDemo());
+        if (openTourBtn) openTourBtn.addEventListener('click', () => openModal(tourModal));
+
+        // Email demo logic
+        function typeText(element, text, speed, done) {
+          element.focus();
+          element.value = '';
+          let i = 0;
+          const tick = () => {
+            element.value += text.charAt(i++);
+            if (i < text.length) setTimeout(tick, speed);
+            else if (done) done();
+          };
+          setTimeout(tick, speed);
+        }
+
+        function startEmailDemo() {
+          const nameEl = document.getElementById('edName');
+          const emailEl = document.getElementById('edEmail');
+          const msgEl = document.getElementById('edMsg');
+          const sendBtn = document.getElementById('edSend');
+          const status = document.getElementById('edStatus');
+          const reply = document.getElementById('edReply');
+          const guide = document.getElementById('guide');
+          const spot = document.getElementById('guideSpot');
+          const tip = document.getElementById('guideTip');
+
+          // reset
+          [nameEl, emailEl, msgEl].forEach(i => i.value = '');
+          status.textContent = '';
+          status.className = 'badge';
+          reply.classList.remove('show');
+
+          openModal(emailModal);
+
+          const nameText = 'Alex Buyer';
+          const emailText = 'alex@example.com';
+          const msgText = 'Hi Cross Creek — I\'m interested in homes near Buckhead around $750k. Can we schedule a tour this weekend?';
+
+          typeText(nameEl, nameText, 110, () => {
+            spotlight(nameEl, 'Step 1: The form captures clean, structured contact data.');
+            typeText(emailEl, emailText, 95, () => {
+              spotlight(emailEl, 'Step 2: Email is validated and ready for EmailJS payload.');
+              typeText(msgEl, msgText, 45, () => {
+                // simulate send
+                sendBtn.disabled = true;
+                status.innerHTML = '<span class="spinner" aria-hidden="true"></span> Sending…';
+                spotlight(sendBtn, 'Step 3: One‑click send posts a secure payload to EmailJS/CRM.');
+                setTimeout(() => {
+                  status.textContent = 'Sent!';
+                  status.className = 'badge success';
+                  reply.classList.add('show');
+                  spotlight(reply, 'Step 4: Instant on‑brand auto‑reply confirms receipt.');
+                  setTimeout(() => openMailPreview(nameText, emailText, msgText), 3200);
+                }, 2400);
+              });
+            });
+          });
+        }
+        function spotlight(targetEl, message) {
+          const guide = document.getElementById('guide');
+          const spot = document.getElementById('guideSpot');
+          const tip = document.getElementById('guideTip');
+          if (!targetEl || !guide || !spot || !tip) return;
+          const rect = targetEl.getBoundingClientRect();
+          const padding = 8;
+          // Positions for a fixed overlay should use viewport coordinates (no scroll offsets)
+          const vw = document.documentElement.clientWidth;
+          const vh = document.documentElement.clientHeight;
+          const left = Math.max(8, rect.left - padding);
+          const top = Math.max(8, rect.top - padding);
+          const width = Math.min(rect.width + padding * 2, vw - 16);
+          const height = Math.min(rect.height + padding * 2, vh - 16);
+          guide.classList.add('open');
+          guide.setAttribute('aria-hidden','false');
+          spot.style.left = `${left}px`;
+          spot.style.top = `${top}px`;
+          spot.style.width = `${width}px`;
+          spot.style.height = `${height}px`;
+          tip.textContent = message;
+          // Position tooltip below if space; otherwise above; clamp to viewport
+          const tipWidth = Math.min(320, vw * 0.92);
+          let tipLeft = left;
+          let tipTop = top + height + 10;
+          if (tipTop + 60 > vh - 8) {
+            tipTop = Math.max(8, top - 10 - 60);
+          }
+          if (tipLeft + tipWidth > vw - 8) {
+            tipLeft = vw - 8 - tipWidth;
+          }
+          tip.style.left = `${tipLeft}px`;
+          tip.style.top = `${tipTop}px`;
+          // Ensure the highlighted element is in view on small screens
+          const targetCenter = rect.top + window.scrollY - window.innerHeight / 2 + rect.height / 2;
+          window.scrollTo({ top: Math.max(0, targetCenter), behavior: 'smooth' });
+          // auto hide after 3s
+          clearTimeout(window.__guideTimer);
+          window.__guideTimer = setTimeout(() => {
+            guide.classList.remove('open');
+            guide.setAttribute('aria-hidden','true');
+          }, 3000);
+        }
+        function openMailPreview(name, email, message) {
+          const modal = document.getElementById('mailPreview');
+          const app = document.getElementById('mailApp');
+          const item = document.getElementById('mpItem');
+          const subjectList = document.getElementById('mpSubjectList');
+          const subject = document.getElementById('mpSubject');
+          const nameInline = document.getElementById('mpNameInline');
+          const nameSpan = document.getElementById('mpName');
+          const emailEl = document.getElementById('mpEmail');
+          const msgEl = document.getElementById('mpMsg');
+
+          const subjText = `Thanks, ${name} — next steps`;
+          if (nameInline) nameInline.textContent = name;
+          if (nameSpan) nameSpan.textContent = name;
+          if (emailEl) emailEl.textContent = email;
+          if (msgEl) msgEl.textContent = message;
+          if (subject) subject.textContent = subjText;
+          if (subjectList) subjectList.innerHTML = `Thanks, <span id="mpNameInline">${name}</span> — next steps`;
+
+          app.classList.remove('view-detail');
+          openModal(modal);
+          item.classList.add('select');
+          setTimeout(() => {
+            app.classList.add('view-detail');
+            // spotlight the inbox row then the subject inside the email
+            const listRow = document.getElementById('mpItem');
+            spotlight(listRow, 'Step 5: New message hits the inbox instantly.');
+            setTimeout(() => {
+              const subj = document.getElementById('mpSubject');
+              spotlight(subj, 'Step 6: Branded EmailJS template with personalized subject.');
+            }, 2000);
+          }, 1600);
+        }
+      })();
+    </script>
+  </body>
+</html>
+
+

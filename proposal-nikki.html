@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Content Strategy & Systems Proposal — Nikki Sanders</title>
+  
+  <!-- Shared Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <style>
+    :root {
+      --brand-dark: #010043;
+      --brand-gold: #e0ab10;
+      --bg-0: #07071a;
+      --bg-1: #0b0b23;
+      --glass: 16px;
+      --text: #ffffff;
+      --muted: #cbd0ff;
+      --ok: #3ddc84;
+      --danger: #ff5470;
+      --shadow: 0 10px 40px rgba(0,0,0,.35);
+      --ring: 0 0 0 2px rgba(224,171,16,.35);
+      --maxw: 1200px;
+      --radius: 16px;
+      
+      /* Card theme (defaults to gold) */
+      --cardA: rgba(255,216,106,.35);
+      --cardB: rgba(224,171,16,.35);
+      --glowA: rgba(255,216,106,.30);
+      --glowB: rgba(224,171,16,.22);
+    }
+
+    * { box-sizing: border-box; }
+    
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 800px at 70% -10%, rgba(255,120,200,.09), transparent 50%),
+        radial-gradient(900px 600px at 0% 100%, rgba(1,0,67,.6), transparent 60%),
+        linear-gradient(180deg, var(--bg-0), var(--bg-1));
+      background-attachment: fixed, fixed, fixed;
+      overflow-x: hidden;
+    }
+
+    .neural-canvas {
+      position: fixed;
+      top: 0; bottom: 0;
+      left: calc(50% - 50vw);
+      right: calc(50% - 50vw);
+      z-index: -2;
+    }
+
+    .neural-overlay {
+      position: fixed;
+      top: 0; bottom: 0;
+      left: calc(50% - 50vw);
+      right: calc(50% - 50vw);
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(1000px 600px at 10% -10%, rgba(255,120,200,.09), transparent 50%),
+        radial-gradient(900px 600px at 100% 100%, rgba(224,171,16,.09), transparent 55%);
+    }
+
+    /* Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: saturate(140%) blur(12px);
+      background: linear-gradient(180deg, rgba(7,7,26,.85), rgba(7,7,26,.55));
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      padding: 0 24px;
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 8px rgba(224,171,16,.35));
+      border-radius: 8px;
+    }
+
+    .brand .name {
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+
+    .brand .name small {
+      display: block;
+      font-weight: 500;
+      color: var(--muted);
+      margin-top: -2px;
+      font-size: 11px;
+    }
+
+    /* Buttons */
+    .cta-primary {
+      background: linear-gradient(135deg, var(--brand-gold), #ffd86a);
+      color: #111;
+      border: none;
+      border-radius: 999px;
+      height: 40px;
+      min-width: 140px;
+      padding: 0 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: .2px;
+      white-space: nowrap;
+      box-shadow: 0 10px 30px rgba(224,171,16,.35);
+      cursor: pointer;
+      transition: transform .15s ease, filter .2s ease;
+    }
+
+    .cta-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+
+    .cta-ghost {
+      background: rgba(255,255,255,.9);
+      color: #111;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      height: 40px;
+      min-width: 120px;
+      padding: 0 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    /* Container */
+    .container {
+      width: min(100%, var(--maxw));
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 72px 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.08;
+      margin: 0 0 14px;
+      font-weight: 800;
+      background: linear-gradient(90deg, #fff, #ffd86a, #9ecbff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p.sub {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    /* Cards */
+    .card {
+      border-radius: var(--radius);
+      background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.08'/></svg>") repeat,
+        linear-gradient(135deg, var(--cardA), var(--cardB));
+      background-size: 160px 160px, auto;
+      background-blend-mode: overlay, normal;
+      border: 1px solid rgba(255,255,255,.22);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px) saturate(130%);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 24px 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav {
+        height: auto;
+        padding: 12px;
+        flex-direction: column;
+        gap: 12px;
+      }
+      
+      .hero {
+        padding: 48px 0;
+      }
+      
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="neural" class="neural-canvas" aria-hidden="true"></canvas>
+  <div class="neural-overlay" aria-hidden="true"></div>
+
+  <header>
+    <nav class="nav">
+      <div class="brand">
+        <img src="logo.webp" alt="Nikki Sanders Logo" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'128\' height=\'128\'><defs><linearGradient id=\'g\' x1=\'0\' x2=\'1\'><stop stop-color=\'%23e0ab10\' offset=\'0\'/><stop stop-color=\'%23ffd86a\' offset=\'1\'/></linearGradient></defs><rect rx=\'24\' ry=\'24\' width=\'100%\' height=\'100%\' fill=\'%23010043\'/><text x=\'50%\' y=\'54%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=\'44\' font-family=\'sans-serif\' fill=\'url(%23g)\'>NS</text></svg>'">
+        <div class="name">
+          Nikki Sanders
+          <small>The Voice of Content Branding</small>
+        </div>
+      </div>
+      <div class="actions">
+        <a href="nikki-mock.html" class="cta-ghost">View Demo</a>
+        <a href="roadmap-nikki.html" class="cta-ghost">View Roadmap</a>
+        <a href="contract-nikki.html" class="cta-primary">Review Agreement</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <h1>Helping you show up consistently + grow without burnout</h1>
+      <p class="sub">Content, Strategy, and AI that actually works.</p>
+      <div class="cta-group">
+        <a href="nikki-mock.html" class="cta-primary">Explore the Demo</a>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="grid">
+        <div class="card">
+          <h2>ChatGPT for Content Creation</h2>
+          <p>LinkedIn Learning course with hands-on workflows and strategy.</p>
+          <a href="demo-nikki.html#course" class="cta-ghost">Learn More</a>
+        </div>
+        
+        <div class="card">
+          <h2>Two-Day Social Accelerator</h2>
+          <p>Design a 90-day content system in two days—zero burnout, maximum clarity.</p>
+          <a href="demo-nikki.html#workshop" class="cta-ghost">View Workshop</a>
+        </div>
+        
+        <div class="card">
+          <h2>AI Content Strategy</h2>
+          <p>Weekly classes to architect your AI-assisted editorial calendar and brand voice.</p>
+          <a href="demo-nikki.html#strategy" class="cta-ghost">Explore Programs</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Neural background animation
+    (function(){
+      const canvas = document.getElementById('neural');
+      if(!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w,h,dpr, t=0, raf;
+      let particles = [];
+      
+      const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+      
+      function resize() {
+        dpr = window.devicePixelRatio || 1;
+        w = canvas.clientWidth = window.innerWidth;
+        h = canvas.clientHeight = window.innerHeight;
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        initParticles();
+        draw(0, true);
+      }
+      
+      function initParticles() {
+        const count = Math.max(40, Math.floor((w * h) / 24000));
+        particles = new Array(count).fill(0).map(() => ({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          life: 200 + Math.random() * 400,
+          size: 0.8 + Math.random() * 1.6,
+          hue: 300 + Math.random() * 40
+        }));
+      }
+      
+      function fieldAngle(x, y, time) {
+        return Math.sin(x * 0.002 + time * 0.6) + Math.cos(y * 0.0025 - time * 0.5);
+      }
+      
+      function draw(time, staticOnly) {
+        ctx.clearRect(0, 0, w, h);
+        
+        // Gradient background
+        const g1 = ctx.createRadialGradient(w * 0.15, h * 0.1, 0, w * 0.15, h * 0.1, Math.max(w, h));
+        g1.addColorStop(0, 'rgba(40,0,25,0.6)');
+        g1.addColorStop(1, 'rgba(25,0,18,0.0)');
+        ctx.fillStyle = g1;
+        ctx.fillRect(0, 0, w, h);
+        
+        const g2 = ctx.createRadialGradient(w * 0.85, h * 0.9, 0, w * 0.85, h * 0.9, Math.max(w, h));
+        g2.addColorStop(0, 'rgba(255,120,200,0.10)');
+        g2.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = g2;
+        ctx.fillRect(0, 0, w, h);
+        
+        if (!staticOnly && !prefersReduce.matches) {
+          // Particles
+          ctx.save();
+          particles.forEach(p => {
+            const a = fieldAngle(p.x, p.y, time) * Math.PI;
+            p.x += Math.cos(a) * 0.9;
+            p.y += Math.sin(a) * 0.9;
+            p.life -= 1;
+            
+            if (p.x < -20) p.x = w + 20;
+            if (p.x > w + 20) p.x = -20;
+            if (p.y < -20) p.y = h + 20;
+            if (p.y > h + 20) p.y = -20;
+            
+            if (p.life <= 0) {
+              p.x = Math.random() * w;
+              p.y = Math.random() * h;
+              p.life = 200 + Math.random() * 400;
+            }
+            
+            ctx.beginPath();
+            ctx.fillStyle = `hsla(${p.hue}, 85%, 62%, 0.85)`;
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+          });
+          ctx.restore();
+        }
+      }
+      
+      function step() {
+        t += 0.012;
+        draw(t, false);
+        raf = requestAnimationFrame(step);
+      }
+      
+      resize();
+      window.addEventListener('resize', resize);
+      
+      if (!prefersReduce.matches) {
+        step();
+      } else {
+        draw(0, true);
+      }
+      
+      prefersReduce.addEventListener('change', (e) => {
+        if (e.matches) {
+          cancelAnimationFrame(raf);
+          draw(0, true);
+        } else {
+          step();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

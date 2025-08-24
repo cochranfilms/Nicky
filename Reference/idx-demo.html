@@ -1,0 +1,1722 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cross Creek Realty — Home Search & Listings</title>
+    <link rel="icon" href="./logo.webp">
+    <meta name="description" content="Cross Creek Realty — Modern home search with saved searches, alerts, tours, scheduling, mortgage calculator, and market insights.">
+    <meta property="og:title" content="Cross Creek Realty — Home Search & Listings">
+    <meta property="og:description" content="Search homes, save searches, get alerts, schedule tours, and estimate payments.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./logo.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preload" as="image" href="./CC__1871-HDR.jpg">
+    <link rel="preload" as="image" href="./DJI_0276.jpg">
+    <link rel="preload" as="image" href="./Liberty_Communities_Preview_NOWM.jpg">
+    <style>
+      :root {
+        --ink: #0b0e2a;
+        --gold: #c7a86b;
+        --slate: #2f3446;
+        --soft: #f7f7f9;
+        --muted: #7b8093;
+        --card: #ffffff;
+        --ok: #0bb57a;
+        --warn: #d97706;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; background: var(--soft); color: #1b1e2b; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+      a { color: var(--gold); text-decoration: none; }
+      .wrap { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+
+      .nav { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(6px); background: rgba(11,14,42,.92); border-bottom: 1px solid rgba(255,255,255,.08); }
+      .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; }
+      .brand { display: flex; align-items: center; gap: 10px; color: #e9ecf4; font-weight: 700; }
+      .brand img { height: 28px; width: auto; }
+      .nav a { color: #e9ecf4; margin-left: 14px; font-weight: 600; font-size: 14px; opacity: .95; }
+
+      .hero { color: #fff; background: radial-gradient(1200px 400px at 65% 10%, rgba(199,168,107,.25), transparent 60%), var(--ink); border-bottom: 1px solid rgba(255,255,255,.1); }
+      .hero-inner { padding: 56px 0 38px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px; align-items: end; }
+      .kicker { color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 12px; }
+      h1 { margin: 10px 0 12px; font-size: 36px; line-height: 1.15; color: #fff; }
+      .sub { color: #cfd5e6; }
+
+      .panel { background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 16px; color: #e9ecf4; }
+      .btns { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+      .btn { display: inline-block; padding: 10px 14px; border-radius: 10px; border: 1px solid transparent; font-weight: 700; letter-spacing: .3px; background: var(--gold); color: #111; }
+      .btn.ghost { background: transparent; border-color: rgba(255,255,255,.35); color: #fff; }
+
+      section { padding: 40px 0; }
+      h2 { font-size: 26px; margin: 0 0 12px; color: var(--ink); }
+      .lead { color: var(--muted); max-width: 880px; }
+
+      .filters { background: var(--card); border: 1px solid #e6e6ef; border-radius: 14px; padding: 12px; display: grid; grid-template-columns: repeat(12, 1fr); gap: 10px; align-items: end; }
+      .filters .field { grid-column: span 2; display: flex; flex-direction: column; gap: 6px; }
+      .filters .field label { font-size: 12px; color: var(--slate); font-weight: 700; letter-spacing: .2px; }
+      .filters input, .filters select { padding: 10px 10px; border-radius: 10px; border: 1px solid #dcdced; font-size: 14px; }
+      .filters .actions { grid-column: span 4; display: flex; gap: 8px; justify-content: flex-end; }
+
+      .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; margin-top: 14px; }
+      .card { background: var(--card); border: 1px solid #e6e6ef; border-radius: 14px; grid-column: span 4; overflow: hidden; display: flex; flex-direction: column; }
+      .thumb { position: relative; height: 180px; border-bottom: 1px solid #e6e6ef; }
+      .thumb img, .thumb video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .fav { position: absolute; right: 10px; top: 10px; background: rgba(0,0,0,.55); color: #fff; border: 0; border-radius: 999px; width: 34px; height: 34px; display: grid; place-items: center; font-size: 18px; cursor: pointer; }
+      .fav.active { background: var(--gold); color: #111; }
+      .content { padding: 12px; display: grid; gap: 6px; }
+      .price { font-weight: 800; color: var(--ink); }
+      .meta { color: var(--muted); font-size: 13px; }
+      .card .actions { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+      .chip { background: #f1efe9; color: #5a4a22; border-radius: 999px; padding: 6px 10px; font-weight: 700; font-size: 12px; letter-spacing: .3px; border: 0; cursor: pointer; }
+
+      .dark { background: var(--ink); color: #e9ecf4; }
+      .dark h2 { color: #fff; }
+      .panel-dark {
+        background: radial-gradient(800px 260px at 15% -10%, rgba(199,168,107,.10), transparent 60%), #0f1535;
+        border: 1px solid rgba(255,255,255,.10);
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 14px 30px rgba(11,14,42,.35);
+      }
+      .panel-dark h3 { margin: 0 0 10px; letter-spacing: .2px; }
+      .dark .saved-search {
+        background: rgba(255,255,255,.04);
+        border: 1px solid rgba(255,255,255,.14);
+        border-radius: 12px;
+        padding: 12px;
+        color: #e9ecf4;
+      }
+      .dark .saved-search + .saved-search { margin-top: 8px; }
+      .dark .saved-search b { color: #fff; }
+      .dark .chip {
+        background: transparent;
+        border: 1px solid rgba(255,255,255,.24);
+        color: #e9ecf4;
+      }
+      .dark .chip:hover { background: var(--gold); color: #111; border-color: var(--gold); }
+
+      .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+      .saved-searches { display: grid; gap: 8px; margin-top: 10px; }
+      .saved-search { background: var(--card); border: 1px solid #e6e6ef; border-radius: 10px; padding: 10px; display: flex; align-items: center; justify-content: space-between; }
+
+      .toast { position: fixed; right: 16px; bottom: 16px; background: var(--ink); color: #fff; padding: 10px 14px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,.2); display: none; }
+
+      /* Modal */
+      .modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,.4); z-index: 100; padding: 12px; }
+      .modal.open { display: flex; }
+      .sheet { width: min(980px, 92vw); background: var(--card); border-radius: 16px; overflow: hidden; border: 1px solid #e6e6ef; max-height: 92vh; display: flex; flex-direction: column; }
+      .sheet-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: var(--ink); color: #fff; }
+      .sheet-body { padding: 12px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 14px; overflow: auto; }
+      .sheet h3 { margin: 8px 0; }
+      .tabs { display: flex; gap: 8px; margin: 8px 0; }
+      .tabs button { border: 1px solid #dcdced; background: #fff; padding: 6px 10px; border-radius: 8px; cursor: pointer; }
+      .tabs button.active { border-color: var(--gold); background: #fff7e6; }
+      .media { position: relative; border: 1px solid #e6e6ef; border-radius: 12px; overflow: hidden; background: #0b0e2a; }
+      .media::before { content: ""; display: block; padding-top: 56.25%; }
+      .media > * { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
+      .ics { margin-top: 8px; font-size: 13px; color: var(--muted); }
+
+      .comps { display: grid; grid-template-columns: repeat(12, 1fr); gap: 10px; }
+      .comp { grid-column: span 4; border: 1px solid #e6e6ef; border-radius: 10px; overflow: hidden; background: #fff; }
+      .comp img { width: 100%; height: 120px; object-fit: cover; display: block; }
+      .comp .p { padding: 8px; font-size: 13px; }
+
+      .foot { padding: 24px 0 60px; color: #9aa1b6; font-size: 14px; }
+
+      /* Corporate Template Additions */
+      .topbar { background: #0f1535; color: #cfd5e6; font-size: 12px; }
+      .topbar-inner { display: flex; align-items: center; justify-content: space-between; padding: 6px 0; }
+      .topbar a { color: #e9ecf4; opacity: .9; }
+      .top-actions { display: flex; gap: 10px; align-items: center; }
+      .top-cta { background: #fff7e6; color: #111; padding: 6px 10px; border-radius: 8px; font-weight: 700; }
+      .topbar .top-cta { color: #111; opacity: 1; }
+
+      .nav .menu a { margin-left: 16px; }
+      .pill.count { background: #e6f7f0; color: #0b8f64; border-radius: 999px; padding: 2px 8px; font-weight: 800; font-size: 12px; margin-left: 6px; }
+
+      .badges { display: grid; grid-auto-flow: column; gap: 8px; width: fit-content; margin-top: 10px; }
+      .badge { background: rgba(255,255,255,.08); color: #e9ecf4; border: 1px solid rgba(255,255,255,.14); padding: 6px 10px; border-radius: 999px; font-weight: 700; font-size: 12px; letter-spacing: .3px; }
+
+      .about { background: var(--card); border-top: 1px solid #e6e6ef; border-bottom: 1px solid #e6e6ef; }
+      .values { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; margin-top: 12px; }
+      .value { grid-column: span 4; background: #fff; border: 1px solid #e6e6ef; border-radius: 12px; padding: 14px; }
+      .value b { color: var(--ink); }
+
+      .resources .cards { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; margin-top: 12px; }
+      .card-link { grid-column: span 4; background: #fff; border: 1px solid #e6e6ef; border-radius: 12px; padding: 14px; display: grid; gap: 6px; }
+      .faq { margin-top: 12px; border: 1px solid #e6e6ef; border-radius: 12px; background: #fff; }
+      .faq-item + .faq-item { border-top: 1px solid #e6e6ef; }
+      .faq-q { width: 100%; text-align: left; padding: 12px 14px; background: #fff; border: 0; cursor: pointer; font-weight: 700; }
+      .faq-a { padding: 0 14px 12px 14px; color: var(--muted); display: none; }
+      .faq-item.open .faq-a { display: block; }
+
+      .contact .two { grid-template-columns: 1.1fr .9fr; }
+      .contact .panel-dark { background: #fff; color: #111; border: 1px solid #e6e6ef; }
+
+      .site-footer { background: var(--ink); color: #cfd5e6; border-top: 1px solid rgba(255,255,255,.08); padding: 30px 0; }
+      .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 16px; }
+      .site-footer h4 { color: #fff; margin: 0 0 10px; font-size: 14px; letter-spacing: .2px; }
+      .site-footer a { color: #cfd5e6; font-size: 14px; display: block; margin: 6px 0; }
+      .site-footer .brandline { display: flex; align-items: center; gap: 10px; }
+      .site-footer .brandline img { height: 28px; }
+
+      .fab { position: fixed; right: 16px; bottom: 82px; background: var(--gold); color: #111; border: 0; border-radius: 999px; padding: 12px 14px; font-weight: 800; cursor: pointer; box-shadow: 0 12px 30px rgba(0,0,0,.25); }
+      .cookie { position: fixed; left: 16px; right: 16px; bottom: 16px; background: #fff; border: 1px solid #e6e6ef; border-radius: 12px; padding: 12px; display: none; align-items: center; justify-content: space-between; gap: 10px; }
+      .cookie.open { display: flex; }
+      .cookie .actions { display: flex; gap: 8px; }
+
+      /* Auth modal */
+      #authModal .sheet { width: min(520px, 92vw); }
+      #authModal .sheet-body { grid-template-columns: 1fr; }
+      #authModal label { font-size: 12px; color: var(--slate); font-weight: 700; letter-spacing: .2px; }
+      #authModal input { padding: 10px; border: 1px solid #dcdced; border-radius: 10px; }
+
+      /* Enhancements */
+      .filters .field.wide { grid-column: span 3; }
+      .filters .field.narrow { grid-column: span 2; }
+      .filters .actions { gap: 8px; flex-wrap: wrap; }
+      .toolbar { display: flex; gap: 8px; align-items: center; justify-content: flex-end; }
+      .toggle { display: inline-flex; border: 1px solid #dcdced; border-radius: 10px; overflow: hidden; }
+      .toggle button { padding: 8px 12px; border: 0; background: #fff; cursor: pointer; }
+      .toggle button.active { background: #fff7e6; border-left: 1px solid var(--gold); border-right: 1px solid var(--gold); }
+      .grid.list .card { grid-column: span 12; display: grid; grid-template-columns: 220px 1fr; }
+      .grid.list .thumb { height: 160px; }
+      .grid.list .content { padding: 12px 16px; }
+      .highlight { outline: 3px solid var(--gold); box-shadow: 0 0 0 4px rgba(199,168,107,.2) inset; }
+      .empty { background: var(--card); border: 1px solid #e6e6ef; border-radius: 14px; padding: 18px; }
+      .empty h3 { margin: 0 0 8px 0; }
+      .empty .p { color: var(--muted); }
+      .listings-toolbar { display: flex; align-items: center; justify-content: space-between; margin: 8px 0 0 0; }
+      .small { font-size: 12px; color: var(--muted); }
+      .pill.badge { background: #e6f7f0; color: #0b8f64; }
+
+      /* Unified Professional Form Theme */
+      input, select, textarea {
+        -webkit-appearance: none;
+        appearance: none;
+        background: #ffffff !important;
+        color: #111 !important;
+        border: 1px solid #dcdced !important;
+        border-radius: 12px !important;
+        padding: 12px 12px !important;
+        font-size: 14px;
+        box-shadow: 0 1px 0 rgba(11,14,42,.03);
+        transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
+        outline: none;
+      }
+      input:hover, select:hover, textarea:hover { border-color: #c9cbe0 !important; }
+      input:focus, select:focus, textarea:focus {
+        border-color: var(--gold) !important;
+        box-shadow: 0 0 0 4px rgba(199,168,107,.15), 0 1px 0 rgba(11,14,42,.05) !important;
+      }
+      input::placeholder, textarea::placeholder { color: #9aa1b6 !important; }
+      input:disabled, select:disabled, textarea:disabled { background: #f2f3f7 !important; color: #9aa1b6 !important; }
+      input[type=number]::-webkit-outer-spin-button,
+      input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+      input[type=number] { -moz-appearance: textfield; }
+      select {
+        background-image: url("data:image/svg+xml;utf8,<!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14' fill='%237b8093'><path d='M7 10l5 5 5-5z'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 14px 14px;
+        padding-right: 38px !important;
+      }
+      .filters .field:focus-within label { color: var(--gold); }
+
+      /* Dark-panel variant for Sell section */
+      .sell .panel-dark input,
+      .sell .panel-dark select,
+      .sell .panel-dark textarea {
+        background: rgba(255,255,255,.06) !important;
+        color: #e9ecf4 !important;
+        border-color: rgba(255,255,255,.22) !important;
+        box-shadow: none;
+      }
+      .sell .panel-dark input::placeholder,
+      .sell .panel-dark textarea::placeholder { color: rgba(233,236,244,.75) !important; }
+      .sell .panel-dark select {
+        background-image: url("data:image/svg+xml;utf8,<!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14' fill='%23e9ecf4'><path d='M7 10l5 5 5-5z'/></svg>");
+      }
+
+      @media (max-width: 980px) {
+        .hero-inner { grid-template-columns: 1fr; }
+        .filters .field { grid-column: span 6; }
+        .filters .actions { grid-column: span 12; justify-content: flex-start; }
+        .card { grid-column: span 12; }
+        .sheet-body { grid-template-columns: 1fr; }
+        .grid.list .card { grid-template-columns: 1fr; }
+      }
+
+      /* Slider */
+      .slider { position: relative; overflow: hidden; border-radius: 14px; border: 1px solid #e6e6ef; background: #000; }
+      .slides { display: flex; transition: transform .6s ease; }
+      .slide { position: relative; min-width: 100%; height: 380px; }
+      .slide img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(1.05) contrast(1.02); }
+      .slide .overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.45)); }
+      .slide .caption { position: absolute; left: 16px; right: 16px; bottom: 16px; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.5); }
+      .slider .ctrl { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,.45); color: #fff; border: 0; width: 38px; height: 38px; border-radius: 999px; display: grid; place-items: center; cursor: pointer; }
+      .slider .prev { left: 10px; }
+      .slider .next { right: 10px; }
+      .slider .dots { position: absolute; left: 0; right: 0; bottom: 8px; display: flex; gap: 6px; justify-content: center; }
+      .slider .dot { width: 8px; height: 8px; border-radius: 999px; background: rgba(255,255,255,.5); border: 1px solid rgba(0,0,0,.2); cursor: pointer; }
+      .slider .dot.active { background: var(--gold); }
+
+      /* Logos / trust */
+      .logo-row { display: grid; grid-auto-flow: column; grid-auto-columns: max-content; gap: 18px; align-items: center; justify-content: start; }
+      .logo-pill { background: #fff; border: 1px solid #e6e6ef; border-radius: 999px; padding: 8px 12px; font-weight: 800; color: var(--slate); font-size: 12px; letter-spacing: .3px; }
+
+      /* Stats */
+      .stats { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; margin-top: 12px; }
+      .stat { grid-column: span 3; background: #fff; border: 1px solid #e6e6ef; border-radius: 12px; padding: 16px; text-align: center; }
+      .stat b { display: block; font-size: 28px; color: var(--ink); }
+      .stat .label { color: var(--muted); font-size: 13px; }
+
+      /* Testimonials */
+      .testimonials .slide { height: auto; background: #fff; color: #111; display: grid; align-content: center; }
+      .testimonial { padding: 20px; display: grid; gap: 8px; }
+      .testimonial .who { display: flex; gap: 10px; align-items: center; }
+      .avatar { width: 40px; height: 40px; border-radius: 999px; background: #e6e6ef; overflow: hidden; }
+      .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .quote { font-size: 16px; color: #333; }
+
+      /* Sell with us */
+      .sell { background: radial-gradient(800px 260px at 85% -10%, rgba(199,168,107,.10), transparent 60%), var(--ink); color: #cfd5e6; }
+      .sell h2 { color: #fff; }
+      .sell .two { align-items: center; }
+      .sell .card { border-color: rgba(255,255,255,.14); background: rgba(255,255,255,.04); }
+      .sell .panel-dark { background: rgba(255,255,255,.04); color: #e9ecf4; border-color: rgba(255,255,255,.14); }
+      .process { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; }
+      .step { grid-column: span 3; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 10px; padding: 12px; }
+      .step b { color: #fff; }
+      .metric { display: inline-block; background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.18); color: #fff; font-weight: 800; border-radius: 999px; padding: 4px 8px; font-size: 12px; }
+
+      .net { display: grid; gap: 8px; }
+      .net input { background: #fff; color: #111; border: 1px solid #dcdced; border-radius: 10px; padding: 10px; }
+      .net .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+      .net .out { margin-top: 8px; font-size: 14px; }
+
+      .sales .slide { height: 240px; }
+      .sales .caption b { font-size: 18px; }
+      .sales .caption .small { color: #e9ecf4; }
+
+      /* Map teaser */
+      .map-teaser { border: 1px solid #e6e6ef; border-radius: 12px; overflow: hidden; background: #0b0e2a; position: relative; }
+      .map-teaser::before { content: ""; display: block; padding-top: 50%; }
+      .map-teaser img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .85; }
+      .map-teaser .mask { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,.35), rgba(0,0,0,.0)); }
+      .map-teaser .atop { position: absolute; left: 12px; right: 12px; bottom: 12px; color: #fff; display: flex; align-items: center; justify-content: space-between; }
+
+      /* Sticky CTA */
+      .sticky-cta { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 50; background: #111; color: #fff; border-radius: 12px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 10px 30px rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.12); }
+      .sticky-cta .btn { background: var(--gold); color: #111; }
+      .sticky-cta .small { color: #cfd5e6; }
+
+      @media (max-width: 980px) {
+        .slide { height: 240px; }
+        .stat { grid-column: span 6; }
+        .logo-row { grid-auto-flow: row; grid-template-columns: repeat(2, max-content); }
+      }
+      /* Mobile optimizations */
+      @media (max-width: 720px) {
+        .wrap { padding: 0 16px; }
+        section { padding: 36px 0; }
+        .nav-inner { padding: 8px 0; }
+        .nav .menu a { margin-left: 10px; font-size: 13px; }
+        h1 { font-size: 30px; }
+        .panel { padding: 14px; }
+        .filters { grid-template-columns: repeat(12, 1fr); gap: 8px; }
+        .filters .field { grid-column: span 12; }
+        .filters .field.wide, .filters .field.narrow { grid-column: span 12; }
+        .filters .actions { justify-content: stretch; gap: 6px; }
+        .btn { padding: 10px 12px; border-radius: 8px; }
+        .grid { gap: 10px; }
+        .thumb { height: 160px; }
+        .sheet { width: 96vw; }
+        .slide { height: 200px; }
+        .stat { grid-column: span 12; }
+        .two { grid-template-columns: 1fr !important; }
+        .map-teaser::before { padding-top: 65%; }
+        .site-footer .footer-grid { grid-template-columns: 1fr 1fr; }
+      }
+      @media (max-width: 420px) {
+        h1 { font-size: 26px; }
+        .btn { padding: 10px 10px; }
+        .thumb { height: 140px; }
+        .nav .menu a { margin-left: 8px; }
+        .site-footer .footer-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="wrap topbar-inner">
+        <div>Call <a href="tel:+14045551234">(404) 555‑1234</a> • Email <a href="mailto:hello@crosscreekrealty.com">hello@crosscreekrealty.com</a></div>
+        <div class="top-actions">
+          <a class="top-cta" href="#contact">Book a consultation</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav">
+      <div class="wrap nav-inner">
+        <div class="brand">
+          <img src="./logo.webp" alt="Cross Creek Realty logo">
+          <span>Cross Creek Realty</span>
+        </div>
+        <div class="menu">
+          <a href="#listings">Listings</a>
+          <a href="#communities">Communities</a>
+          <a href="#resources">Resources</a>
+          <a href="#calc">Calculator</a>
+          <a href="#contact">Contact</a>
+          <a href="./index.html">Proposal</a>
+          <a href="./roadmap.html">Roadmap</a>
+          <a href="./form.html">Project Intake</a>
+          <a href="#activity">Favorites <span id="navFavCount" class="pill count">0</span></a>
+          <a href="#account" id="accountLink">Sign in</a>
+        </div>
+      </div>
+    </div>
+
+    <header class="hero">
+      <div class="wrap hero-inner">
+        <div>
+          <div class="kicker">Cross Creek Realty — Local Data Demo</div>
+          <h1>Beautiful listing experiences that convert</h1>
+          <p class="sub">Interactive tours, saved searches with alerts, calendar scheduling, a built-in mortgage calculator, market comps, and CRM-ready lead capture — all shown here with local demo data.</p>
+          <div class="btns">
+            <a class="btn" href="#listings">See Listings</a>
+            <a class="btn ghost" href="#saved">Saved Searches</a>
+          </div>
+          <div class="badges">
+            <div class="badge">MLS‑ready</div>
+            <div class="badge">Secure Lead Capture</div>
+            <div class="badge">Mobile‑optimized</div>
+          </div>
+        </div>
+        <div class="panel">
+          <b>Highlights</b>
+          <ul>
+            <li>3D/video tours and virtual walkthroughs</li>
+            <li>Saved searches + alert simulation</li>
+            <li>Mortgage calculator and affordability tools</li>
+            <li>Schedule a showing with calendar file (ICS)</li>
+            <li>Lead capture payloads ready for CRM</li>
+            <li>Comparable listings and market insights</li>
+            <li>User favorites and lightweight accounts</li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <section id="trust">
+      <div class="wrap" style="padding:22px 0 8px;">
+        <div class="logo-row" aria-label="Trusted by">
+          <div class="logo-pill">MLS‑Ready</div>
+          <div class="logo-pill">Matterport 3D</div>
+          <div class="logo-pill">Drone Media</div>
+          <div class="logo-pill">Secure Lead Capture</div>
+          <div class="logo-pill">IDX Compliance</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="showcase">
+      <div class="wrap">
+        <div class="slider" id="showcaseSlider" aria-roledescription="carousel">
+          <div class="slides">
+            <div class="slide">
+              <img src="./CC__1871-HDR.jpg" alt="Clubhouse and pool" loading="lazy">
+              <div class="overlay"></div>
+              <div class="caption"><b>Resort‑style amenities</b><div class="small">Clubhouse • Pool • Golf • Gated</div></div>
+            </div>
+            <div class="slide">
+              <img src="./DJI_0276.jpg" alt="Atlanta skyline neighborhood" loading="lazy">
+              <div class="overlay"></div>
+              <div class="caption"><b>Coveted Atlanta neighborhoods</b><div class="small">Close to parks, schools, and shopping</div></div>
+            </div>
+            <div class="slide">
+              <img src="./Liberty_Communities_Preview_NOWM.jpg" alt="Modern home exterior" loading="lazy">
+              <div class="overlay"></div>
+              <div class="caption"><b>Modern builds, classic charm</b><div class="small">Bright, open layouts for everyday living</div></div>
+            </div>
+          </div>
+          <button class="ctrl prev" aria-label="Previous" title="Previous">‹</button>
+          <button class="ctrl next" aria-label="Next" title="Next">›</button>
+          <div class="dots" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="by-the-numbers">
+      <div class="wrap">
+        <h2>By the numbers</h2>
+        <div class="stats">
+          <div class="stat"><b data-count-to="14">0</b><div class="label">Years in Atlanta</div></div>
+          <div class="stat"><b data-count-to="98">0</b><div class="label">Customer satisfaction (%)</div></div>
+          <div class="stat"><b data-count-to="250">0</b><div class="label">Homes toured with 3D</div></div>
+          <div class="stat"><b data-count-to="48">0</b><div class="label">Avg. hours to first showing</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="listings">
+      <div class="wrap">
+        <h2>Live Listings — Demo Data</h2>
+        <p class="lead">Use the filters to narrow results, then save your search to enable alerts. Click a property to tour, schedule, compare, and calculate payments.</p>
+
+        <div class="filters">
+          <div class="field"><label>City</label><select id="fCity"><option value="">Any</option><option>Atlanta</option><option>Sandy Springs</option><option>Brookhaven</option></select></div>
+          <div class="field"><label>Min Price</label><input id="fMin" type="number" placeholder="250000"></div>
+          <div class="field"><label>Max Price</label><input id="fMax" type="number" placeholder="900000"></div>
+          <div class="field"><label>Beds</label><select id="fBeds"><option value="">Any</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+          <div class="field"><label>Baths</label><select id="fBaths"><option value="">Any</option><option>2</option><option>3</option><option>4</option></select></div>
+          <div class="field wide"><label>Keywords</label><input id="fQ" type="text" placeholder="pool, fenced yard, cul‑de‑sac"></div>
+          <div class="field narrow"><label>Sort</label><select id="fSort"><option value="price_desc">Price: High → Low</option><option value="price_asc">Price: Low → High</option><option value="beds_desc">Beds: High → Low</option><option value="newest">Newest</option></select></div>
+          <div class="actions">
+            <button class="btn" id="applyFilters">Apply</button>
+            <button class="btn ghost" id="saveSearch">Save search</button>
+            <button class="btn ghost" id="shareSearch">Share</button>
+            <button class="btn ghost" id="simulateAlert">Simulate new listing alert</button>
+            <div class="toggle" aria-label="View toggle">
+              <button id="viewGrid" class="active" title="Grid view">Grid</button>
+              <button id="viewList" title="List view">List</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="listings-toolbar">
+          <div class="small" id="resultCount">— results</div>
+          <div class="small"><span class="pill badge" id="activeBadges"></span></div>
+        </div>
+
+        <div class="grid" id="listingGrid"></div>
+        <div id="emptyState" class="empty" style="display:none;margin-top:12px;">
+          <h3>No listings match those filters</h3>
+          <div class="p">Tip: widen price, choose Any beds/baths, or try a different city. You can also save this search and we’ll alert you when something hits.</div>
+          <div style="display:grid;gap:8px;margin-top:10px;">
+            <input id="emptyName" placeholder="Your name" style="padding:10px;border:1px solid #dcdced;border-radius:10px;">
+            <input id="emptyEmail" placeholder="Email" style="padding:10px;border:1px solid #dcdced;border-radius:10px;">
+            <button class="btn" id="emptySave">Save this search + notify me</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="communities">
+      <div class="wrap">
+        <h2>Communities</h2>
+        <p class="lead">Follow a community to get notified when new listings appear. This saves a search locally and powers alerts in this demo.</p>
+        <div class="grid" style="margin-top:12px;">
+          <div class="card" style="grid-column:span 4;">
+            <div class="thumb"><img src="./DJI_0276.jpg" alt="Atlanta overview" loading="lazy"></div>
+            <div class="content">
+              <div><b>Atlanta</b></div>
+              <div class="meta">City living • Golf • Gated</div>
+              <div class="actions"><button class="chip" data-follow="Atlanta">Follow Atlanta</button> <button class="chip" data-browse="Atlanta">Browse</button></div>
+            </div>
+          </div>
+          <div class="card" style="grid-column:span 4;">
+            <div class="thumb"><img src="./CC__1871-HDR.jpg" alt="Sandy Springs" loading="lazy"></div>
+            <div class="content">
+              <div><b>Sandy Springs</b></div>
+              <div class="meta">Parks • Cul‑de‑sacs • Schools</div>
+              <div class="actions"><button class="chip" data-follow="Sandy Springs">Follow Sandy Springs</button> <button class="chip" data-browse="Sandy Springs">Browse</button></div>
+            </div>
+          </div>
+          <div class="card" style="grid-column:span 4;">
+            <div class="thumb"><img src="./CC__6615.jpg" alt="Brookhaven" loading="lazy"></div>
+            <div class="content">
+              <div><b>Brookhaven</b></div>
+              <div class="meta">Family‑friendly • Shopping • Dining</div>
+              <div class="actions"><button class="chip" data-follow="Brookhaven">Follow Brookhaven</button> <button class="chip" data-browse="Brookhaven">Browse</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="map-teaser" style="margin-top:12px;">
+          <img src="./DJI_0276.jpg" alt="Atlanta communities map preview" loading="lazy">
+          <div class="mask"></div>
+          <div class="atop">
+            <div><b style="color:#fff;">Explore on a map</b><div class="small" style="color:#cfd5e6;">See listings by neighborhood and amenities</div></div>
+            <a class="btn" href="#listings">Open map</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="wrap">
+        <h2>Why choose Cross Creek</h2>
+        <p class="lead">A boutique brokerage with modern technology and handcrafted service. Our platform helps buyers and sellers make confident decisions, faster.</p>
+        <div class="values">
+          <div class="value">
+            <b>Local expertise</b>
+            <div class="meta">Decades in Atlanta metro neighborhoods, schools, and amenities.</div>
+          </div>
+          <div class="value">
+            <b>Modern search</b>
+            <div class="meta">Save searches, favorite homes, get alerts, tour in 3D, and schedule instantly.</div>
+          </div>
+          <div class="value">
+            <b>Concierge service</b>
+            <div class="meta">From pre‑approval to closing, we coordinate every step.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sell" class="sell">
+      <div class="wrap">
+        <h2>Sell with confidence</h2>
+        <div class="two" style="margin-top:10px;">
+          <div class="panel-dark">
+            <h3>Premium marketing included</h3>
+            <ul>
+              <li>Pro photography, video, and Matterport 3D</li>
+              <li>Targeted ads and buyer alerts from saved searches</li>
+              <li>Weekly performance report and feedback</li>
+            </ul>
+            <div class="btns"><a class="btn" href="#contact">Get a free pricing review</a><a class="btn ghost" href="#resources">See market report</a></div>
+          </div>
+          <div class="panel-dark">
+            <div class="slider testimonials" id="testimonialSlider" aria-roledescription="carousel">
+              <div class="slides">
+                <div class="slide">
+                  <div class="testimonial">
+                    <div class="quote">“Our home had a 3D tour and multiple offers in 3 days. Seamless experience.”</div>
+                    <div class="who"><div class="avatar"><img src="./1.png" alt="Alex avatar" loading="lazy"></div><div><b>Alex & Jamie</b><div class="small">Sandy Springs sellers</div></div></div>
+                  </div>
+                </div>
+                <div class="slide">
+                  <div class="testimonial">
+                    <div class="quote">“Loved the instant scheduling and payment estimates on listings.”</div>
+                    <div class="who"><div class="avatar"><img src="./2.png" alt="Priya avatar" loading="lazy"></div><div><b>Priya R.</b><div class="small">First‑time buyer</div></div></div>
+                  </div>
+                </div>
+                <div class="slide">
+                  <div class="testimonial">
+                    <div class="quote">“Saved search alerts helped us jump on the perfect home right away.”</div>
+                    <div class="who"><div class="avatar"><img src="./3.png" alt="Marcus avatar" loading="lazy"></div><div><b>Marcus L.</b><div class="small">Brookhaven buyer</div></div></div>
+                  </div>
+                </div>
+              </div>
+              <button class="ctrl prev" aria-label="Previous" title="Previous">‹</button>
+              <button class="ctrl next" aria-label="Next" title="Next">›</button>
+              <div class="dots" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-dark" style="margin-top:10px;">
+          <h3>Recent results</h3>
+          <div class="slider sales" id="recentSales" aria-roledescription="carousel">
+            <div class="slides">
+              <div class="slide">
+                <img src="./CC__1871-HDR.jpg" alt="Sold home exterior" loading="lazy">
+                <div class="overlay"></div>
+                <div class="caption"><b>Under contract in 3 days</b><div class="small"><span class="metric">+$18k over ask</span> • Westside Atlanta</div></div>
+              </div>
+              <div class="slide">
+                <img src="./DJI_0276.jpg" alt="Neighborhood aerial" loading="lazy">
+                <div class="overlay"></div>
+                <div class="caption"><b>Sold in 5 days</b><div class="small"><span class="metric">20+ showings</span> • Sandy Springs</div></div>
+              </div>
+              <div class="slide">
+                <img src="./Liberty_Communities_Preview_NOWM.jpg" alt="Modern listing sold" loading="lazy">
+                <div class="overlay"></div>
+                <div class="caption"><b>Pre‑market interest</b><div class="small"><span class="metric">12 private tours</span> • Brookhaven</div></div>
+              </div>
+            </div>
+            <button class="ctrl prev" aria-label="Previous" title="Previous">‹</button>
+            <button class="ctrl next" aria-label="Next" title="Next">›</button>
+            <div class="dots" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="panel-dark" style="margin-top:10px;">
+          <h3>Our listing process</h3>
+          <div class="process">
+            <div class="step"><b>1. Prep</b><div class="small">Staging, repairs, and pro media within 72 hours.</div></div>
+            <div class="step"><b>2. Launch</b><div class="small">MLS syndication, coming‑soon buzz, agent network.</div></div>
+            <div class="step"><b>3. Promote</b><div class="small">Targeted ads, saved‑search alerts, open house strategy.</div></div>
+            <div class="step"><b>4. Negotiate</b><div class="small">Offer strategy to maximize price and minimize risk.</div></div>
+          </div>
+        </div>
+
+        <div class="two" style="margin-top:10px;">
+          <div class="panel-dark">
+            <h3>Estimate your net</h3>
+            <div class="net">
+              <div class="row">
+                <div><label>Expected sale price</label><input id="sellPrice" type="number" value="650000"></div>
+                <div><label>Agent fee (%)</label><input id="sellFee" type="number" value="5.5" step="0.1"></div>
+              </div>
+              <div class="row">
+                <div><label>Closing costs (%)</label><input id="sellClosePct" type="number" value="1.5" step="0.1"></div>
+                <div><label>Staging</label><input id="sellStaging" type="number" value="750"></div>
+              </div>
+              <div class="row">
+                <div><label>Media & marketing</label><input id="sellMedia" type="number" value="650"></div>
+                <div><label>Mortgage payoff</label><input id="sellPayoff" type="number" value="0"></div>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <button class="btn" id="sellerCalc">Calculate</button>
+                <div class="out">Estimated net: <b id="sellerOut">—</b></div>
+              </div>
+              <div class="small">Estimate for planning only; not a binding quote. Fees and costs vary.</div>
+            </div>
+          </div>
+          <div class="panel-dark">
+            <h3>Request your valuation</h3>
+            <div style="display:grid;gap:8px;">
+              <input id="sellerName" placeholder="Your name" style="padding:10px;border:1px solid #dcdced;border-radius:10px;">
+              <input id="sellerEmail" placeholder="you@example.com" style="padding:10px;border:1px solid #dcdced;border-radius:10px;">
+              <input id="sellerAddress" placeholder="Property address" style="padding:10px;border:1px solid #dcdced;border-radius:10px;">
+              <select id="sellerTimeframe" style="padding:10px;border:1px solid #dcdced;border-radius:10px;">
+                <option>Just exploring</option>
+                <option>1–3 months</option>
+                <option>3–6 months</option>
+                <option>Sooner</option>
+              </select>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <button class="btn" id="sellerSubmit">Get valuation & plan</button>
+                <div class="small">Same‑day response</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="activity" class="dark">
+      <div class="wrap">
+        <h2>Your Activity</h2>
+        <div class="two">
+          <div class="panel-dark">
+            <h3>Favorites</h3>
+            <div id="favList" class="saved-searches"></div>
+          </div>
+          <div class="panel-dark">
+            <h3>Recently viewed</h3>
+            <div id="recentList" class="saved-searches"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="saved" class="dark">
+      <div class="wrap">
+        <h2>Saved Searches and Alerts</h2>
+        <div class="two">
+          <div class="panel-dark">
+            <h3>Your saved searches</h3>
+            <div id="savedSearches" class="saved-searches"></div>
+          </div>
+          <div class="panel-dark">
+            <h3>How alerts work</h3>
+            <p class="lead">In production, alerts would email or text when a new listing matches your saved filters. This demo stores filters locally and uses the simulate button to show the flow.</p>
+            <ul>
+              <li>Filters are saved to your browser storage</li>
+              <li>New listings are tested against saved filters</li>
+              <li>Matches show a toast and highlight in the grid</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="resources" class="resources">
+      <div class="wrap">
+        <h2>Resources</h2>
+        <p class="lead">Guides and FAQs to help you navigate buying and selling with confidence.</p>
+        <div class="cards">
+          <a class="card-link" href="./Report.html" target="_blank" rel="noopener">
+            <b>Local Market Report</b>
+            <div class="meta">Monthly snapshot of pricing, inventory, and days on market.</div>
+            <span>View report →</span>
+          </a>
+          <a class="card-link" href="#calc">
+            <b>Affordability & payments</b>
+            <div class="meta">Estimate your payment with taxes and insurance in one click.</div>
+            <span>Jump to calculator →</span>
+          </a>
+          <a class="card-link" href="#saved">
+            <b>Saved searches & alerts</b>
+            <div class="meta">Create alerts for your criteria and get notified about matches.</div>
+            <span>Manage alerts →</span>
+          </a>
+        </div>
+        <div class="faq" style="margin-top:14px;">
+          <div class="faq-item">
+            <button class="faq-q">How often are listings updated?</button>
+            <div class="faq-a">In production, listings sync continuously from the MLS. This demo uses local sample data to showcase the experience.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Can I get alerts for price drops?</button>
+            <div class="faq-a">Yes. Save your search and you’ll receive alerts when new matches appear or prices change.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Do you work with first‑time buyers?</button>
+            <div class="faq-a">Absolutely. We’ll guide you through pre‑approval, search, touring, offers, inspection, and closing.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Do you list homes too?</button>
+            <div class="faq-a">Yes — full‑service listing with modern marketing, media, and pricing strategy.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="calc">
+      <div class="wrap">
+        <h2>Mortgage Calculator</h2>
+        <div class="two">
+          <div class="panel-dark" style="background:#fff;color:#111;border:1px solid #e6e6ef;">
+            <div class="two">
+              <div>
+                <label>Home Price</label>
+                <input id="mcPrice" type="number" value="550000" style="width:100%;padding:10px;border:1px solid #dcdced;border-radius:10px;">
+              </div>
+              <div>
+                <label>Down Payment (%)</label>
+                <input id="mcDownPct" type="number" value="20" style="width:100%;padding:10px;border:1px solid #dcdced;border-radius:10px;">
+              </div>
+            </div>
+            <div class="two" style="margin-top:10px;">
+              <div>
+                <label>Interest Rate (%)</label>
+                <input id="mcRate" type="number" value="6.75" step="0.01" style="width:100%;padding:10px;border:1px solid #dcdced;border-radius:10px;">
+              </div>
+              <div>
+                <label>Term (years)</label>
+                <input id="mcYears" type="number" value="30" style="width:100%;padding:10px;border:1px solid #dcdced;border-radius:10px;">
+              </div>
+            </div>
+            <div class="two" style="margin-top:10px;">
+              <div>
+                <label>Property Tax (annual)</label>
+                <input id="mcTax" type="number" value="5200" style="width:100%;padding:10px;border:1px solid #dcdced;border-radius:10px;">
+              </div>
+              <div>
+                <label>Insurance (annual)</label>
+                <input id="mcIns" type="number" value="1800" style="width:100%;padding:10px;border:1px solid #dcdced;border-radius:10px;">
+              </div>
+            </div>
+            <div style="margin-top:10px;display:flex;gap:8px;">
+              <button class="btn" id="mcCalc">Calculate</button>
+              <div style="align-self:center;">Estimated monthly: <b id="mcOut">—</b></div>
+            </div>
+          </div>
+          <div class="panel-dark">
+            <h3>What buyers see</h3>
+            <p class="lead">This calculated payment can show right on a listing page and updates instantly based on the buyer's down payment and rate.</p>
+            <ul>
+              <li>Breaks out loan principal + interest, plus taxes and insurance</li>
+              <li>Works on desktop and mobile; values can be prefilled from the listing</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="wrap">
+        <h2>Contact us</h2>
+        <div class="two">
+          <div class="panel-dark">
+            <h3>Tell us about your plans</h3>
+            <div style="display:grid;gap:8px;">
+              <div>
+                <label>Name</label>
+                <input id="ctName" placeholder="Your name" style="width:100%;">
+              </div>
+              <div>
+                <label>Email</label>
+                <input id="ctEmail" placeholder="you@example.com" style="width:100%;">
+              </div>
+              <div>
+                <label>Phone</label>
+                <input id="ctPhone" placeholder="(###) ###‑####" style="width:100%;">
+              </div>
+              <div>
+                <label>I'm a</label>
+                <select id="ctType" style="width:100%;padding:10px;border:1px solid #dcdced;border-radius:10px;">
+                  <option>Buyer</option>
+                  <option>Seller</option>
+                  <option>Renter</option>
+                  <option>Agent</option>
+                </select>
+              </div>
+              <div>
+                <label>Message</label>
+                <textarea id="ctMsg" rows="4" placeholder="How can we help?" style="width:100%;padding:10px;border:1px solid #dcdced;border-radius:10px;"></textarea>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <button class="btn" id="ctSubmit">Send</button>
+                <div class="small">We respond same‑day.</div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-dark">
+            <h3>Office</h3>
+            <div class="lead" style="margin:0 0 8px 0;">123 Cross Creek Way, Atlanta, GA 30318</div>
+            <div>Phone: <a href="tel:+14045551234">(404) 555‑1234</a></div>
+            <div>Email: <a href="mailto:hello@crosscreekrealty.com">hello@crosscreekrealty.com</a></div>
+            <div style="margin-top:10px;">
+              <a class="btn" href="https://maps.apple.com/?address=Atlanta,Georgia,United%20States" target="_blank" rel="noopener">Open in Maps</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div>
+            <div class="brandline"><img src="./logo.webp" alt="Cross Creek Realty"><b>Cross Creek Realty</b></div>
+            <div class="small" style="margin-top:8px;">Modern brokerage for Atlanta metro. Technology‑forward, people‑first.</div>
+          </div>
+          <div>
+            <h4>Buy</h4>
+            <a href="#listings">Home search</a>
+            <a href="#saved">Saved searches</a>
+            <a href="#calc">Payment calculator</a>
+          </div>
+          <div>
+            <h4>Communities</h4>
+            <a href="#communities">Atlanta</a>
+            <a href="#communities">Sandy Springs</a>
+            <a href="#communities">Brookhaven</a>
+          </div>
+          <div>
+            <h4>Company</h4>
+            <a href="#about">About</a>
+            <a href="#resources">Resources</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div class="wrap foot">
+      <div>© 2025 Cross Creek Realty • Demonstration experience for showcase purposes</div>
+    </div>
+
+    <div class="toast" id="toast" aria-live="polite"></div>
+
+    <div class="sticky-cta" id="stickyCta" style="display:none;">
+      <div>
+        <b>Start your search today</b>
+        <div class="small">Save a search, get alerts, tour instantly</div>
+      </div>
+      <div class="btns" style="margin:0;">
+        <a class="btn" href="#saved" id="ctaGetAlerts">Get alerts</a>
+        <a class="btn ghost" href="#contact">Talk to an agent</a>
+      </div>
+    </div>
+
+    <button class="fab" id="helpFab" title="Need help?">Need help?</button>
+
+    <div class="cookie" id="cookieBar">
+      <div class="small">We use cookies to improve your experience. By using this site, you agree to our demo privacy notice.</div>
+      <div class="actions"><button class="btn" id="cookieAccept">OK</button><button class="btn ghost" id="cookieHide">Hide</button></div>
+    </div>
+
+    <!-- Property Modal -->
+    <div class="modal" id="propModal" aria-hidden="true">
+      <div class="sheet">
+        <div class="sheet-head">
+          <div id="propTitle">Property</div>
+          <button class="chip" id="closeModal">Close</button>
+        </div>
+        <div class="sheet-body">
+          <div>
+            <div class="tabs">
+              <button data-tab="photos" class="active">Photos</button>
+              <button data-tab="video">Video Walkthrough</button>
+              <button data-tab="tour">3D Tour</button>
+            </div>
+            <div class="media" id="mediaArea"></div>
+            <div style="margin-top:10px;">
+              <h3>Comparable Listings</h3>
+              <div class="comps" id="compGrid"></div>
+            </div>
+          </div>
+          <div>
+            <div class="panel" style="background:#fff;color:#111;border:1px solid #e6e6ef;">
+              <h3>Schedule a showing</h3>
+              <div style="display:grid;gap:8px;">
+                <input id="schedName" placeholder="Your name" style="padding:10px;border:1px solid #dcdced;border-radius:10px;">
+                <input id="schedEmail" placeholder="Email" style="padding:10px;border:1px solid #dcdced;border-radius:10px;">
+                <input id="schedPhone" placeholder="Phone" style="padding:10px;border:1px solid #dcdced;border-radius:10px;">
+                <input id="schedDate" type="date" style="padding:10px;border:1px solid #dcdced;border-radius:10px;">
+                <input id="schedTime" type="time" style="padding:10px;border:1px solid #dcdced;border-radius:10px;">
+                <button class="btn" id="bookShowing">Book and add to calendar</button>
+                <div class="ics" id="icsNote"></div>
+              </div>
+            </div>
+            <div class="panel" style="margin-top:10px;background:#fff;color:#111;border:1px solid #e6e6ef;">
+              <h3>Quick payment estimate</h3>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <input id="qpDown" type="number" placeholder="Down %" value="20" style="padding:10px;border:1px solid #dcdced;border-radius:10px;">
+                <input id="qpRate" type="number" step="0.01" placeholder="Rate %" value="6.75" style="padding:10px;border:1px solid #dcdced;border-radius:10px;">
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;margin-top:8px;">
+                <button class="btn" id="qpCalc">Estimate</button>
+                <div>Monthly: <b id="qpOut">—</b></div>
+              </div>
+            </div>
+            <div class="panel" style="margin-top:10px;background:#fff;color:#111;border:1px solid #e6e6ef;">
+              <h3>Lead capture (CRM-ready)</h3>
+              <p class="lead" style="margin:0 0 8px 0;">Submitting a showing creates a payload ready to send to a CRM. For the demo, we store it locally.</p>
+              <pre id="leadPayload" style="white-space:pre-wrap;background:#0b0e2a;color:#e9ecf4;padding:10px;border-radius:8px;max-height:200px;overflow:auto;"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="authModal" aria-hidden="true">
+      <div class="sheet">
+        <div class="sheet-head">
+          <div>Sign in or create an account</div>
+          <button class="chip" id="authClose">Close</button>
+        </div>
+        <div class="sheet-body">
+          <div>
+            <div style="display:grid;gap:8px;">
+              <div>
+                <label>Name</label>
+                <input id="authName" placeholder="Your name" style="width:100%;">
+              </div>
+              <div>
+                <label>Email</label>
+                <input id="authEmail" placeholder="you@example.com" style="width:100%;">
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;margin-top:4px;">
+                <button class="btn" id="authSubmit">Continue</button>
+                <div class="small">By continuing you agree to our demo terms.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Local demo dataset
+      const commonPhotos = ['./CC__1871-HDR.jpg','./CC__6615.jpg','./DJI_0276.jpg'];
+      const wixVideos = {
+        walkthrough: 'https://video.wixstatic.com/video/aeef42_6d072f431c614174b57772be4f27e2a0/720p/mp4/file.mp4',
+        recap: 'https://video.wixstatic.com/video/aeef42_7ff200d9091145dc8aa7845e368cea47/720p/mp4/file.mp4'
+      };
+      // Public demo Matterport model (stable sample)
+      const matterportDemo = 'https://my.matterport.com/show/?m=JFdHyZdKqRh&play=1&brand=0';
+
+      const listings = [
+        {
+          id: 'atl-001',
+          address: '123 Cross Creek Way',
+          city: 'Atlanta',
+          price: 575000,
+          beds: 4,
+          baths: 3,
+          sqft: 2480,
+          thumb: './CC__1871-HDR.jpg',
+          photos: commonPhotos,
+          video: wixVideos.walkthrough,
+          tour: matterportDemo
+        },
+        {
+          id: 'atl-002',
+          address: '88 Peachtree Grove NE',
+          city: 'Atlanta',
+          price: 489000,
+          beds: 3,
+          baths: 2,
+          sqft: 1800,
+          thumb: './CC__6615.jpg',
+          photos: commonPhotos,
+          video: wixVideos.recap,
+          tour: matterportDemo
+        },
+        {
+          id: 'ss-003',
+          address: '210 River Run Trl',
+          city: 'Sandy Springs',
+          price: 735000,
+          beds: 5,
+          baths: 4,
+          sqft: 3120,
+          thumb: './DJI_0276.jpg',
+          photos: commonPhotos,
+          video: wixVideos.walkthrough,
+          tour: matterportDemo
+        },
+        {
+          id: 'bh-004',
+          address: '55 Windsor Place',
+          city: 'Brookhaven',
+          price: 629000,
+          beds: 4,
+          baths: 3,
+          sqft: 2320,
+          thumb: './Liberty_Communities_Preview_NOWM.jpg',
+          photos: commonPhotos,
+          video: wixVideos.recap,
+          tour: matterportDemo
+        },
+        {
+          id: 'atl-amenity-005',
+          address: '400 Cross Creek Club Dr',
+          city: 'Atlanta',
+          price: 815000,
+          beds: 4,
+          baths: 4,
+          sqft: 2980,
+          features: ['pool','gated','golf','clubhouse'],
+          thumb: './CC__1871-HDR.jpg',
+          photos: commonPhotos,
+          video: wixVideos.walkthrough,
+          tour: matterportDemo
+        }
+      ];
+
+      // Storage helpers
+      const store = {
+        get(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; } },
+        set(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
+      };
+
+      const user = {
+        name: store.get('cc_user_name', ''),
+        email: store.get('cc_user_email', ''),
+        signIn(payload) {
+          const name = (payload?.name || '').trim();
+          const email = (payload?.email || '').trim();
+          this.name = name; this.email = email;
+          store.set('cc_user_name', name);
+          store.set('cc_user_email', email);
+          updateAccountUI();
+        },
+        signOut() { this.name = ''; this.email = ''; store.set('cc_user_name',''); store.set('cc_user_email',''); updateAccountUI(); }
+      };
+      function updateAccountUI() {
+        const link = document.getElementById('accountLink');
+        if (!link) return;
+        link.textContent = user.name || user.email || 'Sign in';
+      }
+      updateAccountUI();
+      document.getElementById('accountLink').addEventListener('click', (e) => {
+        e.preventDefault();
+        if (user.email) {
+          if (confirm('Sign out of your account?')) user.signOut();
+        } else {
+          openAuth();
+        }
+      });
+      function openAuth() { document.getElementById('authModal').classList.add('open'); }
+      function closeAuth() { document.getElementById('authModal').classList.remove('open'); }
+      document.getElementById('authClose').addEventListener('click', closeAuth);
+      document.getElementById('authSubmit').addEventListener('click', () => {
+        const name = document.getElementById('authName').value;
+        const email = document.getElementById('authEmail').value;
+        if (!email) { toast('Please enter your email'); return; }
+        user.signIn({ name, email });
+        closeAuth();
+        toast('Signed in');
+      });
+
+      const favorites = new Set(store.get('cc_favorites', []));
+      function persistFavorites() { store.set('cc_favorites', Array.from(favorites)); updateNavCounts(); }
+      function updateNavCounts() {
+        const el = document.getElementById('navFavCount');
+        if (el) el.textContent = String(favorites.size);
+      }
+      updateNavCounts();
+
+      function fmtMoney(n) { return n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }); }
+
+      function currentFilters() {
+        const f = {
+          city: document.getElementById('fCity').value || null,
+          min: parseInt(document.getElementById('fMin').value || '0', 10),
+          max: parseInt(document.getElementById('fMax').value || '100000000', 10),
+          beds: parseInt(document.getElementById('fBeds').value || '0', 10),
+          baths: parseInt(document.getElementById('fBaths').value || '0', 10),
+          q: (document.getElementById('fQ').value || '').toLowerCase().trim(),
+          sort: document.getElementById('fSort').value
+        };
+        store.set('cc_filters', f);
+        return f;
+      }
+
+      function matchesFilters(home, f) {
+        if (f.city && home.city !== f.city) return false;
+        if (home.price < f.min || home.price > f.max) return false;
+        if (f.beds && home.beds < f.beds) return false;
+        if (f.baths && home.baths < f.baths) return false;
+        if (f.q) {
+          const hay = [home.address, home.city, (home.features||[]).join(' ')].join(' ').toLowerCase();
+          if (!hay.includes(f.q)) return false;
+        }
+        return true;
+      }
+
+      let viewMode = store.get('cc_view', 'grid');
+      function setView(mode) { viewMode = mode; store.set('cc_view', mode); applyViewToggle(); }
+      function applyViewToggle() {
+        document.getElementById('viewGrid')?.classList.toggle('active', viewMode==='grid');
+        document.getElementById('viewList')?.classList.toggle('active', viewMode==='list');
+        const grid = document.getElementById('listingGrid');
+        if (grid) grid.classList.toggle('list', viewMode==='list');
+      }
+
+      function sortHomes(homes, sortKey) {
+        const copy = [...homes];
+        switch (sortKey) {
+          case 'price_asc': return copy.sort((a,b)=>a.price-b.price);
+          case 'beds_desc': return copy.sort((a,b)=>b.beds-a.beds || b.price-a.price);
+          case 'newest': return copy.sort((a,b)=> (b.id?.toString().localeCompare(a.id?.toString())));
+          case 'price_desc':
+          default: return copy.sort((a,b)=>b.price-a.price);
+        }
+      }
+
+      function activeFilterBadges(f) {
+        const parts = [];
+        if (f.city) parts.push(f.city);
+        if (f.min || f.max!==100000000) parts.push(`$${f.min||0}–$${f.max===100000000?'any':f.max}`);
+        if (f.beds) parts.push(`${f.beds}+ bd`);
+        if (f.baths) parts.push(`${f.baths}+ ba`);
+        if (f.q) parts.push(`“${f.q}”`);
+        return parts.join(' • ');
+      }
+
+      const recentlyViewed = store.get('cc_recent', []);
+      function pushRecent(id) {
+        const arr = store.get('cc_recent', []);
+        const next = [id, ...arr.filter(x=>x!==id)].slice(0,6);
+        store.set('cc_recent', next);
+      }
+
+      function renderGrid(highlightId) {
+        const f = currentFilters();
+        const grid = document.getElementById('listingGrid');
+        const empty = document.getElementById('emptyState');
+        const count = document.getElementById('resultCount');
+        const badges = document.getElementById('activeBadges');
+        grid.innerHTML = '';
+        const results = sortHomes(listings.filter(h => matchesFilters(h, f)), f.sort);
+        count.textContent = `${results.length} result${results.length===1?'':'s'}`;
+        badges.textContent = activeFilterBadges(f);
+        applyViewToggle();
+        if (!results.length) {
+          empty.style.display = 'block';
+          return;
+        } else {
+          empty.style.display = 'none';
+        }
+        results.forEach(home => {
+          const el = document.createElement('div');
+          el.className = 'card';
+          el.innerHTML = `
+            <div class="thumb">
+              <img src="${home.thumb}" alt="${home.address}" loading="lazy">
+              <button class="fav ${favorites.has(home.id) ? 'active' : ''}" aria-label="Favorite">★</button>
+            </div>
+            <div class="content">
+              <div class="price">${fmtMoney(home.price)}</div>
+              <div>${home.address}, ${home.city}</div>
+              <div class="meta">${home.beds} bd • ${home.baths} ba • ${home.sqft.toLocaleString()} sqft</div>
+              <div class="actions">
+                <button class="chip" data-act="open">Tour & Details</button>
+                <button class="chip" data-act="schedule">Schedule</button>
+                <button class="chip" data-act="calc">Calc</button>
+                <button class="chip" data-act="share">Share</button>
+              </div>
+            </div>`;
+          el.querySelector('.fav').addEventListener('click', () => {
+            if (favorites.has(home.id)) favorites.delete(home.id); else favorites.add(home.id);
+            persistFavorites(); renderGrid(); renderActivity();
+          });
+          el.querySelector('[data-act="open"]').addEventListener('click', () => { pushRecent(home.id); openModal(home.id); });
+          el.querySelector('[data-act="schedule"]').addEventListener('click', () => { openModal(home.id); document.getElementById('schedName').focus(); });
+          el.querySelector('[data-act="calc"]').addEventListener('click', () => { openModal(home.id); document.getElementById('qpDown').focus(); });
+          el.querySelector('[data-act="share"]').addEventListener('click', () => {
+            const u = new URL(location.href);
+            u.searchParams.set('prop', home.id);
+            navigator.clipboard.writeText(u.toString()).then(()=>toast('Property link copied')).catch(()=>toast('Copy failed'));
+          });
+          grid.appendChild(el);
+          if (highlightId && home.id === highlightId) el.classList.add('highlight');
+        });
+      }
+
+      // Saved searches
+      function saveSearchWithName(name) {
+        if (!name) return;
+        const f = currentFilters();
+        const saved = store.get('cc_saved_searches', []);
+        saved.push({ id: 'ss-' + Date.now(), name, filters: f });
+        store.set('cc_saved_searches', saved);
+        renderSavedSearches();
+        toast('Search saved. Use "Simulate new listing" to see alert flow.');
+      }
+      function saveCurrentSearch() {
+        const name = prompt('Name this search (e.g., "Atlanta 3+ beds under 600k")');
+        if (!name) return;
+        saveSearchWithName(name);
+      }
+
+      function renderSavedSearches() {
+        const wrap = document.getElementById('savedSearches');
+        const saved = store.get('cc_saved_searches', []);
+        if (!saved.length) { wrap.innerHTML = '<div class="saved-search">No saved searches yet.</div>'; return; }
+        wrap.innerHTML = '';
+        saved.forEach(s => {
+          const el = document.createElement('div');
+          el.className = 'saved-search';
+          const f = s.filters;
+          el.innerHTML = `<div><b>${s.name}</b><div style="font-size:12px;color:#667;">${f.city || 'Any'} • $${f.min}–$${f.max} • ${f.beds||'Any'}+ bd • ${f.baths||'Any'}+ ba</div></div><div><button class="chip" data-act="apply">Apply</button> <button class="chip" data-act="delete">Delete</button></div>`;
+          el.querySelector('[data-act="apply"]').addEventListener('click', () => {
+            document.getElementById('fCity').value = f.city || '';
+            document.getElementById('fMin').value = f.min || '';
+            document.getElementById('fMax').value = f.max || '';
+            document.getElementById('fBeds').value = f.beds || '';
+            document.getElementById('fBaths').value = f.baths || '';
+            renderGrid();
+          });
+          el.querySelector('[data-act="delete"]').addEventListener('click', () => {
+            const all = store.get('cc_saved_searches', []);
+            store.set('cc_saved_searches', all.filter(x => x.id !== s.id));
+            renderSavedSearches();
+          });
+          wrap.appendChild(el);
+        });
+      }
+
+      // Favorites and recent activity rendering
+      function renderActivity() {
+        const favWrap = document.getElementById('favList');
+        const recentWrap = document.getElementById('recentList');
+        const favIds = store.get('cc_favorites', []);
+        const recIds = store.get('cc_recent', []);
+        const toCard = (home) => `<div class='saved-search'><div><b>${fmtMoney(home.price)}</b><div style='font-size:12px;color:#667;'>${home.address}, ${home.city}</div></div><div><button class='chip' data-open='${home.id}'>Open</button></div></div>`;
+        favWrap.innerHTML = favIds.length ? favIds.map(id => {
+          const h = listings.find(x=>x.id===id); return h? toCard(h): '';
+        }).join('') : '<div class="saved-search">No favorites yet.</div>';
+        recentWrap.innerHTML = recIds.length ? recIds.map(id => {
+          const h = listings.find(x=>x.id===id); return h? toCard(h): '';
+        }).join('') : '<div class="saved-search">No recent views yet.</div>';
+        [...document.querySelectorAll('#activity [data-open]')].forEach(btn => btn.addEventListener('click', () => openModal(btn.getAttribute('data-open'))));
+      }
+
+      function simulateNewListing() {
+        // Create a new listing that may match saved filters
+        const fake = { ...listings[0] };
+        fake.id = 'new-' + Date.now();
+        fake.price = Math.round(450000 + Math.random()*250000);
+        fake.address = (200 + Math.round(Math.random()*800)) + ' New Market Ln';
+        fake.city = ['Atlanta','Sandy Springs','Brookhaven'][Math.floor(Math.random()*3)];
+        listings.push(fake);
+        renderGrid(fake.id);
+
+        const saved = store.get('cc_saved_searches', []);
+        const matches = saved.filter(s => matchesFilters(fake, s.filters));
+        if (matches.length) {
+          toast(`New listing matches ${matches.length} saved search${matches.length>1?'es':''}!`);
+        } else {
+          toast('New listing added (no saved search matched).');
+        }
+      }
+
+      // Property modal
+      const modal = document.getElementById('propModal');
+      const mediaArea = document.getElementById('mediaArea');
+      let currentHome = null;
+
+      function openModal(id) {
+        currentHome = listings.find(h => h.id === id);
+        if (!currentHome) return;
+        document.getElementById('propTitle').textContent = `${fmtMoney(currentHome.price)} — ${currentHome.address}, ${currentHome.city}`;
+        switchMedia('photos');
+        renderComps();
+        document.getElementById('qpOut').textContent = '—';
+        document.getElementById('leadPayload').textContent = '';
+        modal.classList.add('open');
+        // Update URL for deep-link
+        const url = new URL(location.href);
+        url.searchParams.set('prop', id);
+        history.replaceState(null, '', url.toString());
+      }
+      document.getElementById('closeModal').addEventListener('click', () => { modal.classList.remove('open'); const url = new URL(location.href); url.searchParams.delete('prop'); history.replaceState(null, '', url.toString()); });
+
+      let photoTimer = null;
+      function switchMedia(tab) {
+        document.querySelectorAll('.tabs button').forEach(b => { b.classList.toggle('active', b.dataset.tab === tab); });
+        if (tab === 'photos') {
+          // Show the first photo only per request (no slideshow)
+          mediaArea.innerHTML = `<img src="${currentHome.photos[0]}" alt="Photo">`;
+          if (photoTimer) { clearInterval(photoTimer); photoTimer = null; }
+        } else if (tab === 'video') {
+          mediaArea.innerHTML = `<video src='${currentHome.video}' controls playsinline></video>`;
+        } else {
+          // Embed a Matterport-style demo 3D tour via iframe
+          const src = currentHome.tour && currentHome.tour.includes('matterport.com') ? currentHome.tour : matterportDemo;
+          mediaArea.innerHTML = `<iframe src='${src}' allow='fullscreen; xr-spatial-tracking' allowfullscreen loading='lazy' referrerpolicy='no-referrer-when-downgrade'></iframe>`;
+        }
+      }
+      document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => switchMedia(b.dataset.tab)));
+
+      function renderComps() {
+        const comps = listings.filter(h => h.city === currentHome.city && h.id !== currentHome.id).slice(0,3);
+        const grid = document.getElementById('compGrid');
+        grid.innerHTML = '';
+        comps.forEach(c => {
+          const el = document.createElement('div');
+          el.className = 'comp';
+          el.innerHTML = `<img src='${c.thumb}' alt='${c.address}' loading='lazy'><div class='p'><b>${fmtMoney(c.price)}</b><div>${c.beds} bd • ${c.baths} ba</div><div style='color:#667;'>${c.address}</div></div>`;
+          grid.appendChild(el);
+        });
+      }
+
+      // Scheduling + ICS
+      function createICS(title, description, startDate) {
+        const dt = startDate.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+        const end = new Date(startDate.getTime() + 30*60*1000).toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+        return `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Cochran Films//IDX Demo//EN\nBEGIN:VEVENT\nUID:${Date.now()}@cochranfilms\nDTSTAMP:${dt}\nDTSTART:${dt}\nDTEND:${end}\nSUMMARY:${title}\nDESCRIPTION:${description}\nEND:VEVENT\nEND:VCALENDAR`;
+      }
+
+      document.getElementById('bookShowing').addEventListener('click', () => {
+        if (!currentHome) return;
+        const name = document.getElementById('schedName').value.trim();
+        const email = document.getElementById('schedEmail').value.trim() || user.email;
+        const phone = document.getElementById('schedPhone').value.trim();
+        const date = document.getElementById('schedDate').value;
+        const time = document.getElementById('schedTime').value;
+        if (!name || !email || !date || !time) { toast('Please fill name, email, date and time.'); return; }
+        const start = new Date(`${date}T${time}:00`);
+        const title = `Showing — ${currentHome.address}`;
+        const desc = `Buyer: ${name} (${email}${phone? ', '+phone: ''})`;
+        const ics = createICS(title, desc, start);
+        const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href = url; a.download = 'showing.ics'; a.click();
+        URL.revokeObjectURL(url);
+        document.getElementById('icsNote').textContent = 'Calendar file downloaded. Add it to Google, Apple, or Outlook.';
+
+        // Lead capture payload (CRM-ready)
+        const lead = {
+          source: 'IDX demo',
+          userEmail: user.email || email,
+          name, email, phone,
+          propertyId: currentHome.id,
+          propertyAddress: currentHome.address,
+          city: currentHome.city,
+          price: currentHome.price,
+          scheduledForISO: start.toISOString()
+        };
+        const leads = store.get('cc_leads', []); leads.push(lead); store.set('cc_leads', leads);
+        document.getElementById('leadPayload').textContent = JSON.stringify(lead, null, 2);
+        toast('Showing booked and lead captured.');
+        // Persist a "recently scheduled" marker for this property
+        pushRecent(currentHome.id);
+      });
+
+      // Community follow/browse
+      function followCommunity(city) {
+        const saved = store.get('cc_saved_searches', []);
+        const existing = saved.find(s => s.name === `Follow — ${city}`);
+        const filters = { city, min: 0, max: 100000000, beds: 0, baths: 0, q: '', sort: 'price_desc' };
+        if (!existing) {
+          saved.push({ id: 'ss-' + Date.now(), name: `Follow — ${city}`, filters });
+          store.set('cc_saved_searches', saved);
+          renderSavedSearches();
+        }
+        toast(`${city} followed. Alerts simulated on new matches.`);
+      }
+      document.querySelectorAll('[data-follow]').forEach(btn => btn.addEventListener('click', () => followCommunity(btn.getAttribute('data-follow'))));
+      document.querySelectorAll('[data-browse]').forEach(btn => btn.addEventListener('click', () => { document.getElementById('fCity').value = btn.getAttribute('data-browse'); renderGrid(); window.scrollTo({ top: document.getElementById('listings').offsetTop - 60, behavior: 'smooth' }); }));
+
+      // Quick payment in modal, seeded from current listing price
+      function monthlyPayment(price, downPct, ratePct, years) {
+        const loan = price * (1 - downPct/100);
+        const r = ratePct/100/12;
+        const n = years*12;
+        const pAndI = r === 0 ? loan/n : loan * (r * Math.pow(1+r, n)) / (Math.pow(1+r, n) - 1);
+        return pAndI;
+      }
+      document.getElementById('qpCalc').addEventListener('click', () => {
+        if (!currentHome) return;
+        const down = parseFloat(document.getElementById('qpDown').value || '20');
+        const rate = parseFloat(document.getElementById('qpRate').value || '6.75');
+        const pmt = monthlyPayment(currentHome.price, down, rate, 30);
+        document.getElementById('qpOut').textContent = '$' + Math.round(pmt).toLocaleString();
+      });
+
+      // Full calculator section
+      document.getElementById('mcCalc').addEventListener('click', () => {
+        const price = parseFloat(document.getElementById('mcPrice').value||'0');
+        const down = parseFloat(document.getElementById('mcDownPct').value||'0');
+        const rate = parseFloat(document.getElementById('mcRate').value||'0');
+        const years = parseInt(document.getElementById('mcYears').value||'30',10);
+        const tax = parseFloat(document.getElementById('mcTax').value||'0');
+        const ins = parseFloat(document.getElementById('mcIns').value||'0');
+        const pAndI = monthlyPayment(price, down, rate, years);
+        const monthly = pAndI + (tax/12) + (ins/12);
+        document.getElementById('mcOut').textContent = '$' + Math.round(monthly).toLocaleString();
+      });
+
+      // Toast utility
+      function toast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg; t.style.display = 'block';
+        setTimeout(() => { t.style.display = 'none'; }, 2600);
+      }
+
+      // Resources — FAQ accordion
+      document.querySelectorAll('.faq-item .faq-q').forEach(btn => btn.addEventListener('click', () => btn.parentElement.classList.toggle('open')));
+
+      // Contact form
+      document.getElementById('ctSubmit')?.addEventListener('click', () => {
+        const name = document.getElementById('ctName').value.trim();
+        const email = document.getElementById('ctEmail').value.trim();
+        const phone = document.getElementById('ctPhone').value.trim();
+        const type = document.getElementById('ctType').value;
+        const msg = document.getElementById('ctMsg').value.trim();
+        if (!name || !email) { toast('Please add your name and email.'); return; }
+        const payload = { name, email, phone, type, message: msg, createdAt: new Date().toISOString() };
+        const arr = store.get('cc_contact_leads', []); arr.push(payload); store.set('cc_contact_leads', arr);
+        toast('Thanks! We will reach out shortly.');
+        if (!user.email) { user.signIn({ name, email }); }
+        document.getElementById('ctName').value = '';
+        document.getElementById('ctEmail').value = '';
+        document.getElementById('ctPhone').value = '';
+        document.getElementById('ctMsg').value = '';
+      });
+
+      // Cookie bar
+      const cookieBar = document.getElementById('cookieBar');
+      if (!store.get('cc_cookie_ok', false)) cookieBar.classList.add('open');
+      document.getElementById('cookieAccept').addEventListener('click', () => { store.set('cc_cookie_ok', true); cookieBar.classList.remove('open'); });
+      document.getElementById('cookieHide').addEventListener('click', () => cookieBar.classList.remove('open'));
+
+      // Help FAB
+      document.getElementById('helpFab').addEventListener('click', () => {
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      // Wiring
+      document.getElementById('applyFilters').addEventListener('click', () => renderGrid());
+      document.getElementById('saveSearch').addEventListener('click', saveCurrentSearch);
+      document.getElementById('emptySave').addEventListener('click', () => {
+        const name = document.getElementById('emptyName').value.trim();
+        const email = document.getElementById('emptyEmail').value.trim();
+        if (!name || !email) { toast('Please add name and email.'); return; }
+        if (!user.email) user.signIn({ name, email });
+        saveCurrentSearch();
+        toast('Saved. We will notify you when a match appears.');
+      });
+      document.getElementById('shareSearch').addEventListener('click', () => {
+        const f = currentFilters();
+        const params = new URLSearchParams({
+          city: f.city||'', min: String(f.min||''), max: String(f.max===100000000?'':f.max),
+          beds: String(f.beds||''), baths: String(f.baths||''), q: f.q||'', sort: f.sort||''
+        });
+        const url = location.origin + location.pathname + '?' + params.toString();
+        navigator.clipboard.writeText(url).then(() => toast('Search link copied to clipboard')).catch(()=>toast('Copy failed'));
+      });
+      document.getElementById('simulateAlert').addEventListener('click', simulateNewListing);
+      document.getElementById('viewGrid').addEventListener('click', () => { setView('grid'); renderGrid(); });
+      document.getElementById('viewList').addEventListener('click', () => { setView('list'); renderGrid(); });
+
+      // Initial render
+      // Apply query params if present
+      (() => {
+        const qs = new URLSearchParams(location.search);
+        if (qs.size) {
+          if (qs.get('city') !== null) document.getElementById('fCity').value = qs.get('city')||'';
+          if (qs.get('min') !== null) document.getElementById('fMin').value = qs.get('min')||'';
+          if (qs.get('max') !== null) document.getElementById('fMax').value = qs.get('max')||'';
+          if (qs.get('beds') !== null) document.getElementById('fBeds').value = qs.get('beds')||'';
+          if (qs.get('baths') !== null) document.getElementById('fBaths').value = qs.get('baths')||'';
+          if (qs.get('q') !== null) document.getElementById('fQ').value = qs.get('q')||'';
+          if (qs.get('sort') !== null) document.getElementById('fSort').value = qs.get('sort')||'price_desc';
+        } else {
+          // Restore last-used filters from storage
+          const last = store.get('cc_filters', null);
+          if (last) {
+            document.getElementById('fCity').value = last.city || '';
+            document.getElementById('fMin').value = last.min || '';
+            document.getElementById('fMax').value = last.max===100000000?'':(last.max||'');
+            document.getElementById('fBeds').value = last.beds || '';
+            document.getElementById('fBaths').value = last.baths || '';
+            document.getElementById('fQ').value = last.q || '';
+            document.getElementById('fSort').value = last.sort || 'price_desc';
+          }
+        }
+      })();
+      applyViewToggle();
+      renderGrid();
+      renderSavedSearches();
+      renderActivity();
+      // Open deep-linked property if provided
+      (() => { const qs = new URLSearchParams(location.search); const id = qs.get('prop'); if (id) openModal(id); })();
+
+      // Simple slider utility (carousel)
+      function makeSlider(rootId, opts = {}) {
+        const root = document.getElementById(rootId);
+        if (!root) return null;
+        const track = root.querySelector('.slides');
+        const slides = Array.from(track.children);
+        const prev = root.querySelector('.prev');
+        const next = root.querySelector('.next');
+        const dotsWrap = root.querySelector('.dots');
+        let index = 0;
+        let timer = null;
+
+        function updateDots() {
+          if (!dotsWrap) return;
+          dotsWrap.innerHTML = '';
+          slides.forEach((_, i) => {
+            const d = document.createElement('div');
+            d.className = 'dot' + (i === index ? ' active' : '');
+            d.addEventListener('click', () => go(i));
+            dotsWrap.appendChild(d);
+          });
+        }
+
+        function go(i) {
+          index = (i + slides.length) % slides.length;
+          track.style.transform = `translateX(${-index * 100}%)`;
+          updateDots();
+        }
+
+        function start() {
+          if (!opts.autoplayMs) return;
+          stop();
+          timer = setInterval(() => go(index + 1), opts.autoplayMs);
+        }
+        function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+        prev?.addEventListener('click', () => { go(index - 1); start(); });
+        next?.addEventListener('click', () => { go(index + 1); start(); });
+        root.addEventListener('mouseenter', stop);
+        root.addEventListener('mouseleave', start);
+        updateDots();
+        go(0);
+        start();
+        return { go, start, stop };
+      }
+
+      // Initialize sliders (respect reduced motion)
+      const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      makeSlider('showcaseSlider', { autoplayMs: reduceMotion ? 0 : 5000 });
+      makeSlider('testimonialSlider', { autoplayMs: reduceMotion ? 0 : 6000 });
+
+      // Animated counters when in view
+      function animateCount(el, to, duration = 1200) {
+        const start = 0; const diff = to - start; const t0 = performance.now();
+        function tick(t) {
+          const p = Math.min(1, (t - t0) / duration);
+          el.textContent = Math.round(start + diff * (0.5 - Math.cos(Math.PI * p) / 2));
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+      const counters = document.querySelectorAll('[data-count-to]');
+      if (counters.length) {
+        const obs = new IntersectionObserver((entries, ob) => {
+          entries.forEach(e => {
+            if (e.isIntersecting && !e.target.dataset.counted) {
+              e.target.dataset.counted = '1';
+              animateCount(e.target, parseInt(e.target.getAttribute('data-count-to') || '0', 10));
+              ob.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.4 });
+        counters.forEach(c => obs.observe(c));
+      }
+
+      // Sticky CTA logic
+      const sticky = document.getElementById('stickyCta');
+      function engagementReady() {
+        const saved = store.get('cc_saved_searches', []);
+        return Boolean(user.email) || saved.length > 0;
+      }
+      function updateSticky() {
+        const y = window.scrollY || document.documentElement.scrollTop;
+        const nearBottom = window.innerHeight + y > (document.body.scrollHeight - 800);
+        const show = y > 800 && !engagementReady() && !nearBottom;
+        sticky.style.display = show ? 'flex' : 'none';
+      }
+      window.addEventListener('scroll', updateSticky, { passive: true });
+      window.addEventListener('resize', updateSticky);
+      document.getElementById('ctaGetAlerts').addEventListener('click', () => setTimeout(updateSticky, 800));
+      updateSticky();
+
+      // JSON-LD (LocalBusiness)
+      const schema = {
+        '@context': 'https://schema.org',
+        '@type': 'RealEstateAgent',
+        'name': 'Cross Creek Realty',
+        'url': location.origin + location.pathname,
+        'logo': location.origin + '/logo.webp',
+        'email': 'hello@crosscreekrealty.com',
+        'telephone': '+1-404-555-1234',
+        'address': {
+          '@type': 'PostalAddress',
+          'streetAddress': '123 Cross Creek Way',
+          'addressLocality': 'Atlanta',
+          'addressRegion': 'GA',
+          'postalCode': '30318',
+          'addressCountry': 'US'
+        }
+      };
+      const ld = document.createElement('script'); ld.type = 'application/ld+json'; ld.textContent = JSON.stringify(schema); document.head.appendChild(ld);
+
+      // Sellers: recent sales slider
+      makeSlider('recentSales', { autoplayMs: reduceMotion ? 0 : 5000 });
+
+      // Sellers: net sheet estimator
+      function calcNet() {
+        const price = parseFloat(document.getElementById('sellPrice').value || '0');
+        const feePct = parseFloat(document.getElementById('sellFee').value || '0');
+        const closePct = parseFloat(document.getElementById('sellClosePct').value || '0');
+        const staging = parseFloat(document.getElementById('sellStaging').value || '0');
+        const media = parseFloat(document.getElementById('sellMedia').value || '0');
+        const payoff = parseFloat(document.getElementById('sellPayoff').value || '0');
+        const fees = price * (feePct/100) + price * (closePct/100) + staging + media;
+        const net = Math.max(0, price - fees - payoff);
+        document.getElementById('sellerOut').textContent = '$' + Math.round(net).toLocaleString();
+        return { price, feePct, closePct, staging, media, payoff, net };
+      }
+      document.getElementById('sellerCalc')?.addEventListener('click', calcNet);
+
+      // Sellers: lead capture
+      document.getElementById('sellerSubmit')?.addEventListener('click', () => {
+        const name = document.getElementById('sellerName').value.trim();
+        const email = document.getElementById('sellerEmail').value.trim();
+        const address = document.getElementById('sellerAddress').value.trim();
+        const timeframe = document.getElementById('sellerTimeframe').value;
+        if (!name || !email || !address) { toast('Please add name, email, and address.'); return; }
+        const net = calcNet();
+        const lead = {
+          source: 'IDX demo — seller',
+          name, email, address, timeframe,
+          estimatedNet: net.net || null,
+          inputs: net,
+          createdAt: new Date().toISOString()
+        };
+        const arr = store.get('cc_seller_leads', []); arr.push(lead); store.set('cc_seller_leads', arr);
+        toast('Thanks! We will send a valuation shortly.');
+        if (!user.email) { user.signIn({ name, email }); }
+      });
+    </script>
+  </body>
+</html>
+
+

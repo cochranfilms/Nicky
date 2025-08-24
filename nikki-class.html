@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Class Demo — How to use ChatGPT for Content Creation | Nikki Sanders</title>
+  <meta name="description" content="Premium classroom demo: chapters, progress, notes, quiz, and certificate for 'How to use ChatGPT for Content Creation' by Nikki Sanders.">
+  <link rel="canonical" href="" id="canonicalLink">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Class Demo — How to use ChatGPT for Content Creation | Nikki Sanders">
+  <meta property="og:description" content="Interactive syllabus, chapters, notes, quiz, and certificate. Demo-only integrations (EmailJS, Stripe, LLM).">
+  <meta property="og:url" content="" id="ogUrl">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Class Demo — Content Creation with ChatGPT | Nikki Sanders">
+  <meta name="twitter:description" content="Learn with chapters, progress, notes, quiz, and a certificate. Demo-only.">
+  <link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="%23010043"/><circle cx="32" cy="32" r="18" fill="%23e0ab10"/></svg>'>
+  <style>
+    :root {
+      --brand-dark: #010043; --brand-gold: #e0ab10; --bg-0:#07071a; --bg-1:#0b0b23; --text:#fff;
+      --muted:#cfd3ff; --radius:16px; --shadow:0 10px 40px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,"Helvetica Neue",Arial;
+      background: radial-gradient(1100px 700px at 70% -10%, rgba(255,120,200,.10), transparent 50%),
+                  radial-gradient(900px 600px at 0% 100%, rgba(1,0,67,.5), transparent 60%),
+                  linear-gradient(180deg, var(--bg-0), var(--bg-1));
+      background-attachment: fixed,fixed,fixed;
+    }
+    .neural-canvas{position:fixed;inset:0;z-index:-2}
+    .neural-overlay{position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+      radial-gradient(1000px 600px at 10% -10%, rgba(255,120,200,.09), transparent 50%),
+      radial-gradient(900px 600px at 100% 100%, rgba(224,171,16,.09), transparent 55%)}
+    a{color:#fff;text-decoration:none}
+    :focus-visible{outline:2px solid var(--brand-gold); outline-offset:2px}
+    header{position:sticky;top:0;z-index:20;backdrop-filter:saturate(140%) blur(12px);
+      background:linear-gradient(180deg, rgba(7,7,26,.85), rgba(7,7,26,.55));border-bottom:1px solid rgba(255,255,255,.08)}
+    .nav{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 16px}
+    .cta-primary{--c1:var(--brand-gold);--c2:#ffd86a;background:linear-gradient(135deg,var(--c1),var(--c2));
+      color:#111;border:none;border-radius:999px;height:40px;min-width:140px;padding:0 14px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;line-height:1;font-weight:700;box-shadow:0 10px 30px rgba(224,171,16,.35);cursor:pointer;white-space:nowrap}
+    .cta-ghost{background:rgba(255,255,255,.9);color:#111;border:1px solid rgba(255,255,255,.12);border-radius:999px;height:40px;min-width:120px;padding:0 14px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;line-height:1;font-weight:600;white-space:nowrap}
+    .container{width:min(100%,1200px);margin:0 auto;padding:0 24px}
+    .grid{display:grid;grid-template-columns:1.6fr .8fr;gap:20px}
+    .card{border-radius:0;background:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.08'/></svg>") repeat,
+        linear-gradient(135deg, rgba(0,255,190,.35), rgba(0,255,120,.35));
+      background-size:160px 160px, auto; background-blend-mode:overlay,normal; border:1px solid rgba(255,255,255,.22); box-shadow:var(--shadow); backdrop-filter:blur(12px) saturate(130%);}
+    .hero{padding:18px;margin:20px 0}
+    .hero h1{margin:6px 0 10px}
+    .player{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+    .player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .badge{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.18);
+      background:linear-gradient(135deg, rgba(255,255,255,.2), rgba(255,255,255,.08));color:#111;font-size:12px}
+    .syllabus{padding:16px}
+    .lesson{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:12px;margin:8px 0;border:1px solid rgba(255,255,255,.12)}
+    .progress{height:8px;background:rgba(255,255,255,.12);border-radius:999px;overflow:hidden}
+    .progress > span{display:block;height:100%;background:linear-gradient(90deg,#ffd86a,#9ecbff)}
+    .sidebar{padding:16px}
+    .list{display:grid;gap:10px}
+    .item{display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid rgba(255,255,255,.12);border-radius:12px}
+
+    /* Chat widget */
+    .chat{padding:12px;display:flex;flex-direction:column;gap:10px}
+    .chat-log{max-height:320px;overflow:auto;display:grid;gap:8px;padding:8px;border-radius:12px;border:1px solid rgba(255,255,255,.12)}
+    .bubble{padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
+    .bubble.me{background:rgba(255,255,255,.92);color:#111}
+    .chat-row{display:flex;gap:8px}
+    .chat-row input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:12px 14px;color:#fff}
+
+    /* Enhancements */
+    .gradient-text{background:linear-gradient(90deg,#fff,#ffd86a,#ff78ca);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 6px 24px rgba(255,120,200,.15)}
+    .kpis-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .kpi{padding:16px;text-align:center;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03))}
+    .kpi strong{font-size:22px}
+    @media (max-width: 980px){.kpis-grid{grid-template-columns:1fr 1fr}}
+    .certificate{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media (max-width: 980px){.certificate{grid-template-columns:1fr}}
+    .thumb{position:relative;overflow:hidden;border-radius:12px;border:1px solid rgba(255,255,255,.12)}
+    .thumb img{width:100%;display:block}
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+    .chip{background:rgba(255,255,255,.92);color:#111;border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 10px;font-weight:600;cursor:pointer}
+    details.faq{border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03))}
+    .two-col{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+    @media (max-width: 980px){.two-col{grid-template-columns:1fr}}
+    /* Accessibility */
+    .skip-link{position:absolute;left:8px;top:-40px;background:#fff;color:#111;padding:8px 12px;border-radius:8px;z-index:50}
+    .skip-link:focus{top:8px}
+
+    /* Mini player */
+    .mini-player{position:fixed;right:16px;bottom:16px;width:280px;aspect-ratio:16/9;border:1px solid rgba(255,255,255,.2);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);display:none;background:#000;z-index:30}
+    .mini-player iframe{width:100%;height:100%;border:0}
+    .mini-close{position:absolute;top:6px;right:6px;background:#fff;color:#111;border:none;border-radius:999px;width:26px;height:26px;cursor:pointer}
+
+    /* Lessons & Chapters */
+    .lessons{display:grid;gap:8px}
+    .lesson{display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:10px;padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,.12)}
+    .lesson.active{border-color:var(--brand-gold)}
+    .lesson .title{font-weight:600}
+    .copy-link{background:#fff;color:#111;border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:6px 10px;cursor:pointer}
+    .chapters{margin-top:14px;padding-top:10px;border-top:1px dashed rgba(255,255,255,.18)}
+    .chapter-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .chapter{border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:8px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));cursor:pointer}
+
+    /* Notes Drawer */
+    .notes-drawer{position:fixed;top:0;right:-420px;width:420px;max-width:92vw;height:100vh;background:#0f1026;border-left:1px solid rgba(255,255,255,.18);box-shadow:var(--shadow);transition:transform .28s ease;transform:translateX(0);z-index:40;padding:16px;display:flex;flex-direction:column}
+    .notes-drawer.open{transform:translateX(-420px)}
+    .notes-drawer textarea{flex:1;resize:vertical;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:12px;color:#fff;padding:12px}
+    .notes-actions{display:flex;gap:8px;margin-top:8px}
+
+    /* Transcript */
+    .transcript{margin-top:10px;border-top:1px dashed rgba(255,255,255,.18);padding-top:10px;display:none}
+    .transcript.open{display:block}
+    .transcript .tline{padding:6px 0;border-bottom:1px dotted rgba(255,255,255,.12)}
+    .tline button{border:1px solid rgba(255,255,255,.16);border-radius:6px;padding:2px 6px;background:#fff;color:#111;font-size:12px}
+
+    /* Chat enhancements */
+    .chat-top{display:flex;gap:8px;align-items:center}
+    .chat-select{background:#fff;color:#111;border-radius:8px;padding:6px 8px}
+    .bubble{position:relative}
+    .bubble-actions{position:absolute;right:6px;bottom:6px;display:flex;gap:6px}
+    .bubble-actions button{font-size:11px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#fff;color:#111;padding:2px 6px}
+
+    /* Quiz */
+    .quiz .q{margin:10px 0;padding:10px;border:1px solid rgba(255,255,255,.12);border-radius:10px}
+    .quiz .q legend{font-weight:700}
+    #confetti{position:fixed;inset:0;pointer-events:none;display:none;z-index:60}
+
+    /* Toast */
+    .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);padding:10px 14px;background:#fff;color:#111;border-radius:10px;box-shadow:var(--shadow);z-index:80;display:none}
+
+    /* Modals */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:70}
+    .modal.open{display:flex}
+    .modal .dialog{width:min(92vw,680px);background:#0f1026;border:1px solid rgba(255,255,255,.18);border-radius:12px;box-shadow:var(--shadow);padding:16px}
+
+    /* Print */
+    @media print{
+      header,.player,.mini-player,.neural-canvas,.neural-overlay,#chat,.resources,.quiz .controls,#confetti,.nav .cta-primary{display:none!important}
+      body{background:#fff;color:#000}
+      .card{box-shadow:none;border:1px solid #ccc}
+      .transcript{display:block}
+    }
+  </style>
+  <script type="application/ld+json" id="ldCourse"></script>
+  <script type="application/ld+json" id="ldPerson"></script>
+  <script type="application/ld+json" id="ldEvent"></script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <canvas id="neural" class="neural-canvas" aria-hidden="true"></canvas>
+  <div class="neural-overlay" aria-hidden="true"></div>
+  <header>
+    <div class="nav" role="navigation" aria-label="Primary">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <a class="cta-ghost" href="nikki-mock.html">← Back to Site</a>
+        <strong>Class Demo</strong>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <a class="cta-ghost" href="#syllabus">Syllabus</a>
+        <a class="cta-ghost" href="#chat">Class Chat</a>
+        <button class="cta-ghost" id="helpOpen" aria-haspopup="dialog" aria-controls="helpModal" title="Keyboard Shortcuts (?)">Shortcuts</button>
+        <button class="cta-ghost" id="certOpen" aria-haspopup="dialog" aria-controls="certModal" disabled>Generate Certificate</button>
+        <button class="cta-primary" id="stripeOpen" aria-haspopup="dialog" aria-controls="stripeModal">Enroll — Stripe (Demo)</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero card" aria-label="Player">
+      <h1 class="gradient-text">How to use ChatGPT for Content Creation — Class Demo</h1>
+      <div class="player" id="mainPlayer" aria-live="polite">
+        <iframe id="playerFrame" width="1280" height="720" src="https://www.youtube.com/embed/W0Ck2E9B9A8" title="Course Intro" allow="autoplay; fullscreen" allowfullscreen loading="eager"></iframe>
+      </div>
+      <div class="meta">
+        <span class="badge">35m total</span>
+        <span class="badge">Beginner</span>
+        <span class="badge" id="captionBadge" aria-pressed="false" role="button" tabindex="0">Captions: Off</span>
+        <span class="badge" id="muteBadge" aria-pressed="false" role="button" tabindex="0">Muted: No</span>
+        <span class="badge" title="EmailJS demo only">EmailJS: Demo Mode</span>
+        <span class="badge" title="Local mock only">LLM: Local Mock</span>
+      </div>
+      <!-- ===== TRANSCRIPT ===== -->
+      <div class="transcript" id="transcript" aria-expanded="false" aria-label="Transcript">
+        <div class="tline"><button data-time="00:05" aria-label="Seek to 0:05">00:05</button> Welcome! In this course we’ll set up a simple but powerful content system.</div>
+        <div class="tline"><button data-time="01:10" aria-label="Seek to 1:10">01:10</button> Learn the prompt anatomy: audience, tone, context, and output format.</div>
+        <div class="tline"><button data-time="02:45" aria-label="Seek to 2:45">02:45</button> Chapters help you jump to key moments quickly.</div>
+      </div>
+      <div class="chips">
+        <button class="chip" id="toggleTranscript" aria-controls="transcript" aria-expanded="false">Toggle Transcript (T)</button>
+        <button class="chip" id="openNotes">Open Notes (N)</button>
+      </div>
+    </section>
+
+    <section class="card" style="padding:16px; margin:16px 0;">
+      <div class="kpis-grid" aria-label="Highlights">
+        <div class="kpi"><div>Avg Rating</div><strong>4.6/5</strong></div>
+        <div class="kpi"><div>Learners</div><strong>5,400+</strong></div>
+        <div class="kpi"><div>Lessons</div><strong id="lessonCount">5</strong></div>
+        <div class="kpi"><div>Resources</div><strong>3</strong></div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card syllabus" id="syllabus" aria-label="Syllabus">
+        <h3>Syllabus & Lessons</h3>
+        <!-- ===== PROGRESS SYSTEM ===== -->
+        <div class="lessons" id="lessonList" role="list"></div>
+        <!-- ===== CHAPTERS ===== -->
+        <div class="chapters" id="chapters">
+          <h4>Chapters</h4>
+          <div class="chapter-list" id="chapterList"></div>
+        </div>
+        <div class="progress-summary" aria-live="polite"><strong id="progressPct">0%</strong> complete</div>
+      </div>
+      <aside class="card sidebar" aria-label="Sidebar">
+        <h3>What you’ll learn</h3>
+        <div class="list">
+          <div class="item"><span>Prompt systems for brand voice</span><span class="badge">AI</span></div>
+          <div class="item"><span>90-day content planning</span><span class="badge">Systems</span></div>
+          <div class="item"><span>Repurposing & workflows</span><span class="badge">Ops</span></div>
+          <div class="item"><span>Consistency without burnout</span><span class="badge">Wellness</span></div>
+        </div>
+        <h3 style="margin-top:14px">Certificate Preview</h3>
+        <div class="certificate">
+          <div class="thumb">
+            <img alt="Certificate preview" src="data:image/svg+xml;utf8,
+              <svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'>
+                <rect width='100%' height='100%' rx='18' ry='18' fill='%23ffffff' />
+                <rect x='24' y='24' width='752' height='452' rx='14' ry='14' fill='%23f7f7fb' stroke='%23e9e9f4'/>
+                <text x='50%' y='44%' fill='%23010043' font-size='28' font-family='sans-serif' dominant-baseline='middle' text-anchor='middle'>Certificate of Completion</text>
+                <text x='50%' y='58%' fill='%23010043' font-size='18' font-family='sans-serif' dominant-baseline='middle' text-anchor='middle'>How to use ChatGPT for Content Creation</text>
+              </svg>"/>
+          </div>
+          <div>
+            <p class="section-sub" style="margin:0">Downloadable certificate to add to your portfolio or socials.</p>
+            <div class="chips">
+              <button class="chip" data-load="https://www.youtube.com/embed/HYaf6W3GYE8">Intro</button>
+              <button class="chip" data-load="https://www.youtube.com/embed/iwSYdl1FUHU">Visuals</button>
+              <button class="chip" data-load="https://www.youtube.com/embed/lxw2lCUkIxU">Socials</button>
+              <button class="chip" data-load="https://www.youtube.com/embed/2CTQZWAQ9Js">Foundations</button>
+            </div>
+          </div>
+        </div>
+        <!-- ===== RESOURCES ===== -->
+        <div class="resources" style="margin-top:16px">
+          <h3>Resources</h3>
+          <button class="cta-ghost res-btn" id="dlZip">Prompt Pack (.zip)</button>
+          <button class="cta-ghost res-btn" id="dlCsv">Content Calendar (.csv)</button>
+          <button class="cta-ghost res-btn" id="dlMd">Brand Voice Template (.md)</button>
+          <form id="emailForm" style="margin-top:10px" aria-label="EmailJS demo form">
+            <label for="emailInput">Get updates (demo): </label>
+            <input id="emailInput" type="email" placeholder="you@example.com" aria-required="true" style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#fff;color:#111">
+            <button class="cta-primary" type="submit">Submit</button>
+            <div class="badge" style="margin-top:6px">EmailJS: Demo Mode</div>
+          </form>
+          <!-- EmailJS Placeholder: service_id, template_id, public_key go here in real integration. -->
+        </div>
+        <!-- ===== CALENDAR ===== -->
+        <div style="margin-top:16px">
+          <h3>Next Cohort</h3>
+          <div class="chips">
+            <span class="badge" id="countdown">Starts in —</span>
+          </div>
+          <div class="chips" aria-label="Add to calendar">
+            <button class="chip" id="calGoogle">Google</button>
+            <button class="chip" id="calApple">Apple (.ics)</button>
+            <button class="chip" id="calOutlook">Outlook (.ics)</button>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="two-col">
+      <div class="card" style="padding:16px;">
+        <h3>Frequently Asked Questions</h3>
+        <details class="faq"><summary>Do I need prior ChatGPT experience?</summary><p class="section-sub">No. We start with the basics and build to systems that scale.</p></details>
+        <details class="faq"><summary>Can I use this for my brand voice?</summary><p class="section-sub">Yes. We include prompt frameworks to model and protect your voice.</p></details>
+        <details class="faq"><summary>Will I get templates?</summary><p class="section-sub">You’ll receive prompt templates, content calendars, and workflow checklists.</p></details>
+      </div>
+      <div class="card" style="padding:16px;">
+        <h3>What students say</h3>
+        <div class="list">
+          <div class="item"><span>“Actionable and clear — shipped my first 30-day plan.”</span><span class="badge">Creator</span></div>
+          <div class="item"><span>“The voice framework is gold for our team.”</span><span class="badge">Team Lead</span></div>
+          <div class="item"><span>“Finally consistent without burning out.”</span><span class="badge">Solo</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card chat" id="chat" style="margin:20px 0 60px;">
+      <h3>Class Chat (Mock)</h3>
+      <div class="chat-top">
+        <label for="promptMenu">System prompt:</label>
+        <select id="promptMenu" class="chat-select" aria-label="Canned prompts">
+          <option value="">— choose —</option>
+          <option>Rewrite this hook with more urgency</option>
+          <option>Repurpose this summary for Instagram carousel</option>
+          <option>Add an audience-specific angle for freelancers</option>
+        </select>
+      </div>
+      <div class="chat-log" id="chatLog" aria-live="polite"></div>
+      <div class="chat-row">
+        <input id="chatInput" placeholder="Ask the class assistant anything about this lesson..." aria-label="Chat input" />
+        <button class="cta-primary" id="chatSend">Send</button>
+      </div>
+      <small style="color:#cbd0ff">Demo only — no messages are sent to any LLM. Local mock only.</small>
+    </section>
+  </main>
+
+  <!-- ===== MINI PLAYER ===== -->
+  <div class="mini-player" id="miniPlayer" aria-hidden="true">
+    <button class="mini-close" id="miniClose" aria-label="Close mini player">×</button>
+    <iframe id="miniFrame" title="Mini Player" loading="lazy" width="320" height="180" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  </div>
+
+  <!-- ===== NOTES DRAWER ===== -->
+  <aside class="notes-drawer" id="notesDrawer" aria-label="Notes" aria-modal="true" role="dialog">
+    <h3 style="margin:0 0 8px">Lesson Notes</h3>
+    <textarea id="notesArea" placeholder="Write your notes for this lesson..."></textarea>
+    <div class="notes-actions">
+      <button class="cta-primary" id="saveNotes">Save</button>
+      <button class="cta-ghost" id="exportTxt">Export .txt</button>
+      <button class="cta-ghost" id="exportMd">Generate .md</button>
+      <button class="cta-ghost" id="closeNotes">Close</button>
+    </div>
+  </aside>
+
+  <!-- ===== KEYBOARD SHORTCUTS MODAL ===== -->
+  <div class="modal" id="helpModal" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <div class="dialog">
+      <h3 id="helpTitle">Keyboard Shortcuts</h3>
+      <ul>
+        <li>Space: Play/Pause (demo)</li>
+        <li>J/K: Previous/Next lesson</li>
+        <li>M: Mute (visual)</li>
+        <li>C: Toggle Captions (visual)</li>
+        <li>N: Open Notes</li>
+        <li>T: Toggle Transcript</li>
+        <li>?: Open shortcuts</li>
+        <li>Esc: Close modals</li>
+      </ul>
+      <div style="display:flex;gap:8px;justify-content:flex-end">
+        <button class="cta-ghost" id="helpClose">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CERTIFICATE MODAL ===== -->
+  <div class="modal" id="certModal" role="dialog" aria-modal="true" aria-labelledby="certTitle">
+    <div class="dialog">
+      <h3 id="certTitle">Generate Certificate</h3>
+      <label for="studentName">Student Name</label>
+      <input id="studentName" style="display:block;width:100%;margin:6px 0 10px;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#fff;color:#111" placeholder="Your name" />
+      <canvas id="certCanvas" width="1200" height="800" style="width:100%;border:1px solid rgba(255,255,255,.18);border-radius:12px"></canvas>
+      <div class="chips">
+        <button class="chip" id="dlCert">Download PNG</button>
+        <button class="chip" id="dlShare">Copy Share Card</button>
+        <button class="chip" id="closeCert">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== STRIPE MODAL (DEMO) ===== -->
+  <div class="modal" id="stripeModal" role="dialog" aria-modal="true" aria-labelledby="stripeTitle">
+    <div class="dialog">
+      <h3 id="stripeTitle">Proceed to Stripe (Demo)</h3>
+      <p>Summary: Class access for <strong>$49</strong>. This is a demo — no real payment.</p>
+      <div style="display:flex;gap:8px;justify-content:flex-end">
+        <button class="cta-ghost" id="stripeCancel">Cancel</button>
+        <button class="cta-primary" id="stripeProceed">Proceed</button>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="confetti"></canvas>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // Canonical/OG URLs
+    (function(){ const u=location.href; document.getElementById('canonicalLink').href=u; document.getElementById('ogUrl').setAttribute('content',u); })();
+    // JSON-LD
+    (function(){
+      const course={"@context":"https://schema.org","@type":"Course","name":"How to use ChatGPT for Content Creation","description":"Interactive demo course with chapters, notes, quiz, and certificate.","provider":{"@type":"Organization","name":"Nikki Sanders"}};
+      const person={"@context":"https://schema.org","@type":"Person","name":"Nikki Sanders","sameAs":["https://www.instagram.com/thisisnickys/","https://www.linkedin.com/learning/how-to-use-chatgpt-for-content-creation"]};
+      const start=new Date(Date.now()+1000*60*60*24*14).toISOString();
+      const event={"@context":"https://schema.org","@type":"Event","name":"Two-Day Social Accelerator — Online","eventAttendanceMode":"https://schema.org/OnlineEventAttendanceMode","eventStatus":"https://schema.org/EventScheduled","startDate":start,"location":{"@type":"VirtualLocation","url":location.href}};
+      document.getElementById('ldCourse').textContent=JSON.stringify(course);
+      document.getElementById('ldPerson').textContent=JSON.stringify(person);
+      document.getElementById('ldEvent').textContent=JSON.stringify(event);
+    })();
+
+    // Utilities
+    const $ = (s, d=document)=>d.querySelector(s); const $$ = (s, d=document)=>Array.from(d.querySelectorAll(s));
+    const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.style.display='block'; clearTimeout(t._h); t._h=setTimeout(()=>t.style.display='none',1600); }
+    function parseTimeToSeconds(t){ if(!t) return 0; const m=t.match(/^(\d{1,2}):(\d{2})$/); if(!m) return 0; return parseInt(m[1],10)*60+parseInt(m[2],10); }
+    function secToTime(s){ const m=Math.floor(s/60).toString().padStart(2,'0'); const ss=(s%60).toString().padStart(2,'0'); return `${m}:${ss}`; }
+    function getStore(k,fb){ try{return JSON.parse(localStorage.getItem(k)) ?? fb;}catch(e){return fb;} }
+    function setStore(k,v){ try{localStorage.setItem(k, JSON.stringify(v));}catch(e){} }
+
+    // Background animation (single RAF, reduced motion aware)
+    (function(){
+      const canvas = document.getElementById('neural'); if(!canvas) return; const ctx = canvas.getContext('2d');
+      let w,h,dpr, t=0, raf; let parts=[];
+      function resize(){ dpr=window.devicePixelRatio||1; w=canvas.clientWidth=innerWidth; h=canvas.clientHeight=innerHeight; canvas.width=Math.floor(w*dpr); canvas.height=Math.floor(h*dpr); ctx.setTransform(dpr,0,0,dpr,0,0); init(); draw(0,true); }
+      function init(){ const n=Math.max(40, Math.floor((w*h)/26000)); parts=new Array(n).fill(0).map(()=>({x:Math.random()*w,y:Math.random()*h,life:200+Math.random()*400,size:.8+Math.random()*1.6,hue:300+Math.random()*40})); }
+      function ang(x,y,t){ return Math.sin(x*.002+t*.6)+Math.cos(y*.0025-t*.5); }
+      function aurora(time){ ctx.save(); ctx.globalCompositeOperation='screen'; for(let b=0;b<3;b++){ const y0=h*(.25+.25*b), amp=40+b*26; ctx.beginPath(); for(let x=-100;x<=w+100;x+=12){ const y=y0+Math.sin(x*.012+time*(.8+.15*b))*amp+Math.cos(x*.006-time*(.4+.1*b))*(amp*.6); if(x===-100)ctx.moveTo(x,y); else ctx.lineTo(x,y);} const g=ctx.createLinearGradient(0,y0-80,0,y0+80); const A=['rgba(255,120,200,0.00)','rgba(255,120,200,0.20)','rgba(224,171,16,0.18)'][b]; const B=['rgba(224,171,16,0.22)','rgba(255,216,106,0.14)','rgba(255,120,200,0.12)'][b]; g.addColorStop(0,A); g.addColorStop(1,B); ctx.strokeStyle=g; ctx.lineWidth=3+b*.6; ctx.stroke(); } ctx.restore(); }
+      function field(time){ ctx.save(); ctx.lineWidth=1; ctx.strokeStyle='rgba(255,120,200,0.16)'; const gx=42,gy=24; for(let i=0;i<=gx;i++){ for(let j=0;j<=gy;j++){ const x=(i/gx)*w,y=(j/gy)*h,a=ang(x,y,time)*Math.PI,dx=Math.cos(a)*12,dy=Math.sin(a)*12; ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x+dx,y+dy); ctx.stroke(); }} ctx.restore(); }
+      function particles(time){ ctx.save(); for(const p of parts){ const a=ang(p.x,p.y,time)*Math.PI; p.x+=Math.cos(a)*.9; p.y+=Math.sin(a)*.9; p.life-=1; if(p.x<-20)p.x=w+20; if(p.x>w+20)p.x=-20; if(p.y<-20)p.y=h+20; if(p.y>h+20)p.y=-20; if(p.life<=0){ p.x=Math.random()*w; p.y=Math.random()*h; p.life=200+Math.random()*400; } ctx.beginPath(); ctx.fillStyle=`hsla(${p.hue},85%,62%,0.85)`; ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill(); } ctx.restore(); }
+      function draw(time,staticOnly){ ctx.clearRect(0,0,w,h); const g1=ctx.createRadialGradient(w*.15,h*.1,0,w*.15,h*.1,Math.max(w,h)); g1.addColorStop(0,'rgba(40,0,25,0.6)'); g1.addColorStop(1,'rgba(25,0,18,0.0)'); ctx.fillStyle=g1; ctx.fillRect(0,0,w,h); const g2=ctx.createRadialGradient(w*.85,h*.9,0,w*.85,h*.9,Math.max(w,h)); g2.addColorStop(0,'rgba(255,120,200,0.10)'); g2.addColorStop(1,'rgba(0,0,0,0)'); ctx.fillStyle=g2; ctx.fillRect(0,0,w,h); aurora(time); if(!prefersReduce.matches && !staticOnly){ field(time); particles(time);} }
+      function step(){ t+=.012; draw(t,false); raf=requestAnimationFrame(step);} function start(){ cancelAnimationFrame(raf); if(prefersReduce.matches){ draw(0,true); return;} raf=requestAnimationFrame(step);} resize(); addEventListener('resize',()=>{resize(); start();}); prefersReduce.addEventListener?.('change', start); start();
+    })();
+
+    // ===== Lessons, Chapters, Player, Notes, Downloads, Calendar, Quiz, Certificate, Chat =====
+    (function(){
+      const LESSONS=[
+        {id:1,title:'Foundations of ChatGPT',url:'https://www.youtube.com/embed/2CTQZWAQ9Js',chapters:[['00:00','Intro'],['00:25','Why prompts'],['01:10','Anatomy'] ]},
+        {id:2,title:'Crafting Compelling Social Posts',url:'https://www.youtube.com/embed/lxw2lCUkIxU',chapters:[['00:00','Hooks'],['00:45','Frameworks'],['01:30','Examples']]},
+        {id:3,title:'Curating Visual Content',url:'https://www.youtube.com/embed/iwSYdl1FUHU',chapters:[['00:00','Sources'],['00:30','Light edits'],['01:15','Attribution']]},
+        {id:4,title:'Content Planning with ChatGPT',url:'https://www.youtube.com/embed/HYaf6W3GYE8',chapters:[['00:00','Cadence'],['00:40','Calendar'],['01:20','Automation']]},
+        {id:5,title:'Measuring Performance',url:'https://www.youtube.com/embed/BPhX1da2lbY',chapters:[['00:00','Metrics'],['00:50','Iteration'],['01:35','Next steps']]},
+      ];
+      const $ = (s, d=document)=>d.querySelector(s); const $$ = (s, d=document)=>Array.from(d.querySelectorAll(s));
+      const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const lessonList=$('#lessonList'); const chapterList=$('#chapterList');
+      const completed=(()=>{ try{return JSON.parse(localStorage.getItem('completed'))||{};}catch(e){return{}} })();
+      const lessonTimes=(()=>{ try{return JSON.parse(localStorage.getItem('lessonTimes'))||{};}catch(e){return{}} })();
+      function setStore(k,v){ try{localStorage.setItem(k, JSON.stringify(v));}catch(e){} }
+      function secToTime(s){ const m=Math.floor(s/60).toString().padStart(2,'0'); const ss=(s%60).toString().padStart(2,'0'); return `${m}:${ss}`; }
+      function parseTimeToSeconds(t){ if(!t) return 0; const m=t.match(/^(\d{1,2}):(\d{2})$/); if(!m) return 0; return parseInt(m[1],10)*60+parseInt(m[2],10); }
+      function renderLessons(){ lessonList.innerHTML=''; LESSONS.forEach((L,i)=>{ const row=document.createElement('div'); row.className='lesson'; row.setAttribute('role','listitem'); row.dataset.lessonId=L.id; row.innerHTML=`<input type=\"checkbox\" aria-label=\"Complete lesson ${i+1}\" class=\"done\">`+`<div class=\"title\">${i+1}. ${L.title}</div>`+`<button class=\"cta-ghost play\" aria-label=\"Play ${L.title}\">Play</button>`+`<button class=\"copy-link\" title=\"Copy deep link\" aria-label=\"Copy link\" data-copy>Link</button>`; lessonList.appendChild(row); row.querySelector('.done').checked=!!completed[L.id]; }); document.getElementById('lessonCount').textContent=String(LESSONS.length); updateProgress(); }
+      function renderChapters(lesson){ chapterList.innerHTML=''; lesson.chapters.forEach(ch=>{ const [t,label]=ch; const b=document.createElement('button'); b.className='chapter'; b.textContent=`${t} — ${label}`; b.dataset.time=t; chapterList.appendChild(b); }); }
+      renderLessons();
+
+      const mainFrame=$('#playerFrame'); const mini=$('#miniPlayer'); const miniFrame=$('#miniFrame'); const miniClose=$('#miniClose');
+      const lastLessonObj=(()=>{ try{return JSON.parse(localStorage.getItem('lastLesson'))||{lessonId:1,time:0};}catch(e){return{lessonId:1,time:0}} })();
+      let currentLessonId=lastLessonObj.lessonId||1; let lastStart=lastLessonObj.time||0;
+      function setActiveLessonRow(){ $$('.lesson').forEach(el=>{ el.classList.toggle('active', parseInt(el.dataset.lessonId,10)===currentLessonId ); }); }
+      function buildSrc(base,start=0,autoplay=false){ const u=new URL(base); if(start>0) u.searchParams.set('start', String(start)); else u.searchParams.delete('start'); if(autoplay) u.searchParams.set('autoplay','1'); else u.searchParams.delete('autoplay'); return u.toString(); }
+      function updateUrlHash(start){ const u=new URL(location.href); u.hash=`#lesson=${currentLessonId}`+(start?`&t=${secToTime(start)}`:''); history.replaceState(null,'',u.toString()); }
+      function loadLesson(id,start=0,autoplay=true){ const L=LESSONS.find(x=>x.id===id)||LESSONS[0]; currentLessonId=L.id; lastStart=start||0; setStore('lastLesson',{lessonId:currentLessonId,time:lastStart}); lessonTimes[currentLessonId]=lastStart; setStore('lessonTimes',lessonTimes); const src=buildSrc(L.url,lastStart,autoplay); mainFrame.src=src; miniFrame.src=src; renderChapters(L); setActiveLessonRow(); updateUrlHash(lastStart); }
+      const deep=(function(){ const h=location.hash.slice(1); if(!h) return null; const p=new URLSearchParams(h.replace(/&/g,'&')); const lid=parseInt(p.get('lesson')||''); const t=p.get('t'); if(Number.isFinite(lid)) return {lessonId:lid,time:parseTimeToSeconds(t)}; const onlyT=/^t=(\d{2}:\d{2})$/.exec(h); if(onlyT) return {lessonId:(lastLessonObj.lessonId||1), time:parseTimeToSeconds(onlyT[1])}; return null; })();
+      const io=new IntersectionObserver(entries=>{ entries.forEach(en=>{ if(en.isIntersecting){ mini.style.display='none'; mini.setAttribute('aria-hidden','true'); } else { mini.style.display='block'; mini.setAttribute('aria-hidden','false'); } }); }); io.observe(document.getElementById('mainPlayer'));
+      mini.addEventListener('click',(e)=>{ if(e.target===miniClose){ mini.style.display='none'; mini.setAttribute('aria-hidden','true'); return;} document.getElementById('mainPlayer').scrollIntoView({behavior: prefersReduce.matches?'auto':'smooth'}); });
+      if(deep){ loadLesson(deep.lessonId, deep.time||0, true); } else { loadLesson(currentLessonId, lastStart||0, false); }
+      addEventListener('hashchange', ()=>{ const d=(function(){ const h=location.hash.slice(1); if(!h) return null; const p=new URLSearchParams(h.replace(/&/g,'&')); const lid=parseInt(p.get('lesson')||''); const t=p.get('t'); if(Number.isFinite(lid)) return {lessonId:lid,time:parseTimeToSeconds(t)}; return null; })(); if(d){ loadLesson(d.lessonId, d.time||0, true); }});
+
+      document.addEventListener('click',(e)=>{
+        const row=e.target.closest('.lesson');
+        if(row && e.target.closest('.play')){ loadLesson(parseInt(row.dataset.lessonId,10), 0, true); return; }
+        if(row && e.target.hasAttribute('data-copy')){ const lid=parseInt(row.dataset.lessonId,10); const time=lessonTimes[lid]||0; const url= location.origin+location.pathname+`#lesson=${lid}`+(time?`&t=${secToTime(time)}`:''); navigator.clipboard?.writeText(url).then(()=>showToast('Link copied.')); return; }
+        const ch=e.target.closest('.chapter'); if(ch){ const t=parseTimeToSeconds(ch.dataset.time); loadLesson(currentLessonId, t, true); showToast(`Jumped to ${ch.dataset.time}`); return; }
+        if(e.target.id==='toggleTranscript'){ const tr=document.getElementById('transcript'); const exp=tr.classList.toggle('open'); tr.setAttribute('aria-expanded', exp?'true':'false'); e.target.setAttribute('aria-expanded', exp?'true':'false'); return; }
+      });
+
+      document.addEventListener('change',(e)=>{ const row=e.target.closest('.lesson'); if(row && e.target.classList.contains('done')){ completed[row.dataset.lessonId]=e.target.checked; setStore('completed',completed); updateProgress(); }});
+      function updateProgress(){ const total=LESSONS.length; const done=Object.values(completed).filter(Boolean).length; const pct=Math.round((done/total)*100); document.getElementById('progressPct').textContent=pct+'%'; const ok=pct>=80 && done===total; document.getElementById('certOpen').disabled=!ok; }
+
+      // Shortcuts
+      addEventListener('keydown',(e)=>{
+        if(e.key==='?' || (e.shiftKey && e.key==='/' )){ e.preventDefault(); openModal('#helpModal','#helpClose'); return; }
+        if(e.key==='Escape'){ closeModal('#helpModal'); closeModal('#certModal'); closeModal('#stripeModal'); closeNotes(); return; }
+        if(e.key===' '){ e.preventDefault(); const u=new URL(mainFrame.src); const ap=u.searchParams.get('autoplay')==='1'; u.searchParams.set('autoplay', ap?'0':'1'); mainFrame.src=u.toString(); miniFrame.src=u.toString(); return; }
+        if(e.key.toLowerCase()==='n'){ openNotes(); return; }
+        if(e.key.toLowerCase()==='t'){ const b=document.getElementById('toggleTranscript'); b.click(); return; }
+        if(e.key.toLowerCase()==='j'){ const idx=Math.max(0, LESSONS.findIndex(l=>l.id===currentLessonId)-1); loadLesson(LESSONS[idx].id,0,true); return; }
+        if(e.key.toLowerCase()==='k'){ const idx=Math.min(LESSONS.length-1, LESSONS.findIndex(l=>l.id===currentLessonId)+1); loadLesson(LESSONS[idx].id,0,true); return; }
+        if(e.key.toLowerCase()==='m'){ const b=document.getElementById('muteBadge'); const on=b.getAttribute('aria-pressed')==='true'; b.setAttribute('aria-pressed', (!on).toString()); b.textContent='Muted: '+(!on?'Yes':'No'); showToast('Mute toggled (visual)'); return; }
+        if(e.key.toLowerCase()==='c'){ const b=document.getElementById('captionBadge'); const on=b.getAttribute('aria-pressed')==='true'; b.setAttribute('aria-pressed', (!on).toString()); b.textContent='Captions: '+(!on?'On':'Off'); showToast('Captions toggled (visual)'); return; }
+      });
+
+      // Transcript seek
+      document.getElementById('transcript').addEventListener('click',(e)=>{ const b=e.target.closest('button[data-time]'); if(!b) return; const s=parseTimeToSeconds(b.dataset.time); loadLesson(currentLessonId, s, true); });
+
+      // Notes Drawer
+      const drawer=document.getElementById('notesDrawer'); const notesArea=document.getElementById('notesArea');
+      function openNotes(){ drawer.classList.add('open'); const map=(()=>{ try{return JSON.parse(localStorage.getItem('notes'))||{};}catch(e){return{}} })(); notesArea.value=map[currentLessonId]||''; notesArea.focus(); }
+      function closeNotes(){ drawer.classList.remove('open'); }
+      function saveNotes(){ const map=(()=>{ try{return JSON.parse(localStorage.getItem('notes'))||{};}catch(e){return{}} })(); map[currentLessonId]=notesArea.value; setStore('notes',map); showToast('Notes saved'); }
+      function exportNotes(fmt){ const map=(()=>{ try{return JSON.parse(localStorage.getItem('notes'))||{};}catch(e){return{}} })(); const txt=map[currentLessonId]||''; const name=`lesson-${currentLessonId}-notes.${fmt}`; const content= fmt==='md'?`# Notes for Lesson ${currentLessonId}\n\n${txt}`:txt; const blob=new Blob([content],{type:'text/plain'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; a.click(); URL.revokeObjectURL(a.href); }
+      document.addEventListener('click',(e)=>{ if(e.target.id==='openNotes') openNotes(); if(e.target.id==='saveNotes') saveNotes(); if(e.target.id==='exportTxt') exportNotes('txt'); if(e.target.id==='exportMd') exportNotes('md'); if(e.target.id==='closeNotes') closeNotes(); });
+
+      // Resources downloads
+      function mockZip(){ const files='Prompt Pack (demo):\n- Hooks.txt\n- Captions.txt\n- CTAs.txt'; const blob=new Blob([files],{type:'application/zip'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='prompt-pack-demo.zip'; a.click(); URL.revokeObjectURL(a.href); }
+      function mockCsv(){ const rows=['date,theme,format','2025-01-05,Hook Reel,Reel','2025-01-08,Carousel,Carousel']; const blob=new Blob([rows.join('\n')],{type:'text/csv'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='content-calendar-demo.csv'; a.click(); URL.revokeObjectURL(a.href); }
+      function mockMd(){ const md='# Brand Voice Template\n\n- Tone: Warm, clear, direct\n- Do: Use active voice\n- Avoid: Jargon'; const blob=new Blob([md],{type:'text/markdown'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='brand-voice-template.md'; a.click(); URL.revokeObjectURL(a.href); }
+      document.getElementById('dlZip')?.addEventListener('click',mockZip);
+      document.getElementById('dlCsv')?.addEventListener('click',mockCsv);
+      document.getElementById('dlMd')?.addEventListener('click',mockMd);
+      document.getElementById('emailForm')?.addEventListener('submit',(e)=>{ e.preventDefault(); const email=document.getElementById('emailInput').value.trim(); if(!email){ showToast('Enter email'); return; } alert('EmailJS Demo: Submission captured. Check console.'); console.log('EmailJS payload (demo):',{email}); /* EmailJS placeholders: service_id, template_id, public_key */ });
+
+      // Calendar & countdown
+      const cohortStart=new Date(Date.now()+1000*60*60*24*9 + 1000*3600*10);
+      function updateCountdown(){ const el=document.getElementById('countdown'); const now=new Date(); let d=(cohortStart-now)/1000; if(d<0) d=0; const days=Math.floor(d/86400); d%=86400; const hrs=Math.floor(d/3600).toString().padStart(2,'0'); const mins=Math.floor((d%3600)/60).toString().padStart(2,'0'); el.textContent=`Starts in ${days}d:${hrs}h:${mins}m`; }
+      updateCountdown(); let cdIv=setInterval(()=>{ if(!prefersReduce.matches) updateCountdown(); },1000); addEventListener('beforeunload',()=>clearInterval(cdIv));
+      function ics(){ const dt=(d)=> d.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z'; const end=new Date(cohortStart.getTime()+2*24*3600*1000); return `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Nikki//Class Demo//EN\nBEGIN:VEVENT\nUID:${Date.now()}@nikki\nDTSTAMP:${dt(new Date())}\nDTSTART:${dt(cohortStart)}\nDTEND:${dt(end)}\nSUMMARY:Two-Day Social Accelerator — Online\nDESCRIPTION:Class cohort (demo).\nLOCATION:Online\nEND:VEVENT\nEND:VCALENDAR`; }
+      document.getElementById('calApple')?.addEventListener('click',()=>{ const blob=new Blob([ics()],{type:'text/calendar'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='accelerator.ics'; a.click(); URL.revokeObjectURL(a.href); });
+      document.getElementById('calOutlook')?.addEventListener('click',()=>{ const blob=new Blob([ics()],{type:'text/calendar'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='accelerator.ics'; a.click(); URL.revokeObjectURL(a.href); });
+      document.getElementById('calGoogle')?.addEventListener('click',()=>{ const start=cohortStart.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z'; const end=new Date(cohortStart.getTime()+2*24*3600*1000).toISOString().replace(/[-:]/g,'').split('.')[0]+'Z'; const url=`https://calendar.google.com/calendar/r/eventedit?text=${encodeURIComponent('Two-Day Social Accelerator — Online')}&dates=${start}/${end}&details=${encodeURIComponent('Demo cohort')}&location=${encodeURIComponent('Online')}`; window.open(url,'_blank','noopener'); });
+
+      // Quiz + certificate gating
+      const answers={q1:'b',q2:'b',q3:'b',q4:'b',q5:'b'};
+      document.getElementById('quizForm')?.addEventListener('submit',(e)=>{ e.preventDefault(); let score=0, total=Object.keys(answers).length; for(const k in answers){ const v=(new FormData(e.target)).get(k); if(v===answers[k]) score++; } const pct=Math.round((score/total)*100); const el=document.getElementById('quizResult'); const pass=pct>=80; el.innerHTML=`<span class=\"badge\" style=\"background:${pass?'linear-gradient(135deg,#41d695,#b0ffdd)':'linear-gradient(135deg,#ff6b7a,#ffd1d6)'};color:#111\">${pass?'Pass — Certificate unlocked':'Try again for certificate'} (${pct}%)</span>`; if(pass){ if(!prefersReduce.matches) confettiBurst(); }});
+      function confettiBurst(){ const c=document.getElementById('confetti'), ctx=c.getContext('2d'); let w=c.width=innerWidth, h=c.height=innerHeight; c.style.display='block'; const parts=Array.from({length:140},()=>({x:Math.random()*w,y:-20*Math.random(),vx:(Math.random()-.5)*2,vy:1+Math.random()*3,clr:`hsl(${Math.random()*360},90%,60%)`,s:4+Math.random()*4,life:80+Math.random()*60})); let id; function step(){ ctx.clearRect(0,0,w,h); parts.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.vy+=0.02; p.life--; ctx.fillStyle=p.clr; ctx.fillRect(p.x,p.y,p.s,p.s); }); if(parts.some(p=>p.life>0)) id=requestAnimationFrame(step); else { c.style.display='none'; cancelAnimationFrame(id); } } step(); }
+
+      // Certificate modal actions
+      function drawCertificate(){ const c=document.getElementById('certCanvas'), ctx=c.getContext('2d'); const name=((document.getElementById('studentName').value)||'Your Name').trim(); ctx.clearRect(0,0,c.width,c.height); ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,c.width,c.height); ctx.strokeStyle='#e9e9f4'; ctx.lineWidth=2; ctx.strokeRect(24,24,c.width-48,c.height-48); const grad=ctx.createLinearGradient(0,0,c.width,0); grad.addColorStop(0,'#010043'); grad.addColorStop(1,'#e0ab10'); ctx.fillStyle=grad; ctx.fillRect(24,120,c.width-48,10); ctx.fillStyle='#010043'; ctx.font='bold 54px sans-serif'; ctx.textAlign='center'; ctx.fillText('Certificate of Completion', c.width/2, 240); ctx.font='28px sans-serif'; ctx.fillText('How to use ChatGPT for Content Creation', c.width/2, 300); ctx.font='24px sans-serif'; ctx.fillText('awarded to', c.width/2, 380); ctx.font='bold 42px sans-serif'; ctx.fillStyle='#010043'; ctx.fillText(name, c.width/2, 440); ctx.font='18px sans-serif'; ctx.fillText('Instructor: Nikki Sanders', c.width/2, 520); ctx.beginPath(); ctx.arc(c.width-180, c.height-180, 60, 0, Math.PI*2); ctx.fillStyle='#e0ab10'; ctx.fill(); ctx.fillStyle='#010043'; ctx.font='bold 18px sans-serif'; ctx.fillText('NIKKI', c.width-180, c.height-180+6); }
+      document.getElementById('studentName')?.addEventListener('input', drawCertificate);
+      function downloadCert(){ drawCertificate(); const c=document.getElementById('certCanvas'); const a=document.createElement('a'); a.href=c.toDataURL('image/png'); a.download='certificate.png'; a.click(); }
+      function downloadShare(){ const w=1200,h=630; const c=document.createElement('canvas'); c.width=w; c.height=h; const ctx=c.getContext('2d'); ctx.fillStyle='#010043'; ctx.fillRect(0,0,w,h); ctx.fillStyle='#e0ab10'; ctx.font='bold 48px sans-serif'; ctx.textAlign='center'; ctx.fillText('Class Completed', w/2, h/2-20); ctx.fillStyle='#fff'; ctx.font='28px sans-serif'; ctx.fillText(((document.getElementById('studentName').value)||'Your Name').trim(), w/2, h/2+30); const a=document.createElement('a'); a.href=c.toDataURL('image/png'); a.download='share-card.png'; a.click(); }
+      function openModal(sel,closeSel){ const m=$(sel); window._lastActive=document.activeElement; m.classList.add('open'); const focusables=m.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])'); const first=focusables[0], last=focusables[focusables.length-1]; function trap(e){ if(e.key!=='Tab') return; if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); } else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); } } m.addEventListener('keydown', trap); $(closeSel)?.focus(); }
+      function closeModal(sel){ const m=$(sel); m.classList.remove('open'); window._lastActive?.focus(); }
+      document.addEventListener('click',(e)=>{
+        if(e.target.id==='helpOpen') openModal('#helpModal','#helpClose');
+        if(e.target.id==='helpClose') closeModal('#helpModal');
+        if(e.target.id==='certOpen'){ openModal('#certModal','#closeCert'); drawCertificate(); }
+        if(e.target.id==='closeCert') closeModal('#certModal');
+        if(e.target.id==='dlCert') downloadCert();
+        if(e.target.id==='dlShare') downloadShare();
+        if(e.target.id==='stripeOpen') openModal('#stripeModal','#stripeCancel');
+        if(e.target.id==='stripeCancel') closeModal('#stripeModal');
+        if(e.target.id==='stripeProceed'){ alert('Stripe: Demo checkout. No network calls.'); console.log('Stripe payload (demo):',{plan:'class',price:49}); closeModal('#stripeModal'); }
+      });
+
+      // Chat mock + enhancements
+      const chatLog=document.getElementById('chatLog'); const chatInput=document.getElementById('chatInput'); const chatSend=document.getElementById('chatSend');
+      function appendBubble(text, me=false){ const b=document.createElement('div'); b.className='bubble'+(me?' me':''); b.innerHTML=`<div>${text}</div><div class=\"bubble-actions\"><button data-act=\"copy\">Copy</button><button data-act=\"save\">Save to Notes</button><button data-act=\"up\">👍</button><button data-act=\"down\">👎</button></div>`; chatLog.appendChild(b); chatLog.scrollTop=chatLog.scrollHeight; }
+      function mockReply(q){ const replies=["Great question. Try framing your prompt with audience, tone, and desired action.","Repurpose by extracting hooks, quotes, and FAQs from your long form content.","Use a content cadence: 1 pillar, 3 themes, and 2 weekly formats.","Measure results with reach, saves, and replies — then iterate your prompts."]; const pick=replies[Math.floor(Math.random()*replies.length)]; appendBubble(pick,false); }
+      function sendMessage(){ const val=chatInput.value.trim(); if(!val) return; appendBubble(val,true); chatInput.value=''; setTimeout(()=>appendBubble('Thinking…',false),200); setTimeout(()=>{ const last=chatLog.querySelector('.bubble:last-child'); if(last && last.textContent.includes('Thinking…')) last.remove(); mockReply(val); },900); }
+      chatSend?.addEventListener('click', sendMessage); chatInput?.addEventListener('keydown',(e)=>{ if(e.key==='Enter') sendMessage(); });
+      document.getElementById('promptMenu')?.addEventListener('change',(e)=>{ if(e.target.value){ chatInput.value=e.target.value+': '; chatInput.focus(); } });
+      chatLog?.addEventListener('click',(e)=>{ const btn=e.target.closest('button'); if(!btn) return; const b=e.target.closest('.bubble'); const text=b?.innerText||''; if(btn.dataset.act==='copy'){ navigator.clipboard?.writeText(text); showToast('Copied'); } if(btn.dataset.act==='save'){ const map=(()=>{ try{return JSON.parse(localStorage.getItem('notes'))||{};}catch(ex){return{}} })(); map[currentLessonId]=(map[currentLessonId]||'')+`\nChat: ${text}`; setStore('notes',map); showToast('Saved to notes'); } if(btn.dataset.act==='up'||btn.dataset.act==='down'){ showToast('Thanks!'); } });
+    })();
+  </script>
+</body>
+</html>

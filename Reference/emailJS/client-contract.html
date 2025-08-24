@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Contract Confirmed</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      .wrap { max-width: 640px; margin: 0 auto; font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: #111; }
+      .card { background: #ffffff; border-radius: 12px; border: 1px solid #eee; padding: 24px; }
+      .brand { background: #010043; color: #fff; padding: 20px; border-radius: 12px 12px 0 0; text-align: center; }
+      .brand h1 { margin: 0; font-size: 20px; letter-spacing: .5px; }
+      .section h2 { margin: 0 0 8px; font-size: 16px; }
+      .muted { color: #555; }
+      .list { margin: 8px 0 0 18px; }
+      .btn { display: inline-block; background: #e0ab10; color: #111; padding: 12px 18px; border-radius: 999px; text-decoration: none; font-weight: 700; }
+      .meta { font-size: 13px; color: #444; margin-top: 16px; }
+      .hr { height: 1px; background: #eee; margin: 20px 0; }
+      .foot { text-align: center; font-size: 12px; color: #666; margin-top: 18px; }
+      .pill { display:inline-block;background:#faf5e0;border:1px solid #e0ab10;color:#111;padding:4px 8px;border-radius:999px;font-size:12px; }
+    </style>
+  </head>
+  <body style="background:#f7f7fb; padding: 20px;">
+    <div class="wrap">
+      <div class="brand">
+        <h1>Marketing Mousetrap Agency</h1>
+        <div style="margin-top:6px;font-size:13px;opacity:.85;">Contract Confirmation</div>
+      </div>
+      <div class="card" style="border-top-left-radius:0;border-top-right-radius:0">
+        <p>Hi {{client_name}},</p>
+        <p>Thanks for signing! Your service agreement has been received and your initial invoice has been prepared.</p>
+
+        <div class="section">
+          <h2>Summary</h2>
+          <p class="muted">
+            <span class="pill">{{selected_package}}</span>
+          </p>
+          <p class="meta">
+            Contract ID: <strong>{{contract_id}}</strong><br/>
+            Signed: <strong>{{effective_date}}</strong><br/>
+            Email: <strong>{{client_email}}</strong>
+          </p>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="section">
+          <h2>Invoice</h2>
+          <p>Amount due now (50% deposit): <strong>{{invoice_total_due}}</strong></p>
+          {{#if payment_link}}
+          <p><a class="btn" href="{{payment_link}}" target="_blank" rel="noreferrer">Pay Securely</a></p>
+          <p class="muted" style="font-size:13px">If the button doesn't work, open this link: <br><a href="{{payment_link}}" target="_blank">{{payment_link}}</a></p>
+          {{/if}}
+          {{#if invoice_id}}
+          <p class="meta">Invoice ID: <strong>{{invoice_id}}</strong></p>
+          {{/if}}
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="section">
+          <h2>Next Steps</h2>
+          <ul class="list">
+            <li>Complete the initial deposit to activate your project slot.</li>
+            <li>We’ll email you a kickoff checklist and booking links.</li>
+            <li>We begin implementing your unified, AI‑powered content system.</li>
+          </ul>
+        </div>
+
+        <p class="foot">Questions? Reply to this email and we’ll help right away.</p>
+      </div>
+    </div>
+  </body>
+</html>

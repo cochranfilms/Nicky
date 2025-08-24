@@ -454,29 +454,55 @@
       </div>
     </div>
 
-    <!-- Thank You Screen -->
+    <!-- Thank You + Invoice Screen -->
     <div id="thankYouScreen" class="thank-you-screen">
       <div class="contract-card">
         <div class="icon">✨</div>
         <h2>Thank You for Signing!</h2>
         <p>Your contract has been successfully signed and submitted.</p>
-        <div class="btn-row">
-          <button id="downloadContractBtn" class="cta-primary">Download Contract PDF</button>
-          <a href="https://link.waveapps.com/payment-demo" target="_blank" class="cta-ghost">View Invoice</a>
-        </div>
         <div id="emailStatus" class="email-status"></div>
+      </div>
+
+      <!-- Branded Invoice UI -->
+      <div class="contract-card" id="invoiceCard">
+        <h2 style="margin-bottom:12px">Invoice</h2>
+        <div id="invoiceMeta" style="color:var(--muted); font-size:14px; margin-bottom:16px"></div>
+        <div id="invoiceItems" style="text-align:left"></div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px; padding-top:12px; border-top:1px solid rgba(255,255,255,.14)">
+          <strong id="invoiceTotal" style="font-size:18px"></strong>
+          <div class="btn-row" style="margin:0">
+            <button id="payNowBtn" class="cta-primary">Pay Securely</button>
+            <button id="downloadInvoiceBtn" class="cta-ghost">Download Invoice PDF</button>
+            <button id="downloadContractBtn" class="cta-ghost">Download Contract PDF</button>
+          </div>
+        </div>
+        <div id="invoiceStatus" class="email-status" style="margin-top:14px"></div>
       </div>
     </div>
   </div>
 
   <script>
-    // Initialize EmailJS
-    (function() {
-      emailjs.init("YOUR_PUBLIC_KEY"); // Demo only
-    })();
+    // EmailJS configuration (mirror reference structure)
+    const EMAILJS_CONFIG = {
+      publicKey: 'YOUR_EMAILJS_PUBLIC_KEY',
+      serviceId: 'YOUR_EMAILJS_SERVICE_ID',
+      templateId: 'YOUR_EMAILJS_CLIENT_TEMPLATE_ID',
+      adminTemplateId: 'YOUR_EMAILJS_ADMIN_TEMPLATE_ID'
+    };
 
-    // Store contract data
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        if (typeof emailjs !== 'undefined') {
+          emailjs.init(EMAILJS_CONFIG.publicKey);
+        }
+      } catch (e) {
+        console.warn('EmailJS init error', e);
+      }
+    });
+
+    // Store contract and invoice meta data
     let contractData = {};
+    let invoiceMeta = { invoiceId: null, paymentUrl: null };
 
     // Format date
     function formatDate(date) {
@@ -488,7 +514,7 @@
     }
 
     // Handle form submission
-    document.getElementById('signatureForm').addEventListener('submit', function(e) {
+    document.getElementById('signatureForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       
       // Get form data
@@ -496,6 +522,10 @@
       const clientEmail = document.getElementById('clientEmail').value.trim();
       const selectedPackage = document.getElementById('selectedPackage').value;
       const signature = document.getElementById('signature').value.trim();
+      if (!clientName || !clientEmail || !selectedPackage || !signature) {
+        alert('Please fill in all required fields.');
+        return;
+      }
       
       // Store contract data
       contractData = {
@@ -504,7 +534,7 @@
         selectedPackage,
         signature,
         signatureDate: formatDate(new Date()),
-        contractDate: '',
+        contractDate: formatDate(new Date()),
         effectiveDate: formatDate(new Date()),
         contractId: 'NS-' + Date.now()
       };
@@ -515,23 +545,95 @@
       // Hide form and show thank you screen
       document.getElementById('contractForm').style.display = 'none';
       document.getElementById('thankYouScreen').classList.add('show');
+      document.getElementById('thankYouScreen').scrollIntoView({ behavior: 'smooth' });
+
+      // Render branded invoice UI for the selected package
+      renderInvoiceUI(contractData);
       
-      // Send confirmation email
-      sendConfirmationEmail(contractData);
+      // Create Wave invoice first so emails can include invoice details
+      try {
+        const result = await createInvoiceOnServer(contractData);
+        if (result) {
+          invoiceMeta.invoiceId = result.invoiceId || null;
+          invoiceMeta.paymentUrl = result.paymentUrl || null;
+        }
+        if (invoiceMeta.paymentUrl) {
+          const payBtn = document.getElementById('payNowBtn');
+          payBtn.disabled = false;
+          payBtn.onclick = () => { window.open(invoiceMeta.paymentUrl, '_blank'); };
+          setInvoiceStatus('✅ Invoice is ready. Click Pay Securely to complete payment.', 'success');
+        } else {
+          setInvoiceStatus('⚠️ Could not prepare online payment link. You can still pay via the invoice we send by email.', 'error');
+        }
+      } catch (err) {
+        console.error('Invoice creation error', err);
+        setInvoiceStatus('⚠️ Invoice setup error. We will follow up with a payment link via email.', 'error');
+      }
+
+      // Send confirmation emails (now with invoice details if available)
+      sendConfirmationEmail(contractData, invoiceMeta);
     });
 
-    // Send confirmation email
-    async function sendConfirmationEmail(contractData) {
+    // Send confirmation email (client + admin), modeled after reference
+    async function sendConfirmationEmail(contractData, invoiceMeta = {}) {
       try {
-        // Demo: Log email data
-        console.log('📧 Sending confirmation email:', contractData);
-        
-        // Show success message
-        showEmailStatus('✅ Confirmation email sent!', 'success');
-        
+        if (typeof emailjs === 'undefined') {
+          throw new Error('EmailJS not available');
+        }
+        const pkg = getPackageDetails(contractData.selectedPackage);
+        const deposit = pkg ? Math.round(pkg.price * 0.5) : null;
+        // Generate signed contract PDF (base64) for client attachment
+        let contractPdfBase64 = '';
+        let contractFileName = `NickySanders_Contract_${contractData.contractId}.pdf`;
+        try {
+          contractPdfBase64 = await generateContractPDFBase64(contractData);
+        } catch (e) {
+          console.warn('Could not generate contract PDF for email attachment', e);
+        }
+        // Client email
+        const clientParams = {
+          to_email: contractData.clientEmail,
+          client_name: contractData.clientName,
+          client_email: contractData.clientEmail,
+          contract_id: contractData.contractId,
+          contract_date: contractData.contractDate,
+          effective_date: contractData.effectiveDate,
+          selected_package: pkg ? pkg.name : contractData.selectedPackage,
+          invoice_total_due: deposit ? `$${deposit.toLocaleString()}` : '',
+          payment_link: invoiceMeta.paymentUrl || '',
+          invoice_id: invoiceMeta.invoiceId || ''
+        };
+        try {
+          await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, clientParams, {
+            publicKey: EMAILJS_CONFIG.publicKey,
+            attachments: contractPdfBase64 ? [
+              { name: contractFileName, data: contractPdfBase64 }
+            ] : undefined
+          });
+        } catch (attachErr) {
+          console.warn('EmailJS send with attachment failed, retrying without attachment', attachErr);
+          await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, clientParams);
+        }
+
+        // Admin email
+        const adminParams = {
+          to_email: 'info@marketingmousetrap.com',
+          client_name: contractData.clientName,
+          client_email: contractData.clientEmail,
+          contract_id: contractData.contractId,
+          contract_date: contractData.contractDate,
+          effective_date: contractData.effectiveDate,
+          selected_package: pkg ? pkg.name : contractData.selectedPackage,
+          invoice_total_due: deposit ? `$${deposit.toLocaleString()}` : '',
+          payment_link: invoiceMeta.paymentUrl || '',
+          invoice_id: invoiceMeta.invoiceId || ''
+        };
+        await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.adminTemplateId, adminParams);
+
+        showEmailStatus('✅ Confirmation emails sent successfully!', 'success');
       } catch (error) {
-        console.error('❌ Email error:', error);
-        showEmailStatus('⚠️ Email error: ' + error.message, 'error');
+        console.log('Email error:', error);
+        showEmailStatus('⚠️ Email error: ' + (error && error.message ? error.message : 'Unknown error'), 'error');
       }
     }
 
@@ -540,6 +642,111 @@
       const status = document.getElementById('emailStatus');
       status.textContent = message;
       status.className = `email-status ${type}`;
+    }
+
+    // Invoice helpers
+    function setInvoiceStatus(message, type) {
+      const el = document.getElementById('invoiceStatus');
+      el.textContent = message;
+      el.className = `email-status ${type}`;
+    }
+
+    function getPackageDetails(selectedPackage) {
+      // Base prices per package
+      const map = {
+        core: { name: 'Core System Package', price: 5000 },
+        growth: { name: 'Growth Accelerator Package', price: 7500 },
+        full: { name: 'Full Ecosystem Package', price: 10000 }
+      };
+      return map[selectedPackage] || null;
+    }
+
+    function renderInvoiceUI(cd) {
+      const pkg = getPackageDetails(cd.selectedPackage);
+      const meta = document.getElementById('invoiceMeta');
+      const items = document.getElementById('invoiceItems');
+      const total = document.getElementById('invoiceTotal');
+      const payBtn = document.getElementById('payNowBtn');
+
+      if (!pkg) {
+        items.innerHTML = '<p style="color:var(--muted)">Unknown package selected.</p>';
+        total.textContent = '';
+        payBtn.disabled = true;
+        return;
+      }
+
+      // 50% upfront per payment terms
+      const deposit = Math.round(pkg.price * 0.5);
+      const lineItems = [
+        { label: `${pkg.name} — Initial Deposit (50%)`, amount: deposit },
+      ];
+
+      meta.textContent = `${cd.clientName} • ${cd.clientEmail} • ${cd.effectiveDate}`;
+      items.innerHTML = `
+        <div style="display:grid; gap:10px">
+          ${lineItems.map(li => `
+            <div style="display:flex; justify-content:space-between; gap:16px">
+              <div>${li.label}</div>
+              <div><strong>$${li.amount.toLocaleString()}</strong></div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+      total.textContent = `Total Due Now: $${deposit.toLocaleString()}`;
+      payBtn.disabled = true; // enabled after backend returns paymentUrl
+    }
+
+    async function createInvoiceOnServer(cd) {
+      const res = await fetch('/api/create-invoice', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contractData: cd,
+          invoice: { packageKey: cd.selectedPackage }
+        })
+      });
+      if (!res.ok) {
+        try {
+          const err = await res.json();
+          throw new Error(err.error || 'Create invoice failed');
+        } catch (_) {
+          throw new Error('Create invoice failed');
+        }
+      }
+      return res.json();
+    }
+
+    // Build the same contract PDF and return base64 (no data URL prefix)
+    async function generateContractPDFBase64(cd) {
+      const { jsPDF } = window.jspdf;
+      if (!jsPDF) throw new Error('jsPDF not loaded');
+      const doc = new jsPDF();
+
+      // Header
+      doc.setFillColor(224, 171, 16);
+      doc.rect(0, 0, 210, 25, 'F');
+      doc.setTextColor(0, 0, 0);
+      doc.setFontSize(20);
+      doc.text('Service Agreement', 105, 15, { align: 'center' });
+
+      doc.setFontSize(12);
+      doc.text(`Contract ID: ${cd.contractId}`, 20, 40);
+      doc.text(`Date: ${cd.effectiveDate}`, 20, 50);
+      doc.text(`Client: ${cd.clientName}`, 20, 60);
+      doc.text(`Email: ${cd.clientEmail}`, 20, 70);
+      doc.text(`Package: ${cd.selectedPackage}`, 20, 80);
+
+      // Signature
+      doc.setFontSize(12);
+      doc.text('Digital Signature:', 20, 200);
+      doc.setFont('helvetica', 'italic');
+      doc.text(cd.signature, 20, 210);
+
+      // Return pure base64
+      const dataUri = doc.output('datauristring');
+      const base64 = dataUri.split('base64,')[1] || '';
+      if (!base64) throw new Error('Failed to produce base64');
+      return base64;
     }
 
     // Generate and download PDF
@@ -576,6 +783,108 @@
       } catch (error) {
         console.error('❌ PDF error:', error);
         alert('Error generating PDF. Please try again.');
+      }
+    });
+
+    // Generate and download Invoice PDF
+    document.getElementById('downloadInvoiceBtn').addEventListener('click', function() {
+      try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        const pkg = getPackageDetails(contractData.selectedPackage);
+        const deposit = pkg ? Math.round(pkg.price * 0.5) : 0;
+
+        // Brand colors
+        // brand-dark: #010043 (1,0,67) | brand-gold: #e0ab10 (224,171,16)
+        doc.setFillColor(1, 0, 67);
+        doc.rect(0, 0, 210, 28, 'F');
+
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(18);
+        doc.setFont('helvetica', 'bold');
+        doc.text('MARKETING MOUSETRAP AGENCY', 105, 12, { align: 'center' });
+        doc.setFontSize(11);
+        doc.setFont('helvetica', 'normal');
+        doc.text('INVOICE', 105, 20, { align: 'center' });
+
+        // Meta
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(10);
+        doc.text(`Invoice ID: ${invoiceMeta.invoiceId || 'Pending'}`, 20, 38);
+        doc.text(`Contract ID: ${contractData.contractId}`, 20, 44);
+        doc.text(`Date: ${contractData.effectiveDate}`, 20, 50);
+
+        // Bill To
+        doc.setFillColor(224, 171, 16);
+        doc.rect(20, 60, 170, 8, 'F');
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(10);
+        doc.text('BILL TO', 25, 66);
+
+        doc.setFillColor(248, 249, 250);
+        doc.rect(20, 70, 170, 22, 'F');
+        doc.setDrawColor(224, 171, 16);
+        doc.setLineWidth(0.5);
+        doc.rect(20, 70, 170, 22, 'S');
+
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9);
+        doc.setTextColor(0, 0, 0);
+        doc.text(`Client: ${contractData.clientName}`, 25, 78);
+        doc.text(`Email: ${contractData.clientEmail}`, 25, 84);
+
+        // Items header
+        doc.setFillColor(224, 171, 16);
+        doc.rect(20, 98, 170, 8, 'F');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(10);
+        doc.text('ITEMS', 25, 104);
+
+        // Line item
+        doc.setFillColor(248, 249, 250);
+        doc.rect(20, 108, 170, 14, 'F');
+        doc.setDrawColor(224, 171, 16);
+        doc.setLineWidth(0.5);
+        doc.rect(20, 108, 170, 14, 'S');
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9);
+        const label = `${pkg ? pkg.name : contractData.selectedPackage} — Initial Deposit (50%)`;
+        doc.text(label, 25, 116);
+        doc.text(`$${deposit.toLocaleString()}`, 180, 116, { align: 'right' });
+
+        // Total
+        doc.setFillColor(224, 171, 16);
+        doc.rect(20, 130, 170, 8, 'F');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(10);
+        doc.text('TOTAL DUE NOW', 25, 136);
+
+        doc.setFillColor(248, 249, 250);
+        doc.rect(20, 138, 170, 14, 'F');
+        doc.setDrawColor(224, 171, 16);
+        doc.setLineWidth(0.5);
+        doc.rect(20, 138, 170, 14, 'S');
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(12);
+        doc.text(`$${deposit.toLocaleString()}`, 180, 147, { align: 'right' });
+
+        // Payment note
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8);
+        doc.setTextColor(100, 100, 100);
+        const y = 168;
+        doc.text('Secure online payment is available via the Pay button on your contract page.', 105, y, { align: 'center' });
+        if (invoiceMeta.paymentUrl) {
+          doc.text(`Payment Link: ${invoiceMeta.paymentUrl}`, 105, y + 6, { align: 'center' });
+        }
+
+        const fileName = `MarketingMousetrap_Invoice_${invoiceMeta.invoiceId || contractData.contractId}.pdf`;
+        doc.save(fileName);
+      } catch (error) {
+        console.error('❌ Invoice PDF error:', error);
+        alert('Error generating invoice PDF. Please try again.');
       }
     });
   </script>

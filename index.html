@@ -227,6 +227,24 @@
     .carousel-btn.prev { left: 16px; }
     .carousel-btn.next { right: 16px; }
 
+    /* Mobile hardening */
+    @media (max-width: 640px) {
+      html, body { overflow-x: hidden; }
+      .container, .hero-inner, .topbar .actions { padding-left: 16px !important; padding-right: 16px !important; }
+      .carousel-wrap { padding: 12px 36px 14px; }
+      .carousel-track { grid-auto-columns: 88%; }
+      .carousel-btn { width: 34px; height: 34px; }
+      .yt-card .meta h4, .media-card .meta h4 { font-size: 14px; }
+      .ai-card { border-radius: 14px; }
+      img, video, iframe { max-width: 100%; height: auto; }
+      .hero .buttons, .cta-row, .btn-row { flex-wrap: wrap; }
+      .features-grid { grid-template-columns: 1fr !important; }
+      .services-grid { grid-template-columns: 1fr !important; }
+      .media-grid { grid-template-columns: 1fr !important; }
+      .form-row { grid-template-columns: 1fr !important; }
+      .topbar .brand .name { font-size: 13px; }
+    }
+
     .cta-primary {
       --c1: var(--brand-gold);
       --c2: #ffd86a;

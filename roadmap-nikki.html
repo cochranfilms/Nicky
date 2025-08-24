@@ -246,6 +246,19 @@
         margin-left: 40px !important;
       }
     }
+
+    /* Mobile hardening */
+    @media (max-width: 640px) {
+      html, body { overflow-x: hidden; }
+      .top-inner { padding: 0 12px; }
+      .hero-inner { padding: 0 16px; }
+      .container { padding: 0 16px; }
+      img, video, iframe, canvas { max-width: 100%; height: auto; }
+      .summary-card { padding: 18px; }
+      .kpis { grid-template-columns: 1fr; }
+      .phase { margin-bottom: 42px; }
+      .phase-card { padding: 18px; }
+    }
   </style>
 </head>
 <body>

@@ -250,6 +250,22 @@
         grid-template-columns: 1fr;
       }
     }
+    
+    /* Mobile hardening */
+    @media (max-width: 640px) {
+      html, body { overflow-x: hidden; }
+      .top-inner { padding: 0 12px; }
+      .hero-inner { padding: 0 16px; }
+      .container { padding: 0 16px; }
+      img, video, iframe, canvas { max-width: 100%; height: auto; }
+      .cta-primary, .cta-ghost { width: 100%; }
+      .cta-group { display: grid; gap: 10px; grid-template-columns: 1fr; justify-items: stretch; }
+      .hero-title { font-size: clamp(26px, 6vw, 40px); }
+      .hero-sub { font-size: 14px; }
+      .chips { gap: 8px; }
+      .chip { padding: 6px 10px; font-size: 11px; }
+      .card { padding: 18px; }
+    }
   </style>
 </head>
 <body>

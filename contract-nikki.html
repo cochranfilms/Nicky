@@ -297,6 +297,23 @@
         width: 100%;
       }
     }
+    
+    /* Mobile hardening: prevent horizontal scroll and scale media */
+    @media (max-width: 640px) {
+      html, body { overflow-x: hidden; }
+      .top-inner { padding: 0 12px; }
+      .hero-inner { padding: 0 16px; }
+      .container { padding: 0 16px; }
+      img, video, iframe { max-width: 100%; height: auto; }
+      .logo-container img { width: 120px; height: 120px; }
+      .hero-title { font-size: 26px; }
+      .hero-sub { font-size: 14px; }
+      .chips { gap: 8px; }
+      .chip { padding: 6px 10px; font-size: 11px; }
+      .contract-card { padding: 18px; }
+      .btn-row { gap: 10px; }
+      .cta-primary, .cta-ghost { height: 46px; padding: 0 18px; }
+    }
   </style>
 </head>
 <body>

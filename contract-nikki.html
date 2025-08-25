@@ -479,7 +479,6 @@
           <strong id="invoiceTotal" style="font-size:18px"></strong>
           <div class="btn-row" style="margin:0">
             <button id="payNowBtn" class="cta-primary">Pay Securely</button>
-            <button id="downloadInvoiceBtn" class="cta-ghost">Download Invoice PDF</button>
             <button id="downloadContractBtn" class="cta-ghost">Download Contract PDF</button>
           </div>
         </div>
@@ -858,9 +857,19 @@
       if (!jsPDF) throw new Error('jsPDF not loaded');
       const doc = new jsPDF();
 
-      // Header
+      // Header with brand bar and logo
       doc.setFillColor(224, 171, 16);
       doc.rect(0, 0, 210, 25, 'F');
+      try {
+        // Embed brand logo if available in project root as Logo.png
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = function() {
+          try { doc.addImage(img, 'PNG', 6, 3, 20, 20); } catch (e) {}
+        };
+        img.onerror = function() {};
+        img.src = 'Logo.png';
+      } catch (e) {}
       doc.setTextColor(0, 0, 0);
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(18);
@@ -875,7 +884,7 @@
       doc.text(`Contract ID: ${cd.contractId}`, 20, 35);
       doc.text(`Effective Date: ${cd.effectiveDate}`, 20, 40);
 
-      // Client info
+      // Client info + package feature list
       doc.setFillColor(224, 171, 16);
       doc.rect(20, 50, 170, 8, 'F');
       doc.setFont('helvetica', 'bold');
@@ -884,16 +893,27 @@
       doc.text('CLIENT INFORMATION', 105, 56, { align: 'center' });
 
       doc.setFillColor(248, 249, 250);
-      doc.rect(20, 65, 170, 25, 'F');
+      doc.rect(20, 65, 170, 50, 'F');
       doc.setDrawColor(224, 171, 16);
       doc.setLineWidth(0.5);
-      doc.rect(20, 65, 170, 25, 'S');
+      doc.rect(20, 65, 170, 50, 'S');
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(9);
       doc.setTextColor(0, 0, 0);
       doc.text(`Client: ${cd.clientName}`, 25, 75);
       doc.text(`Email: ${cd.clientEmail}`, 25, 81);
-      doc.text(`Package: ${getPackageDetails(cd.selectedPackage)?.name || cd.selectedPackage}`, 25, 87);
+      const pkgInfo = getPackageDetails(cd.selectedPackage);
+      doc.text(`Package: ${pkgInfo?.name || cd.selectedPackage}`, 25, 87);
+      // Feature list (package description)
+      if (pkgInfo && pkgInfo.features && pkgInfo.features.length) {
+        doc.setFontSize(8);
+        const max = 6; // keep it compact on page 1
+        const startY = 93;
+        const features = pkgInfo.features.slice(0, max);
+        features.forEach((f, idx) => {
+          doc.text(`• ${f}`, 25, startY + idx * 5);
+        });
+      }
 
       // Signatures
       const signatureY = 120;
@@ -1059,118 +1079,7 @@
       }
     });
 
-    // Generate and download Invoice PDF
-    document.getElementById('downloadInvoiceBtn').addEventListener('click', function() {
-      try {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-
-        const pkg = getPackageDetails(contractData.selectedPackage);
-        const deposit = pkg ? Math.round(pkg.price * 0.5) : 0;
-        const features = (pkg && pkg.features) ? pkg.features : [];
-
-        // Brand colors
-        // brand-dark: #010043 (1,0,67) | brand-gold: #e0ab10 (224,171,16)
-        doc.setFillColor(1, 0, 67);
-        doc.rect(0, 0, 210, 28, 'F');
-
-        doc.setTextColor(255, 255, 255);
-        doc.setFontSize(18);
-        doc.setFont('helvetica', 'bold');
-        doc.text('MARKETING MOUSETRAP AGENCY', 105, 12, { align: 'center' });
-        doc.setFontSize(11);
-        doc.setFont('helvetica', 'normal');
-        doc.text('INVOICE', 105, 20, { align: 'center' });
-
-        // Meta
-        doc.setTextColor(0, 0, 0);
-        doc.setFontSize(10);
-        doc.text(`Invoice ID: ${invoiceMeta.invoiceId || 'Pending'}`, 20, 38);
-        doc.text(`Contract ID: ${contractData.contractId}`, 20, 44);
-        doc.text(`Date: ${contractData.effectiveDate}`, 20, 50);
-
-        // Bill To
-        doc.setFillColor(224, 171, 16);
-        doc.rect(20, 60, 170, 8, 'F');
-        doc.setTextColor(0, 0, 0);
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(10);
-        doc.text('BILL TO', 25, 66);
-
-        doc.setFillColor(248, 249, 250);
-        doc.rect(20, 70, 170, 22, 'F');
-        doc.setDrawColor(224, 171, 16);
-        doc.setLineWidth(0.5);
-        doc.rect(20, 70, 170, 22, 'S');
-
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(9);
-        doc.setTextColor(0, 0, 0);
-        doc.text(`Client: ${contractData.clientName}`, 25, 78);
-        doc.text(`Email: ${contractData.clientEmail}`, 25, 84);
-
-        // Package items
-        doc.setFillColor(224, 171, 16);
-        doc.rect(20, 98, 170, 8, 'F');
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(10);
-        doc.text('PACKAGE ITEMS', 25, 104);
-
-        let yPos = 112;
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(8.5);
-        const maxItems = 12;
-        features.slice(0, maxItems).forEach((f) => {
-          if (yPos > 152) return; // keep within page before totals
-          doc.text(`• ${f}`, 25, yPos);
-          yPos += 6;
-        });
-
-        // Deposit line
-        doc.setFillColor(248, 249, 250);
-        doc.rect(20, 156, 170, 12, 'F');
-        doc.setDrawColor(224, 171, 16);
-        doc.setLineWidth(0.5);
-        doc.rect(20, 156, 170, 12, 'S');
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(9);
-        const label = `${pkg ? pkg.name : contractData.selectedPackage} — Initial Deposit (50%)`;
-        doc.text(label, 25, 164);
-        doc.text(`$${deposit.toLocaleString()}`, 180, 164, { align: 'right' });
-
-        // Total
-        doc.setFillColor(224, 171, 16);
-        doc.rect(20, 174, 170, 8, 'F');
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(10);
-        doc.text('TOTAL DUE NOW', 25, 180);
-
-        doc.setFillColor(248, 249, 250);
-        doc.rect(20, 182, 170, 14, 'F');
-        doc.setDrawColor(224, 171, 16);
-        doc.setLineWidth(0.5);
-        doc.rect(20, 182, 170, 14, 'S');
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(12);
-        doc.text(`$${deposit.toLocaleString()}`, 180, 191, { align: 'right' });
-
-        // Payment note
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(8);
-        doc.setTextColor(100, 100, 100);
-        const y = 204;
-        doc.text('Secure online payment is available via the Pay button on your contract page.', 105, y, { align: 'center' });
-        if (invoiceMeta.paymentUrl) {
-          doc.text(`Payment Link: ${invoiceMeta.paymentUrl}`, 105, y + 6, { align: 'center' });
-        }
-
-        const fileName = `MarketingMousetrap_Invoice_${invoiceMeta.invoiceId || contractData.contractId}.pdf`;
-        doc.save(fileName);
-      } catch (error) {
-        console.error('❌ Invoice PDF error:', error);
-        alert('Error generating invoice PDF. Please try again.');
-      }
-    });
+    // Removed custom invoice PDF generation (Wave invoice used instead)
 
     // Upload signed contract PDF to GitHub via API
     async function uploadSignedContractToGitHub(cd) {

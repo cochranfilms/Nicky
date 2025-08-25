@@ -35,6 +35,7 @@
 
     * { box-sizing: border-box; }
     
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial;
@@ -88,52 +89,7 @@
         radial-gradient(900px 600px at 100% 100%, rgba(224,171,16,.09), transparent 55%);
     }
 
-    /* Navigation */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      backdrop-filter: saturate(140%) blur(12px);
-      background: linear-gradient(180deg, rgba(7,7,26,.85), rgba(7,7,26,.55));
-      border-bottom: 1px solid rgba(255,255,255,.06);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 56px;
-      padding: 0 24px;
-      max-width: var(--maxw);
-      margin: 0 auto;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand img {
-      width: 30px;
-      height: 30px;
-      object-fit: contain;
-      filter: drop-shadow(0 2px 8px rgba(224,171,16,.35));
-      border-radius: 8px;
-    }
-
-    .brand .name {
-      font-weight: 700;
-      letter-spacing: .2px;
-    }
-
-    .brand .name small {
-      display: block;
-      font-weight: 500;
-      color: var(--muted);
-      margin-top: -2px;
-      font-size: 11px;
-    }
+    /* (legacy nav styles removed; consolidated to top brand bar) */
 
     /* Buttons */
     .cta-primary {
@@ -187,28 +143,25 @@
       padding: 0 24px;
     }
 
-    /* Hero */
-    .hero {
-      padding: 72px 0;
-      text-align: center;
-    }
+    /* Two-column proposal layout */
+    .proposal-wrap { padding: 32px 0 64px; }
+    .proposal-layout { display: grid; grid-template-columns: 260px 1fr; gap: 24px; }
+    .toc { position: sticky; top: 72px; align-self: start; }
+    .toc .card { padding: 16px; }
+    .toc h3 { margin: 0 0 8px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    .toc .links a { display: block; padding: 8px 10px; border-radius: 10px; color: var(--text); text-decoration: none; font-size: 14px; }
+    .toc .links a:hover { background: rgba(255,255,255,.08); }
 
-    .hero h1 {
-      font-size: clamp(28px, 4vw, 48px);
-      line-height: 1.08;
-      margin: 0 0 14px;
-      font-weight: 800;
-      background: linear-gradient(90deg, #fff, #ffd86a, #9ecbff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero p.sub {
-      margin: 0 0 24px;
-      color: var(--muted);
-      font-size: 18px;
-    }
+    /* Section content */
+    .section { scroll-margin-top: 88px; }
+    .section h2 { margin: 0 0 8px; font-size: clamp(20px, 3vw, 28px); font-weight: 800; background: linear-gradient(90deg, #fff, #ffd86a, #9ecbff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .section p.lead { color: var(--muted); margin: 0 0 12px; }
+    .bullets { display: grid; gap: 10px; padding-left: 18px; }
+    .bullets li { margin: 0; }
+    .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .price-card { display: grid; gap: 8px; }
+    .price { font-size: 28px; font-weight: 800; }
+    .meta { color: var(--muted); font-size: 13px; }
 
     /* Cards */
     .card {
@@ -242,13 +195,15 @@
         gap: 12px;
       }
       
-      .hero {
-        padding: 48px 0;
+      .proposal-layout {
+        grid-template-columns: 1fr;
       }
-      
       .grid {
         grid-template-columns: 1fr;
       }
+      .toc { position: relative; top: 0; }
+      .toc .links { display: grid; grid-auto-flow: column; overflow-x: auto; gap: 8px; scrollbar-width: none; }
+      .toc .links::-webkit-scrollbar { display: none; }
     }
     
     /* Mobile hardening */
@@ -298,35 +253,188 @@
     </div>
   </section>
 
-  <main>
-    <section class="hero container">
-      <h1>Helping you show up consistently + grow without burnout</h1>
-      <p class="sub">Content, Strategy, and AI that actually works.</p>
-      <div class="cta-group">
-        <a href="index.html" class="cta-primary">Explore the Demo</a>
-        <a href="roadmap-nikki.html" class="cta-ghost">See the Roadmap</a>
-      </div>
-    </section>
+  <main id="proposal-print">
+    <section class="container proposal-wrap">
+      <div class="proposal-layout">
+        <aside class="toc">
+          <div class="card">
+            <h3>On this page</h3>
+            <nav class="links" aria-label="Table of contents">
+              <a href="#summary">Executive Summary</a>
+              <a href="#outcomes">Outcomes & KPIs</a>
+              <a href="#scope">Scope of Work</a>
+              <a href="#timeline">Timeline</a>
+              <a href="#investment">Investment</a>
+              <a href="#stack">Tech Stack</a>
+              <a href="#next">Next Steps</a>
+            </nav>
+            <div class="cta-group" style="margin-top:12px; display:grid; gap:8px;">
+              <a class="cta-ghost" href="Reference/Nicky_AI_Web_System_Proposal.pdf" target="_blank" rel="noopener">Open Reference PDF</a>
+            </div>
+          </div>
+        </aside>
 
-    <section class="container">
-      <div class="grid">
-        <div class="card">
-          <h2>Unified Booking Hub</h2>
-          <p>One smart form for speaking, podcast, and workshop requests with auto calendar invites.</p>
-          <a href="index.html#contact" class="cta-ghost">Preview Booking</a>
-        </div>
-        
-        <div class="card">
-          <h2>Education Platform</h2>
-          <p>Courses, workshops, and resources under one brand—optimized for conversion and learning.</p>
-          <a href="index.html#workshops" class="cta-ghost">See Workshops</a>
-        </div>
-        
-        <div class="card">
-          <h2>AI Content Engine</h2>
-          <p>Reusable prompts, templates, and analytics to scale content without burnout.</p>
-          <a href="index.html#toolkit" class="cta-ghost">Explore Toolkit</a>
-        </div>
+        <article class="content">
+          <section id="summary" class="section card">
+            <h2>Executive Summary</h2>
+            <p class="lead">Build a high‑performance, AI‑powered platform that books you, educates your audience, and scales your content while you sleep.</p>
+            <div class="two-col">
+              <div>
+                <ul class="bullets">
+                  <li>Unified booking with automated scheduling and pre‑call workflows.</li>
+                  <li>Education hub for workshops, courses, and premium resources.</li>
+                  <li>AI content engine for reusable prompts, brand voice, and analytics.</li>
+                </ul>
+              </div>
+              <div class="card" style="margin:0;">
+                <strong>Deliverable Themes</strong>
+                <ul class="bullets">
+                  <li>Conversion‑optimized website and funnels</li>
+                  <li>Operational automations and CRM hygiene</li>
+                  <li>Creator workflows and media systemization</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section id="outcomes" class="section card">
+            <h2>Outcomes & KPIs</h2>
+            <div class="two-col">
+              <div>
+                <ul class="bullets">
+                  <li>Increase qualified booking requests and close rate.</li>
+                  <li>Reduce response and scheduling time with automation.</li>
+                  <li>Grow consistent content output without burnout.</li>
+                </ul>
+              </div>
+              <div>
+                <ul class="bullets">
+                  <li>Improve course sales and workshop attendance.</li>
+                  <li>Centralize analytics for revenue‑focused decisions.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section id="scope" class="section card">
+            <h2>Scope of Work</h2>
+            <div class="two-col">
+              <div>
+                <strong>Booking Hub</strong>
+                <ul class="bullets">
+                  <li>Single smart form for speaking, podcast, and workshops</li>
+                  <li>Automated calendar invites and reminders</li>
+                  <li>CRM capture and qualification routing</li>
+                </ul>
+                <strong>Education Platform</strong>
+                <ul class="bullets">
+                  <li>Course/workshop pages and checkout</li>
+                  <li>Member onboarding and resource delivery</li>
+                </ul>
+              </div>
+              <div>
+                <strong>AI Content Engine</strong>
+                <ul class="bullets">
+                  <li>Brand voice, reusable prompts, and templates</li>
+                  <li>Clip, repurpose, and publish workflows</li>
+                  <li>Analytics dashboard for reach and ROI</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section id="timeline" class="section card">
+            <h2>Timeline</h2>
+            <div class="two-col">
+              <div>
+                <strong>Phase 1 — Discovery & Content Audit</strong>
+                <div class="meta">Days 1–3</div>
+                <ul class="bullets">
+                  <li>Deep dive into current content ecosystem</li>
+                  <li>Analyze existing workflows and pain points</li>
+                  <li>Map content types and distribution channels</li>
+                  <li>Document brand voice and AI guidelines</li>
+                  <li>Set up project management and communication</li>
+                </ul>
+              </div>
+              <div>
+                <strong>Phase 2 — System Build & Integration</strong>
+                <div class="meta">Days 4–10</div>
+                <ul class="bullets">
+                  <li>Develop centralized booking system</li>
+                  <li>Integrate workshop and course platforms</li>
+                  <li>Set up automated calendar syncing</li>
+                  <li>Create AI content templates and prompts</li>
+                  <li>Build community newsletter infrastructure</li>
+                  <li>Configure analytics and tracking</li>
+                </ul>
+              </div>
+              <div>
+                <strong>Phase 3 — Launch & Training</strong>
+                <div class="meta">Days 11–14</div>
+                <ul class="bullets">
+                  <li>Comprehensive system testing</li>
+                  <li>Team training on new workflows</li>
+                  <li>Content migration and optimization</li>
+                  <li>Launch preparation and checklist</li>
+                  <li>Documentation and handover</li>
+                </ul>
+              </div>
+              <div>
+                <strong>Phase 4 — Optimization & Scale</strong>
+                <div class="meta">Days 15–18</div>
+                <ul class="bullets">
+                  <li>Performance monitoring and adjustments</li>
+                  <li>Workflow refinement based on feedback</li>
+                  <li>Advanced automation setup</li>
+                  <li>Scale testing with increased load</li>
+                  <li>Future roadmap planning</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section id="investment" class="section card">
+            <h2>Investment</h2>
+            <div class="two-col">
+              <div class="card price-card" style="margin:0;">
+                <div class="price">Project‑based</div>
+                <div class="meta">Aligned to final scope; milestone billing</div>
+                <ul class="bullets"><li>Includes implementation, training, and launch</li><li>Ongoing support optional</li></ul>
+              </div>
+              <div>
+                <p class="meta">Full investment details are outlined in the reference PDF and agreement. Click "Open Reference PDF" in the sidebar for the exact breakdown.</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="stack" class="section card">
+            <h2>Tech Stack</h2>
+            <div class="two-col">
+              <ul class="bullets">
+                <li>Web: fast, responsive site with conversion‑first UI</li>
+                <li>CRM + email: integrated contacts, automations, and templates</li>
+              </ul>
+              <ul class="bullets">
+                <li>AI: prompt libraries, brand voice, and content pipelines</li>
+                <li>Analytics: dashboards for content, sales, and bookings</li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="next" class="section card">
+            <h2>Next Steps</h2>
+            <ul class="bullets">
+              <li>Review this proposal and the reference PDF.</li>
+              <li>Sign the agreement and select a kickoff date.</li>
+              <li>Share access to required accounts and assets.</li>
+            </ul>
+            <div class="cta-group" style="margin-top:12px;">
+              <a href="contract-nikki.html" class="cta-primary">Review & Sign Agreement</a>
+              <a href="roadmap-nikki.html" class="cta-ghost">View Roadmap</a>
+            </div>
+          </section>
+        </article>
       </div>
     </section>
   </main>
@@ -437,6 +545,8 @@
         }
       });
     })();
+
+    // (Download to PDF removed per request)
   </script>
 </body>
 </html>

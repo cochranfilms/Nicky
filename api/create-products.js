@@ -40,7 +40,7 @@ async function waveQuery(query, variables) {
   return body.data;
 }
 
-async function createProduct({ businessId, name, description }) {
+async function createProduct({ businessId, name, description, unitPrice }) {
   const mutation = `
     mutation ProductCreate($input: ProductCreateInput!) {
       productCreate(input: $input) {
@@ -50,13 +50,13 @@ async function createProduct({ businessId, name, description }) {
       }
     }
   `;
-  // Keep input minimal; many schemas allow creating without price; line items will set unitPrice.
+  // Provide required fields per current schema: unitPrice is Decimal (string)
   const variables = {
     input: {
       businessId,
       name,
       description,
-      isSold: true
+      unitPrice: String(unitPrice)
     }
   };
   const data = await waveQuery(mutation, variables);
@@ -93,9 +93,9 @@ module.exports = async (req, res) => {
     const results = {};
     const errors = {};
     for (const key of Object.keys(PACKAGES)) {
-      const { name, description } = PACKAGES[key];
+      const { name, description, price } = PACKAGES[key];
       try {
-        const prod = await createProduct({ businessId, name, description });
+        const prod = await createProduct({ businessId, name, description, unitPrice: price });
         results[key] = prod;
       } catch (e) {
         errors[key] = { message: e.message, details: e.waveErrors || null };

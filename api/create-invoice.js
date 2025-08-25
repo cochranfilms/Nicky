@@ -174,6 +174,27 @@ async function sendInvoice({ invoiceId }) {
   return res.invoice.viewUrl || null;
 }
 
+// Approve a draft invoice so it becomes visible to the customer
+async function approveInvoice({ invoiceId }) {
+  const mutation = `
+    mutation InvoiceApprove($input: InvoiceApproveInput!) {
+      invoiceApprove(input: $input) {
+        didSucceed
+        inputErrors { code message }
+        invoice { id status }
+      }
+    }
+  `;
+  const variables = { input: { invoiceId } };
+  const data = await waveQuery(mutation, variables);
+  const res = data.invoiceApprove;
+  if (!res || !res.didSucceed || !res.invoice) {
+    const firstErr = res && res.inputErrors && res.inputErrors[0];
+    throw new Error(`Approve invoice failed: ${firstErr ? firstErr.message : 'Unknown error'}`);
+  }
+  return res.invoice.status;
+}
+
 module.exports = async (req, res) => {
   try {
     if (req.method !== 'POST') {
@@ -217,6 +238,8 @@ module.exports = async (req, res) => {
     let paymentUrl = viewUrl;
     if (!paymentUrl) {
       try {
+        // Ensure invoice is approved before sending/viewing
+        await approveInvoice({ invoiceId });
         paymentUrl = await sendInvoice({ invoiceId });
       } catch (e) {
         // continue with null paymentUrl

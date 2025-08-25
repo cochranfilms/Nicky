@@ -601,6 +601,9 @@
           invoiceMeta.paymentUrl = result.paymentUrl || '';
           invoiceMeta.mode = result.mode || 'fallback';
           console.log('✅ Invoice meta updated:', invoiceMeta);
+          if (result.error || result.errorDetails) {
+            console.warn('⚠️ Wave error details:', result.error, result.errorDetails);
+          }
         } else {
           // Fallback when WaveApps fails
           invoiceMeta.invoiceId = 'Manual-' + Date.now();

@@ -39,7 +39,9 @@ async function waveQuery(query, variables) {
   const body = await resp.json();
   if (!resp.ok || body.errors) {
     const msg = body.errors ? JSON.stringify(body.errors) : resp.statusText;
-    throw new Error(`Wave GraphQL error: ${msg}`);
+    const err = new Error(`Wave GraphQL error: ${msg}`);
+    err.waveErrors = body.errors || null;
+    throw err;
   }
   return body.data;
 }
@@ -218,7 +220,8 @@ module.exports = async (req, res) => {
     return json(res, 200, {
       mode: 'fallback',
       paymentUrl: 'https://link.waveapps.com/payment-demo',
-      error: error.message || 'Unknown error'
+      error: error.message || 'Unknown error',
+      errorDetails: error.waveErrors || null
     });
   }
 };

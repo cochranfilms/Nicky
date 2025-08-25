@@ -53,7 +53,7 @@ async function createCustomer({ businessId, clientName, clientEmail }) {
     mutation CreateCustomer($input: CustomerCreateInput!) {
       customerCreate(input: $input) {
         didSucceed
-        inputErrors { code message field }
+        inputErrors { code message }
         customer { id }
       }
     }
@@ -91,7 +91,7 @@ async function createInvoice({ businessId, customerId, currency, packageKey, con
     mutation InvoiceCreate($input: InvoiceCreateInput!) {
       invoiceCreate(input: $input) {
         didSucceed
-        inputErrors { code message field }
+        inputErrors { code message }
         invoice { id status viewUrl publicUrl }
       }
     }
@@ -135,7 +135,7 @@ async function sendInvoice({ invoiceId }) {
     mutation InvoiceSend($input: InvoiceSendInput!) {
       invoiceSend(input: $input) {
         didSucceed
-        inputErrors { code message field }
+        inputErrors { code message }
         invoice { id viewUrl publicUrl }
       }
     }

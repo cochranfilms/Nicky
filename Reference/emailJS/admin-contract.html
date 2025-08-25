@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>New Contract Signed</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      .wrap { max-width: 680px; margin: 0 auto; font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: #111; }
+      .head { background:#010043; color:#fff; border-radius:12px; padding:18px 20px; }
+      .card { background:#fff; border:1px solid #eee; border-radius:12px; padding:20px; margin-top:14px; }
+      .k { color:#555; width:160px; display:inline-block; }
+      .v { font-weight:600; }
+      .pill { display:inline-block;background:#faf5e0;border:1px solid #e0ab10;color:#111;padding:4px 8px;border-radius:999px;font-size:12px; }
+      .btn { display:inline-block;background:#e0ab10;color:#111;padding:10px 14px;border-radius:999px;text-decoration:none;font-weight:700; }
+      .muted { color:#666; font-size:13px; }
+      .hr { height:1px; background:#eee; margin: 18px 0; }
+      .grid { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+      @media (max-width: 520px){ .grid{grid-template-columns:1fr;} .k{width:auto;display:block;margin-bottom:4px;} }
+    </style>
+  </head>
+  <body style="background:#f7f7fb; padding:18px;">
+    <div class="wrap">
+      <div class="head">
+        <div style="font-size:14px;opacity:.9;">New Contract Signed</div>
+        <div style="font-size:18px;font-weight:700;">Marketing Mousetrap Agency</div>
+      </div>
+
+      <div class="card">
+        <div class="grid">
+          <div><span class="k">Client</span> <span class="v">{{client_name}}</span></div>
+          <div><span class="k">Email</span> <span class="v">{{client_email}}</span></div>
+          <div><span class="k">Package</span> <span class="pill">{{selected_package}}</span></div>
+          <div><span class="k">Contract ID</span> <span class="v">{{contract_id}}</span></div>
+          <div><span class="k">Signed</span> <span class="v">{{effective_date}}</span></div>
+          <div><span class="k">Drafted</span> <span class="v">{{contract_date}}</span></div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="grid">
+          <div><span class="k">Invoice ID</span> <span class="v">{{invoice_id}}</span></div>
+          <div><span class="k">Deposit Due</span> <span class="v">{{invoice_total_due}}</span></div>
+        </div>
+
+        <p style="margin-top:10px;">
+          <a class="btn" href="{{payment_link}}" target="_blank" rel="noreferrer">Open Payment Link</a>
+        </p>
+        <p class="muted">Direct URL: <a href="{{payment_link}}" target="_blank">{{payment_link}}</a></p>
+      </div>
+    </div>
+  </body>
+</html>

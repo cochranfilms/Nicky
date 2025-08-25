@@ -584,22 +584,11 @@
       renderInvoiceUI(contractData);
       
       // Create Wave invoice first so emails can include invoice details
-      // TEMPORARY: Skip WaveApps until Business ID is fixed
-      console.log('⚠️ Skipping WaveApps invoice creation - using manual fallback');
-      invoiceMeta.invoiceId = 'Manual-' + Date.now();
-      invoiceMeta.paymentUrl = 'https://link.waveapps.com/payment-demo';
-      invoiceMeta.mode = 'manual';
-      
-      const payBtn = document.getElementById('payNowBtn');
-      payBtn.disabled = true;
-      setInvoiceStatus('ℹ️ Manual invoice processing. We will email your payment link shortly.', 'success');
-      
-      /* UNCOMMENT AFTER FIXING WAVE_BUSINESS_ID:
       try {
         console.log('🔄 Creating WaveApps invoice...');
         const result = await createInvoiceOnServer(contractData);
         console.log('📊 WaveApps response:', result);
-        
+
         if (result) {
           invoiceMeta.invoiceId = result.invoiceId || 'Manual-' + Date.now();
           invoiceMeta.paymentUrl = result.paymentUrl || '';
@@ -612,7 +601,7 @@
           invoiceMeta.mode = 'fallback';
           console.log('⚠️ Using fallback invoice meta:', invoiceMeta);
         }
-        
+
         const payBtn = document.getElementById('payNowBtn');
         const isLive = invoiceMeta && invoiceMeta.mode === 'live' && invoiceMeta.paymentUrl && !/payment-demo/.test(invoiceMeta.paymentUrl);
         if (isLive) {
@@ -627,7 +616,6 @@
         console.error('❌ Invoice creation error:', err);
         setInvoiceStatus('⚠️ Invoice setup error. We will follow up with a payment link via email.', 'error');
       }
-      */
 
       // Upload signed contract PDF (store URL for emails)
       try {

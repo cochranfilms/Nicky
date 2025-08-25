@@ -514,7 +514,8 @@
     document.addEventListener('DOMContentLoaded', function() {
       try {
         if (typeof emailjs !== 'undefined') {
-          emailjs.init(EMAILJS_CONFIG.publicKey);
+          // EmailJS v4 recommended init signature
+          emailjs.init({ publicKey: EMAILJS_CONFIG.publicKey });
         }
       } catch (e) {
         console.warn('EmailJS init error', e);

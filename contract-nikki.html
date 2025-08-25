@@ -543,6 +543,12 @@
       const clientEmail = document.getElementById('clientEmail').value.trim();
       const selectedPackage = document.getElementById('selectedPackage').value;
       const signature = document.getElementById('signature').value.trim();
+      
+      console.log('🔍 RAW form values:');
+      console.log('  Raw clientName:', document.getElementById('clientName').value);
+      console.log('  Raw clientEmail:', document.getElementById('clientEmail').value);
+      console.log('  Trimmed clientEmail:', clientEmail);
+      
       if (!clientName || !clientEmail || !selectedPackage || !signature) {
         alert('Please fill in all required fields.');
         return;
@@ -559,6 +565,12 @@
         effectiveDate: formatDate(new Date()),
         contractId: 'NS-' + Date.now()
       };
+      
+      console.log('📝 Form data captured:');
+      console.log('  clientName:', clientName);
+      console.log('  clientEmail:', clientEmail);
+      console.log('  selectedPackage:', selectedPackage);
+      console.log('📋 Contract data stored:', contractData);
       
       // Remove display date in the form header (not set until signing)
       const ed = document.getElementById('effectiveDateDisplay'); if (ed) ed.textContent = contractData.effectiveDate;

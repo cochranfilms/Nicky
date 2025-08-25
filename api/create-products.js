@@ -91,7 +91,7 @@ module.exports = async (req, res) => {
       });
     }
 
-    const incomeAccountId = process.env.WAVE_INCOME_ACCOUNT_ID || '';
+    const incomeAccountId = (req.query && req.query.incomeAccountId) || process.env.WAVE_INCOME_ACCOUNT_ID || '';
     if (!incomeAccountId) {
       return json(res, 200, {
         error: 'Missing WAVE_INCOME_ACCOUNT_ID',

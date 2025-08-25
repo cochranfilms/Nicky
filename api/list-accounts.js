@@ -45,8 +45,6 @@ module.exports = async (req, res) => {
               node {
                 id
                 name
-                type
-                subtype
               }
             }
           }

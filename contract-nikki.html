@@ -512,12 +512,11 @@
     };
 
     document.addEventListener('DOMContentLoaded', function() {
-      try {
-        if (typeof emailjs !== 'undefined') {
-          try { emailjs.init({ publicKey: EMAILJS_CONFIG.publicKey }); } catch (_) { emailjs.init(EMAILJS_CONFIG.publicKey); }
-        }
-      } catch (e) {
-        console.warn('EmailJS init error', e);
+      if (typeof emailjs !== 'undefined') {
+        emailjs.init(EMAILJS_CONFIG.publicKey);
+        console.log('✅ EmailJS initialized');
+      } else {
+        console.warn('⚠️ EmailJS library not loaded');
       }
     });
 

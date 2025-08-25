@@ -99,7 +99,7 @@ async function createInvoice({ businessId, customerId, currency, packageKey, con
       invoiceCreate(input: $input) {
         didSucceed
         inputErrors { code message }
-        invoice { id status viewUrl publicUrl }
+        invoice { id status viewUrl }
       }
     }
   `;
@@ -133,8 +133,8 @@ async function createInvoice({ businessId, customerId, currency, packageKey, con
 
   return {
     invoiceId: res.invoice.id,
-    // prefer publicUrl/viewUrl when available
-    viewUrl: res.invoice.publicUrl || res.invoice.viewUrl || null
+    // prefer viewUrl when available (some schemas do not expose publicUrl)
+    viewUrl: res.invoice.viewUrl || null
   };
 }
 
@@ -145,7 +145,7 @@ async function sendInvoice({ invoiceId }) {
       invoiceSend(input: $input) {
         didSucceed
         inputErrors { code message }
-        invoice { id viewUrl publicUrl }
+        invoice { id viewUrl }
       }
     }
   `;
@@ -156,7 +156,7 @@ async function sendInvoice({ invoiceId }) {
     const firstErr = res && res.inputErrors && res.inputErrors[0];
     throw new Error(`Send invoice failed: ${firstErr ? firstErr.message : 'Unknown error'}`);
   }
-  return res.invoice.publicUrl || res.invoice.viewUrl || null;
+  return res.invoice.viewUrl || null;
 }
 
 module.exports = async (req, res) => {

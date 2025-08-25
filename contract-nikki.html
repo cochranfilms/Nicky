@@ -513,7 +513,8 @@
 
     document.addEventListener('DOMContentLoaded', function() {
       if (typeof emailjs !== 'undefined') {
-        emailjs.init(EMAILJS_CONFIG.publicKey);
+        // EmailJS v4 prefers an object argument
+        emailjs.init({ publicKey: EMAILJS_CONFIG.publicKey });
         console.log('✅ EmailJS initialized');
       } else {
         console.warn('⚠️ EmailJS library not loaded');
@@ -596,8 +597,10 @@
       // Upload signed contract PDF (store URL for emails)
       try {
         invoiceMeta.contractDownloadUrl = await uploadSignedContractToGitHub(contractData);
+        console.log('✅ Contract uploaded:', invoiceMeta.contractDownloadUrl);
       } catch (e) {
-        console.warn('Contract upload skipped:', e);
+        console.error('❌ Contract upload failed:', e);
+        setInvoiceStatus('⚠️ Contract upload failed. We will email you the contract separately.', 'error');
       }
 
       // Send confirmation emails (now with invoice details if available)
@@ -612,9 +615,16 @@
         }
         const pkg = getPackageDetails(contractData.selectedPackage);
         const deposit = pkg ? Math.round(pkg.price * 0.5) : null;
+        const baseParams = {
+          from_name: 'Marketing Mousetrap Agency',
+          from_email: 'info@marketingmousetrapagency.com',
+          reply_to: 'info@marketingmousetrapagency.com'
+        };
         // Client email
         const clientParams = {
+          ...baseParams,
           to_email: contractData.clientEmail,
+          to_name: contractData.clientName,
           client_name: contractData.clientName,
           client_email: contractData.clientEmail,
           contract_id: contractData.contractId,
@@ -624,13 +634,18 @@
           invoice_total_due: deposit ? `$${deposit.toLocaleString()}` : '',
           payment_link: invoiceMeta.paymentUrl || '',
           invoice_id: invoiceMeta.invoiceId || '',
-          download_link: invoiceMeta.contractDownloadUrl || ''
+          download_link: invoiceMeta.contractDownloadUrl || '',
+          subject: `Contract Confirmation — ${contractData.contractId}`
         };
+        console.log('📧 Sending client email with params:', clientParams);
         await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, clientParams);
+        console.log('✅ Client email sent successfully');
 
         // Admin email
         const adminParams = {
+          ...baseParams,
           to_email: 'info@marketingmousetrapagency.com',
+          to_name: 'MMA Admin',
           client_name: contractData.clientName,
           client_email: contractData.clientEmail,
           contract_id: contractData.contractId,
@@ -640,9 +655,12 @@
           invoice_total_due: deposit ? `$${deposit.toLocaleString()}` : '',
           payment_link: invoiceMeta.paymentUrl || '',
           invoice_id: invoiceMeta.invoiceId || '',
-          download_link: invoiceMeta.contractDownloadUrl || ''
+          download_link: invoiceMeta.contractDownloadUrl || '',
+          subject: `New Contract Signed — ${contractData.contractId}`
         };
+        console.log('📧 Sending admin email with params:', adminParams);
         await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.adminTemplateId, adminParams);
+        console.log('✅ Admin email sent successfully');
 
         showEmailStatus('✅ Confirmation emails sent successfully!', 'success');
       } catch (error) {
@@ -1099,19 +1117,30 @@
 
     // Upload signed contract PDF to GitHub via API
     async function uploadSignedContractToGitHub(cd) {
+      console.log('🔄 Generating contract PDF for upload...');
       const base64 = await generateContractPDFBase64(cd);
+      console.log('✅ PDF generated, size:', base64.length, 'chars');
+      
       const safeName = cd.clientName.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
       const filename = `MMA_Contract_${safeName}_${cd.contractId}.pdf`;
+      console.log('🔄 Uploading to GitHub as:', filename);
+      
       const res = await fetch('/api/upload-contract', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ filename, content: base64, contractData: cd })
       });
+      
+      console.log('📡 Upload response status:', res.status);
+      
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
-        throw new Error(err.error || 'Upload failed');
+        console.error('❌ Upload failed with error:', err);
+        throw new Error(err.error || `Upload failed with status ${res.status}`);
       }
+      
       const data = await res.json();
+      console.log('✅ Upload successful, download URL:', data.downloadUrl);
       return data.downloadUrl || '';
     }
 

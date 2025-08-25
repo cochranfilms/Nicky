@@ -92,7 +92,7 @@ async function createInvoice({ businessId, customerId, currency, packageKey, con
       invoiceCreate(input: $input) {
         didSucceed
         inputErrors { code message field }
-        invoice { id status viewUrl }
+        invoice { id status viewUrl publicUrl }
       }
     }
   `;
@@ -105,10 +105,10 @@ async function createInvoice({ businessId, customerId, currency, packageKey, con
       currency,
       status: 'DRAFT',
       memo: `Contract ${contractId} • ${pkg.name} – Initial 50% deposit`,
-      invoiceItems: [
+      items: [
         {
           description: `${pkg.name} — Initial Deposit (50%)`,
-          unitPrice: deposit,
+          unitPrice: { amount: String(deposit), currency },
           quantity: 1
         }
       ]
@@ -124,9 +124,30 @@ async function createInvoice({ businessId, customerId, currency, packageKey, con
 
   return {
     invoiceId: res.invoice.id,
-    // viewUrl may not always be present depending on status; keep null-safe
-    viewUrl: res.invoice.viewUrl || null
+    // prefer publicUrl/viewUrl when available
+    viewUrl: res.invoice.publicUrl || res.invoice.viewUrl || null
   };
+}
+
+// Try to send the invoice to generate a public URL if needed
+async function sendInvoice({ invoiceId }) {
+  const mutation = `
+    mutation InvoiceSend($input: InvoiceSendInput!) {
+      invoiceSend(input: $input) {
+        didSucceed
+        inputErrors { code message field }
+        invoice { id viewUrl publicUrl }
+      }
+    }
+  `;
+  const variables = { input: { invoiceId } };
+  const data = await waveQuery(mutation, variables);
+  const res = data.invoiceSend;
+  if (!res || !res.didSucceed || !res.invoice) {
+    const firstErr = res && res.inputErrors && res.inputErrors[0];
+    throw new Error(`Send invoice failed: ${firstErr ? firstErr.message : 'Unknown error'}`);
+  }
+  return res.invoice.publicUrl || res.invoice.viewUrl || null;
 }
 
 module.exports = async (req, res) => {
@@ -169,11 +190,20 @@ module.exports = async (req, res) => {
       contractId: contractData.contractId
     });
 
+    let paymentUrl = viewUrl;
+    if (!paymentUrl) {
+      try {
+        paymentUrl = await sendInvoice({ invoiceId });
+      } catch (e) {
+        // continue with null paymentUrl
+      }
+    }
+
     // Best effort return of a link the client can use
     return json(res, 200, {
       mode: 'live',
       invoiceId,
-      paymentUrl: viewUrl || null
+      paymentUrl: paymentUrl || null
     });
   } catch (error) {
     console.error('Wave invoice error:', error);

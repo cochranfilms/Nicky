@@ -578,10 +578,16 @@
         console.log('📊 WaveApps response:', result);
         
         if (result) {
-          invoiceMeta.invoiceId = result.invoiceId || null;
-          invoiceMeta.paymentUrl = result.paymentUrl || null;
-          invoiceMeta.mode = result.mode || null;
+          invoiceMeta.invoiceId = result.invoiceId || 'Manual-' + Date.now();
+          invoiceMeta.paymentUrl = result.paymentUrl || '';
+          invoiceMeta.mode = result.mode || 'fallback';
           console.log('✅ Invoice meta updated:', invoiceMeta);
+        } else {
+          // Fallback when WaveApps fails
+          invoiceMeta.invoiceId = 'Manual-' + Date.now();
+          invoiceMeta.paymentUrl = '';
+          invoiceMeta.mode = 'fallback';
+          console.log('⚠️ Using fallback invoice meta:', invoiceMeta);
         }
         
         const payBtn = document.getElementById('payNowBtn');
@@ -622,7 +628,7 @@
         const deposit = pkg ? Math.round(pkg.price * 0.5) : null;
         const baseParams = {
           from_name: 'Marketing Mousetrap Agency',
-          from_email: 'info@marketingmousetrapagency.com',
+          from_email: 'noreply@marketingmousetrapagency.com',
           reply_to: 'info@marketingmousetrapagency.com'
         };
         // Client email

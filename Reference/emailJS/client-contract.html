@@ -46,16 +46,15 @@
         <div class="section">
           <h2>Invoice</h2>
           <p>Amount due now (50% deposit): <strong>{{invoice_total_due}}</strong></p>
-          <p><a class="btn" href="{{payment_link}}" target="_blank" rel="noreferrer">Pay Securely</a></p>
-          <p class="muted" style="font-size:13px">Payment Link: <a href="{{payment_link}}" target="_blank">{{payment_link}}</a></p>
-          <p class="meta">Invoice ID: <strong>{{invoice_id}}</strong></p>
+          <p>Invoice ID: {{invoice_id}}</p>
+          <p>Payment Link: {{payment_link}}</p>
         </div>
 
         <div class="hr"></div>
 
         <div class="section">
           <h2>Contract Documents</h2>
-          <p><a class="btn" href="{{download_link}}" target="_blank" rel="noreferrer">Download Signed Contract</a></p>
+          <p>Download Link: {{download_link}}</p>
           <p class="muted" style="font-size:13px">Your signed contract is available for download at any time.</p>
         </div>
 

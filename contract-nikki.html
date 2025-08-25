@@ -614,8 +614,8 @@
         const isLive = invoiceMeta && invoiceMeta.mode === 'live' && invoiceMeta.paymentUrl && !/payment-demo/.test(invoiceMeta.paymentUrl);
         if (isLive) {
           payBtn.disabled = false;
-          // Wave blocks embedding on next.waveapps.com; open in a new tab instead
-          payBtn.onclick = () => window.open(invoiceMeta.paymentUrl, '_blank', 'noopener');
+          // Try to show in modal; if blocked, user can use the fallback link in the modal
+          payBtn.onclick = () => openPaymentModal(invoiceMeta.paymentUrl);
           setInvoiceStatus('✅ Invoice is ready. Pay securely below.', 'success');
         } else {
           payBtn.disabled = true;

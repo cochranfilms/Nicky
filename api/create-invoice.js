@@ -235,15 +235,18 @@ module.exports = async (req, res) => {
       contractId: contractData.contractId
     });
 
-    let paymentUrl = viewUrl;
-    if (!paymentUrl) {
-      try {
-        // Ensure invoice is approved before sending/viewing
-        await approveInvoice({ invoiceId });
-        paymentUrl = await sendInvoice({ invoiceId });
-      } catch (e) {
-        // continue with null paymentUrl
-      }
+    // Always try to approve and send so status is not Draft, regardless of viewUrl presence
+    let paymentUrl = viewUrl || null;
+    try {
+      await approveInvoice({ invoiceId });
+    } catch (e) {
+      // non-fatal; continue
+    }
+    try {
+      const sentUrl = await sendInvoice({ invoiceId });
+      if (sentUrl) paymentUrl = sentUrl;
+    } catch (e) {
+      // non-fatal; keep existing paymentUrl (may be viewUrl)
     }
 
     // Best effort return of a link the client can use

@@ -518,6 +518,22 @@
       }
     });
 
+    // Helper: fetch image and return data URL
+    async function getImageDataUrl(src) {
+      try {
+        const res = await fetch(src, { cache: 'no-store' });
+        if (!res.ok) return null;
+        const blob = await res.blob();
+        return await new Promise(resolve => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.readAsDataURL(blob);
+        });
+      } catch (e) {
+        return null;
+      }
+    }
+
     // Store contract and invoice meta data
     let contractData = {};
     let invoiceMeta = { invoiceId: null, paymentUrl: null, contractDownloadUrl: '' };
@@ -860,16 +876,10 @@
       // Header with brand bar and logo
       doc.setFillColor(224, 171, 16);
       doc.rect(0, 0, 210, 25, 'F');
-      try {
-        // Embed brand logo if available in project root as Logo.png
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-        img.onload = function() {
-          try { doc.addImage(img, 'PNG', 6, 3, 20, 20); } catch (e) {}
-        };
-        img.onerror = function() {};
-        img.src = 'Logo.png';
-      } catch (e) {}
+      const logoDataUrlUpload = await getImageDataUrl('Logo.png');
+      if (logoDataUrlUpload) {
+        try { doc.addImage(logoDataUrlUpload, 'PNG', 6, 3, 20, 20); } catch (e) {}
+      }
       doc.setTextColor(0, 0, 0);
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(18);
@@ -975,14 +985,18 @@
     }
 
     // Generate and download PDF (with signatures)
-    document.getElementById('downloadContractBtn').addEventListener('click', function() {
+    document.getElementById('downloadContractBtn').addEventListener('click', async function() {
       try {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
         
-        // Header
+        // Header with logo
         doc.setFillColor(224, 171, 16);
         doc.rect(0, 0, 210, 25, 'F');
+        const logoDataUrlDownload = await getImageDataUrl('Logo.png');
+        if (logoDataUrlDownload) {
+          try { doc.addImage(logoDataUrlDownload, 'PNG', 6, 3, 20, 20); } catch (e) {}
+        }
         doc.setTextColor(0, 0, 0);
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(18);
@@ -997,7 +1011,7 @@
         doc.text(`Contract ID: ${contractData.contractId}`, 20, 35);
         doc.text(`Effective Date: ${contractData.effectiveDate}`, 20, 40);
         
-        // Client info
+        // Client info + package features
         doc.setFillColor(224, 171, 16);
         doc.rect(20, 50, 170, 8, 'F');
         doc.setFont('helvetica', 'bold');
@@ -1005,16 +1019,26 @@
         doc.setTextColor(0, 0, 0);
         doc.text('CLIENT INFORMATION', 105, 56, { align: 'center' });
         doc.setFillColor(248, 249, 250);
-        doc.rect(20, 65, 170, 25, 'F');
+        doc.rect(20, 65, 170, 50, 'F');
         doc.setDrawColor(224, 171, 16);
         doc.setLineWidth(0.5);
-        doc.rect(20, 65, 170, 25, 'S');
+        doc.rect(20, 65, 170, 50, 'S');
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(9);
         doc.setTextColor(0, 0, 0);
         doc.text(`Client: ${contractData.clientName}`, 25, 75);
         doc.text(`Email: ${contractData.clientEmail}`, 25, 81);
-        doc.text(`Package: ${getPackageDetails(contractData.selectedPackage)?.name || contractData.selectedPackage}`, 25, 87);
+        const pkgInfoDownload = getPackageDetails(contractData.selectedPackage);
+        doc.text(`Package: ${pkgInfoDownload?.name || contractData.selectedPackage}`, 25, 87);
+        if (pkgInfoDownload && pkgInfoDownload.features && pkgInfoDownload.features.length) {
+          doc.setFontSize(8);
+          const max = 6;
+          const startY = 93;
+          const features = pkgInfoDownload.features.slice(0, max);
+          features.forEach((f, idx) => {
+            doc.text(`• ${f}`, 25, startY + idx * 5);
+          });
+        }
         
         // Signatures
         const signatureY = 120;

@@ -573,12 +573,17 @@
       
       // Create Wave invoice first so emails can include invoice details
       try {
+        console.log('🔄 Creating WaveApps invoice...');
         const result = await createInvoiceOnServer(contractData);
+        console.log('📊 WaveApps response:', result);
+        
         if (result) {
           invoiceMeta.invoiceId = result.invoiceId || null;
           invoiceMeta.paymentUrl = result.paymentUrl || null;
           invoiceMeta.mode = result.mode || null;
+          console.log('✅ Invoice meta updated:', invoiceMeta);
         }
+        
         const payBtn = document.getElementById('payNowBtn');
         const isLive = invoiceMeta && invoiceMeta.mode === 'live' && invoiceMeta.paymentUrl && !/payment-demo/.test(invoiceMeta.paymentUrl);
         if (isLive) {
@@ -590,7 +595,7 @@
           setInvoiceStatus('ℹ️ Payment link pending. We will email your secure checkout shortly.', 'success');
         }
       } catch (err) {
-        console.error('Invoice creation error', err);
+        console.error('❌ Invoice creation error:', err);
         setInvoiceStatus('⚠️ Invoice setup error. We will follow up with a payment link via email.', 'error');
       }
 
@@ -631,9 +636,9 @@
           contract_date: contractData.contractDate,
           effective_date: contractData.effectiveDate,
           selected_package: pkg ? pkg.name : contractData.selectedPackage,
-          invoice_total_due: deposit ? `$${deposit.toLocaleString()}` : '',
+          invoice_total_due: deposit ? `$${deposit.toLocaleString()}` : 'TBD',
           payment_link: invoiceMeta.paymentUrl || '',
-          invoice_id: invoiceMeta.invoiceId || '',
+          invoice_id: invoiceMeta.invoiceId || 'Pending',
           download_link: invoiceMeta.contractDownloadUrl || '',
           subject: `Contract Confirmation — ${contractData.contractId}`
         };
@@ -652,9 +657,9 @@
           contract_date: contractData.contractDate,
           effective_date: contractData.effectiveDate,
           selected_package: pkg ? pkg.name : contractData.selectedPackage,
-          invoice_total_due: deposit ? `$${deposit.toLocaleString()}` : '',
+          invoice_total_due: deposit ? `$${deposit.toLocaleString()}` : 'TBD',
           payment_link: invoiceMeta.paymentUrl || '',
-          invoice_id: invoiceMeta.invoiceId || '',
+          invoice_id: invoiceMeta.invoiceId || 'Pending',
           download_link: invoiceMeta.contractDownloadUrl || '',
           subject: `New Contract Signed — ${contractData.contractId}`
         };
@@ -770,6 +775,8 @@
     }
 
     async function createInvoiceOnServer(cd) {
+      console.log('📡 Calling /api/create-invoice with:', { contractData: cd, invoice: { packageKey: cd.selectedPackage } });
+      
       const res = await fetch('/api/create-invoice', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -778,20 +785,28 @@
           invoice: { packageKey: cd.selectedPackage }
         })
       });
+      
+      console.log('📡 Invoice API response status:', res.status);
+      
       let payload;
       try {
         payload = await res.json();
-      } catch (_) {
+        console.log('📡 Invoice API response body:', payload);
+      } catch (e) {
+        console.error('❌ Failed to parse invoice API response:', e);
         payload = null;
       }
+      
       if (!res.ok) {
-        const msg = (payload && (payload.error || payload.message)) ? payload.error || payload.message : 'Create invoice failed';
+        const msg = (payload && (payload.error || payload.message)) ? payload.error || payload.message : `Create invoice failed with status ${res.status}`;
         throw new Error(msg);
       }
+      
       // Surface server message if present
       if (payload && payload.error) {
         setInvoiceStatus('⚠️ ' + payload.error, 'error');
       }
+      
       return payload;
     }
 

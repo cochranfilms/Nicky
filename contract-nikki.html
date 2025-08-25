@@ -514,8 +514,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       try {
         if (typeof emailjs !== 'undefined') {
-          // EmailJS v4 recommended init signature
-          emailjs.init({ publicKey: EMAILJS_CONFIG.publicKey });
+          try { emailjs.init({ publicKey: EMAILJS_CONFIG.publicKey }); } catch (_) { emailjs.init(EMAILJS_CONFIG.publicKey); }
         }
       } catch (e) {
         console.warn('EmailJS init error', e);
@@ -595,7 +594,7 @@
         setInvoiceStatus('⚠️ Invoice setup error. We will follow up with a payment link via email.', 'error');
       }
 
-      // Upload signed contract PDF to GitHub (store URL for emails)
+      // Upload signed contract PDF (store URL for emails)
       try {
         invoiceMeta.contractDownloadUrl = await uploadSignedContractToGitHub(contractData);
       } catch (e) {
@@ -649,7 +648,8 @@
         showEmailStatus('✅ Confirmation emails sent successfully!', 'success');
       } catch (error) {
         console.log('Email error:', error);
-        showEmailStatus('⚠️ Email error: ' + (error && error.message ? error.message : 'Unknown error'), 'error');
+        const detail = (error && (error.text || error.message || error.status)) ? `${error.status ? `Status ${error.status}: ` : ''}${error.text || error.message}` : 'Unknown error';
+        showEmailStatus('⚠️ Email error: ' + detail, 'error');
       }
     }
 
@@ -761,15 +761,21 @@
           invoice: { packageKey: cd.selectedPackage }
         })
       });
-      if (!res.ok) {
-        try {
-          const err = await res.json();
-          throw new Error(err.error || 'Create invoice failed');
-        } catch (_) {
-          throw new Error('Create invoice failed');
-        }
+      let payload;
+      try {
+        payload = await res.json();
+      } catch (_) {
+        payload = null;
       }
-      return res.json();
+      if (!res.ok) {
+        const msg = (payload && (payload.error || payload.message)) ? payload.error || payload.message : 'Create invoice failed';
+        throw new Error(msg);
+      }
+      // Surface server message if present
+      if (payload && payload.error) {
+        setInvoiceStatus('⚠️ ' + payload.error, 'error');
+      }
+      return payload;
     }
 
     // Build signed contract PDF (MMA + Client signatures) and return base64

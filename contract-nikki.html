@@ -676,10 +676,12 @@
         console.log('📧 Client email params:', clientParams);
         
         try {
-          await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, clientParams);
+          const clientResponse = await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, clientParams);
           console.log('✅ Client email sent successfully to:', clientParams.to_email);
+          console.log('📧 EmailJS client response:', clientResponse);
         } catch (clientError) {
           console.error('❌ Client email failed:', clientError);
+          console.error('❌ Client error details:', clientError.text, clientError.status);
           throw clientError; // Re-throw to trigger main catch block
         }
 
@@ -704,10 +706,12 @@
         console.log('📧 Admin email params:', adminParams);
         
         try {
-          await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.adminTemplateId, adminParams);
+          const adminResponse = await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.adminTemplateId, adminParams);
           console.log('✅ Admin email sent successfully to:', adminParams.to_email);
+          console.log('📧 EmailJS admin response:', adminResponse);
         } catch (adminError) {
           console.error('❌ Admin email failed:', adminError);
+          console.error('❌ Admin error details:', adminError.text, adminError.status);
           throw adminError; // Re-throw to trigger main catch block
         }
 

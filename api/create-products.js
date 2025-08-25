@@ -73,8 +73,13 @@ async function createProduct({ businessId, name, description }) {
 
 module.exports = async (req, res) => {
   try {
-    if (req.method !== 'POST') {
-      return json(res, 405, { error: 'Method not allowed' });
+    // Allow POST (preferred) and GET with an explicit confirmation flag for convenience
+    const isPost = req.method === 'POST';
+    const isGetConfirmed = req.method === 'GET' && (
+      (req.query && (req.query.create === '1' || req.query.create === 'true'))
+    );
+    if (!isPost && !isGetConfirmed) {
+      return json(res, 405, { error: 'Method not allowed. Use POST or GET with ?create=1' });
     }
 
     const businessId = process.env.WAVE_BUSINESS_ID || '';

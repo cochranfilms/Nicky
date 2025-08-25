@@ -40,7 +40,7 @@ async function waveQuery(query, variables) {
   return body.data;
 }
 
-async function createProduct({ businessId, name, description, unitPrice }) {
+async function createProduct({ businessId, name, description, unitPrice, incomeAccountId }) {
   const mutation = `
     mutation ProductCreate($input: ProductCreateInput!) {
       productCreate(input: $input) {
@@ -56,7 +56,8 @@ async function createProduct({ businessId, name, description, unitPrice }) {
       businessId,
       name,
       description,
-      unitPrice: String(unitPrice)
+      unitPrice: String(unitPrice),
+      incomeAccountId
     }
   };
   const data = await waveQuery(mutation, variables);
@@ -90,12 +91,20 @@ module.exports = async (req, res) => {
       });
     }
 
+    const incomeAccountId = process.env.WAVE_INCOME_ACCOUNT_ID || '';
+    if (!incomeAccountId) {
+      return json(res, 200, {
+        error: 'Missing WAVE_INCOME_ACCOUNT_ID',
+        note: 'Set WAVE_INCOME_ACCOUNT_ID to a valid Income account ID (e.g., Sales/Service Income) from your Chart of Accounts.'
+      });
+    }
+
     const results = {};
     const errors = {};
     for (const key of Object.keys(PACKAGES)) {
       const { name, description, price } = PACKAGES[key];
       try {
-        const prod = await createProduct({ businessId, name, description, unitPrice: price });
+        const prod = await createProduct({ businessId, name, description, unitPrice: price, incomeAccountId });
         results[key] = prod;
       } catch (e) {
         errors[key] = { message: e.message, details: e.waveErrors || null };

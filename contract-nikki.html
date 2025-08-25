@@ -614,8 +614,8 @@
         const isLive = invoiceMeta && invoiceMeta.mode === 'live' && invoiceMeta.paymentUrl && !/payment-demo/.test(invoiceMeta.paymentUrl);
         if (isLive) {
           payBtn.disabled = false;
-          // Try to show in modal; if blocked, user can use the fallback link in the modal
-          payBtn.onclick = () => openPaymentModal(invoiceMeta.paymentUrl);
+          // Open directly in a new tab (Wave blocks embedding)
+          payBtn.onclick = () => window.open(invoiceMeta.paymentUrl, '_blank', 'noopener');
           setInvoiceStatus('✅ Invoice is ready. Pay securely below.', 'success');
         } else {
           payBtn.disabled = true;

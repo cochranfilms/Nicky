@@ -130,8 +130,7 @@ async function createInvoice({ businessId, customerId, currency, packageKey, con
       items: [
         {
           productId,
-          description: `${pkg.name} — Initial Deposit (50%)`,
-          // unitPrice expects Decimal (string), not Money object
+          // Use Product's configured description in Wave; only set price/qty
           unitPrice: String(deposit),
           quantity: 1
         }

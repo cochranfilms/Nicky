@@ -94,11 +94,16 @@ async function createInvoice({ businessId, customerId, currency, packageKey, con
   const invoiceDate = today.toISOString().slice(0, 10); // YYYY-MM-DD
   const dueDate = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10); // +14 days
 
-  // Wave requires a productId for each line item in many accounts/schemas
-  const productId = process.env.WAVE_PRODUCT_ID || '';
+  // Wave requires a productId for each line item; prefer per-package envs
+  const productIdMap = {
+    core: process.env.WAVE_PRODUCT_ID_CORE,
+    growth: process.env.WAVE_PRODUCT_ID_GROWTH,
+    full: process.env.WAVE_PRODUCT_ID_FULL
+  };
+  const productId = productIdMap[packageKey] || process.env.WAVE_PRODUCT_ID || '';
   if (!productId) {
     const err = new Error('Missing WAVE_PRODUCT_ID');
-    err.waveErrors = [{ message: 'Set WAVE_PRODUCT_ID to a valid Product ID in your Wave business.' }];
+    err.waveErrors = [{ message: 'Set WAVE_PRODUCT_ID_<PACKAGE> (CORE/GROWTH/FULL) or WAVE_PRODUCT_ID to a valid Product ID in your Wave business.' }];
     throw err;
   }
 

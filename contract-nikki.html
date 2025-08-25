@@ -660,9 +660,16 @@
           download_link: invoiceMeta.contractDownloadUrl || '',
           subject: `Contract Confirmation — ${contractData.contractId}`
         };
-        console.log('📧 Sending client email with params:', clientParams);
-        await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, clientParams);
-        console.log('✅ Client email sent successfully');
+        console.log('📧 Sending CLIENT email to:', clientParams.to_email);
+        console.log('📧 Client email params:', clientParams);
+        
+        try {
+          await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, clientParams);
+          console.log('✅ Client email sent successfully to:', clientParams.to_email);
+        } catch (clientError) {
+          console.error('❌ Client email failed:', clientError);
+          throw clientError; // Re-throw to trigger main catch block
+        }
 
         // Admin email
         const adminParams = {
@@ -681,9 +688,16 @@
           download_link: invoiceMeta.contractDownloadUrl || '',
           subject: `New Contract Signed — ${contractData.contractId}`
         };
-        console.log('📧 Sending admin email with params:', adminParams);
-        await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.adminTemplateId, adminParams);
-        console.log('✅ Admin email sent successfully');
+        console.log('📧 Sending ADMIN email to:', adminParams.to_email);
+        console.log('📧 Admin email params:', adminParams);
+        
+        try {
+          await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.adminTemplateId, adminParams);
+          console.log('✅ Admin email sent successfully to:', adminParams.to_email);
+        } catch (adminError) {
+          console.error('❌ Admin email failed:', adminError);
+          throw adminError; // Re-throw to trigger main catch block
+        }
 
         showEmailStatus('✅ Confirmation emails sent successfully!', 'success');
       } catch (error) {

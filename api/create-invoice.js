@@ -87,12 +87,13 @@ async function createInvoice({ businessId, customerId, currency, packageKey, con
   if (!pkg) {
     throw new Error('Unknown package key');
   }
-  const deposit = Math.round(pkg.price * 0.5 * 100) / 100; // cents-safe
+  // Invoice the full amount; clients can make a partial payment for the 50% deposit on Wave
+  const totalAmount = Math.round(pkg.price * 100) / 100; // cents-safe
 
   // Provide explicit dates; some Wave accounts require these
   const today = new Date();
   const invoiceDate = today.toISOString().slice(0, 10); // YYYY-MM-DD
-  const dueDate = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10); // +14 days
+  const dueDate = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10); // +7 days
 
   // Wave requires a productId for each line item; prefer per-package envs
   const productIdMap = {
@@ -126,12 +127,12 @@ async function createInvoice({ businessId, customerId, currency, packageKey, con
       status: 'DRAFT',
       invoiceDate,
       dueDate,
-      memo: `Contract ${contractId} • ${pkg.name} – Initial 50% deposit`,
+      memo: `Contract ${contractId} • ${pkg.name} – Project invoice`,
       items: [
         {
           productId,
           // Use Product's configured description in Wave; only set price/qty
-          unitPrice: String(deposit),
+          unitPrice: String(totalAmount),
           quantity: 1
         }
       ]

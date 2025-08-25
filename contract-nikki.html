@@ -433,11 +433,11 @@
           <form id="signatureForm">
             <div class="form-group">
               <label for="clientName">Full Name</label>
-              <input type="text" id="clientName" required>
+              <input type="text" id="clientName" required maxlength="80" pattern="[A-Za-z .,'-]{2,80}">
             </div>
             <div class="form-group">
               <label for="clientEmail">Email Address</label>
-              <input type="email" id="clientEmail" required>
+              <input type="email" id="clientEmail" required inputmode="email" maxlength="254" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$">
             </div>
             <div class="form-group">
               <label for="selectedPackage">Selected Package</label>
@@ -450,7 +450,12 @@
             </div>
             <div class="form-group">
               <label for="signature">Digital Signature</label>
-              <input type="text" id="signature" required placeholder="Type your full name as signature">
+              <input type="text" id="signature" required placeholder="Type your full name as signature" maxlength="120">
+            </div>
+            <!-- Honeypot field to deter bots -->
+            <div class="form-group" style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;">
+              <label for="companyWebsite">Company Website</label>
+              <input type="text" id="companyWebsite" name="companyWebsite" tabindex="-1" autocomplete="off">
             </div>
             <div class="btn-row">
               <button type="submit" class="cta-primary">Sign & Submit</button>
@@ -567,12 +572,30 @@
         return;
       }
       
+      // Honeypot and anti-abuse checks
+      const honeypot = document.getElementById('companyWebsite');
+      if (honeypot && honeypot.value) {
+        console.warn('Bot submission blocked via honeypot');
+        showEmailStatus('⚠️ Submission blocked. Please try again.', 'error');
+        return;
+      }
+      
+      // Normalize and validate email, lightly sanitize name/signature
+      const normalizedEmail = clientEmail.toLowerCase();
+      const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+      if (!emailRegex.test(normalizedEmail)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      const cleanedName = clientName.replace(/[<>]/g, '').slice(0, 80);
+      const cleanedSignature = signature.replace(/[<>]/g, '').slice(0, 120);
+      
       // Store contract data
       contractData = {
-        clientName,
-        clientEmail,
+        clientName: cleanedName,
+        clientEmail: normalizedEmail,
         selectedPackage,
-        signature,
+        signature: cleanedSignature,
         signatureDate: formatDate(new Date()),
         contractDate: formatDate(new Date()),
         effectiveDate: formatDate(new Date()),

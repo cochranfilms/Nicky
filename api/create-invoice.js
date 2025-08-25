@@ -94,6 +94,14 @@ async function createInvoice({ businessId, customerId, currency, packageKey, con
   const invoiceDate = today.toISOString().slice(0, 10); // YYYY-MM-DD
   const dueDate = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10); // +14 days
 
+  // Wave requires a productId for each line item in many accounts/schemas
+  const productId = process.env.WAVE_PRODUCT_ID || '';
+  if (!productId) {
+    const err = new Error('Missing WAVE_PRODUCT_ID');
+    err.waveErrors = [{ message: 'Set WAVE_PRODUCT_ID to a valid Product ID in your Wave business.' }];
+    throw err;
+  }
+
   const mutation = `
     mutation InvoiceCreate($input: InvoiceCreateInput!) {
       invoiceCreate(input: $input) {
@@ -116,8 +124,10 @@ async function createInvoice({ businessId, customerId, currency, packageKey, con
       memo: `Contract ${contractId} • ${pkg.name} – Initial 50% deposit`,
       items: [
         {
+          productId,
           description: `${pkg.name} — Initial Deposit (50%)`,
-          unitPrice: { amount: String(deposit), currency },
+          // unitPrice expects Decimal (string), not Money object
+          unitPrice: String(deposit),
           quantity: 1
         }
       ]

@@ -87,6 +87,11 @@ async function createInvoice({ businessId, customerId, currency, packageKey, con
   }
   const deposit = Math.round(pkg.price * 0.5 * 100) / 100; // cents-safe
 
+  // Provide explicit dates; some Wave accounts require these
+  const today = new Date();
+  const invoiceDate = today.toISOString().slice(0, 10); // YYYY-MM-DD
+  const dueDate = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10); // +14 days
+
   const mutation = `
     mutation InvoiceCreate($input: InvoiceCreateInput!) {
       invoiceCreate(input: $input) {
@@ -104,6 +109,8 @@ async function createInvoice({ businessId, customerId, currency, packageKey, con
       customerId,
       currency,
       status: 'DRAFT',
+      invoiceDate,
+      dueDate,
       memo: `Contract ${contractId} • ${pkg.name} – Initial 50% deposit`,
       items: [
         {

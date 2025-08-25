@@ -588,6 +588,13 @@
         console.log('🔄 Creating WaveApps invoice...');
         const result = await createInvoiceOnServer(contractData);
         console.log('📊 WaveApps response:', result);
+        if (result) {
+          console.log('📋 Invoice result detail:', {
+            mode: result.mode,
+            invoiceId: result.invoiceId,
+            paymentUrl: result.paymentUrl
+          });
+        }
 
         if (result) {
           invoiceMeta.invoiceId = result.invoiceId || 'Manual-' + Date.now();

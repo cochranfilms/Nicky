@@ -658,7 +658,6 @@
         // Client email
         const clientParams = {
           ...baseParams,
-          to_email: contractData.clientEmail,
           to_name: contractData.clientName,
           client_name: contractData.clientName,
           client_email: contractData.clientEmail,
@@ -672,12 +671,12 @@
           download_link: invoiceMeta.contractDownloadUrl || '',
           subject: `Contract Confirmation — ${contractData.contractId}`
         };
-        console.log('📧 Sending CLIENT email to:', clientParams.to_email);
+        console.log('📧 Sending CLIENT email to:', clientParams.client_email);
         console.log('📧 Client email params:', clientParams);
         
         try {
           const clientResponse = await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, clientParams);
-          console.log('✅ Client email sent successfully to:', clientParams.to_email);
+          console.log('✅ Client email sent successfully to:', clientParams.client_email);
           console.log('📧 EmailJS client response:', clientResponse);
         } catch (clientError) {
           console.error('❌ Client email failed:', clientError);
